@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, Component, ViewChild, OnInit, Input, Inject, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnInit, Input, Inject, ElementRef, ChangeDetectorRef, Optional } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { IfilterValues } from '../../table.inteface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -28,11 +28,11 @@ export class FilterPopupComponent implements OnInit {
   filterField: string = '';
   filterColumn: FilterColumn | undefined;
   displayedColumns: Array<FilterColumn> = Object.values(columnDefination);
+  private _filteringService= new FilteringService();
 
   constructor(private _liveAnnouncer: LiveAnnouncer,
-    private _filteringService: FilteringService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    public dialModalRef: MatDialogRef<any>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Optional()  public dialModalRef: MatDialogRef<FilterPopupComponent>,
     private changeDetector: ChangeDetectorRef,
   ) { }
   ngOnInit(): void {

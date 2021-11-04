@@ -18,7 +18,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FilterPopupComponent } from './lib/filter-popup/filter-popup.component';
 import { tableExampleComponent } from './table-example/table-example.component'
-import "@angular/compiler";
 import { SelectFilterComponent } from './lib/filters/select-filter/select-filter.component';
 import { StringFilterComponent } from './lib/filters/string-filter/string-filter.component';
 import { FilterWrapperComponent } from './lib/filters/filter-wrapper/filter-wrapper.component';
@@ -26,8 +25,6 @@ import { FilterChipsWrapperComponent } from './lib/filter-chips-wrapper/filter-c
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableComponent } from './lib/mat-table/mat-table.component';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 
 
 @NgModule({
@@ -61,8 +58,6 @@ import { EffectsModule } from '@ngrx/effects';
     MatListModule,
     MatIconModule,
     MatChipsModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
