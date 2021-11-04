@@ -1,0 +1,23 @@
+<!-- <mat-form-field style="margin-left: 15px;"> -->
+    <!-- <mat-label>Filter symbol</mat-label> -->
+    <!-- <select matNativeControl name="symbol" (change)="onChange($event)">
+        <option value="">-- Select symbol --</option>
+        <option [value]="item" >{{item}}</option>
+    </select> -->
+
+    <!-- <mat-checbox type="checkbox" matInput [formControl]="emailFormControl" ></mat-checbox> -->
+<!-- </mat-form-field> -->
+<!-- <div class="example-container">
+    <form [formGroup]="options">
+        <div *ngFor="let item of filterColumn.options" >
+                  <mat-checkbox [formControl]="hideRequiredControl" (change)="onChange($event, item)">{{item}}</mat-checkbox>
+
+        </div>
+    </form>
+  </div> -->
+
+
+    <mat-button-toggle-group matNativeControl name="approved"
+        (change)="onChange($event)">
+        <mat-button-toggle *ngFor="let item of filterColumn.options" value={{item}} >{{item}}</mat-button-toggle>
+    </mat-button-toggle-group>

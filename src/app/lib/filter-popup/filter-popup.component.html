@@ -1,0 +1,16 @@
+<ng-container class="fffff" style="max-height: 30px;">
+
+    <mat-list *ngIf="!filterColumn; else filterWrapper">
+        <mat-form-field>
+            <input matNativeControl name="name" (keyup)="onKeyUp($event)">
+        </mat-form-field>
+        <mat-list-item class="filter-list-item" *ngFor="let col of displayedColumns" (click)="fieldSelected(col.ordernumber)">
+            {{col.columnnamehebrew}}</mat-list-item>
+    </mat-list>
+
+    <ng-template #filterWrapper>
+        <app-filter-wrapper [filterColumn]="filterColumn" (goBack)="goBack()"></app-filter-wrapper>
+    </ng-template>
+
+</ng-container>
+
