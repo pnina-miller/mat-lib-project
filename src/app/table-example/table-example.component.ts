@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, Component, ViewChild, OnInit, Input, Inject, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, Input, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -45,7 +45,6 @@ export class tableExampleComponent implements OnInit {
 
   }
 
-
   openDialog(event: any) {
     const target = new ElementRef(event.currentTarget);
     if (this.dialog.openDialogs.length > 0)
@@ -58,8 +57,6 @@ export class tableExampleComponent implements OnInit {
         panelClass: 'md-dialog-container',
         data: {
           trigger: target,
-          dataSource: this.dataSource,
-          columns: this.columns
         }
       });
     }

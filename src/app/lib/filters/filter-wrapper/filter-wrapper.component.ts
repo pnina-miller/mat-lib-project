@@ -12,25 +12,26 @@ import { StringFilterComponent } from '../string-filter/string-filter.component'
 })
 export class FilterWrapperComponent implements OnInit {
 
-  @ViewChild('filterComponent') filterComponent!: StringFilterComponent | SelectFilterComponent 
+  @ViewChild('filterComponent') filterComponent!: StringFilterComponent | SelectFilterComponent
+
   @Input() filterColumn: any | undefined;
   @Output() goBack: EventEmitter<any> = new EventEmitter();
 
-  filterTypes=['DATE', 'String', 'BOOLEAN', 'MULTISELECT', 'NUMERIC', 'SELECT'];
+  filterTypes = ['DATE', 'String', 'BOOLEAN', 'MULTISELECT', 'NUMERIC', 'SELECT'];
 
   displayedColumns: Array<FilterColumn> = columnDefination;
   filterSelectSymbol = []
   constructor() { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
   }
 
   back() {
     this.goBack.emit()
   }
 
-  seveClick(){
-this.filterComponent.saveFilter();
+  seveClick() {
+    this.filterComponent.saveFilter();
   }
 
 }

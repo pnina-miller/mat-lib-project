@@ -1,13 +1,11 @@
 <mat-chip-list #chipList aria-label="Fruit selection">
-    <mat-chip *ngFor="let item of filterArr" 
-             [removable]="removable" (removed)="removeFilter(item)">
-    {{item.columnnamehebrew}}: 
+  <mat-chip *ngFor="let item of filterArr" [removable]="removable" (removed)="removeFilter(item)">
+    {{item.columnnamehebrew}}:
     {{item.stringFilterValue}}
-      <button matChipRemove *ngIf="removable">
-        <mat-icon>cancel</mat-icon>
-      </button>
-    </mat-chip>
-    </mat-chip-list>
+    <button matChipRemove *ngIf="removable">
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-chip>
+</mat-chip-list>
 
-    <button mat-flat-button color="warn" (click)="resetFilters()">Reset</button>
-
+<button mat-flat-button color="warn" (click)="resetFilters()">Reset</button>

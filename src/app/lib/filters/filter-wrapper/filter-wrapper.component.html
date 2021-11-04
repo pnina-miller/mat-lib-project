@@ -5,10 +5,10 @@
 
     <!-- DATE -->
     <ng-container *ngSwitchCase="filterTypes[0]">
-        <mat-form-field style="margin-left: 15px;">
+        <!-- <mat-form-field style="margin-left: 15px;">
             <mat-label>Filter DATE</mat-label>
-            <!-- <input matNativeControl name="name" (keyup)="onfilterChange('name',$event)"> -->
-        </mat-form-field>
+            <input matNativeControl name="name" (keyup)="onfilterChange('name',$event)">
+        </mat-form-field> -->
     </ng-container>
 
 
@@ -19,9 +19,9 @@
 
     <!-- BOOLEAN -->
     <ng-container *ngSwitchCase="filterTypes[2]">
-        <mat-label>Filter BOOLEAN</mat-label>
         <!-- <mat-button-toggle-group matNativeControl name="approved"
             (change)="onCheckBoxfilterChange('approved',{checked:$event.value})"> 
+        <mat-label>Filter BOOLEAN</mat-label>
             <mat-button-toggle value="true">yes</mat-button-toggle>
             <mat-button-toggle value="false">no</mat-button-toggle>
         </mat-button-toggle-group>-->
@@ -31,6 +31,7 @@
     <!-- MULTISELECT -->
     <ng-container *ngSwitchCase="filterTypes[3]">
         <!-- <mat-form-field style="margin-left: 15px;">
+        <mat-label>Filter MULTISELECT</mat-label>
             <mat-label>Filter symbol</mat-label>
             <select matNativeControl name="symbol" (change)="onfilterChange('symbol',$event)">
                 <option value="">-- Select symbol --</option>
@@ -41,10 +42,10 @@
 
     <!-- NUMERIC -->
     <ng-container *ngSwitchCase="filterTypes[4]">
-        <mat-form-field style="margin-left: 15px;">
+        <!--<mat-form-field style="margin-left: 15px;">
             <mat-label>Filter name</mat-label>
-            <!-- <input matNativeControl name="name" (keyup)="onfilterChange('name',$event)"> -->
-        </mat-form-field>
+             <input matNativeControl name="name" (keyup)="onfilterChange('name',$event)"> 
+        </mat-form-field>-->
     </ng-container>
 
     <!-- SELECT -->
@@ -52,5 +53,6 @@
         <app-select-filter [filterColumn]="filterColumn" #filterComponent></app-select-filter>
     </ng-container>
 </ng-container>
-
-<button mat-stroked-button (click)="seveClick()">save</button>
+<div>
+    <button mat-stroked-button (click)="seveClick()" style="width: 100%;">save</button>
+</div>

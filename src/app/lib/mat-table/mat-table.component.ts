@@ -38,7 +38,7 @@ export class MatTableComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+    this.displayDataSource.sort = this.sort;
   }
 
   filterArrChanged(data: Array<FilterColumnValue>) {
