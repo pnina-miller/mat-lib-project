@@ -11,8 +11,8 @@ import * as columnDefination from '../../../assets/data/tableColumns.json'
 })
 export class FilterPopupComponent implements OnInit {
 
-  filterColumn: FilterColumn | undefined;
-  displayedColumns: Array<FilterColumn> = Object.values(columnDefination);
+  selectedFilterColumn: FilterColumn | undefined;
+  displayedColumns: Array<any> = Object.values(columnDefination);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {trigger: ElementRef },
     public dialModalRef: MatDialogRef<FilterPopupComponent>,
@@ -25,7 +25,7 @@ export class FilterPopupComponent implements OnInit {
   }
 
   goBack() {
-    this.filterColumn = undefined;
+    this.selectedFilterColumn = undefined;
   }
 
   onKeyUp(e: any) {
@@ -35,7 +35,7 @@ export class FilterPopupComponent implements OnInit {
   }
 
   fieldSelected(ordernumber: string) {
-    this.filterColumn = this.displayedColumns.find(col => col.ordernumber === ordernumber)
+    this.selectedFilterColumn = this.displayedColumns.find(col => col.ordernumber === ordernumber)
   }
   
 }

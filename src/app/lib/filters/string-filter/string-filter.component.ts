@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { FilterService } from 'src/app/services/filter.service';
-import { FilterColumnValue, SelectFilterColumn } from 'src/app/models/filterColumns';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatTableService } from 'src/app/services/mat-table.service';
+import { StringFilterColumn } from 'src/app/models/filterColumns';
 
 @Component({
   selector: 'app-string-filter',
@@ -10,22 +9,23 @@ import { FilterColumnValue, SelectFilterColumn } from 'src/app/models/filterColu
 })
 export class StringFilterComponent implements OnInit {
 
-  constructor(private filterService:FilterService) { }
+  constructor(private filterService:MatTableService) { }
 
 
-  @Input() filterColumn!: SelectFilterColumn;
+  @Input() filterColumn!: StringFilterColumn;
   selectedMethod:string=''
-  stringFilterValue=''
+  filterValue=''
+
   ngOnInit(): void {
   }
 
   onKeyUp(e: any){
-    //TODO: filter method 
-    this.stringFilterValue=e.target.value
+    this.filterValue=e.target.value
   }
 
   saveFilter(){
-        this.filterService.setFilter(new FilterColumnValue({...this.filterColumn, stringFilterValue:this.stringFilterValue}));
+    let stringFilterValue=`${this.selectedMethod} ${this.filterValue} `;
+        this.filterService.setFilter(new StringFilterColumn({...this.filterColumn, filterValue:this.filterValue, filterMethod:this.selectedMethod, stringFilterValue}));
 
   }
 

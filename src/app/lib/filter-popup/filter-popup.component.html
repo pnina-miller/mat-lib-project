@@ -1,6 +1,6 @@
 <ng-container style="max-height: 30px;">
 
-    <mat-list *ngIf="!filterColumn; else filterWrapper">
+    <mat-list *ngIf="!selectedFilterColumn; else filterWrapper">
         <mat-form-field>
             <input matNativeControl name="name" (keyup)="onKeyUp($event)">
         </mat-form-field>
@@ -9,7 +9,7 @@
     </mat-list>
 
     <ng-template #filterWrapper>
-        <app-filter-wrapper [filterColumn]="filterColumn" (goBack)="goBack()"></app-filter-wrapper>
+        <app-filter-wrapper [filterColumn]="selectedFilterColumn" (goBack)="goBack()"></app-filter-wrapper>
     </ng-template>
 
 </ng-container>

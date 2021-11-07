@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FilterPopupComponent } from '../lib/filter-popup/filter-popup.component';
 import { IfilterValues } from '../table.inteface';
 import * as columnDefination from '../../assets/data/tableColumns.json'
+import { MatTableService } from '../services/mat-table.service';
 
 
 @Component({
@@ -26,26 +27,20 @@ export class tableExampleComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   displayedColumns!: string[];
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, public dialog: MatDialog) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer,
+     public dialog: MatDialog,
+      private matTableService: MatTableService,
+      ) { }
 
   ngOnInit(): void {
-    let data = Object.values(columnDefination)
-    let dataSourch=Array.from(Array(10).keys()).map(i => {
-      let obj: { [key: string]: string } = {id:i.toString()};
-      let index=0;
-      data.forEach(col =>{
-        index++;
-        if(index<15)
-        col.columnnamehebrew ? obj[col.columnnamehebrew] = (Math.random() + 1).toString(36).substring(7) : {}
-      })
-      return obj;
-    }
-    )
-    this.dataSource = new MatTableDataSource(dataSourch);
-
+    this.matTableService.displayDataSource.subscribe(this.dataSourceChanged)
+  }
+  dataSourceChanged=(data:any)=>{
+    this.dataSource = data
   }
 
   openDialog(event: any) {
+
     const target = new ElementRef(event.currentTarget);
     if (this.dialog.openDialogs.length > 0)
       this.dialog.closeAll()

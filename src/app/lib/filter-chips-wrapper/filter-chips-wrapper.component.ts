@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FilterService } from '../../services/filter.service';
-import { FilterColumn, FilterColumnValue } from '../../models/filterColumns';
+import { MatTableService } from '../../services/mat-table.service';
+import { FilterColumn } from '../../models/filterColumns';
 
 @Component({
   selector: 'app-filter-chips-wrapper',
@@ -9,11 +9,11 @@ import { FilterColumn, FilterColumnValue } from '../../models/filterColumns';
 })
 export class FilterChipsWrapperComponent implements OnInit {
 
-  filterArr!:Array<FilterColumnValue>
+  filterArr!:Array<FilterColumn>
 
   removable=true;
 
-  constructor(private filterService:FilterService) { 
+  constructor(private filterService:MatTableService) { 
   }
 
   ngOnInit(): void {

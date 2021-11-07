@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FilterService } from './filter.service';
+import { MatTableService } from './mat-table.service';
 
 describe('FilterService', () => {
-  let service: FilterService;
+  let service: MatTableService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FilterService);
+    service = TestBed.inject(MatTableService);
   });
 
   it('should be created', () => {

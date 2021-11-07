@@ -19,6 +19,7 @@
 
     <!-- BOOLEAN -->
     <ng-container *ngSwitchCase="filterTypes[2]">
+        <app-boolean-filter [filterColumn]="filterColumn" #filterComponent></app-boolean-filter>
         <!-- <mat-button-toggle-group matNativeControl name="approved"
             (change)="onCheckBoxfilterChange('approved',{checked:$event.value})"> 
         <mat-label>Filter BOOLEAN</mat-label>

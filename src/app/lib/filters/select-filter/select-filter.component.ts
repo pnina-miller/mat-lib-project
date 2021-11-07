@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
-import { FilterService } from 'src/app/services/filter.service';
-import { FilterColumn, FilterColumnValue, SelectFilterColumn } from 'src/app/models/filterColumns';
+import { MatTableService } from 'src/app/services/mat-table.service';
+import { FilterColumn, SelectFilterColumn } from 'src/app/models/filterColumns';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -10,12 +10,12 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 })
 export class SelectFilterComponent implements OnInit {
 
-  constructor(private filterService:FilterService) { }
+  constructor(private filterService:MatTableService) { }
 
+  @Input() filterColumn!: SelectFilterColumn;
   options!: FormGroup;
   hideRequiredControl = new FormControl(false);
   stringFilterValue=''
-  @Input() filterColumn!: SelectFilterColumn;
 
   ngOnInit(): void {
     this.options=new FormGroup({hideRequiredControl:this.hideRequiredControl})
@@ -26,7 +26,7 @@ export class SelectFilterComponent implements OnInit {
   }
 
   saveFilter(){
-    this.filterService.setFilter(new FilterColumnValue({...this.filterColumn,stringFilterValue:this.stringFilterValue}))
+    this.filterService.setFilter(new FilterColumn({...this.filterColumn,stringFilterValue:this.stringFilterValue}))
 
   }
 

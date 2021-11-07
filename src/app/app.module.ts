@@ -25,6 +25,9 @@ import { FilterChipsWrapperComponent } from './lib/filter-chips-wrapper/filter-c
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableComponent } from './lib/mat-table/mat-table.component';
+import { HttpClientModule } from  '@angular/common/http';
+import { DateFilterComponent } from './lib/filters/date-filter/date-filter.component';
+import { BooleanFilterComponent } from './lib/filters/boolean-filter/boolean-filter.component';
 
 
 @NgModule({
@@ -37,6 +40,8 @@ import { MatTableComponent } from './lib/mat-table/mat-table.component';
     FilterWrapperComponent,
     FilterChipsWrapperComponent,
     MatTableComponent,
+    DateFilterComponent,
+    BooleanFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +52,7 @@ import { MatTableComponent } from './lib/mat-table/mat-table.component';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    HttpClientModule,
     MatInputModule,
     MatTableModule,
     MatSelectModule,

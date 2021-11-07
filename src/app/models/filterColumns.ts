@@ -1,76 +1,79 @@
 
-export abstract class FilterColumn {
-  ordernumber!: string; //v
-  columnfiltertype!: string; //v
-  columnvalidationtype!: string;
-  columnvalidationmessage!: string;
-  associatedcolumnname!: string;
-  columnformatter!: string;
-  columnnameenglish!: string; //v
-  columnnamehebrew!: string; //v
-  display!: string;
-  removable!: string;
-  savedbyuser!: string;
+export class FilterColumn {
+  ordernumber!: string;
+  columnfiltertype!: string; 
+  columnnameenglish!: string; 
+  columnnamehebrew!: string; 
 
-  constructor(col: FilterColumn) {
+  filterValue!: String;
+  stringFilterValue: String = '';
+
+  constructor(col: any) {
     this.ordernumber = col.ordernumber;
     this.columnfiltertype = col.columnfiltertype;
-    this.columnvalidationtype = col.columnvalidationtype;
-    this.columnvalidationmessage = col.columnvalidationmessage;
-    this.associatedcolumnname = col.associatedcolumnname;
-    this.columnformatter = col.columnformatter;
     this.columnnameenglish = col.columnnameenglish;
     this.columnnamehebrew = col.columnnamehebrew;
-    this.display = col.display;
-    this.removable = col.removable;
-    this.savedbyuser = col.savedbyuser;
+    this.filterValue = col.filterValue;
+    this.stringFilterValue = col.stringFilterValue;
+  }
+
+  checkFilter(line: any): boolean {
+    return this.filterValue===line[this.columnnamehebrew]
   }
 }
 
 export class SelectFilterColumn extends FilterColumn {
-  ordernumber!: string;
-  columnfiltertype!: string;
-  columnvalidationtype!: string;
-  columnvalidationmessage!: string;
-  associatedcolumnname!: string;
-  columnformatter!: string;
-  columnnameenglish!: string;
-  columnnamehebrew!: string;
-  display!: string;
-  removable!: string;
-  savedbyuser!: string;
-  filterValue!: String;
+
   options: string[] = []
 
-  constructor(col: SelectFilterColumn) {
+  constructor(col: any) {
     super(col)
-    this.filterValue = col.filterValue;
     this.options = col.options;
+  }
+
+  checkFilter(line: any): boolean {
+    return this.filterValue===line[this.columnnamehebrew];
   }
 }
 
+export class StringFilterColumn extends FilterColumn {
 
-export class FilterColumnValue extends FilterColumn {
-  ordernumber!: string;
-  columnfiltertype!: string;
-  columnvalidationtype!: string;
-  columnvalidationmessage!: string;
-  associatedcolumnname!: string;
-  columnformatter!: string;
-  columnnameenglish!: string;
-  columnnamehebrew!: string;
-  display!: string;
-  removable!: string;
-  savedbyuser!: string;
-  filterValue!: String;
-  options: string[] = []
-  stringFilterValue: String = '';
+methodOptions: string[] = ['contain','start with']
+  filterMethod!:String;
 
-
-  constructor(col: FilterColumnValue) {
+  constructor(col: any) {
     super(col)
-    this.filterValue = col.filterValue;
-    this.options = col.options;
-    this.stringFilterValue=col.stringFilterValue;
+    this.methodOptions=col.methodOptions;
+    this.filterMethod=col.filterMethod;
+  }
+  checkFilter(line: any): boolean {
+    if(this.filterMethod==='contain')
+    return line[this.columnnamehebrew].includes(this.filterValue)
+    else
+    return line[this.columnnamehebrew].startsWith(this.filterValue)
+  }
+}
+
+export class DateFilterColumn extends FilterColumn {
+  // ordernumber!: string;
+  // columnfiltertype!: string;
+  // columnvalidationtype!: string;
+  // columnvalidationmessage!: string;
+  // associatedcolumnname!: string;
+  // columnformatter!: string;
+  // columnnameenglish!: string;
+  // columnnamehebrew!: string;
+  // display!: string;
+  // removable!: string;
+  // savedbyuser!: string;
+  // filterValue!: String;
+  // options: string[] = [];
+  // stringFilterValue: String = '';
+
+  constructor(col: DateFilterColumn) {
+    super(col)
+    // this.filterValue = col.filterValue;
+    // this.options = col.options;
+    // this.stringFilterValue=col.stringFilterValue;
   }
 }
