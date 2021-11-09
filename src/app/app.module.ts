@@ -28,6 +28,10 @@ import { MatTableComponent } from './lib/mat-table/mat-table.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { DateFilterComponent } from './lib/filters/date-filter/date-filter.component';
 import { BooleanFilterComponent } from './lib/filters/boolean-filter/boolean-filter.component';
+import { MultiSelectFilterComponent } from './lib/filters/multi-select-filter/multi-select-filter.component';
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NumericFilterComponent } from './lib/filters/numeric-filter/numeric-filter.component';
 
 
 @NgModule({
@@ -42,6 +46,8 @@ import { BooleanFilterComponent } from './lib/filters/boolean-filter/boolean-fil
     MatTableComponent,
     DateFilterComponent,
     BooleanFilterComponent,
+    MultiSelectFilterComponent,
+    NumericFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +70,9 @@ import { BooleanFilterComponent } from './lib/filters/boolean-filter/boolean-fil
     MatListModule,
     MatIconModule,
     MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule ,
+    
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

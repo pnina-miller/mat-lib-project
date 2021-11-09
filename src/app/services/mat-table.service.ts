@@ -20,8 +20,10 @@ export class MatTableService {
     this.FilterArr.subscribe(data => { this.filterArrChanged() })
 
   }
-
-  initDataSource() {
+  // mat-table Hapoalim lib component call this method in ngOnInit
+  // filter-popub lib component call this method if got null @Input TableDataSource
+  initDataSource(/*tableDataSource, columnDefinitions */) {//{if (!dataSource) load from server by environment.ts parameter else subjectDataSource(next(dataSource));
+  // if(!columnsDefinition) etc...}
     this.load().subscribe(res => {
       let data = Object.values(res)
       let dataSourch = Array.from(Array(10).keys()).map(i => {
@@ -35,7 +37,9 @@ export class MatTableService {
 
     })
   }
-
+  //getColumnOptions(columnName){
+    //dataSource.filter(column=>{}).distinct()
+  //}
   load(): Observable<FilterColumn[]> {
     return this.http.get<FilterColumn[]>('assets/data/tableColumns.json');
   }
@@ -64,7 +68,8 @@ export class MatTableService {
   }
 
   replaceFilter(filterColumn: FilterColumn) {
-    this.filterArrSource.next(this.filterArrSource.getValue().map(filter => (filter.ordernumber === filterColumn.ordernumber ? filterColumn : filter)));
+    let data= this.filterArrSource.getValue().map(filter => (filter.ordernumber === filterColumn.ordernumber ? filterColumn : filter))
+    this.filterArrSource.next(data);
 
   }
 

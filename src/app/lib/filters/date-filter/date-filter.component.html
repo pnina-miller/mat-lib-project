@@ -1,1 +1,6 @@
-<p>date-filter works!</p>
+<mat-label>איתור לפי</mat-label>
+<mat-select [(value)]="selectedMethod">
+  <mat-option *ngFor="let method of optionsArr " value="{{method[0]}}" >{{ method[1].name }}</mat-option>
+</mat-select>
+
+<mat-calendar (selectedChange)="selected = $event"  selected="{{selected}}"></mat-calendar>

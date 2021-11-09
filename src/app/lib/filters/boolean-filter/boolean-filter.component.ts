@@ -17,7 +17,7 @@ export class BooleanFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-onChange(e: any){debugger
+onChange(e: any){
   this.stringFilterValue=e.value;
 }
 

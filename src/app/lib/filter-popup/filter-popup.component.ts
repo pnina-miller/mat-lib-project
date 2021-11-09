@@ -11,6 +11,8 @@ import * as columnDefination from '../../../assets/data/tableColumns.json'
 })
 export class FilterPopupComponent implements OnInit {
 
+  //@Input TableDataSource
+  //@Input ColumnDefinitions
   selectedFilterColumn: FilterColumn | undefined;
   displayedColumns: Array<any> = Object.values(columnDefination);
 
@@ -22,6 +24,8 @@ export class FilterPopupComponent implements OnInit {
   ngOnInit(): void {
     const rect = this.data.trigger.nativeElement.getBoundingClientRect();
     this.dialModalRef.updatePosition({ top: `${rect.top + rect.height}px`, left: `${rect.left}px` })
+    // filterService.initTableDefinition( TableDataSource, ColumnDefinition); 
+
   }
 
   goBack() {

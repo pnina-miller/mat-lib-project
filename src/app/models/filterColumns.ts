@@ -1,12 +1,12 @@
 
 export class FilterColumn {
   ordernumber!: string;
-  columnfiltertype!: string; 
-  columnnameenglish!: string; 
-  columnnamehebrew!: string; 
+  columnfiltertype!: string;
+  columnnameenglish!: string;
+  columnnamehebrew!: string;
 
-  filterValue!: String;
-  stringFilterValue: String = '';
+  filterValue!: string;
+  stringFilterValue: string;
 
   constructor(col: any) {
     this.ordernumber = col.ordernumber;
@@ -18,7 +18,7 @@ export class FilterColumn {
   }
 
   checkFilter(line: any): boolean {
-    return this.filterValue===line[this.columnnamehebrew]
+    return this.filterValue === line[this.columnnamehebrew]
   }
 }
 
@@ -32,48 +32,92 @@ export class SelectFilterColumn extends FilterColumn {
   }
 
   checkFilter(line: any): boolean {
-    return this.filterValue===line[this.columnnamehebrew];
+    return this.filterValue === line[this.columnnamehebrew];
   }
 }
 
 export class StringFilterColumn extends FilterColumn {
 
-methodOptions: string[] = ['contain','start with']
-  filterMethod!:String;
+  methodOptions: string[] = ['contain', 'start with']
+  filterMethod!: String;
 
   constructor(col: any) {
     super(col)
-    this.methodOptions=col.methodOptions;
-    this.filterMethod=col.filterMethod;
+    this.methodOptions = col.methodOptions;
+    this.filterMethod = col.filterMethod;
   }
   checkFilter(line: any): boolean {
-    if(this.filterMethod==='contain')
-    return line[this.columnnamehebrew].includes(this.filterValue)
+    if (this.filterMethod === 'contain')
+      return line[this.columnnamehebrew].includes(this.filterValue)
     else
-    return line[this.columnnamehebrew].startsWith(this.filterValue)
+      return line[this.columnnamehebrew].startsWith(this.filterValue)
+  }
+}
+export class NumericFilterColumn extends FilterColumn {
+
+  public static methodOptions: { [key: string]: any } = {
+
+    lte: { name: '=<', check: (filterValue: string, lineValue: string) => Number(filterValue) <= Number(lineValue) },
+    equal: { name: '=', check: (filterValue: string, lineValue: string) => Number(filterValue) === Number(lineValue) },
+    gte: { name: '=>', check: (filterValue: string, lineValue: string) => Number(filterValue) >= Number(lineValue) },
+    range: { name: 'טווח', check: (filterValue: string, lineValue: string, secondValueForRange: string) => (Number(lineValue) - Number(filterValue)) * (Number(secondValueForRange) - Number(lineValue)) >= 0
+
+  },
+  }
+
+  filterMethodKey!: string;
+  secondValueForRange!: string
+
+  constructor(col: any) {
+    super(col)
+    this.secondValueForRange = col.secondValueForRange;
+    this.filterMethodKey = col.filterMethodKey;
+  }
+
+  checkFilter(line: any): boolean {
+    return NumericFilterColumn.methodOptions[this.filterMethodKey].check(this.filterValue, line[this.columnnamehebrew], this.secondValueForRange)
+
+  }
+}
+
+
+export class MultiSelectFilterColumn extends FilterColumn {
+
+  selectedOptions!: string[];
+  options!: string[];
+
+  constructor(col: any) {
+    super(col)
+    this.selectedOptions = col.selectedOptions;
+    this.options = col.options;
+  }
+  checkFilter(line: any): boolean {
+    //TODO
+    return !!this.selectedOptions.find(op => op === line[this.columnnamehebrew])
+
   }
 }
 
 export class DateFilterColumn extends FilterColumn {
-  // ordernumber!: string;
-  // columnfiltertype!: string;
-  // columnvalidationtype!: string;
-  // columnvalidationmessage!: string;
-  // associatedcolumnname!: string;
-  // columnformatter!: string;
-  // columnnameenglish!: string;
-  // columnnamehebrew!: string;
-  // display!: string;
-  // removable!: string;
-  // savedbyuser!: string;
-  // filterValue!: String;
-  // options: string[] = [];
-  // stringFilterValue: String = '';
 
-  constructor(col: DateFilterColumn) {
+  public static methodOptions: { [key: string]: any } = {
+
+    in: { name: 'בתאריך', check: (filterValue: string, lineValue: string) => filterValue === lineValue },
+    before: { name: 'לפני', check: (filterValue: string, lineValue: string) => filterValue > lineValue },
+    after: { name: 'אחרי', check: (filterValue: string, lineValue: string) => filterValue < lineValue },
+    range: { name: 'בטווח', check: (filterValue: string, lineValue: string, secondValueForRange: string) => filterValue > lineValue && lineValue < secondValueForRange }
+  }
+
+  filterMethodKey!: string;
+  secondValueForRange!: string
+
+  constructor(col: any) {
     super(col)
-    // this.filterValue = col.filterValue;
-    // this.options = col.options;
-    // this.stringFilterValue=col.stringFilterValue;
+    this.secondValueForRange = col.secondValueForRange;
+    this.filterMethodKey = col.filterMethodKey;
+  }
+
+  checkFilter(line: any): boolean {
+    return DateFilterColumn.methodOptions[this.filterMethodKey].check(this.filterValue, line[this.columnnamehebrew], this.secondValueForRange)
   }
 }

@@ -18,6 +18,10 @@ export class FilterWrapperComponent implements OnInit {
   @Output() goBack: EventEmitter<any> = new EventEmitter();
 
   filterTypes = ['DATE', 'String', 'BOOLEAN', 'MULTISELECT', 'NUMERIC', 'SELECT'];
+  filterTypes1={
+  date:'date',
+  string:'string'
+  }
 
   filterSelectSymbol = []
   constructor() { }
