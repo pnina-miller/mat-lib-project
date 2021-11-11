@@ -121,4 +121,3 @@ export class DateFilterColumn extends FilterColumn {
     return DateFilterColumn.methodOptions[this.filterMethodKey].check(this.filterValue, line[this.columnnamehebrew], this.secondValueForRange)
   }
 }
-//try
