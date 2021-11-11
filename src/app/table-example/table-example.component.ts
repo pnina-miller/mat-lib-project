@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FilterPopupComponent } from '../lib/filter-popup/filter-popup.component';
 import { IfilterValues } from '../table.inteface';
 import * as columnDefination from '../../assets/data/tableColumns.json'
-import { MatTableService } from '../services/mat-table.service';
+import * as dataSourch from '../../assets/data/dataSource.json'
 
 
 @Component({
@@ -19,24 +19,15 @@ export class tableExampleComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
+  TableDataSourceUrl: string = 'assets/data/tableColumns.json';
+  ColumnDefinitionsUrl: string = 'assets/data/tableColumns.json';
+  tableDataSource = Object.values(dataSourch)
+  columnDefinitions: any[] = Object.values(columnDefination);
 
-  @Input() elementData: any;
-  @Input() columns!: IfilterValues;
-
-
-  dataSource!: MatTableDataSource<any>;
-  displayedColumns!: string[];
-
-  constructor(private _liveAnnouncer: LiveAnnouncer,
-     public dialog: MatDialog,
-      private matTableService: MatTableService,
-      ) { }
+  
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.matTableService.displayDataSource.subscribe(this.dataSourceChanged)
-  }
-  dataSourceChanged=(data:any)=>{
-    this.dataSource = data
   }
 
   openDialog(event: any) {
@@ -52,6 +43,7 @@ export class tableExampleComponent implements OnInit {
         panelClass: 'md-dialog-container',
         data: {
           trigger: target,
+          // ColumnDefinitionsUrl: this.ColumnDefinitionsUrl
         }
       });
     }

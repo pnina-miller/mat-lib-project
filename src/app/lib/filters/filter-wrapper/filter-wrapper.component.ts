@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FilterColumn } from 'src/app/models/filterColumns';
+import { FilterColumn } from 'src/app/lib/models/filterColumns';
 import { SelectFilterComponent } from '../select-filter/select-filter.component';
 import { StringFilterComponent } from '../string-filter/string-filter.component';
 

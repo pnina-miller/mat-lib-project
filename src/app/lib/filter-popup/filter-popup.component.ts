@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef, ChangeDetectorRef, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FilterColumn } from '../../models/filterColumns';
-import * as columnDefination from '../../../assets/data/tableColumns.json'
+import { FilterColumn } from '../models/filterColumns';
+import { MatTableService } from '../services/mat-table.service';
 
 
 @Component({
@@ -11,21 +11,21 @@ import * as columnDefination from '../../../assets/data/tableColumns.json'
 })
 export class FilterPopupComponent implements OnInit {
 
-  //@Input TableDataSource
-  //@Input ColumnDefinitions
-  selectedFilterColumn: FilterColumn | undefined;
-  displayedColumns: Array<any> = Object.values(columnDefination);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {trigger: ElementRef },
+  selectedFilterColumn: FilterColumn | undefined;
+  columns!: Array<FilterColumn> 
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {trigger: ElementRef, TableDataSourceUrl:string, ColumnDefinitionsUrl:string, TableDataSource:any[], ColumnDefinitions:FilterColumn[] },
     public dialModalRef: MatDialogRef<FilterPopupComponent>,
     private changeDetector: ChangeDetectorRef,
+    private matTableService: MatTableService,
   ) { }
 
   ngOnInit(): void {
     const rect = this.data.trigger.nativeElement.getBoundingClientRect();
     this.dialModalRef.updatePosition({ top: `${rect.top + rect.height}px`, left: `${rect.left}px` })
-    // filterService.initTableDefinition( TableDataSource, ColumnDefinition); 
-
+    this.matTableService.init(this.data.TableDataSourceUrl,this.data.ColumnDefinitionsUrl, this.data.TableDataSource, this.data.ColumnDefinitions); 
+    this.matTableService.columnDefinitions.subscribe(data=>this.columns = data)
   }
 
   goBack() {
@@ -33,13 +33,13 @@ export class FilterPopupComponent implements OnInit {
   }
 
   onKeyUp(e: any) {
-    this.displayedColumns = Object.values(columnDefination).filter(col => col.columnnamehebrew?.includes(e.target.value))
-    this.changeDetector.detectChanges();
+    // this.displayedColumns = Object.values(this.ColumnDefinitions).filter(col => col.columnnamehebrew?.includes(e.target.value))
+    // this.changeDetector.detectChanges();
 
   }
 
   fieldSelected(ordernumber: string) {
-    this.selectedFilterColumn = this.displayedColumns.find(col => col.ordernumber === ordernumber)
+    this.selectedFilterColumn = this.columns.find(col => col.ordernumber === ordernumber)
   }
   
 }

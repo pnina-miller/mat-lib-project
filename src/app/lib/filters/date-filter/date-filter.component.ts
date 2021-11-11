@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DateFilterColumn, StringFilterColumn } from 'src/app/models/filterColumns';
-import { MatTableService } from 'src/app/services/mat-table.service';
+import { DateFilterColumn, StringFilterColumn } from 'src/app/lib/models/filterColumns';
+import { MatTableService } from 'src/app/lib/services/mat-table.service';
 
 @Component({
   selector: 'app-date-filter',

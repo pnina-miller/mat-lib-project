@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatTableService } from '../../services/mat-table.service';
-import { FilterColumn } from '../../models/filterColumns';
+import { MatTableService } from '../services/mat-table.service';
+import { FilterColumn } from '../models/filterColumns';
 
 @Component({
   selector: 'app-filter-chips-wrapper',

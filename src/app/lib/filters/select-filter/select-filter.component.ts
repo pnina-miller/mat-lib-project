@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
-import { MatTableService } from 'src/app/services/mat-table.service';
-import { FilterColumn, SelectFilterColumn } from 'src/app/models/filterColumns';
+import { MatTableService } from 'src/app/lib/services/mat-table.service';
+import { FilterColumn, SelectFilterColumn } from 'src/app/lib/models/filterColumns';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -26,7 +26,7 @@ export class SelectFilterComponent implements OnInit {
   }
 
   saveFilter(){
-    this.filterService.setFilter(new FilterColumn({...this.filterColumn,stringFilterValue:this.stringFilterValue}))
+    this.filterService.setFilter(new SelectFilterColumn({...this.filterColumn,stringFilterValue:this.stringFilterValue,filterValue:this.stringFilterValue}))
 
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MultiSelectFilterColumn } from 'src/app/models/filterColumns';
-import { MatTableService } from 'src/app/services/mat-table.service';
+import { MultiSelectFilterColumn } from 'src/app/lib/models/filterColumns';
+import { MatTableService } from 'src/app/lib/services/mat-table.service';
 
 @Component({
   selector: 'app-multi-select-filter',
