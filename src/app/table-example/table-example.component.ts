@@ -1,9 +1,8 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, ViewChild, OnInit, Input, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FilterPopupComponent } from '../lib/filter-popup/filter-popup.component';
+import { FilterPopupComponent } from '../lib/mat-filter/filter-popup/filter-popup.component';
 import { IfilterValues } from '../table.inteface';
 import * as columnDefination from '../../assets/data/tableColumns.json'
 import * as dataSourch from '../../assets/data/dataSource.json'
@@ -16,11 +15,8 @@ import * as dataSourch from '../../assets/data/dataSource.json'
 })
 export class tableExampleComponent implements OnInit {
 
-
-  @ViewChild(MatSort) sort: MatSort = new MatSort;
-
-  TableDataSourceUrl: string = 'assets/data/tableColumns.json';
-  ColumnDefinitionsUrl: string = 'assets/data/tableColumns.json';
+  tableDataSourceUrl: string = 'assets/data/dataSource.json';
+  columnDefinitionsUrl: string = 'assets/data/tableColumns.json';
   tableDataSource = Object.values(dataSourch)
   columnDefinitions: any[] = Object.values(columnDefination);
 
@@ -43,7 +39,8 @@ export class tableExampleComponent implements OnInit {
         panelClass: 'md-dialog-container',
         data: {
           trigger: target,
-          // ColumnDefinitionsUrl: this.ColumnDefinitionsUrl
+          TableDataSourceUrl:this.tableDataSourceUrl,
+          ColumnDefinitionsUrl: this.columnDefinitionsUrl
         }
       });
     }

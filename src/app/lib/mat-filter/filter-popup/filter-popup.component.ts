@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ElementRef, ChangeDetectorRef, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FilterColumn } from '../models/filterColumns';
-import { MatTableService } from '../services/mat-table.service';
+import { FilterColumn } from '../../models/filterColumns';
+import { MatTableService } from '../../services/mat-table.service';
 
 
 @Component({

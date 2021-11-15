@@ -1,7 +1,6 @@
 
-<button mat-button (click)="openDialog($event)">Open Filters</button>
-
+<!-- <button mat-button (click)="openDialog($event)">Open Filters</button> -->
+<app-mat-filter [tableDataSourceUrl]="tableDataSourceUrl"  [columnDefinitionsUrl]="columnDefinitionsUrl" ></app-mat-filter>
 <app-filter-chips-wrapper></app-filter-chips-wrapper>
 
-<app-mat-table  ></app-mat-table>
-<!-- [tableDataSource]="tableDataSource" -->
+<app-mat-table [tableDataSourceUrl]="tableDataSourceUrl"  [columnDefinitionsUrl]="columnDefinitionsUrl" ></app-mat-table>
