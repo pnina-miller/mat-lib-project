@@ -26,24 +26,8 @@ export class tableExampleComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDialog(event: any) {
-
-    const target = new ElementRef(event.currentTarget);
-    if (this.dialog.openDialogs.length > 0)
-      this.dialog.closeAll()
-    else {
-      this.dialog.open(FilterPopupComponent, {
-        backdropClass: 'backdropBackground',
-        height: '400px',
-        width: '300px',
-        panelClass: 'md-dialog-container',
-        data: {
-          trigger: target,
-          TableDataSourceUrl:this.tableDataSourceUrl,
-          ColumnDefinitionsUrl: this.columnDefinitionsUrl
-        }
-      });
-    }
+  updateFilters(filters: any[]): void {debugger
+    console.log('filters updates',filters);
+    alert('yessss')
   }
-
 }

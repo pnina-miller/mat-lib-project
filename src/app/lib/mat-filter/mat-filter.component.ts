@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterPopupComponent } from './filter-popup/filter-popup.component';
 
@@ -17,12 +17,14 @@ export class MatFilterComponent implements OnInit {
   @Input() tableDataSourceUrl!: string;
   @Input() columnDefinitionsUrl!: string;
 
+  @Output() updateFilters: EventEmitter<any[]>=new EventEmitter();
+
   ngOnInit(): void {
   }
 
 
   openDialog(event: any) {
-
+this.updateFilters.emit(['try'])
     const target = new ElementRef(event.currentTarget);
     if (this.dialog.openDialogs.length > 0)
       this.dialog.closeAll()
@@ -35,7 +37,8 @@ export class MatFilterComponent implements OnInit {
         data: {
           trigger: target,
           TableDataSourceUrl:this.tableDataSourceUrl,
-          ColumnDefinitionsUrl: this.columnDefinitionsUrl
+          ColumnDefinitionsUrl: this.columnDefinitionsUrl,
+          updateFilters:(filters:any[])=>{ this.updateFilters.emit(filters)}
         }
       });
     }

@@ -19,6 +19,7 @@ export class MatTableService {
   public filterArrSource: BehaviorSubject<Array<FilterColumn>> = new BehaviorSubject(new Array<FilterColumn>());
   FilterArr = this.filterArrSource.asObservable()
 
+  updateFilters!:Function;
   constructor(private http: HttpClient) {
     this.FilterArr.subscribe(data => { this.filterArrChanged() })
     // this.displayDataSource.subscribe(data => { this.dataChanged()})
@@ -35,13 +36,14 @@ export class MatTableService {
   }
   // mat-table Hapoalim lib component call this method in ngOnInit
   // filter-popub lib component call this method if got null @Input TableDataSource
-  init(dataSourceUrl: string, columnDefinitionsUrl: string, tableDataSource: any[], columnDefinitions: FilterColumn[]) {//{if (!dataSource) load from server by environment.ts parameter else subjectDataSource(next(dataSource));
+  init(dataSourceUrl: string, columnDefinitionsUrl: string, tableDataSource: any[], columnDefinitions: FilterColumn[], updateFilters:Function=()=>{}): void {//{if (!dataSource) load from server by environment.ts parameter else subjectDataSource(next(dataSource));
     
     if (dataSourceUrl) this.loadDataSource(dataSourceUrl).subscribe(res => this.initDataSource(res))
     else if (tableDataSource) this.initDataSource(tableDataSource)
     else this.loadDemoData().subscribe(data => this.initDataSource(data))
 
     this.initColumns(columnDefinitionsUrl, columnDefinitions)
+    this.updateFilters=updateFilters;
   }
 
   initDataSource(data: any[]) {
@@ -92,6 +94,7 @@ export class MatTableService {
   }
 
   filterArrChanged() {
+    this.updateFilters && this.updateFilters(this.filterArrSource.getValue())
     let filters = this.filterArrSource.getValue()
     let filteredData = this?.dataSource.filteredData?.filter(line => {
       let check = true
