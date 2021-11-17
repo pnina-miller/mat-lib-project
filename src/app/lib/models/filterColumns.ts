@@ -103,9 +103,9 @@ export class DateFilterColumn extends FilterColumn {
   public static methodOptions: { [key: string]: any } = {
 
     in: { name: 'בתאריך', check: (filterValue: string, lineValue: string) => filterValue === lineValue },
-    before: { name: 'לפני', check: (filterValue: string, lineValue: string) => filterValue > lineValue },
-    after: { name: 'אחרי', check: (filterValue: string, lineValue: string) => filterValue < lineValue },
-    range: { name: 'בטווח', check: (filterValue: string, lineValue: string, secondValueForRange: string) => filterValue > lineValue && lineValue < secondValueForRange }
+    before: { name: 'לפני', check: (filterValue: string, lineValue: string) => new Date(filterValue) > new Date(lineValue) },
+    after: { name: 'אחרי', check: (filterValue: string, lineValue: string) => new Date(filterValue) < new Date(lineValue) },
+    range: { name: 'בטווח', check: (filterValue: string, lineValue: string, secondValueForRange: string) => new Date(filterValue) > new Date(lineValue) && new Date(lineValue) < new Date(secondValueForRange) }
   }
 
   filterMethodKey!: string;
@@ -118,6 +118,6 @@ export class DateFilterColumn extends FilterColumn {
   }
 
   checkFilter(line: any): boolean {
-    return DateFilterColumn.methodOptions[this.filterMethodKey].check(this.filterValue, line[this.columnnamehebrew], this.secondValueForRange)
+    return DateFilterColumn.methodOptions[this.filterMethodKey].check(this.filterValue, new Date(line[this.columnnamehebrew]).toDateString() , this.secondValueForRange)
   }
 }

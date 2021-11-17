@@ -3,4 +3,5 @@
   <mat-option *ngFor="let method of optionsArr " value="{{method[0]}}" >{{ method[1].name }}</mat-option>
 </mat-select>
 
-<mat-calendar (selectedChange)="selected = $event"  selected="{{selected}}"></mat-calendar>
+<mat-calendar class="mat-calendar-filter" (selectedChange)="selected = $event"  selected="{{selected}}"></mat-calendar>
+{{selected.toDateString()}}

@@ -13,10 +13,6 @@ import { MatTableService } from '../../services/mat-table.service';
 
 interface DataType {
   trigger: ElementRef;
-  TableDataSourceUrl: string;
-  ColumnDefinitionsUrl: string;
-  TableDataSource: any[];
-  ColumnDefinitions: FilterColumn[];
   updateFilters: Function;
 }
 
@@ -28,6 +24,7 @@ interface DataType {
 export class FilterPopupComponent implements OnInit {
   selectedFilterColumn: FilterColumn | undefined;
   columns!: Array<FilterColumn>;
+  displayedColumns!: Array<FilterColumn>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DataType,
@@ -42,15 +39,9 @@ export class FilterPopupComponent implements OnInit {
       top: `${rect.top + rect.height}px`,
       left: `${rect.left}px`,
     });
-    this.matTableService.init(
-      this.data.TableDataSourceUrl,
-      this.data.ColumnDefinitionsUrl,
-      this.data.TableDataSource,
-      this.data.ColumnDefinitions,
-      this.data.updateFilters
-    );
+
     this.matTableService.columnDefinitions.subscribe(
-      (data) => (this.columns = data)
+      (data) => {this.columns = data; this.displayedColumns=data}
     );
   }
 
@@ -59,8 +50,9 @@ export class FilterPopupComponent implements OnInit {
   }
 
   onKeyUp(e: any) {
-    // this.displayedColumns = Object.values(this.ColumnDefinitions).filter(col => col.columnnamehebrew?.includes(e.target.value))
-    // this.changeDetector.detectChanges();
+    let filteresArr=this.columns.filter( col => col.columnnamehebrew?.includes(e.target.value) );
+
+    this.displayedColumns=filteresArr;
     }
 
   fieldSelected(ordernumber: string) {

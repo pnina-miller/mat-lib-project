@@ -93,6 +93,7 @@ export class MatTableService {
     return this.http.get<FilterColumn[]>(url);
   }
 
+
   filterArrChanged() {
     this.updateFilters && this.updateFilters(this.filterArrSource.getValue())
     let filters = this.filterArrSource.getValue()
