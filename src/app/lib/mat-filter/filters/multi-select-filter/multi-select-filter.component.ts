@@ -12,13 +12,14 @@ export class MultiSelectFilterComponent implements OnInit {
 
   constructor(private filterService:MatTableService) { }
 
-  @Input() filterColumn!: MultiSelectFilterColumn;
+  @Input() filterColumn: MultiSelectFilterColumn | undefined;
+
   options!: String[];
   selected: String[]=[];
   stringFilterValue=''
 
   ngOnInit(): void {
-    this.options=this.filterColumn.options
+    this.options=this.filterColumn?.options||[]
   }
 
   onChange(e: any){
@@ -31,13 +32,6 @@ export class MultiSelectFilterComponent implements OnInit {
 
   }
 
-  /*TODO: onBooleanChange(e: any,item:String){
-    if(e.checked)
-    this.filterService.addFilter(this.filterColumn.ordernumber, item)
-    else
-    this.filterService.removeFilter(item)
-
-  }*/
 }
 
 

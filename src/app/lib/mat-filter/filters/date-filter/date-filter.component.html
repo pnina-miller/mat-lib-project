@@ -1,6 +1,12 @@
-<mat-label>איתור לפי</mat-label>
+<div class="select-filter-container">
+  <mat-form-field  class="select-filter-select">
 <mat-select [(value)]="selectedMethod">
   <mat-option *ngFor="let method of optionsArr " value="{{method[0]}}" >{{ method[1].name }}</mat-option>
 </mat-select>
-
-<mat-calendar (selectedChange)="selected = $event"  selected="{{selected}}"></mat-calendar>
+</mat-form-field>
+<div class="select-filter-selected">
+<p *ngIf="selectedMethod !== 'range'">{{convertDate(selected)}}</p>
+<p *ngIf="selectedMethod === 'range'"> {{convertDate(selected)}}  - {{convertDate(selected2)}}</p>
+</div>
+<mat-calendar (selectedChange)="dateSelected($event)"  selected="{{selected}}"></mat-calendar>
+</div>

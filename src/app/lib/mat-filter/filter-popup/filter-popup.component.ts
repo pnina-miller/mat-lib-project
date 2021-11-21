@@ -6,7 +6,10 @@ import {
   ChangeDetectorRef,
   Input,
   EventEmitter,
+  ViewChild,
 } from '@angular/core';
+import { SelectFilterComponent } from '../filters/select-filter/select-filter.component';
+import { StringFilterComponent } from '../filters/string-filter/string-filter.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FilterColumn } from '../../models/filterColumns';
 import { MatTableService } from '../../services/mat-table.service';
@@ -26,8 +29,9 @@ interface DataType {
   styleUrls: ['./filter-popup.component.scss'],
 })
 export class FilterPopupComponent implements OnInit {
-  selectedFilterColumn: FilterColumn | undefined;
+  selectedFilterColumn: any | undefined;;
   columns!: Array<FilterColumn>;
+  displayedColumns!: Array<FilterColumn>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DataType,
@@ -50,7 +54,7 @@ export class FilterPopupComponent implements OnInit {
       this.data.updateFilters
     );
     this.matTableService.columnDefinitions.subscribe(
-      (data) => (this.columns = data)
+      (data) => {this.columns = data; this.displayedColumns=data}
     );
   }
 
@@ -59,8 +63,7 @@ export class FilterPopupComponent implements OnInit {
   }
 
   onKeyUp(e: any) {
-    // this.displayedColumns = Object.values(this.ColumnDefinitions).filter(col => col.columnnamehebrew?.includes(e.target.value))
-    // this.changeDetector.detectChanges();
+    this.displayedColumns = this.columns.filter(col => col.columnnamehebrew?.includes(e.target.value))
     }
 
   fieldSelected(ordernumber: string) {
@@ -68,4 +71,29 @@ export class FilterPopupComponent implements OnInit {
       (col) => col.ordernumber === ordernumber
     );
   }
+
+  @ViewChild('filterComponent') filterComponent!: StringFilterComponent | SelectFilterComponent
+
+
+
+  filterTypes={
+  date:'DATE',
+  string:'String',
+  boolean:'BOOLEAN',
+  multiSelect:'MULTISELECT',
+  numeric: 'NUMERIC',
+  select: 'SELECT'
+  }
+
+  filterSelectSymbol = []
+
+
+  back() {
+    this.goBack()
+  }
+
+  seveClick() {
+    this.filterComponent.saveFilter();
+  }
+
 }

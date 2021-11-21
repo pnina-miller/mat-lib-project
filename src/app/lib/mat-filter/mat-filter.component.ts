@@ -24,14 +24,13 @@ export class MatFilterComponent implements OnInit {
 
 
   openDialog(event: any) {
-this.updateFilters.emit(['try'])
     const target = new ElementRef(event.currentTarget);
     if (this.dialog.openDialogs.length > 0)
       this.dialog.closeAll()
     else {
       this.dialog.open(FilterPopupComponent, {
         backdropClass: 'backdropBackground',
-        height: '400px',
+        maxHeight: '400px',
         width: '300px',
         panelClass: 'md-dialog-container',
         data: {

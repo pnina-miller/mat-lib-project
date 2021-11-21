@@ -16,23 +16,24 @@ import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/materia
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { HttpClientModule } from  '@angular/common/http';
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+
 import { FilterPopupComponent } from './lib/mat-filter/filter-popup/filter-popup.component';
 import { tableExampleComponent } from './table-example/table-example.component'
 import { SelectFilterComponent } from './lib/mat-filter/filters/select-filter/select-filter.component';
 import { StringFilterComponent } from './lib/mat-filter/filters/string-filter/string-filter.component';
-import { FilterWrapperComponent } from './lib/mat-filter/filters/filter-wrapper/filter-wrapper.component';
 import { FilterChipsWrapperComponent } from './lib/filter-chips-wrapper/filter-chips-wrapper.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatTableComponent } from './lib/mat-table/mat-table.component';
-import { HttpClientModule } from  '@angular/common/http';
 import { DateFilterComponent } from './lib/mat-filter/filters/date-filter/date-filter.component';
 import { BooleanFilterComponent } from './lib/mat-filter/filters/boolean-filter/boolean-filter.component';
 import { MultiSelectFilterComponent } from './lib/mat-filter/filters/multi-select-filter/multi-select-filter.component';
-import {MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { NumericFilterComponent } from './lib/mat-filter/filters/numeric-filter/numeric-filter.component';
 import { MatFilterComponent } from './lib/mat-filter/mat-filter.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -42,7 +43,6 @@ import { MatFilterComponent } from './lib/mat-filter/mat-filter.component';
     tableExampleComponent,
     SelectFilterComponent,
     StringFilterComponent,
-    FilterWrapperComponent,
     FilterChipsWrapperComponent,
     MatTableComponent,
     DateFilterComponent,
@@ -74,7 +74,7 @@ import { MatFilterComponent } from './lib/mat-filter/mat-filter.component';
     MatChipsModule,
     MatDatepickerModule,
     MatNativeDateModule ,
-    
+    MatCardModule,
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

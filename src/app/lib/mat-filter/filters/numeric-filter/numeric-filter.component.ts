@@ -12,7 +12,8 @@ export class NumericFilterComponent implements OnInit {
   constructor(private filterService: MatTableService) { }
 
 
-  @Input() filterColumn!: NumericFilterColumn;
+  @Input() filterColumn: NumericFilterColumn | undefined;
+
   methodOptions = NumericFilterColumn.methodOptions;
   optionsArr = Object.entries(this.methodOptions)
 
