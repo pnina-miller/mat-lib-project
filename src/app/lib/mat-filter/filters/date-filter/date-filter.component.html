@@ -5,8 +5,8 @@
 </mat-select>
 </mat-form-field>
 <div class="select-filter-selected">
-<p *ngIf="selectedMethod !== 'range'">{{convertDate(selected)}}</p>
-<p *ngIf="selectedMethod === 'range'"> {{convertDate(selected)}}  - {{convertDate(selected2)}}</p>
+<p *ngIf="selectedMethod !== 'range'">{{convertDate(filterValue)}}</p>
+<p *ngIf="selectedMethod === 'range'"> {{convertDate(filterValue)}}  - {{convertDate(filterValue2)}}</p>
 </div>
-<mat-calendar (selectedChange)="dateSelected($event)"  selected="{{selected}}"></mat-calendar>
+<mat-calendar (selectedChange)="dateSelected($event)"  selected="{{filterValue}}"></mat-calendar>
 </div>

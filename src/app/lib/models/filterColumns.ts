@@ -1,3 +1,5 @@
+import { Inject, Injectable } from "@angular/core";
+
 export class FilterColumn {
   ordernumber!: string;
   columnfiltertype!: string;
@@ -33,24 +35,30 @@ export class SelectFilterColumn extends FilterColumn {
     return this.filterValue === line[this.columnnamehebrew];
   }
 }
-
+@Injectable({ providedIn: 'root' })
 export class StringFilterColumn extends FilterColumn {
-  methodOptions: string[] = ['contain', 'start with'];
-  filterMethod!: String;
+  methodOptions: { [key: string]: any } = {contain: {
+    name: 'מכיל',
+    check: (filterValue: string, lineValue: string) =>lineValue.includes(filterValue)
+  },
+   startWith:{
+    name: 'מתחיל ב',
+    check: (filterValue: string, lineValue: string) =>lineValue.startsWith(filterValue)
+   }};
+  filterMethodKey!: string;
 
-  constructor(col: any) {
+  constructor(@Inject('defaultCol') col: any) {
     super(col);
-    this.methodOptions = col.methodOptions;
-    this.filterMethod = col.filterMethod;
+    this.filterMethodKey = col?.filterMethodKey;
   }
   checkFilter(line: any): boolean {
-    if (this.filterMethod === 'contain')
-      return line[this.columnnamehebrew].includes(this.filterValue);
-    else return line[this.columnnamehebrew].startsWith(this.filterValue);
+  return this.methodOptions[this.filterMethodKey].check( this.filterValue, line[this.columnnamehebrew]);
   }
 }
+
+@Injectable({ providedIn: 'root' })
 export class NumericFilterColumn extends FilterColumn {
-  public static methodOptions: { [key: string]: any } = {
+  public methodOptions: { [key: string]: any } = {
     lte: {
       name: '=<',
       check: (filterValue: string, lineValue: string) =>
@@ -82,14 +90,14 @@ export class NumericFilterColumn extends FilterColumn {
   filterMethodKey!: string;
   secondValueForRange!: string;
 
-  constructor(col: any) {
+  constructor(@Inject('defaultCol') col: any) {
     super(col);
     this.secondValueForRange = col.secondValueForRange;
     this.filterMethodKey = col.filterMethodKey;
   }
 
   checkFilter(line: any): boolean {
-    return NumericFilterColumn.methodOptions[this.filterMethodKey].check(
+    return this.methodOptions[this.filterMethodKey].check(
       this.filterValue,
       line[this.columnnamehebrew],
       this.secondValueForRange
@@ -114,27 +122,27 @@ export class MultiSelectFilterColumn extends FilterColumn {
   }
 }
 
-  function prepareDate(date: any):number {
-    return new Date(date).getTime();
-  }
+ 
+
+  @Injectable({ providedIn: 'root' })
 export class DateFilterColumn extends FilterColumn {
   
 
-  public static methodOptions: { [key: string]: any } = {
+  public methodOptions: { [key: string]: any } = {
     in: {
       name: 'בתאריך',
       check: (filterValue: string, lineValue: string) =>
-      prepareDate(filterValue) === prepareDate(lineValue),
+      this.prepareDate(filterValue) === this.prepareDate(lineValue),
     },
     before: {
       name: 'לפני',
       check: (filterValue: string, lineValue: string) =>
-      prepareDate(filterValue) > prepareDate(lineValue),
+      this.prepareDate(filterValue) > this.prepareDate(lineValue),
     },
     after: {
       name: 'אחרי',
       check: (filterValue: string, lineValue: string) =>
-        prepareDate(filterValue) < prepareDate(lineValue),
+      this.prepareDate(filterValue) < this.prepareDate(lineValue),
     },
     range: {
       name: 'בטווח תאריכים',
@@ -151,16 +159,20 @@ export class DateFilterColumn extends FilterColumn {
   filterMethodKey!: string;
   secondValueForRange!: string;
 
-  constructor(col: any) {
+  constructor(@Inject('defaultCol') col: any) {
     super(col);
     this.secondValueForRange = col.secondValueForRange;
     this.filterMethodKey = col.filterMethodKey;
   }
   checkFilter(line: any): boolean {
-    return DateFilterColumn.methodOptions[this.filterMethodKey].check(
+    return this.methodOptions[this.filterMethodKey].check(
       this.filterValue,
       line[this.columnnamehebrew],
       this.secondValueForRange
     );
+  } 
+  
+  prepareDate(date: any):number {
+    return new Date(date).getTime();
   }
 }

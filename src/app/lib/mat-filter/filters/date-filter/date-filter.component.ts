@@ -13,36 +13,36 @@ import { MatTableService } from 'src/app/lib/services/mat-table.service';
 export class DateFilterComponent implements OnInit {
   @Input() filterColumn: DateFilterColumn | undefined;
 
-  selected!: Date; //= new Date();
-  selected2!: Date; //= new Date();
-  selectedMethod: string = 'in';
-  methodOptions = DateFilterColumn.methodOptions;
+  filterValue!: Date; //= new Date();
+  filterValue2!: Date; //= new Date();
+  methodOptions = this.dateFilterColumn.methodOptions;
   optionsArr = Object.entries(this.methodOptions);
+  selectedMethod: string = this.optionsArr[0][0] || 'in';
 
   convertDate(date: Date) {
     return date?.toLocaleDateString().replace(/\./g, '/');
   }
-  constructor(private filterService: MatTableService) {}
+  constructor(private filterService: MatTableService, private dateFilterColumn:DateFilterColumn) {}
 
   ngOnInit(): void {}
 
   dateSelected(e: any) {
-    if (this.selectedMethod === 'range' && this.selected) this.selected2 = e;
+    if (this.selectedMethod === 'range' && this.filterValue) this.filterValue2 = e;
     //TODO
-    else this.selected = e;
+    else this.filterValue = e;
   }
 
   saveFilter() {
     let stringFilterValue = `${
-      DateFilterColumn.methodOptions[this.selectedMethod].name
-    } ${this.convertDate(this.selected)} ${this.selected2 ? '-'+this.convertDate(this.selected2) : ''}`;
+      this.dateFilterColumn.methodOptions[this.selectedMethod].name
+    } ${this.convertDate(this.filterValue)} ${this.filterValue2 ? '-'+this.convertDate(this.filterValue2) : ''}`;
     this.filterService.setFilter(
       new DateFilterColumn({
         ...this.filterColumn,
         stringFilterValue,
         filterMethodKey: this.selectedMethod,
-        filterValue: this.selected,
-        secondValueForRange: this.selected2,
+        filterValue: this.filterValue,
+        secondValueForRange: this.filterValue2,
       })
     );
   }

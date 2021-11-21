@@ -3,8 +3,7 @@
 
         <mat-label>איתור לפי</mat-label>
         <mat-select [(value)]="selectedMethod">
-            <mat-option value="contain">מכיל</mat-option>
-            <mat-option value="startWith">מתחיל ב</mat-option>
+            <mat-option *ngFor="let method of optionsArr " value="{{method[0]}}" >{{ method[1].name }}</mat-option>
         </mat-select>
     </mat-form-field>
 

@@ -10,7 +10,7 @@ import { MatTableService } from 'src/app/lib/services/mat-table.service';
 export class BooleanFilterComponent implements OnInit {
 
   @Input() filterColumn!: SelectFilterColumn;
-  stringFilterValue:boolean | undefined
+  filterValue:boolean | undefined
   
   constructor(private filterService:MatTableService) { }
 
@@ -18,10 +18,11 @@ export class BooleanFilterComponent implements OnInit {
   }
 
 onChange(e: any){
-  this.stringFilterValue=e.value;
+  this.filterValue=e.value;
 }
 
 saveFilter(){
-  this.filterService.setFilter(new FilterColumn({...this.filterColumn,stringFilterValue:this.stringFilterValue,filterValue:this.stringFilterValue}))
+  const stringFilterValue=this.filterValue?'כן':'לא'
+  this.filterService.setFilter(new FilterColumn({...this.filterColumn,stringFilterValue:stringFilterValue,filterValue:this.filterValue}))
 }
 }

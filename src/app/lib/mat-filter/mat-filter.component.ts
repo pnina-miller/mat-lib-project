@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableService } from '../services/mat-table.service';
 import { FilterPopupComponent } from './filter-popup/filter-popup.component';
 
 @Component({
@@ -9,7 +10,7 @@ import { FilterPopupComponent } from './filter-popup/filter-popup.component';
 })
 export class MatFilterComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private matTableService: MatTableService) { }
 
   @Input() tableDataSource!: any[];
   @Input() columnDefinitions!: any[]
@@ -20,6 +21,8 @@ export class MatFilterComponent implements OnInit {
   @Output() updateFilters: EventEmitter<any[]>=new EventEmitter();
 
   ngOnInit(): void {
+    this.matTableService.init(this.tableDataSourceUrl,this.columnDefinitionsUrl, this.tableDataSource, this.columnDefinitions); 
+
   }
 
 

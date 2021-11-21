@@ -21,6 +21,7 @@ import {MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatCardModule} from '@angular/material/card';
 
 import { FilterPopupComponent } from './lib/mat-filter/filter-popup/filter-popup.component';
 import { tableExampleComponent } from './table-example/table-example.component'
@@ -33,7 +34,7 @@ import { BooleanFilterComponent } from './lib/mat-filter/filters/boolean-filter/
 import { MultiSelectFilterComponent } from './lib/mat-filter/filters/multi-select-filter/multi-select-filter.component';
 import { NumericFilterComponent } from './lib/mat-filter/filters/numeric-filter/numeric-filter.component';
 import { MatFilterComponent } from './lib/mat-filter/mat-filter.component';
-import {MatCardModule} from '@angular/material/card';
+import { StringFilterColumn } from './lib/models/filterColumns'
 
 
 @NgModule({
@@ -78,7 +79,11 @@ import {MatCardModule} from '@angular/material/card';
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} }
+    { provide: MatDialogRef, useValue: {} },
+      {
+          provide: 'defaultCol',
+          useValue: new StringFilterColumn({}),
+      }
   ],
   bootstrap: [AppComponent]
 })

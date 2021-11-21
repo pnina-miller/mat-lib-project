@@ -11,4 +11,8 @@
         <mat-label></mat-label>
         <input matNativeControl name="name" (keyup)="onKeyUp($event)">
     </mat-form-field>
+    <mat-form-field  *ngIf="selectedMethod==='range'">
+        <mat-label></mat-label>
+        <input matNativeControl name="name" (keyup)="onKeyUp2($event)">
+    </mat-form-field>
 </ng-container>
