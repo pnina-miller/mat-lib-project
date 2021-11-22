@@ -22,8 +22,7 @@ export class tableExampleComponent implements OnInit {
   
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   updateFilters(filters: any[]): void {
     console.log('filters updated',filters);
