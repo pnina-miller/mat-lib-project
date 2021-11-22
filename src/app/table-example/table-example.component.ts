@@ -1,6 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, ViewChild, OnInit, Input, ElementRef } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { FilterPopupComponent } from '../lib/mat-filter/filter-popup/filter-popup.component';
 import { IfilterValues } from '../table.inteface';
@@ -21,13 +20,12 @@ export class tableExampleComponent implements OnInit {
   columnDefinitions: any[] = Object.values(columnDefination);
 
   
-  constructor(public dialog: MatDialog) { }
+  constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  updateFilters(filters: any[]): void {debugger
-    console.log('filters updates',filters);
-    alert('yessss')
+  updateFilters(filters: any[]): void {
+    console.log('filters updated',filters);
+    alert('filters updated')
   }
 }

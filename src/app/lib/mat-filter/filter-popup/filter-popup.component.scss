@@ -1,3 +1,49 @@
-.filter-list-item:hover{
-    background: rgba(0,0,0,.04) !important;
+.filter-list-item:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+.filter-popup-container {
+  // overflow: hidden;
+}
+.filter-search-input {
+  background-color: white;
+  width: 100%;
+  border: none;
+    direction: rtl;
+    &:focus-visible{
+      outline: none;
+
+    }
+}
+
+.filter-hedaer {
+  background-color: white;
+  position: fixed;
+  height: fit-content;
+  padding: 5px 0px;
+  position:relative;
+  display: flex;
+  border-bottom: 1px solid black;
+  z-index: 1;
+  align-content: center;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+::ng-deep {
+  .mat-dialog-container {
+    overflow-y: hidden !important;
+    padding:0px
+  }
+}
+
+.filter-mat-list-wrapper{
+    overflow-y: auto;
+    height: 100%;
+}
+
+.filter-save-button{
+  background-color: #4C7FC5;
+  border-radius: 0;
+  color: white;
 }

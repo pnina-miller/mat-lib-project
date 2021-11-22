@@ -3,10 +3,10 @@ import {
   OnInit,
   Inject,
   ElementRef,
-  ChangeDetectorRef,
-  Input,
-  EventEmitter,
+  ViewChild,
 } from '@angular/core';
+import { SelectFilterComponent } from '../filters/select-filter/select-filter.component';
+import { StringFilterComponent } from '../filters/string-filter/string-filter.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FilterColumn } from '../../models/filterColumns';
 import { MatTableService } from '../../services/mat-table.service';
@@ -22,14 +22,14 @@ interface DataType {
   styleUrls: ['./filter-popup.component.scss'],
 })
 export class FilterPopupComponent implements OnInit {
-  selectedFilterColumn: FilterColumn | undefined;
+  
+  selectedFilterColumn: any | undefined;;
   columns!: Array<FilterColumn>;
   displayedColumns!: Array<FilterColumn>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DataType,
     public dialModalRef: MatDialogRef<FilterPopupComponent>,
-    private changeDetector: ChangeDetectorRef,
     private matTableService: MatTableService
   ) {}
 
@@ -51,7 +51,6 @@ export class FilterPopupComponent implements OnInit {
 
   onKeyUp(e: any) {
     let filteresArr=this.columns.filter( col => col.columnnamehebrew?.includes(e.target.value) );
-
     this.displayedColumns=filteresArr;
     }
 
@@ -60,4 +59,25 @@ export class FilterPopupComponent implements OnInit {
       (col) => col.ordernumber === ordernumber
     );
   }
+
+  @ViewChild('filterComponent') filterComponent!: StringFilterComponent | SelectFilterComponent
+
+  filterTypes={
+  date:'DATE',
+  string:'String',
+  boolean:'BOOLEAN',
+  multiSelect:'MULTISELECT',
+  numeric: 'NUMERIC',
+  select: 'SELECT'
+  }
+
+
+  back() {
+    this.goBack()
+  }
+
+  seveClick() {
+    this.filterComponent.saveFilter();
+  }
+
 }

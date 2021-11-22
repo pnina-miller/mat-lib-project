@@ -1,5 +1,9 @@
-<mat-button-toggle-group matNativeControl name="approved" style="border:none"
+
+<div class="filter-boolean-container">
+    <mat-button-toggle-group matNativeControl name="approved" style="border:none"
 (change)="onChange($event)">
-<mat-button-toggle  value='true' style="border: 1px black solid; margin: 3px;;">כן</mat-button-toggle>
-<mat-button-toggle value='false' style="border: 1px black solid; margin: 3px;;">לא</mat-button-toggle>
-</mat-button-toggle-group>
+  <mat-button-toggle  value='true' class='filter-boolean-button-toggle'>כן</mat-button-toggle>
+<mat-button-toggle value='false' class='filter-boolean-button-toggle'>לא</mat-button-toggle>
+</mat-button-toggle-group>  
+</div>
+

@@ -1,36 +1,49 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DateFilterColumn, StringFilterColumn } from 'src/app/lib/models/filterColumns';
+import {
+  DateFilterColumn,
+  StringFilterColumn,
+} from 'src/app/lib/models/filterColumns';
 import { MatTableService } from 'src/app/lib/services/mat-table.service';
 
 @Component({
   selector: 'app-date-filter',
   templateUrl: './date-filter.component.html',
-  styleUrls: ['./date-filter.component.scss']
+  styleUrls: ['./date-filter.component.scss'],
 })
 export class DateFilterComponent implements OnInit {
+  @Input() filterColumn: DateFilterColumn | undefined;
 
-  selected: Date = new Date();
-  selected2: Date = new Date();
-  @Input() filterColumn!: DateFilterColumn;
-  selectedMethod: string='in';
-  methodOptions =DateFilterColumn.methodOptions;
-optionsArr=Object.entries(this.methodOptions)
+  filterValue!: Date; //= new Date();
+  filterValue2!: Date; //= new Date();
+  methodOptions = this.dateFilterColumn.methodOptions;
+  optionsArr = Object.entries(this.methodOptions);
+  selectedMethod: string = this.optionsArr[0][0] || 'in';
 
-  constructor(private filterService: MatTableService) { }
-
-  ngOnInit(): void {
+  convertDate(date: Date) {
+    return date?.toLocaleDateString().replace(/\./g, '/');
   }
+  constructor(private filterService: MatTableService, private dateFilterColumn:DateFilterColumn) {}
 
-  selectedChange(value:Date){
-    //TODO: support date range
-    // if(this.selectedMethod==='range' && this.selected)  this.selected2=value;
-    //else
-     this.selected = value;
+  ngOnInit(): void {}
+
+  dateSelected(e: any) {
+    if (this.selectedMethod === 'range' && this.filterValue) this.filterValue2 = e;
+    //TODO
+    else this.filterValue = e;
   }
 
   saveFilter() {
-    let stringFilterValue= DateFilterColumn.methodOptions[this.selectedMethod].name + ' ' + this.selected?.toDateString()
-    this.filterService.setFilter(new DateFilterColumn({ ...this.filterColumn, stringFilterValue , filterMethodKey: this.selectedMethod, filterValue: this.selected?.toDateString() }));
+    let stringFilterValue = `${
+      this.dateFilterColumn.methodOptions[this.selectedMethod].name
+    } ${this.convertDate(this.filterValue)} ${this.filterValue2 ? '-'+this.convertDate(this.filterValue2) : ''}`;
+    this.filterService.setFilter(
+      new DateFilterColumn({
+        ...this.filterColumn,
+        stringFilterValue,
+        filterMethodKey: this.selectedMethod,
+        filterValue: this.filterValue,
+        secondValueForRange: this.filterValue2,
+      })
+    );
   }
-
 }

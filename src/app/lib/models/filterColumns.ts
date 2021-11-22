@@ -1,3 +1,4 @@
+import { Inject, Injectable } from "@angular/core";
 
 export class FilterColumn {
   ordernumber!: string;
@@ -18,16 +19,15 @@ export class FilterColumn {
   }
 
   checkFilter(line: any): boolean {
-    return this.filterValue === line[this.columnnamehebrew]
+    return this.filterValue === line[this.columnnamehebrew];
   }
 }
 
 export class SelectFilterColumn extends FilterColumn {
-
-  options: string[] = []
+  options: string[] = [];
 
   constructor(col: any) {
-    super(col)
+    super(col);
     this.options = col.options;
   }
 
@@ -35,89 +35,144 @@ export class SelectFilterColumn extends FilterColumn {
     return this.filterValue === line[this.columnnamehebrew];
   }
 }
-
+@Injectable({ providedIn: 'root' })
 export class StringFilterColumn extends FilterColumn {
+  methodOptions: { [key: string]: any } = {contain: {
+    name: 'מכיל',
+    check: (filterValue: string, lineValue: string) =>lineValue.includes(filterValue)
+  },
+   startWith:{
+    name: 'מתחיל ב',
+    check: (filterValue: string, lineValue: string) =>lineValue.startsWith(filterValue)
+   }};
+  filterMethodKey!: string;
 
-  methodOptions: string[] = ['contain', 'start with']
-  filterMethod!: String;
-
-  constructor(col: any) {
-    super(col)
-    this.methodOptions = col.methodOptions;
-    this.filterMethod = col.filterMethod;
+  constructor(@Inject('defaultCol') col: any) {
+    super(col);
+    this.filterMethodKey = col?.filterMethodKey;
   }
   checkFilter(line: any): boolean {
-    if (this.filterMethod === 'contain')
-      return line[this.columnnamehebrew].includes(this.filterValue)
-    else
-      return line[this.columnnamehebrew].startsWith(this.filterValue)
+  return this.methodOptions[this.filterMethodKey].check( this.filterValue, line[this.columnnamehebrew]);
   }
 }
+
+@Injectable({ providedIn: 'root' })
 export class NumericFilterColumn extends FilterColumn {
-
-  public static methodOptions: { [key: string]: any } = {
-
-    lte: { name: '=<', check: (filterValue: string, lineValue: string) => Number(filterValue) <= Number(lineValue) },
-    equal: { name: '=', check: (filterValue: string, lineValue: string) => Number(filterValue) === Number(lineValue) },
-    gte: { name: '=>', check: (filterValue: string, lineValue: string) => Number(filterValue) >= Number(lineValue) },
-    range: { name: 'טווח', check: (filterValue: string, lineValue: string, secondValueForRange: string) => (Number(lineValue) - Number(filterValue)) * (Number(secondValueForRange) - Number(lineValue)) >= 0
-
-  },
-  }
+  public methodOptions: { [key: string]: any } = {
+    lte: {
+      name: '=<',
+      check: (filterValue: string, lineValue: string) =>
+        Number(filterValue) <= Number(lineValue),
+    },
+    equal: {
+      name: '=',
+      check: (filterValue: string, lineValue: string) =>
+        Number(filterValue) === Number(lineValue),
+    },
+    gte: {
+      name: '=>',
+      check: (filterValue: string, lineValue: string) =>
+        Number(filterValue) >= Number(lineValue),
+    },
+    range: {
+      name: 'טווח',
+      check: (
+        filterValue: string,
+        lineValue: string,
+        secondValueForRange: string
+      ) =>
+        (Number(lineValue) - Number(filterValue)) *
+          (Number(secondValueForRange) - Number(lineValue)) >=
+        0,
+    },
+  };
 
   filterMethodKey!: string;
-  secondValueForRange!: string
+  secondValueForRange!: string;
 
-  constructor(col: any) {
-    super(col)
+  constructor(@Inject('defaultCol') col: any) {
+    super(col);
     this.secondValueForRange = col.secondValueForRange;
     this.filterMethodKey = col.filterMethodKey;
   }
 
   checkFilter(line: any): boolean {
-    return NumericFilterColumn.methodOptions[this.filterMethodKey].check(this.filterValue, line[this.columnnamehebrew], this.secondValueForRange)
-
+    return this.methodOptions[this.filterMethodKey].check(
+      this.filterValue,
+      line[this.columnnamehebrew],
+      this.secondValueForRange
+    );
   }
 }
 
-
 export class MultiSelectFilterColumn extends FilterColumn {
-
   selectedOptions!: string[];
   options!: string[];
 
   constructor(col: any) {
-    super(col)
+    super(col);
     this.selectedOptions = col.selectedOptions;
     this.options = col.options;
   }
   checkFilter(line: any): boolean {
     //TODO
-    return !!this.selectedOptions.find(op => op === line[this.columnnamehebrew])
-
+    return !!this.selectedOptions.find(
+      (op) => op === line[this.columnnamehebrew]
+    );
   }
 }
 
+ 
+
+  @Injectable({ providedIn: 'root' })
 export class DateFilterColumn extends FilterColumn {
+  
 
-  public static methodOptions: { [key: string]: any } = {
-
-    in: { name: 'בתאריך', check: (filterValue: string, lineValue: string) => filterValue === lineValue },
-    before: { name: 'לפני', check: (filterValue: string, lineValue: string) => new Date(filterValue) > new Date(lineValue) },
-    after: { name: 'אחרי', check: (filterValue: string, lineValue: string) => new Date(filterValue) < new Date(lineValue) },
-    range: { name: 'בטווח', check: (filterValue: string, lineValue: string, secondValueForRange: string) => new Date(filterValue) > new Date(lineValue) && new Date(lineValue) < new Date(secondValueForRange) }
-  }
+  public methodOptions: { [key: string]: any } = {
+    in: {
+      name: 'בתאריך',
+      check: (filterValue: string, lineValue: string) =>
+      this.prepareDate(filterValue) === this.prepareDate(lineValue),
+    },
+    before: {
+      name: 'לפני',
+      check: (filterValue: string, lineValue: string) =>
+      this.prepareDate(filterValue) > this.prepareDate(lineValue),
+    },
+    after: {
+      name: 'אחרי',
+      check: (filterValue: string, lineValue: string) =>
+      this.prepareDate(filterValue) < this.prepareDate(lineValue),
+    },
+    range: {
+      name: 'בטווח תאריכים',
+      check: (
+        filterValue: string,
+        lineValue: string,
+        secondValueForRange: string
+      ) =>
+        new Date(filterValue) > new Date(lineValue) &&
+        new Date(lineValue) < new Date(secondValueForRange)
+    },
+  };
 
   filterMethodKey!: string;
-  secondValueForRange!: string
+  secondValueForRange!: string;
 
-  constructor(col: any) {
-    super(col)
+  constructor(@Inject('defaultCol') col: any) {
+    super(col);
     this.secondValueForRange = col.secondValueForRange;
     this.filterMethodKey = col.filterMethodKey;
   }
-
   checkFilter(line: any): boolean {
-    return DateFilterColumn.methodOptions[this.filterMethodKey].check(this.filterValue, new Date(line[this.columnnamehebrew]).toDateString() , this.secondValueForRange)
+    return this.methodOptions[this.filterMethodKey].check(
+      this.filterValue,
+      line[this.columnnamehebrew],
+      this.secondValueForRange
+    );
+  } 
+  
+  prepareDate(date: any):number {
+    return new Date(date).getTime();
   }
 }
