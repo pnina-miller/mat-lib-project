@@ -33,12 +33,14 @@ export class MatTableService {
   dataChanged() {
     if (this.displayDataSource.getValue() && this.columnDefinitions.getValue())
       this.columnDefinitions.getValue().forEach((col) => {
-        if (col.columnfiltertype === 'SELECT')
+        if (col.columnfiltertype === 'SELECT'){
           this.getColumnOptions(col.columnnamehebrew);
+          //this.getColumnOptions(col.orederNumber);
+        }
       });
   }
   // mat-table Hapoalim lib component call this method in ngOnInit
-  // filter-popub lib component call this method if got null @Input TableDataSource
+  // filter-popub lib component call this method if got null @Input TableDataSource?
   init(
     dataSourceUrl: string,
     columnDefinitionsUrl: string,
@@ -87,6 +89,7 @@ export class MatTableService {
   }
   
   //TODO: this
+//orderNumber
   getColumnOptions(columnName: string) {
     let options = [
       ...new Set(
@@ -94,6 +97,9 @@ export class MatTableService {
       ),
     ];
     let columns = this.columnDefinitions.getValue();
+    //let index=column.findIndex(col=>col.columnnamehebrew === columnName)
+    //columns[index] = new SelectFilterColumn({ ...columns[index], options: options });
+
     columns.forEach((col, index) => {
       if (col.columnnamehebrew === columnName)
         columns[index] = new SelectFilterColumn({ ...col, options: options });
