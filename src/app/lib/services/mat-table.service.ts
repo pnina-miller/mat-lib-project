@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { FilterColumn, SelectFilterColumn } from '../models/filterColumns';
+import { FilterColumn, MultiSelectFilterColumn, SelectFilterColumn } from '../models/filterColumns';
 import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
@@ -19,35 +19,48 @@ export class MatTableService {
   public filterArrSource: BehaviorSubject<Array<FilterColumn>> = new BehaviorSubject(new Array<FilterColumn>());
   FilterArr = this.filterArrSource.asObservable()
 
-  updateFilters!:Function;
+  updateFilters!: Function;
   constructor(private http: HttpClient) {
-    this.FilterArr.subscribe(data => { this.filterArrChanged() })
-    // this.displayDataSource.subscribe(data => { this.dataChanged()})
-    // this.columnDefinitions.subscribe(data => { this.dataChanged()})
+    this.FilterArr.subscribe(data => {
+      this.dataSource.filter = this.filterArrSource.getValue().reduce((filters, filter) => ({ ...filters, [filter.columnnamehebrew]: filter }), {}) as string;
+    })
+
 
   }
   dataChanged() {
-    if(this.displayDataSource.getValue() && this.columnDefinitions.getValue()) 
-    this.columnDefinitions.getValue().forEach(col=>{
-      if(col.columnfiltertype==='SELECT')
-          this.getColumnOptions(col.columnnamehebrew)
+    if (this.displayDataSource.getValue() && this.columnDefinitions.getValue()) {
+      let columns = this.columnDefinitions.getValue()
+      this.columnDefinitions.getValue().forEach((col, index) => {
 
-    })
+        if (col.columnfiltertype === 'SELECT') {
+          let options = [...new Set(this.dataSource.filteredData.map(column => column[col.columnnamehebrew]))]
+          columns[index] = new SelectFilterColumn({ ...col, options: options })
+        }
+        if (col.columnfiltertype === 'MULTISELECT') {
+          let options = [...new Set(this.dataSource.filteredData.map(column => column[col.columnnamehebrew]))]
+          columns[index] = new MultiSelectFilterColumn({ ...col, options: options })
+        }
+      })
+      this.columnDefinitions.next(columns);
+    }
   }
+
   // mat-table Hapoalim lib component call this method in ngOnInit
   // filter-popub lib component call this method if got null @Input TableDataSource
-  init(dataSourceUrl: string, columnDefinitionsUrl: string, tableDataSource: any[], columnDefinitions: FilterColumn[], updateFilters:Function=()=>{}): void {//{if (!dataSource) load from server by environment.ts parameter else subjectDataSource(next(dataSource));
-    
+  init(dataSourceUrl: string, columnDefinitionsUrl: string, tableDataSource: any[], columnDefinitions: FilterColumn[], updateFilters: Function = () => { }): void {//{if (!dataSource) load from server by environment.ts parameter else subjectDataSource(next(dataSource));
+
     if (dataSourceUrl) this.loadDataSource(dataSourceUrl).subscribe(res => this.initDataSource(res))
     else if (tableDataSource) this.initDataSource(tableDataSource)
     else this.loadDemoData().subscribe(data => this.initDataSource(data))
 
     this.initColumns(columnDefinitionsUrl, columnDefinitions)
-    this.updateFilters=updateFilters;
+    this.updateFilters = updateFilters;
   }
 
   initDataSource(data: any[]) {
     this.dataSource = new MatTableDataSource<any>(data)
+    this.dataSource.filterPredicate = (data: any, filter: any) => this.checkFilters(data, filter);
+
     this.displayDataSource.next(this.dataSource);
     this.dataChanged();
   }
@@ -70,13 +83,7 @@ export class MatTableService {
       })
     }
   }
-//TODO: this
-  getColumnOptions(columnName: string) {
-  let options= [...new Set(this.dataSource.filteredData.map(column => column[columnName]))]//.distinct()
-  let columns=this.columnDefinitions.getValue()
-  columns.forEach((col,index)=>{if(col.columnnamehebrew===columnName) columns[index]=new SelectFilterColumn({...col, options:options})} );
-  this.columnDefinitions.next(columns);
-  }
+
 
   loadDemoData(): Observable<any[]> {
     return this.loadDataSource('assets/data/tableColumns.json').pipe(mergeMap((res: any[]) => {
@@ -94,17 +101,13 @@ export class MatTableService {
   }
 
 
-  filterArrChanged() {
-    this.updateFilters && this.updateFilters(this.filterArrSource.getValue())
-    let filters = this.filterArrSource.getValue()
-    let filteredData = this?.dataSource.filteredData?.filter(line => {
-      let check = true
-      filters.forEach(filter => {
-        if (!filter.checkFilter(line)) check = false;
-      })
-      return check
+  checkFilters(data: any, filters: FilterColumn) {
+    let check = true
+    Object.values(filters).forEach(filter => {
+      if (!filter.checkFilter(data)) check = false;
+
     })
-    this.displayDataSource.next(new MatTableDataSource(filteredData));
+    return check
   }
 
   addFilter(filterColumn: FilterColumn) {

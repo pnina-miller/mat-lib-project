@@ -10,6 +10,7 @@ import { MatTableService } from 'src/app/lib/services/mat-table.service';
 export class DateFilterComponent implements OnInit {
 
   selected: Date = new Date();
+  selected2: Date = new Date();
   @Input() filterColumn!: DateFilterColumn;
   selectedMethod: string='in';
   methodOptions =DateFilterColumn.methodOptions;
@@ -20,6 +21,12 @@ optionsArr=Object.entries(this.methodOptions)
   ngOnInit(): void {
   }
 
+  selectedChange(value:Date){
+    //TODO: support date range
+    // if(this.selectedMethod==='range' && this.selected)  this.selected2=value;
+    //else
+     this.selected = value;
+  }
 
   saveFilter() {
     let stringFilterValue= DateFilterColumn.methodOptions[this.selectedMethod].name + ' ' + this.selected?.toDateString()
