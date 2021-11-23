@@ -19,7 +19,7 @@ export class FilterColumn {
   }
 
   checkFilter(line: any): boolean {
-    return this.filterValue === line[this.columnnamehebrew];
+    return this.filterValue === line[this.columnnameenglish.trim()];
   }
 }
 
@@ -32,7 +32,7 @@ export class SelectFilterColumn extends FilterColumn {
   }
 
   checkFilter(line: any): boolean {
-    return this.filterValue === line[this.columnnamehebrew];
+    return this.filterValue === line[this.columnnameenglish.trim()];
   }
 }
 @Injectable({ providedIn: 'root' })
@@ -52,7 +52,7 @@ export class StringFilterColumn extends FilterColumn {
     this.filterMethodKey = col?.filterMethodKey;
   }
   checkFilter(line: any): boolean {
-  return this.methodOptions[this.filterMethodKey].check( this.filterValue, line[this.columnnamehebrew]);
+  return this.methodOptions[this.filterMethodKey].check( this.filterValue, line[this.columnnameenglish.trim()]);
   }
 }
 
@@ -99,7 +99,7 @@ export class NumericFilterColumn extends FilterColumn {
   checkFilter(line: any): boolean {
     return this.methodOptions[this.filterMethodKey].check(
       this.filterValue,
-      line[this.columnnamehebrew],
+      line[this.columnnameenglish.trim()],
       this.secondValueForRange
     );
   }
@@ -117,7 +117,7 @@ export class MultiSelectFilterColumn extends FilterColumn {
   checkFilter(line: any): boolean {
     //TODO
     return !!this.selectedOptions.find(
-      (op) => op === line[this.columnnamehebrew]
+      (op) => op === line[this.columnnameenglish.trim()]
     );
   }
 }
@@ -167,7 +167,7 @@ export class DateFilterColumn extends FilterColumn {
   checkFilter(line: any): boolean {
     return this.methodOptions[this.filterMethodKey].check(
       this.filterValue,
-      line[this.columnnamehebrew],
+      line[this.columnnameenglish.trim()],
       this.secondValueForRange
     );
   } 

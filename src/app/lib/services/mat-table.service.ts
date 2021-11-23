@@ -34,10 +34,10 @@ export class MatTableService {
     if (this.displayDataSource.getValue() && this.columnDefinitions.getValue())
       this.columnDefinitions.getValue().forEach((col) => {
         if (col.columnfiltertype === 'SELECT'){
-          this.getColumnOptions(col.ordernumber,col.columnnamehebrew,SelectFilterColumn);
+          this.getColumnOptions(col.ordernumber,col.columnnameenglish.trim(),SelectFilterColumn);
         }
         if (col.columnfiltertype === 'MULTISELECT'){
-          this.getColumnOptions(col.ordernumber,col.columnnamehebrew,MultiSelectFilterColumn);
+          this.getColumnOptions(col.ordernumber,col.columnnameenglish.trim(),MultiSelectFilterColumn);
         }
       });
   }
@@ -81,8 +81,8 @@ export class MatTableService {
   initColumns(columnDefinitions: FilterColumn[]) {
     let cols = columnDefinitions.reduce<string[]>(
       (filtered, option) =>
-        option.columnnamehebrew
-          ? [...filtered, option.columnnamehebrew]
+        option.columnnameenglish
+          ? [...filtered, option.columnnameenglish.trim()]
           : filtered,
       []
     );

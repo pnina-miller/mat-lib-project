@@ -14,8 +14,6 @@ import { DataSource } from '@angular/cdk/collections';
 })
 export class MatTableComponent implements OnInit {
 
-  @ViewChild(MatSort) sort: MatSort = new MatSort;
-
   @Input() tableDataSource!: any[];
   @Input() columnDefinitions!: any[]
 
@@ -24,31 +22,22 @@ export class MatTableComponent implements OnInit {
 
   displayDataSource!: MatTableDataSource<any>;
   displayedColumns: string[]=[''];
+  cols!:any
   filterArr!: Array<FilterColumn>
 
-  constructor(private _liveAnnouncer: LiveAnnouncer,
-    public dialog: MatDialog,
-    public matTableService: MatTableService
-  ) { }
+  constructor(public matTableService: MatTableService) { }
 
 
   ngOnInit(): void {
     this.matTableService.init(this.tableDataSourceUrl, this.columnDefinitionsUrl, this.tableDataSource, this.columnDefinitions);
     this.matTableService.displayDataSource.subscribe(data=>this.displayDataSource = data)
     this.matTableService.displayedColumns.subscribe(data=>{this.displayedColumns = data; })
-    }
-
-
-  ngAfterViewInit() {
-    this.displayDataSource.sort = this.sort;
+    this.matTableService.columnDefinitions.subscribe(data=>{this.cols =  data.reduce<any>(
+      (filtered, option) =>
+        option.columnnameenglish
+          ? {...filtered, [option.columnnameenglish.trim()]:option.columnnamehebrew}
+          : filtered,
+      {});
+    })
   }
-
-  announceSortChange(sortState: any) {
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
-
 }
