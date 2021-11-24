@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import {
   DateFilterColumn,
-  StringFilterColumn,
 } from 'src/app/lib/models/filterColumns';
 import { MatTableService } from 'src/app/lib/services/mat-table.service';
 

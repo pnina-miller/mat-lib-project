@@ -14,6 +14,7 @@ import { MatTableService } from '../../services/mat-table.service';
 interface DataType {
   trigger: ElementRef;
   updateFilters: Function;
+  position:string;
 }
 
 @Component({
@@ -35,6 +36,8 @@ export class FilterPopupComponent implements OnInit {
 
   ngOnInit(): void {
     const rect = this.data.trigger.nativeElement.getBoundingClientRect();
+    debugger
+    if(this.data.position=='right')
     this.dialModalRef.updatePosition({
       top: `${rect.top + rect.height}px`,
       left: `${rect.left}px`,

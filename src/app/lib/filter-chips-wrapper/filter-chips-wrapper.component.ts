@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableService } from '../services/mat-table.service';
 import { FilterColumn } from '../models/filterColumns';
 
@@ -13,8 +13,7 @@ export class FilterChipsWrapperComponent implements OnInit {
 
   removable=true;
 
-  constructor(private filterService:MatTableService) { 
-  }
+  constructor(private filterService:MatTableService) { }
 
   ngOnInit(): void {
     this.filterService.FilterArr.subscribe(data=>this.filterArr=data)

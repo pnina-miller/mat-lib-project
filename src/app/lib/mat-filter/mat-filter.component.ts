@@ -16,6 +16,8 @@ export class MatFilterComponent implements OnInit {
 
   @Input() tableDataSourceUrl!: string;
   @Input() columnDefinitionsUrl!: string;
+  
+  @Input() position!: string;
 
   @Output() updateFilters: EventEmitter<any[]>=new EventEmitter();
 
@@ -33,6 +35,7 @@ export class MatFilterComponent implements OnInit {
         width: '300px',
         panelClass: 'md-dialog-container',
         data: {
+          position:this.position,
           trigger: target,
           updateFilters:(filters:any[])=>{ this.updateFilters.emit(filters)}
         }
