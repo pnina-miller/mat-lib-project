@@ -43,7 +43,6 @@ export class MatTableService {
   }
 
   // mat-table Hapoalim lib component call this method in ngOnInit
-  // filter-popub lib component call this method if got null @Input TableDataSource?
   init(
     dataSourceUrl: string,
     columnDefinitionsUrl: string,
@@ -51,24 +50,20 @@ export class MatTableService {
     columnDefinitions: FilterColumn[],
     updateFilters: Function = () => {}
   ): void {
-    if (this.dataSource.filteredData.length === 0) {//?
       if (tableDataSource) this.initDataSource(tableDataSource);
-      else if (!dataSourceUrl) dataSourceUrl = 'assets/data/dataSource.json'; //temp
-      if (dataSourceUrl)
+      else if (dataSourceUrl)
         this.loadDataSource(dataSourceUrl).subscribe((res) =>
           this.initDataSource(res)
         );
-    }
+        else console.error('mat table error: No data source')
     
-    if (this.columnDefinitions.getValue().length === 0) {
       if (columnDefinitions) this.initColumns(columnDefinitions);
-      else if (!columnDefinitionsUrl)
-        columnDefinitionsUrl = 'assets/data/tableColumns.json'; //temp
-      if (columnDefinitionsUrl)
+      else if (columnDefinitionsUrl)
         this.loadColumnDefinition(columnDefinitionsUrl).subscribe((res) =>
           this.initColumns(res)
         );
-    }
+        else console.error('mat table error: No column definition')
+
     this.updateFilters = updateFilters;
   }
 
@@ -124,7 +119,7 @@ export class MatTableService {
         if (!filter.checkFilter(line)) check = false;
       });
       return check;
-    });
+    });debugger
     this.displayDataSource.next(new MatTableDataSource(filteredData));
   }
 

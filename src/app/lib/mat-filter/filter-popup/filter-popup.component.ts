@@ -38,6 +38,8 @@ export class FilterPopupComponent implements OnInit {
     const rect = this.data.trigger.nativeElement.getBoundingClientRect();
     debugger
     if(this.data.position=='right')
+
+    
     this.dialModalRef.updatePosition({
       top: `${rect.top + rect.height}px`,
       left: `${rect.left}px`,
