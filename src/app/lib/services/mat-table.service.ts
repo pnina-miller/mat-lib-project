@@ -34,15 +34,16 @@ export class MatTableService {
     if (this.displayDataSource.getValue() && this.columnDefinitions.getValue())
       this.columnDefinitions.getValue().forEach((col) => {
         if (col.columnfiltertype === 'SELECT'){
-          this.getColumnOptions(col.ordernumber,col.columnnameenglish.trim(),SelectFilterColumn);
+          this.getColumnOptions(col.ordernumber,col.columnnameenglish,SelectFilterColumn);
         }
         if (col.columnfiltertype === 'MULTISELECT'){
-          this.getColumnOptions(col.ordernumber,col.columnnameenglish.trim(),MultiSelectFilterColumn);
+          this.getColumnOptions(col.ordernumber,col.columnnameenglish,MultiSelectFilterColumn);
         }
       });
   }
 
   // mat-table Hapoalim lib component call this method in ngOnInit
+  // filter-popub lib component call this method if got null @Input TableDataSource?
   init(
     dataSourceUrl: string,
     columnDefinitionsUrl: string,
@@ -50,20 +51,21 @@ export class MatTableService {
     columnDefinitions: FilterColumn[],
     updateFilters: Function = () => {}
   ): void {
+    if (this.dataSource.filteredData.length === 0) {//?
       if (tableDataSource) this.initDataSource(tableDataSource);
       else if (dataSourceUrl)
         this.loadDataSource(dataSourceUrl).subscribe((res) =>
           this.initDataSource(res)
         );
-        else console.error('mat table error: No data source')
+    }
     
+    if (this.columnDefinitions.getValue().length === 0) {
       if (columnDefinitions) this.initColumns(columnDefinitions);
       else if (columnDefinitionsUrl)
         this.loadColumnDefinition(columnDefinitionsUrl).subscribe((res) =>
           this.initColumns(res)
         );
-        else console.error('mat table error: No column definition')
-
+    }
     this.updateFilters = updateFilters;
   }
 
@@ -74,10 +76,11 @@ export class MatTableService {
   }
 
   initColumns(columnDefinitions: FilterColumn[]) {
+    if(columnDefinitions.find(c=>!c.columnfiltertype))return;
     let cols = columnDefinitions.reduce<string[]>(
       (filtered, option) =>
         option.columnnameenglish
-          ? [...filtered, option.columnnameenglish.trim()]
+          ? [...filtered, option.associatedcolumnname || option.columnnameenglish.trim()]
           : filtered,
       []
     );
@@ -119,7 +122,7 @@ export class MatTableService {
         if (!filter.checkFilter(line)) check = false;
       });
       return check;
-    });debugger
+    });
     this.displayDataSource.next(new MatTableDataSource(filteredData));
   }
 

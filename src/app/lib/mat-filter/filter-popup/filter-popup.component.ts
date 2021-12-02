@@ -3,10 +3,10 @@ import {
   OnInit,
   Inject,
   ElementRef,
-  ViewChild,
+  ChangeDetectorRef,
+  Input,
+  EventEmitter,
 } from '@angular/core';
-import { SelectFilterComponent } from '../filters/select-filter/select-filter.component';
-import { StringFilterComponent } from '../filters/string-filter/string-filter.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FilterColumn } from '../../models/filterColumns';
 import { MatTableService } from '../../services/mat-table.service';
@@ -14,37 +14,32 @@ import { MatTableService } from '../../services/mat-table.service';
 interface DataType {
   trigger: ElementRef;
   updateFilters: Function;
-  position:string;
 }
 
 @Component({
-  selector: 'app-filter-popup',
+  selector: 'matbea-filter-popup',
   templateUrl: './filter-popup.component.html',
   styleUrls: ['./filter-popup.component.scss'],
 })
 export class FilterPopupComponent implements OnInit {
-  
-  selectedFilterColumn: any | undefined;;
+  selectedFilterColumn: FilterColumn | undefined;
   columns!: Array<FilterColumn>;
   displayedColumns!: Array<FilterColumn>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DataType,
     public dialModalRef: MatDialogRef<FilterPopupComponent>,
+    private changeDetector: ChangeDetectorRef,
     private matTableService: MatTableService
   ) {}
 
   ngOnInit(): void {
     const rect = this.data.trigger.nativeElement.getBoundingClientRect();
-    debugger
-    if(this.data.position=='right')
-
-    
     this.dialModalRef.updatePosition({
       top: `${rect.top + rect.height}px`,
-      left: `${rect.left}px`,
+      left: `${rect.right-rect.width}px`,//TODO
     });
-
+debugger
     this.matTableService.columnDefinitions.subscribe(
       (data) => {this.columns = data; this.displayedColumns=data}
     );
@@ -54,8 +49,9 @@ export class FilterPopupComponent implements OnInit {
     this.selectedFilterColumn = undefined;
   }
 
-  onKeyUp(e: any) {
-    let filteresArr=this.columns.filter( col => col.columnnamehebrew?.includes(e.target.value) );
+  onKeyUp(value: string) {
+    let filteresArr=this.columns.filter( col => col.columnnamehebrew?.includes(value) );
+debugger
     this.displayedColumns=filteresArr;
     }
 
@@ -64,25 +60,4 @@ export class FilterPopupComponent implements OnInit {
       (col) => col.ordernumber === ordernumber
     );
   }
-
-  @ViewChild('filterComponent') filterComponent!: StringFilterComponent | SelectFilterComponent
-
-  filterTypes={
-  date:'DATE',
-  string:'String',
-  boolean:'BOOLEAN',
-  multiSelect:'MULTISELECT',
-  numeric: 'NUMERIC',
-  select: 'SELECT'
-  }
-
-
-  back() {
-    this.goBack()
-  }
-
-  seveClick() {
-    this.filterComponent.saveFilter();
-  }
-
 }

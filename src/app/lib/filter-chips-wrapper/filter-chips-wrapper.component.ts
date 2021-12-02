@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTableService } from '../services/mat-table.service';
 import { FilterColumn } from '../models/filterColumns';
 
 @Component({
-  selector: 'app-filter-chips-wrapper',
+  selector: 'matbea-filter-chips-wrapper',
   templateUrl: './filter-chips-wrapper.component.html',
   styleUrls: ['./filter-chips-wrapper.component.scss']
 })
@@ -13,10 +13,11 @@ export class FilterChipsWrapperComponent implements OnInit {
 
   removable=true;
 
-  constructor(private filterService:MatTableService) { }
+  constructor(private filterService:MatTableService,private changeDetectorRef: ChangeDetectorRef) {
+  }
 
-  ngOnInit(): void {
-    this.filterService.FilterArr.subscribe(data=>this.filterArr=data)
+  ngOnInit(): void { 
+    this.filterService.FilterArr.subscribe(data=>{this.filterArr=data; this.changeDetectorRef.detectChanges()})
   }
 
   removeFilter(item:FilterColumn){

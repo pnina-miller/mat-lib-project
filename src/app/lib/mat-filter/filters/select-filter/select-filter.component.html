@@ -1,4 +1,4 @@
-    <mat-button-toggle-group matNativeControl name="approved" style="border:none;   flex-wrap: wrap;"
+    <mat-button-toggle-group matNativeControl name="approved" style="border:none"
         (change)="onChange($event)">
-        <mat-button-toggle *ngFor="let item of filterColumn.options" value={{item}} style="border: 1px black solid; width:60px; height:48px">{{item}}</mat-button-toggle>
+        <mat-button-toggle *ngFor="let item of filterColumn.options" value={{item}} style="border: 1px black solid; margin: 3px;;">{{item}}</mat-button-toggle>
     </mat-button-toggle-group>

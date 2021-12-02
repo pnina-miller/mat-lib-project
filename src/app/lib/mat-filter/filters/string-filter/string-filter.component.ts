@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatTableService } from 'src/app/lib/services/mat-table.service';
-import { StringFilterColumn } from 'src/app/lib/models/filterColumns';
+import {MatTableService} from "../../../services/mat-table.service";
+import {StringFilterColumn} from "../../../models/filterColumns";
 
 @Component({
   selector: 'app-string-filter',

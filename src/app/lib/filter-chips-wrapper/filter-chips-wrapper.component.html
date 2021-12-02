@@ -6,6 +6,5 @@
       <mat-icon>cancel</mat-icon>
     </button>
   </mat-chip>
+<span class="reset-filter-link" *ngIf="!!filterArr[0]" (click)="resetFilters()">ניקוי כל הסינונים</span>
 </mat-chip-list>
-
-<button mat-flat-button color="warn" (click)="resetFilters()">Reset</button>
