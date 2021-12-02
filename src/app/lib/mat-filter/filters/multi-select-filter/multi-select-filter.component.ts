@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MultiSelectFilterColumn } from 'src/app/lib/models/filterColumns';
-import { MatTableService } from 'src/app/lib/services/mat-table.service';
+import {MatTableService} from "../../../services/mat-table.service";
+import {MultiSelectFilterColumn} from "../../../models/filterColumns";
 
 @Component({
   selector: 'app-multi-select-filter',
@@ -12,14 +11,13 @@ export class MultiSelectFilterComponent implements OnInit {
 
   constructor(private filterService:MatTableService) { }
 
-  @Input() filterColumn: MultiSelectFilterColumn | undefined;
-
+  @Input() filterColumn!: MultiSelectFilterColumn;
   options!: String[];
   selected: String[]=[];
   stringFilterValue=''
 
   ngOnInit(): void {
-    this.options=this.filterColumn?.options||[]
+    this.options=this.filterColumn.options
   }
 
   onChange(e: any){
@@ -32,6 +30,13 @@ export class MultiSelectFilterComponent implements OnInit {
 
   }
 
+  /*TODO: onBooleanChange(e: any,item:String){
+    if(e.checked)
+    this.filterService.addFilter(this.filterColumn.ordernumber, item)
+    else
+    this.filterService.removeFilter(item)
+
+  }*/
 }
 
 

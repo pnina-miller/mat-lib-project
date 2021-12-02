@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
-import { MatTableService } from 'src/app/lib/services/mat-table.service';
-import { FilterColumn, SelectFilterColumn } from 'src/app/lib/models/filterColumns';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {MatTableService} from "../../../services/mat-table.service";
+import {SelectFilterColumn} from "../../../models/filterColumns";
 
 @Component({
   selector: 'app-select-filter',
@@ -12,9 +12,7 @@ export class SelectFilterComponent implements OnInit {
 
   constructor(private filterService:MatTableService) { }
 
-  @Input()
-  filterColumn!: SelectFilterColumn;
-
+  @Input() filterColumn!: SelectFilterColumn;
   options!: FormGroup;
   hideRequiredControl = new FormControl(false);
   stringFilterValue=''
@@ -32,6 +30,13 @@ export class SelectFilterComponent implements OnInit {
 
   }
 
+  /*TODO: onBooleanChange(e: any,item:String){
+    if(e.checked)
+    this.filterService.addFilter(this.filterColumn.ordernumber, item)
+    else
+    this.filterService.removeFilter(item)
+
+  }*/
 }
 
 
