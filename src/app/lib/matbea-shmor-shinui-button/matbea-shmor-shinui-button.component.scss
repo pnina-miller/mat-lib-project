@@ -1,0 +1,15 @@
+.matbea-shnor-shinui{
+    margin: 1em;
+}
+.matbea-sinui{
+  opacity: 0;
+  cursor: copy;
+  &:hover{
+    opacity: 1;
+    cursor: all-scroll;
+  }
+  &[ng-reflect-disabled="true"]{
+    opacity: 1;
+  }
+
+}

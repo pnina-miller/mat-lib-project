@@ -1,0 +1,92 @@
+/* Colors: */
+
+$unnamed-color-7dd24e: #7DD24E;
+$unnamed-color-ce0f19: #CE0F19;
+$unnamed-color-ffffff: #FFFFFF;
+$unnamed-color-f9fbfd: #F9FBFD;
+$unnamed-color-f1f6fb: #F1F6FB;
+$unnamed-color-e4edf7: #E4EDF7;
+$unnamed-color-dee0e4: #DEE0E4;
+$unnamed-color-8991a1: #8991A1;
+$unnamed-color-717171: #717171;
+$unnamed-color-242e49: #242E49;
+$unnamed-color-c01039: #C01039;
+$unnamed-color-e02919: #E02919;
+$unnamed-color-c10f3a: #C10F3A;
+$unnamed-color-ed1b2e: #ED1B2E;
+$unnamed-color-d7d9dd: #D7D9DD;
+$unnamed-color-e3e3e3: #E3E3E3;
+$unnamed-color-a8a8a8: #A8A8A8;
+$unnamed-color-ce0f19: #CE0F19;
+$unnamed-color-c4c7cc: #C4C7CC;
+$unnamed-color-4c7fc5: #4C7FC5;
+$unnamed-color-558cd8: #558CD8;
+$unnamed-color-1a73e8: #1A73E8;
+$unnamed-color-1a73e8_05: rgba(26, 115, 232, 0.5);
+
+$matbea-base-background-color:$unnamed-color-ffffff;
+$matbea-page-background-color:$unnamed-color-f1f6fb;
+$matbea-icon-button-color: $unnamed-color-8991a1;
+$matbea-table-cell-status-pail:$unnamed-color-7dd24e;
+$matbea-table-cell-status-histaem:$unnamed-color-ed1b2e;
+
+
+/* Font/text values */
+$unnamed-font-family-rubik-medium: Roboto, "Helvetica Neue", sans-serif;
+$unnamed-font-family-rubik-regular: Roboto, "Helvetica Neue", sans-serif;
+$unnamed-font-style-normal: normal;
+$unnamed-font-weight-normal: normal;
+$unnamed-font-size-14: 14px;
+$unnamed-font-size-30: 30px;
+$unnamed-character-spacing-0: 0px;
+$unnamed-line-spacing-14: 14px;
+$unnamed-line-spacing-17: 17px;
+$unnamed-line-spacing-35: 35px;
+
+
+/* Character Styles */
+.unnamed-character-style-1 {
+  font-family: $unnamed-font-family-rubik-medium;
+  font-style: $unnamed-font-style-normal;
+  font-weight: $unnamed-font-weight-normal;
+  font-size: $unnamed-font-size-30;
+  line-height: $unnamed-line-spacing-35;
+  letter-spacing: $unnamed-character-spacing-0;
+  color: $unnamed-color-242e49;
+}
+.unnamed-character-style-2 {
+  font-family: $unnamed-font-family-rubik-medium;
+  font-style: $unnamed-font-style-normal;
+  font-weight: $unnamed-font-weight-normal;
+  font-size: $unnamed-font-size-14;
+  line-height: $unnamed-line-spacing-14;
+  letter-spacing: $unnamed-character-spacing-0;
+  color: $unnamed-color-242e49;
+}
+.unnamed-character-style-3 {
+  font-family: $unnamed-font-family-rubik-regular;
+  font-style: $unnamed-font-style-normal;
+  font-weight: $unnamed-font-weight-normal;
+  font-size: $unnamed-font-size-14;
+  line-height: $unnamed-line-spacing-17;
+  letter-spacing: $unnamed-character-spacing-0;
+  color: $unnamed-color-717171;
+}
+.unnamed-character-style-4 {
+  font-family: $unnamed-font-family-rubik-medium;
+  font-style: $unnamed-font-style-normal;
+  font-weight: $unnamed-font-weight-normal;
+  font-size: $unnamed-font-size-14;
+  line-height: $unnamed-line-spacing-17;
+  letter-spacing: $unnamed-character-spacing-0;
+  color: $unnamed-color-ce0f19;
+}
+.unnamed-character-style-5 {
+  font-family: $unnamed-font-family-rubik-medium;
+  font-style: $unnamed-font-style-normal;
+  font-weight: $unnamed-font-weight-normal;
+  font-size: $unnamed-font-size-14;
+  line-height: $unnamed-line-spacing-17;
+  letter-spacing: $unnamed-character-spacing-0;
+  color: $unnamed-color-ffffff;
+}

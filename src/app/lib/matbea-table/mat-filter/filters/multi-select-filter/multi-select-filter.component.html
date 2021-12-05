@@ -1,0 +1,8 @@
+<!-- <mat-button-toggle-group matNativeControl name="approved" style="border:none"
+(change)="onChange($event)">
+<mat-button-toggle *ngFor="let item of filterColumn.options" value={{item}} style="border: 1px black solid; margin: 3px;;">{{item}}</mat-button-toggle>
+</mat-button-toggle-group> -->
+
+<!-- <mat-checkbox *ngFor="let item of options" class="example-margin" value="{{item}}" (change)="onChange($event)">{{item}}</mat-checkbox> -->
+
+<matbea-checkbox *ngFor="let item of options" name={{item}} lable="{{item}}" (valueChange)="onChange($event)" ></matbea-checkbox>

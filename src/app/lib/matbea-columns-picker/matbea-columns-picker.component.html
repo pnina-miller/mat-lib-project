@@ -1,0 +1,18 @@
+<ng-container>
+<div mat-dialog-title >
+    <div class='matbea-picker-title'>
+      <matbea-slide-toggle  [checked]="saveInDB" (change)="isChange($event)" labelPosition='after' classLable="small-lable" lable="שמירת העדפות"></matbea-slide-toggle>
+        <span class="matbea-picker-title-text">בחירת עמודות</span>
+    </div>
+
+</div>
+<div mat-dialog-content>
+        <matbea-columns-drag [inUseList]= 'inUseList' [toChooseList] ='toChooseList' [limit]=limit [locked] ="locked"></matbea-columns-drag>
+</div>
+<div mat-dialog-actions >
+    <div class='matbea-picker-title'>
+    <matbea-button type='matbea-raised' color="primary"  cdkFocusInitial (onClick)="onSave()" >אישור</matbea-button>
+    <matbea-button type='matbea-stroked'   (onClick)="onNoSave()">ביטול</matbea-button>
+    </div>
+</div>
+</ng-container>

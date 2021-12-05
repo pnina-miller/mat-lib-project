@@ -1,7 +1,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, ViewChild, OnInit, Input, ElementRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { FilterPopupComponent } from '../lib/mat-filter/filter-popup/filter-popup.component';
+import { FilterPopupComponent } from '../lib/matbea-table/mat-filter/filter-popup/filter-popup.component';
 import { IfilterValues } from '../table.inteface';
 import * as columnDefination from '../../assets/data/tableColumns.json'
 import * as dataSourch from '../../assets/data/dataSource.json'
@@ -16,13 +16,14 @@ export class tableExampleComponent implements OnInit {
 
   tableDataSourceUrl: string = 'assets/data/dataSource.json';
   columnDefinitionsUrl: string = 'assets/data/tableColumns.json';
-  tableDataSource = Object.values(dataSourch)
-  columnDefinitions: any[] = Object.values(columnDefination);
+  tableDataSource = Object.values(dataSourch).filter(c=>!!c.KodStatusBitzua)
+  columnDefinitions: any[] = Object.values(columnDefination).filter(c=>!!c.columnfiltertype);
 
   
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+   }
 
   updateFilters(filters: any[]): void {
     console.log('filters updated',filters);

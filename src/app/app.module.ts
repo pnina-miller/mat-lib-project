@@ -23,34 +23,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 
-import { FilterPopupComponent } from './lib/mat-filter/filter-popup/filter-popup.component';
+import { FilterPopupComponent } from './lib/matbea-table/mat-filter/filter-popup/filter-popup.component';
 import { tableExampleComponent } from './table-example/table-example.component'
-import { SelectFilterComponent } from './lib/mat-filter/filters/select-filter/select-filter.component';
-import { StringFilterComponent } from './lib/mat-filter/filters/string-filter/string-filter.component';
-import { FilterChipsWrapperComponent } from './lib/filter-chips-wrapper/filter-chips-wrapper.component';
-import { MatTableComponent } from './lib/mat-table/mat-table.component';
-import { DateFilterComponent } from './lib/mat-filter/filters/date-filter/date-filter.component';
-import { BooleanFilterComponent } from './lib/mat-filter/filters/boolean-filter/boolean-filter.component';
-import { MultiSelectFilterComponent } from './lib/mat-filter/filters/multi-select-filter/multi-select-filter.component';
-import { NumericFilterComponent } from './lib/mat-filter/filters/numeric-filter/numeric-filter.component';
-import { MatFilterComponent } from './lib/mat-filter/mat-filter.component';
-import { StringFilterColumn } from './lib/models/filterColumns'
+import { SelectFilterComponent } from './lib/matbea-table/mat-filter/filters/select-filter/select-filter.component';
+import { StringFilterComponent } from './lib/matbea-table/mat-filter/filters/string-filter/string-filter.component';
+import { FilterChipsWrapperComponent } from './lib/matbea-table/filter-chips-wrapper/filter-chips-wrapper.component';
+import { MatTableComponent } from './lib/matbea-table/mat-table/mat-table.component';
+import { DateFilterComponent } from './lib/matbea-table/mat-filter/filters/date-filter/date-filter.component';
+import { BooleanFilterComponent } from './lib/matbea-table/mat-filter/filters/boolean-filter/boolean-filter.component';
+import { MultiSelectFilterComponent } from './lib/matbea-table/mat-filter/filters/multi-select-filter/multi-select-filter.component';
+import { NumericFilterComponent } from './lib/matbea-table/mat-filter/filters/numeric-filter/numeric-filter.component';
+import { MatFilterComponent } from './lib/matbea-table/mat-filter/mat-filter.component';
+import { StringFilterColumn } from './lib/matbea-table/models/filterColumns'
+import { MatbeaTableModule } from './lib/matbea-table/matbea-table.module'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FilterPopupComponent,
     tableExampleComponent,
-    SelectFilterComponent,
-    StringFilterComponent,
-    FilterChipsWrapperComponent,
-    MatTableComponent,
-    DateFilterComponent,
-    BooleanFilterComponent,
-    MultiSelectFilterComponent,
-    NumericFilterComponent,
-    MatFilterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -76,6 +68,8 @@ import { StringFilterColumn } from './lib/models/filterColumns'
     MatDatepickerModule,
     MatNativeDateModule ,
     MatCardModule,
+
+    MatbeaTableModule
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },

@@ -1,0 +1,49 @@
+.filter-list-item:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+.filter-list {
+  height: 100%;
+  overflow: auto;
+}
+
+.filter-header {
+//   height: 40px;
+}
+
+.filter-search-input .matbea-input {
+  color: blue;
+  height: auto;
+}
+
+::ng-deep .md-dialog-container {
+  position: fixed !important;
+  left: 0px;
+  top: 30px;
+  z-index: 100000;
+
+  .mat-dialog-container {
+    padding: 0px;
+
+    .filter-header {
+      position: fixed;
+      width: 300px;
+      background-color: white;
+      height: 10%;
+    }
+
+    .filters-wrapper {
+      margin: 24px;
+      position: fixed;
+      max-height: 60%;
+      overflow-y: auto;
+    }
+
+    .filter-save-wrapper {
+      position: fixed;
+      background-color: white;
+      width: 300px;
+      height:10%
+    }
+  }
+}

@@ -1,0 +1,44 @@
+
+.panelClassSelect{
+  margin-top: 1.6em;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+div.cdk-overlay-pane{
+  transform: none !important;
+}
+.mat-option{
+  padding: 0 8px !important;
+  height: 30px !important;
+}
+.mat-option:hover{
+  background-color: #F9FBFD!important;
+}
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple){
+  background-color: #E4EDF7;
+}
+ .mat-form-field-wrapper.mat-form-field-flex{
+  padding: 0px !important;
+}
+.matbea-combo{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  .form-field-prefix{
+    margin: 0px 1em;
+  }
+   .mat-form-field-infix{
+    background-color: #C10F3A;
+     height: 100px;
+  }
+}
+.matbea-input-top{
+  flex-direction: column;
+}
+.matbea-input-end{
+  flex-direction: row-reverse;
+}
+
