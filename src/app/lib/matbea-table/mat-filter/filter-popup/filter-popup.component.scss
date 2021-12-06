@@ -1,49 +1,78 @@
 .filter-list-item:hover {
-  background: rgba(0, 0, 0, 0.04) !important;
-}
-
-.filter-list {
-  height: 100%;
-  overflow: auto;
-}
-
-.filter-header {
-//   height: 40px;
-}
-
-.filter-search-input .matbea-input {
-  color: blue;
-  height: auto;
-}
-
-::ng-deep .md-dialog-container {
-  position: fixed !important;
-  left: 0px;
-  top: 30px;
-  z-index: 100000;
-
-  .mat-dialog-container {
-    padding: 0px;
-
-    .filter-header {
-      position: fixed;
-      width: 300px;
-      background-color: white;
-      height: 10%;
-    }
-
-    .filters-wrapper {
-      margin: 24px;
-      position: fixed;
-      max-height: 60%;
-      overflow-y: auto;
-    }
-
-    .filter-save-wrapper {
-      position: fixed;
-      background-color: white;
-      width: 300px;
-      height:10%
-    }
+    background: rgba(0, 0, 0, 0.04) !important;
+  }
+  
+  ::ng-deep .mat-list-base .mat-list-item, .mat-list-base .mat-list-option{
+    height: fit-content !important;
+padding: 7px !important;
+direction: rtl;
+.mat-list-item-content{
+    font-size: medium;
   }
 }
+
+  .filter-list {
+    height: 100%;
+    overflow: auto;
+  }
+  
+  
+  .filter-search-input .matbea-input {
+    color: blue;
+    height: auto;
+  }
+  
+  ::ng-deep .md-dialog-container {
+    position: absolute !important;
+    left: 0px;
+    top: 30px;
+    z-index: 100000;
+    direction: ltr;
+    // margin-top: 0px !important;
+    // margin-left: 0px !important;
+
+    .mat-dialog-container {
+      padding: 0px;
+  
+.filter-popup-contaner{
+  display: flex;
+  height: 100%;
+  // padding-top: 10px;
+}
+
+      .filter-header {
+        // position: fixed;
+        width: 300px;
+        background-color: white;
+        height: 10%;
+        border-bottom: gray 2px solid;
+z-index: 2;
+        padding-top: 5px;
+// ::ng-deep .mat-input-element{ all: unset; }
+// ::ng-deep .mat-form-field-infix{  all: unset; }
+// ::ng-deep .mat-form-field-wrapper{  all: unset; }
+      }
+  
+      .filters-wrapper {
+        padding-top: 35px;
+        padding: 24px;
+        padding-right: 10px;
+        position: fixed;
+        height: 350px;
+        overflow-y: auto;
+        width: 300px;
+      }
+  
+      .filter-save-wrapper {
+        position: fixed;
+        background-color: white;
+        width: 300px;
+        // height:10%;
+        align-self: flex-end;
+
+        .filter-save-button{
+         background-color: #4C7FC5;
+        }
+      }
+    }
+  }
