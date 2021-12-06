@@ -1,3 +1,5 @@
+<div class="filter-chips-container"></div>
+
 <mat-chip-list #chipList aria-label="Fruit selection">
   <mat-chip *ngFor="let item of filterArr" [removable]="removable" (removed)="removeFilter(item)">
     {{item.columnnamehebrew}}:
