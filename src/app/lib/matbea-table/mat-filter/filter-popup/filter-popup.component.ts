@@ -48,7 +48,8 @@ export class FilterPopupComponent implements OnInit {
     );
   }
 
-  goBack() {
+  goBack() {debugger
+    this.displayedColumns=this.columns
     this.selectedFilterColumn = undefined;
   }
 
