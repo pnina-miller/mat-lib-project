@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {MatTableService} from "../../../../matbea-table/services/mat-table.service";
 import {MultiSelectFilterColumn} from "../../../../matbea-table/models/filterColumns";
+import { Component, OnInit, Input } from '@angular/core';
+import { MatTableService } from "../../../services/mat-table.service";
+import { MultiSelectFilterColumn } from "../../../models/filterColumns";
 
 @Component({
   selector: 'app-multi-select-filter',
@@ -9,24 +12,27 @@ import {MultiSelectFilterColumn} from "../../../../matbea-table/models/filterCol
 })
 export class MultiSelectFilterComponent implements OnInit {
 
-  constructor(private filterService:MatTableService) { }
+  constructor(private filterService: MatTableService) { }
 
   @Input() filterColumn!: MultiSelectFilterColumn;
   options!: String[];
-  selected: String[]=[];
-  stringFilterValue=''
+  selected: String[] = [];
+  stringFilterValue = '';
 
   ngOnInit(): void {
-    this.options=this.filterColumn.options
+    this.options = this.filterColumn.options;
   }
 
-  onChange(e: any){
-    this.selected.push(e.source.name)
+  onChange(option: string, checked: boolean) {
+    if (checked)
+      this.selected.push(option);
+    else
+      this.selected = this.selected.filter(s => s !== option)
   }
 
-  saveFilter(){
-    this.stringFilterValue=this.selected.join(', ')
-    this.filterService.setFilter(new MultiSelectFilterColumn({...this.filterColumn,stringFilterValue:this.stringFilterValue, selectedOptions:this.selected}))
+  saveFilter() {
+    this.stringFilterValue = this.selected.join(', ');
+    this.filterService.setFilter(new MultiSelectFilterColumn({ ...this.filterColumn, stringFilterValue: this.stringFilterValue, selectedOptions: this.selected }));
 
   }
 
@@ -38,5 +44,3 @@ export class MultiSelectFilterComponent implements OnInit {
 
   }*/
 }
-
-
