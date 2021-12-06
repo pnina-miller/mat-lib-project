@@ -4,5 +4,6 @@
 </mat-button-toggle-group> -->
 
 <!-- <mat-checkbox *ngFor="let item of options" class="example-margin" value="{{item}}" (change)="onChange($event)">{{item}}</mat-checkbox> -->
-
-<matbea-checkbox *ngFor="let item of options" name={{item}} lable="{{item}}" (valueChange)="onChange($event)" ></matbea-checkbox>
+<div class="multi-select-filter-container">
+<matbea-checkbox *ngFor="let item of options" name={{item}} lable="{{item}}" (valueChange)="onChange(item, $event)" ></matbea-checkbox>
+</div>
