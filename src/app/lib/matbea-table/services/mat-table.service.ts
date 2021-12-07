@@ -56,7 +56,7 @@ export class MatTableService {
         this.loadDataSource(dataSourceUrl).subscribe((res) =>
           this.initDataSource(res)
         );
-        else console.error('mat table error: No data source')
+        else console.warn('mat table error: No data source')
     }
     
     if (this.columnDefinitions.getValue().length === 0) {
@@ -65,7 +65,7 @@ export class MatTableService {
         this.loadColumnDefinition(columnDefinitionsUrl).subscribe((res) =>
           this.initColumns(res)
         );
-        else console.error('mat table error: No column definition')
+        else console.warn('mat table error: No column definition')
     }
     this.updateFilters = updateFilters;
   }

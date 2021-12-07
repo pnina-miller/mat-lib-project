@@ -48,13 +48,13 @@ export class FilterPopupComponent implements OnInit {
     );
   }
 
-  goBack() {debugger
+  goBack() {
     this.displayedColumns=this.columns
     this.selectedFilterColumn = undefined;
   }
 
-  onKeyUp(e: any) {
-    let filteresArr=this.columns.filter( col => col.columnnamehebrew?.includes(e.target.value) );
+  onKeyUp(value: any) {
+    let filteresArr=this.columns.filter( col => col.columnnamehebrew?.toLocaleLowerCase().includes(value.toLocaleLowerCase()) );
     this.displayedColumns=filteresArr;
     }
 

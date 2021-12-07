@@ -7,6 +7,7 @@ export class FilterColumn {
   columnnameenglish!: string;
   columnnamehebrew!: string;
   associatedcolumnname!: string;
+  columnformatter!:string
 
   filterValue!: string;
   stringFilterValue: string;
@@ -17,6 +18,7 @@ export class FilterColumn {
     this.columnnameenglish = col.columnnameenglish;
     this.columnnamehebrew = col.columnnamehebrew;
     this.filterValue = col.filterValue;
+    this.columnformatter = col.columnformatter;
     this.stringFilterValue = col.stringFilterValue;
     this.associatedcolumnname = col.associatedcolumnname;
   }

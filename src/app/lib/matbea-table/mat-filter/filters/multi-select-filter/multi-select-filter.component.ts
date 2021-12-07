@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {MatTableService} from "../../../../matbea-table/services/mat-table.service";
 import {MultiSelectFilterColumn} from "../../../../matbea-table/models/filterColumns";
-import { Component, OnInit, Input } from '@angular/core';
-import { MatTableService } from "../../../services/mat-table.service";
-import { MultiSelectFilterColumn } from "../../../models/filterColumns";
+
 
 @Component({
   selector: 'app-multi-select-filter',
@@ -23,7 +21,7 @@ export class MultiSelectFilterComponent implements OnInit {
     this.options = this.filterColumn.options;
   }
 
-  onChange(option: string, checked: boolean) {
+  onChange(option: String, checked: boolean) {
     if (checked)
       this.selected.push(option);
     else

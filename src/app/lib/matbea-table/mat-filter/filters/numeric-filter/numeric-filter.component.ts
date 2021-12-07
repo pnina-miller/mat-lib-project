@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import {MatTableService} from "../../../services/mat-table.service";
 import {NumericFilterColumn} from "../../../models/filterColumns";
 
@@ -7,7 +7,7 @@ import {NumericFilterColumn} from "../../../models/filterColumns";
   templateUrl: './numeric-filter.component.html',
   styleUrls: ['./numeric-filter.component.scss']
 })
-export class NumericFilterComponent implements OnInit {
+export class NumericFilterComponent implements OnChanges {
 
   constructor(private filterService: MatTableService, private numericFilterColumn:NumericFilterColumn) { 
     this.methodOptions = this.numericFilterColumn.methodOptions;
@@ -21,11 +21,14 @@ export class NumericFilterComponent implements OnInit {
   methodOptions:any;
   optionsArr:any[];
 
+inputSuffix='';
+
   selectedMethod: string = ''
   filterValue = ''
   filterValue2 = ''
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.inputSuffix=this.filterColumn?.columnformatter==="PERCENT"?'%':''
   }
 /*
     //TODO: clean this up

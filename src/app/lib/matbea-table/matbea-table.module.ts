@@ -41,7 +41,7 @@ import { MatTableService } from './services/mat-table.service';
 import { StringFilterColumn } from './models/filterColumns';
 import { MatbeaIconButtonModule } from '../matbea-icon-button/matbea-icon-button.module';
 import { MatbeaInputModule } from '../matbea-input/matbea-input.module';
-import { MatbeaCheckboxModule, MatbeaIconModule } from '..';
+import { MatbeaButtonModule, MatbeaCheckboxModule, MatbeaIconModule } from '..';
 
 @NgModule({
   declarations: [
@@ -91,6 +91,7 @@ import { MatbeaCheckboxModule, MatbeaIconModule } from '..';
     MatbeaIconModule,
     MatbeaInputModule,
     MatbeaCheckboxModule,
+    MatbeaButtonModule,
   ],
   exports: [
     MatbeaTableComponent,

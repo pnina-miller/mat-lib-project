@@ -8,7 +8,9 @@ export const svgIcons = [
   "matbea-filter",
   "matbea-print",
   "matbea-search",
-  "matbea-sort"
+  "matbea-sort",
+  "home",
+  "matbea-back"
 ]
 @Component({
   selector: 'matbea-icon-button',
@@ -32,7 +34,9 @@ export class MatbeaIconButtonComponent implements OnInit,OnChanges {
     this.matIconRegistry.addSvgIcon("download", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/download.svg"));
     this.matIconRegistry.addSvgIcon("filter", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/filter.svg"));
     this.matIconRegistry.addSvgIcon("print", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/print.svg"));
-    this.matIconRegistry.addSvgIcon("search", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/search.svg"));
+    this.matIconRegistry.addSvgIcon("search", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/search.svg"));
+    this.matIconRegistry.addSvgIcon("home", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/search.svg"));
+    this.matIconRegistry.addSvgIcon("matbea-back", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/search.svg"));
     this.matIconRegistry.addSvgIcon("sort", this.domSanitizer.bypassSecurityTrustResourceUrl("./assets/icons/sort.svg"));
   }
 

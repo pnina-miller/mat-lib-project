@@ -1,23 +1,30 @@
-<div class="filter-popup-contaner" >
-    <ng-container class="filter-container">
-      <div class="filter-header">
-        <div
-          style="padding: 10px;"
-          *ngIf="!selectedFilterColumn; else filterHeader"
-        >
-          <input placeholder="חיפוש" class="filter-search-input" style="width: 95%;"  (keyup)="onKeyUp($event)" />
-          <!-- <matbea-input (valueChange)="onKeyUp($event)" [placeholder]="'חיפוש'" ></matbea-input> -->
-          <matbea-icon icon="search" [inline]="true"  ></matbea-icon>
-        </div>
-        <ng-template  #filterHeader>
-
-          <matbea-icon-button  (onClick)="goBack()" icon="matbea-back"></matbea-icon-button>
-          {{ selectedFilterColumn?.columnnamehebrew }}
-        </ng-template>
+<div class="filter-popup-contaner">
+  <ng-container class="filter-container">
+    <div class="filter-header">
+      <div
+      class="filter-search-wrapper"
+        *ngIf="!selectedFilterColumn; else filterHeader"
+      >
+        <matbea-input
+          (valueChange)="onKeyUp($event)"
+          class="filter-search-input"
+          [placeholder]="'חיפוש'"
+        ></matbea-input>
+        <matbea-icon icon="search" [inline]="true"></matbea-icon>
       </div>
-  
-      <div class="filters-wrapper" >
-      <div *ngIf="!selectedFilterColumn; else filterWrapper" style="margin-top: 20px;">
+      <ng-template #filterHeader>
+        <matbea-icon-button
+          (onClick)="goBack()"
+          icon="matbea-back"
+        ></matbea-icon-button>
+        {{ selectedFilterColumn?.columnnamehebrew }}
+      </ng-template>
+    </div>
+
+    <div class="filters-wrapper">
+      <div
+        *ngIf="!selectedFilterColumn; else filterWrapper"
+      >
         <mat-list class="filter-mat-list-wrapper">
           <mat-list-item
             class="filter-list-item"
@@ -29,70 +36,68 @@
         </mat-list>
       </div>
       <ng-template #filterWrapper>
-      <div style="padding: 10%;">
-        <ng-container [ngSwitch]="selectedFilterColumn?.columnfiltertype">
-          <!-- DATE -->
-          <ng-container *ngSwitchCase="filterTypes.date">
-            <app-date-filter
-              [filterColumn]="selectedFilterColumn"
-              #filterComponent
-            ></app-date-filter>
+        <div style="padding: 10%">
+          <ng-container [ngSwitch]="selectedFilterColumn?.columnfiltertype">
+            <!-- DATE -->
+            <ng-container *ngSwitchCase="filterTypes.date">
+              <app-date-filter
+                [filterColumn]="selectedFilterColumn"
+                #filterComponent
+              ></app-date-filter>
+            </ng-container>
+
+            <!-- String -->
+            <ng-container *ngSwitchCase="filterTypes.string">
+              <app-string-filter
+                [filterColumn]="selectedFilterColumn"
+                #filterComponent
+              ></app-string-filter>
+            </ng-container>
+
+            <!-- BOOLEAN -->
+            <ng-container *ngSwitchCase="filterTypes.boolean">
+              <app-boolean-filter
+                [filterColumn]="selectedFilterColumn"
+                #filterComponent
+              ></app-boolean-filter>
+            </ng-container>
+
+            <!-- MULTISELECT -->
+            <ng-container *ngSwitchCase="filterTypes.multiSelect">
+              <app-multi-select-filter
+                [filterColumn]="selectedFilterColumn"
+                #filterComponent
+              ></app-multi-select-filter>
+            </ng-container>
+
+            <!-- NUMERIC -->
+            <ng-container *ngSwitchCase="filterTypes.numeric">
+              <app-numeric-filter
+                [filterColumn]="selectedFilterColumn"
+                #filterComponent
+              ></app-numeric-filter>
+            </ng-container>
+
+            <!-- SELECT -->
+            <ng-container *ngSwitchCase="filterTypes.select">
+              <app-select-filter
+                [filterColumn]="selectedFilterColumn"
+                #filterComponent
+              ></app-select-filter>
+            </ng-container>
           </ng-container>
-  
-          <!-- String -->
-          <ng-container *ngSwitchCase="filterTypes.string">
-            <app-string-filter
-              [filterColumn]="selectedFilterColumn"
-              #filterComponent
-            ></app-string-filter>
-          </ng-container>
-  
-          <!-- BOOLEAN -->
-          <ng-container *ngSwitchCase="filterTypes.boolean">
-            <app-boolean-filter
-              [filterColumn]="selectedFilterColumn"
-              #filterComponent
-            ></app-boolean-filter>
-          </ng-container>
-  
-          <!-- MULTISELECT -->
-          <ng-container *ngSwitchCase="filterTypes.multiSelect">
-            <app-multi-select-filter
-              [filterColumn]="selectedFilterColumn"
-              #filterComponent
-            ></app-multi-select-filter>
-          </ng-container>
-  
-          <!-- NUMERIC -->
-          <ng-container *ngSwitchCase="filterTypes.numeric">
-            <app-numeric-filter
-              [filterColumn]="selectedFilterColumn"
-              #filterComponent
-            ></app-numeric-filter>
-          </ng-container>
-  
-          <!-- SELECT -->
-          <ng-container *ngSwitchCase="filterTypes.select">
-            <app-select-filter
-              [filterColumn]="selectedFilterColumn"
-              #filterComponent
-            ></app-select-filter>
-          </ng-container>
-        </ng-container>
-      </div>
+        </div>
       </ng-template>
-  
-      </div>
-      <div class="filter-save-wrapper">
-            <button
-        class="filter-save-button"
-        mat-stroked-button
-        (click)="seveClick()"
+    </div>
+    <div class="filter-save-wrapper">
+      <matbea-button
         style="width: 100%"
+        type="matbea-regular"
+        color="accent"
+        class="filter-save-button"
+        (onClick)="seveClick()"
+        >אישור</matbea-button
       >
-        אישור
-      </button>
-      </div>
-  
-    </ng-container>
-  </div>
+    </div>
+  </ng-container>
+</div>
