@@ -10,7 +10,7 @@
     font-size: medium;
   }
 }
-
+//TODO: check
 .filter-list {
   height: 100%;
   overflow: auto;
@@ -41,8 +41,9 @@
       height: 50px;
       border-bottom: gray 2px solid;
       z-index: 2;
-      padding-top: 5px;
-
+      display: flex;
+      align-items: center;
+      
       .filter-search-wrapper {
         display: flex;
         align-content: flex-start;
@@ -52,11 +53,14 @@
         flex-wrap: nowrap;
         flex-direction: row;
         padding: 0px;
-
+width: 100%;
         .filter-search-input {
           width: 90%;
           color: black;
           .matbea-input .mat-form-field {
+            .mat-form-field-wrapper{
+              padding-bottom: 0px;
+            }
             text-align: right;
             .mat-form-field-underline {
               background-color: black;
