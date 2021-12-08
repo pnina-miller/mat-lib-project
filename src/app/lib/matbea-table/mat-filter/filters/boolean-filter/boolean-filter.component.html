@@ -1,11 +1,2 @@
-
-<div class="filter-boolean-container">
-    <mat-button-toggle-group matNativeControl name="approved" style="border:none"
-(change)="onChange($event)">
-  <mat-button-toggle  value='true' class='filter-boolean-button-toggle'>כן</mat-button-toggle>
-<mat-button-toggle value='false' class='filter-boolean-button-toggle'>לא</mat-button-toggle>
-</mat-button-toggle-group>  
-<mat-error *ngIf="!valid">יש למלא שדה זה.</mat-error>
-
-</div>
+<matbea-radio-button-tab [dataList]="[{id:true,description:'כן'},{id:false,description:'לא'}]" (selectedButtonChanged)="onChange($event)" ></matbea-radio-button-tab>
 
