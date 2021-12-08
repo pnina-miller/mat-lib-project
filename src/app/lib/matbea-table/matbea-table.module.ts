@@ -92,6 +92,7 @@ import { MatbeaButtonModule, MatbeaCheckboxModule, MatbeaIconModule } from '..';
     MatbeaInputModule,
     MatbeaCheckboxModule,
     MatbeaButtonModule,
+    MatbeaComboModule
   ],
   exports: [
     MatbeaTableComponent,
