@@ -9,29 +9,21 @@ import { MatTableService } from 'src/app/lib/matbea-table/services/mat-table.ser
 })
 export class BooleanFilterComponent implements OnInit {
 
-  @Input() filterColumn!: SelectFilterColumn;
+  @Input() filterColumn!: BooleanFilterColumn;
   filterValue:string | undefined
   
-  valid:boolean = true;
-
 
   constructor(private filterService:MatTableService) { }
 
   ngOnInit(): void {
   }
 
-onChange(e: any){
-  this.filterValue=e.value;
+onChange(value: any){
+  this.filterValue=value;
 }
 
-saveFilter(){
-  if(!this.filterValue){
-    this.valid=false;
-    return;
-  }
-  this.valid=true;
-  this.valid=true;
-  const stringFilterValue=this.filterValue==='true'?'כן':'לא'
-  this.filterService.setFilter(new FilterColumn({...this.filterColumn,stringFilterValue:stringFilterValue,filterValue:this.filterValue}))
+saveFilter(){debugger
+  const stringFilterValue=this.filterValue?'כן':'לא'
+  this.filterService.setFilter(new BooleanFilterColumn({...this.filterColumn,stringFilterValue:stringFilterValue,filterValue:this.filterValue, booleanValue:this.filterValue}));
 }
 }
