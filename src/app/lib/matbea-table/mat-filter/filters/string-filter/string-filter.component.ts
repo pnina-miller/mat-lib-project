@@ -12,7 +12,7 @@ export class StringFilterComponent {
 
   constructor(private filterService:MatTableService, stringFilterColumn:StringFilterColumn) {
     this.methodOptions = stringFilterColumn.methodOptions;
-    this.optionsArr = Object.entries(this.methodOptions);
+    this.optionsArr = Object.entries(this.methodOptions).map((option:any[])=>({ id: option[0], value: option[1].name}));
     this.selectedMethod=this.optionsArr[0][0]//contain
 
    }
