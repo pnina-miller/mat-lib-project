@@ -16,15 +16,16 @@ export class SelectFilterComponent implements OnInit {
   options!: FormGroup;
   hideRequiredControl = new FormControl(false);
   stringFilterValue=''
-
+  optionsArr:RadioButtonTabEntry[];
   valid:boolean = true;
 
   ngOnInit(): void {
-    this.options=new FormGroup({hideRequiredControl:this.hideRequiredControl})
+    this.options=new FormGroup({hideRequiredControl:this.hideRequiredControl});
+    this.optionsArr=this.filterColumn.options.map(option=>({id:option,description:option}));
   }
 
-  onChange(e: any){
-    this.stringFilterValue=e.value
+  onChange(value: any){
+    this.stringFilterValue=value
   }
 
   saveFilter(){
@@ -45,5 +46,3 @@ export class SelectFilterComponent implements OnInit {
 
   }*/
 }
-
-
