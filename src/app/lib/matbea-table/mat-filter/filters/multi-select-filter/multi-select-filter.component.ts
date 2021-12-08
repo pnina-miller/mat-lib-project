@@ -16,7 +16,7 @@ export class MultiSelectFilterComponent implements OnInit {
   options!: String[];
   selected: String[] = [];
   stringFilterValue = '';
-
+valid:boolean = true;
   ngOnInit(): void {
     this.options = this.filterColumn.options;
   }
@@ -29,6 +29,11 @@ export class MultiSelectFilterComponent implements OnInit {
   }
 
   saveFilter() {
+    if(!this.selected[0]){
+      this.valid=false;
+      return;
+    }
+    this.valid=true;
     this.stringFilterValue = this.selected.join(', ');
     this.filterService.setFilter(new MultiSelectFilterColumn({ ...this.filterColumn, stringFilterValue: this.stringFilterValue, selectedOptions: this.selected }));
 

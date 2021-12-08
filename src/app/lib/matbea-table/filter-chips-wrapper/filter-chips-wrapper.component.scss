@@ -10,4 +10,9 @@
 
   .filter-chips-container{
     width: 50vh;
+  }
+  ::ng-deep .mat-chip-list-wrapper{
+    .mat-chip.mat-standard-chip{
+      min-height: 25px !important;
+    }
     }

@@ -12,6 +12,9 @@ export class BooleanFilterComponent implements OnInit {
   @Input() filterColumn!: SelectFilterColumn;
   filterValue:string | undefined
   
+  valid:boolean = true;
+
+
   constructor(private filterService:MatTableService) { }
 
   ngOnInit(): void {
@@ -22,6 +25,12 @@ onChange(e: any){
 }
 
 saveFilter(){
+  if(!this.filterValue){
+    this.valid=false;
+    return;
+  }
+  this.valid=true;
+  this.valid=true;
   const stringFilterValue=this.filterValue==='true'?'כן':'לא'
   this.filterService.setFilter(new FilterColumn({...this.filterColumn,stringFilterValue:stringFilterValue,filterValue:this.filterValue}))
 }

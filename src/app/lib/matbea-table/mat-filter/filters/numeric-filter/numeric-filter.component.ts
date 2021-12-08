@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import {MatTableService} from "../../../services/mat-table.service";
-import {NumericFilterColumn} from "../../../models/filterColumns";
+import { MatTableService } from "../../../services/mat-table.service";
+import { NumericFilterColumn } from "../../../models/filterColumns";
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-numeric-filter',
@@ -9,70 +10,74 @@ import {NumericFilterColumn} from "../../../models/filterColumns";
 })
 export class NumericFilterComponent implements OnChanges {
 
-  constructor(private filterService: MatTableService, private numericFilterColumn:NumericFilterColumn) { 
+  constructor(private filterService: MatTableService, private numericFilterColumn: NumericFilterColumn) {
     this.methodOptions = this.numericFilterColumn.methodOptions;
     this.optionsArr = Object.entries(this.methodOptions)
-    this.selectedMethod=this.optionsArr[1][0]//equal
+    this.selectedMethod = this.optionsArr[1][0]//equal
   }
 
 
   @Input() filterColumn: NumericFilterColumn | undefined;
 
-  methodOptions:any;
-  optionsArr:any[];
-
-inputSuffix='';
-
+  methodOptions: any;
+  optionsArr: any[];
   selectedMethod: string = ''
-  filterValue = ''
-  filterValue2 = ''
+
+  inputSuffix = '';
+
+  inputFormControl = new FormControl('', [Validators.required, Validators.pattern('^[0-9&.]*$')])
+  inputFormControl2 = new FormControl('', [Validators.required, Validators.pattern('^[0-9&.]*$')])
+  errorMessages = { required: 'יש למלא שדה זה.', pattern:'יש להזין מספרים בלבד' }
 
   ngOnChanges(): void {
-    this.inputSuffix=this.filterColumn?.columnformatter==="PERCENT"?'%':''
+    this.inputSuffix = this.filterColumn?.columnformatter === "PERCENT" ? '%' : ''
   }
-/*
-    //TODO: clean this up
-  onKeyUp(e: any) {
-    let isPercent = e.target.value.indexOf('%')
-    let value = e.target.value.replace(/,/g, '')
-     value =value.replace(/%/g, '')
-    if (value === ' ' || isNaN(Number(value))) {
-      value = this.filterValue;
+  /*
+      //TODO: clean this up
+    onKeyUp(e: any) {
+      let isPercent = e.target.value.indexOf('%')
+      let value = e.target.value.replace(/,/g, '')
+       value =value.replace(/%/g, '')
+      if (value === ' ' || isNaN(Number(value))) {
+        value = this.filterValue;
+      }
+      this.filterValue = value
+      let arr = value.split('.')
+      arr[0] = Number(arr[0]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      value = arr.join('.')
+      if (isPercent>-1)
+        value = value + '%'
+      e.target.value = value
+  
     }
-    this.filterValue = value
-    let arr = value.split('.')
-    arr[0] = Number(arr[0]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    value = arr.join('.')
-    if (isPercent>-1)
-      value = value + '%'
-    e.target.value = value
-
-  }
-  onKeyUp2(e: any) {
-    //TODO: clean this up
-    let isPercent = e.target.value.indexOf('%')
-    let value = e.target.value.replace(/,/g, '')
-     value =value.replace(/%/g, '')
-    if (value === ' ' || isNaN(Number(value))) {
-      value = this.filterValue2;
+    onKeyUp2(e: any) {
+      //TODO: clean this up
+      let isPercent = e.target.value.indexOf('%')
+      let value = e.target.value.replace(/,/g, '')
+       value =value.replace(/%/g, '')
+      if (value === ' ' || isNaN(Number(value))) {
+        value = this.filterValue2;
+      }
+      this.filterValue2 = value
+      let arr = value.split('.')
+      arr[0] = Number(arr[0]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      value = arr.join('.')
+      if (isPercent>-1)
+        value = value + '%'
+      e.target.value = value
+  
     }
-    this.filterValue2 = value
-    let arr = value.split('.')
-    arr[0] = Number(arr[0]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    value = arr.join('.')
-    if (isPercent>-1)
-      value = value + '%'
-    e.target.value = value
-
-  }
-
-*/
+  
+  */
 
   saveFilter() {
-    let stringFilterValue = `${this.methodOptions[this.selectedMethod]?.name}  ${this.filterValue}
-     ${this.filterValue2 ? '-'+this.filterValue2 : ''} `;
-    this.filterService.setFilter(new NumericFilterColumn({ ...this.filterColumn, filterValue: this.filterValue, filterMethodKey: this.selectedMethod, stringFilterValue, secondValueForRange:this.filterValue2 }));
-
+    if (this.inputFormControl.valid && this.inputFormControl2.valid) {
+      const filterValue = this.inputFormControl.value
+      const secondValueForRange = this.inputFormControl2.value
+      let stringFilterValue = `${this.methodOptions[this.selectedMethod]?.name}  ${filterValue}
+     ${secondValueForRange && this.selectedMethod === 'range' ? '-' + secondValueForRange : ''} `;
+      this.filterService.setFilter(new NumericFilterColumn({ ...this.filterColumn, filterValue, filterMethodKey: this.selectedMethod, stringFilterValue, secondValueForRange }));
+    }
   }
 
 }

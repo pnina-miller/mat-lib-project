@@ -7,9 +7,9 @@
         </mat-select>
     </mat-form-field>
 
-    <matbea-input [suffix]="inputSuffix" [(value)]="filterValue" [type]="'number'" ></matbea-input>
+    <matbea-input [inputFormControl]="inputFormControl" [error-messages]="errorMessages" [suffix]="inputSuffix"></matbea-input>
 
-    <matbea-input   *ngIf="selectedMethod==='range'" [(value)]="filterValue2" [type]="'number'" ></matbea-input>
+    <matbea-input [inputFormControl]="inputFormControl2" [error-messages]="errorMessages" [suffix]="inputSuffix" *ngIf="selectedMethod==='range'"></matbea-input>
 
 
     <!-- <mat-form-field>

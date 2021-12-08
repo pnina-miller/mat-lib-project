@@ -2,3 +2,5 @@
         (change)="onChange($event)">
         <mat-button-toggle class="select-filter-option" *ngFor="let item of filterColumn.options" value={{item}}>{{item}}</mat-button-toggle>
     </mat-button-toggle-group>
+    <mat-error *ngIf="!valid">יש למלא שדה זה.</mat-error>
+

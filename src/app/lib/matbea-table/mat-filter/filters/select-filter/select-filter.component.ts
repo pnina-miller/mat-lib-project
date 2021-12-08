@@ -17,6 +17,8 @@ export class SelectFilterComponent implements OnInit {
   hideRequiredControl = new FormControl(false);
   stringFilterValue=''
 
+  valid:boolean = true;
+
   ngOnInit(): void {
     this.options=new FormGroup({hideRequiredControl:this.hideRequiredControl})
   }
@@ -26,6 +28,11 @@ export class SelectFilterComponent implements OnInit {
   }
 
   saveFilter(){
+    if(!this.stringFilterValue){
+      this.valid=false;
+      return;
+    }
+    this.valid=true;
     this.filterService.setFilter(new SelectFilterColumn({...this.filterColumn,stringFilterValue:this.stringFilterValue,filterValue:this.stringFilterValue}))
 
   }
