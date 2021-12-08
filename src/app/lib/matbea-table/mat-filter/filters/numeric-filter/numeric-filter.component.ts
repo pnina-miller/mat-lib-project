@@ -12,7 +12,7 @@ export class NumericFilterComponent implements OnChanges {
 
   constructor(private filterService: MatTableService, private numericFilterColumn: NumericFilterColumn) {
     this.methodOptions = this.numericFilterColumn.methodOptions;
-    this.optionsArr = Object.entries(this.methodOptions)
+    this.optionsArr = Object.entries(this.methodOptions).map((option:any[])=>({ id: option[0], value: option[1].name}));
     this.selectedMethod = this.optionsArr[1][0]//equal
   }
 
@@ -25,9 +25,9 @@ export class NumericFilterComponent implements OnChanges {
 
   inputSuffix = '';
 
-  inputFormControl = new FormControl('', [Validators.required, Validators.pattern('^[0-9&.]*$')])
-  inputFormControl2 = new FormControl('', [Validators.required, Validators.pattern('^[0-9&.]*$')])
-  errorMessages = { required: 'יש למלא שדה זה.', pattern:'יש להזין מספרים בלבד' }
+  inputFormControl = new FormControl('', Validators.required)
+  inputFormControl2 = new FormControl('', Validators.required)
+  errorMessages = { required: 'יש למלא שדה זה.' }
 
   ngOnChanges(): void {
     this.inputSuffix = this.filterColumn?.columnformatter === "PERCENT" ? '%' : ''
