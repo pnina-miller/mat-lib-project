@@ -1,6 +1,4 @@
-    <mat-button-toggle-group matNativeControl name="approved" style="border:none;   flex-wrap: wrap;"
-        (change)="onChange($event)">
-        <mat-button-toggle class="select-filter-option" *ngFor="let item of filterColumn.options" value={{item}}>{{item}}</mat-button-toggle>
-    </mat-button-toggle-group>
-    <mat-error *ngIf="!valid">יש למלא שדה זה.</mat-error>
+<matbea-radio-button-tab [dataList]="optionsArr" [value]="stringFilterValue" (selectedButtonChanged)="onChange($event)">
+</matbea-radio-button-tab>
 
+<mat-error *ngIf="!valid">יש למלא שדה זה.</mat-error>
