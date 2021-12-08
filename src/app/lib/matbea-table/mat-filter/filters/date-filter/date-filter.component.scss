@@ -1,23 +1,25 @@
-// @import "./variables.scss";
-
-.select-filter-container{
-    direction: rtl;
-    padding: 25px;
-    height: 280px;
-    overflow-y: auto;
-}
-
-.select-filter-select {
-  width: 120px;
-}
-
-::ng-deep .mat-select-panel {
-  max-width: fit-content;
-  width: fit-content;
-  min-width: fit-content !important;
-}
-
-// $selectors: '::ng-deep .mat-calendar-body-cell[aria-label= "November 2, 2021" ]';
-// #{$selectors} {
-//   background: blue;
-// }
+.sd-container {
+    position: relative;
+    float: left;
+  }
+  
+  .sd {
+    padding: 5px 10px;
+    height: 30px;
+    width: 150px;
+  }
+  
+  .open-button {
+    position: absolute;
+    top: 10px;
+    right: 11px;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    pointer-events: none;
+  }
+  
+  .open-button button {
+    border: none;
+    background: transparent;
+  }
