@@ -1,8 +1,3 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import {
-  DateFilterColumn,
-} from 'src/app/lib/matbea-table/models/filterColumns';
-import { MatTableService } from 'src/app/lib/matbea-table/services/mat-table.service';
 
 @Component({
   selector: 'app-date-filter',
@@ -11,38 +6,40 @@ import { MatTableService } from 'src/app/lib/matbea-table/services/mat-table.ser
 })
 export class DateFilterComponent implements OnInit {
   @Input() filterColumn: DateFilterColumn | undefined;
-  filterValue!: Date; //= new Date();
-  filterValue2!: Date; //= new Date();
+  filterValue: string='mm/dd/yyy' //= new Date();
+  filterValue2: string='mm/dd/yyy'  //= new Date();
   methodOptions = this.dateFilterColumn.methodOptions;
-  optionsArr = Object.entries(this.methodOptions);
-  selectedMethod: string = this.optionsArr[0][0] || 'in';
+  optionsArr = Object.entries(this.methodOptions).map((option:any[])=>({ id: option[0], value: option[1].name}));
 
+  selectedMethod: string = this.optionsArr[0][0] || 'in';
+  inputFocused:number=0
+  inputFormControl=new FormControl();
   convertDate(date: Date) {
     return date?.toLocaleDateString().replace(/\./g, '/');
   }
-  constructor(private filterService: MatTableService,private elementRef: ElementRef, private dateFilterColumn:DateFilterColumn) {}
+  constructor(private filterService: MatTableService,private elementRef: ElementRef, private dateFilterColumn:DateFilterColumn,private changeDetectorRef: ChangeDetectorRef) {}
 
-  ngOnInit(): void {}
-
-  dateSelected(e: any) {
-  
-    if (this.selectedMethod === 'range' && this.filterValue) {
-      this.filterValue2 && this.colorSelected(this.filterValue2,'white')
-      this.colorSelected(e,'red')
-      this.filterValue2 = e;
-    }
-    //TODO
-    else{
-      this.filterValue && this.colorSelected(this.filterValue,'white')
-      this.colorSelected(e,'red')
-       this.filterValue = e;
-    }
+  ngOnInit(): void {
   }
+
+  dateSelected(e: Date) {
+    this.inputFormControl.setValue(this.convertDate(e))
+
+       this.filterValue && this.colorSelected(new Date(this.filterValue),'white')
+       this.colorSelected(e,'red')
+        this.filterValue = this.convertDate(e);
+   }
+   dateSelected2(e: Date) {
+ this.filterValue2 && this.colorSelected(new Date(this.filterValue2),'white')
+       this.colorSelected(e,'red')
+       this.filterValue2 =  this.convertDate(e);
+
+   }
 colorSelected(date:Date,color:string){
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-  const stringDate=`${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+  const stringDate=`${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`
    let el:any=document.querySelector(`.mat-calendar-body-cell[aria-label= "${stringDate}" ] .mat-calendar-body-cell-content`)
     if(el) el.style.backgroundColor=color;
     this.elementRef.nativeElement.style.setProperty('selectors', 'e');
@@ -50,7 +47,7 @@ colorSelected(date:Date,color:string){
   saveFilter() {
     let stringFilterValue = `${
       this.dateFilterColumn.methodOptions[this.selectedMethod].name
-    } ${this.convertDate(this.filterValue)} ${this.filterValue2 ? '-'+this.convertDate(this.filterValue2) : ''}`;
+    } ${this.filterValue} ${this.filterValue2 ? '-'+this.filterValue2 : ''}`;
     this.filterService.setFilter(
       new DateFilterColumn({
         ...this.filterColumn,
