@@ -41,7 +41,9 @@ import { MatTableService } from './services/mat-table.service';
 import { StringFilterColumn } from './models/filterColumns';
 import { MatbeaIconButtonModule } from '../matbea-icon-button/matbea-icon-button.module';
 import { MatbeaInputModule } from '../matbea-input/matbea-input.module';
-import { MatbeaButtonModule, MatbeaCheckboxModule, MatbeaIconModule } from '..';
+import { MatbeaButtonModule, MatbeaCheckboxModule, MatbeaIconModule, RadioButtonTabModule } from '..';
+import { MatbeaComboModule } from '../drag-page/matbea-combo/matbea-combo.module';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -80,6 +82,7 @@ import { MatbeaButtonModule, MatbeaCheckboxModule, MatbeaIconModule } from '..';
     MatCheckboxModule,
     MatButtonToggleModule,
     MatDialogModule,
+    MatFormFieldModule,
     MatMenuModule,
     MatDividerModule,
     MatListModule,
@@ -92,7 +95,9 @@ import { MatbeaButtonModule, MatbeaCheckboxModule, MatbeaIconModule } from '..';
     MatbeaInputModule,
     MatbeaCheckboxModule,
     MatbeaButtonModule,
-    MatbeaComboModule
+    MatbeaIconButtonModule,
+    MatbeaComboModule,
+    RadioButtonTabModule
   ],
   exports: [
     MatbeaTableComponent,
@@ -105,7 +110,7 @@ import { MatbeaButtonModule, MatbeaCheckboxModule, MatbeaIconModule } from '..';
     BooleanFilterComponent,
     MultiSelectFilterComponent,
     NumericFilterComponent,
-    MatFilterComponent,
+    MatFilterComponent
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: new MatbeaPaginatorIntl() },

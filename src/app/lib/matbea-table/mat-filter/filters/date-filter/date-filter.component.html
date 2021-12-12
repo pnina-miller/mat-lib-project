@@ -1,17 +1,21 @@
 <div class="select-filter-container">
    
     <matbea-combo lable="" [options]="optionsArr"  (value)="selectedMethod=$event.id" [valueToDefoult]="this.selectedMethod"></matbea-combo>
-
-    <div style="width: 50%;display: inline-flex;" class="select-filter-selected">
-        <input (click)="inputFocused=0" matInput style="    margin-left: -50px;"  [(ngModel)]="filterValue" ><mat-datepicker-toggle ></mat-datepicker-toggle>
+<div style="width:100%">
+    <div style="width: 50%;display: inline-flex;" class="select-filter-selected">ת. התחלה </div> 
+    <div style="width: 50%;display: inline-flex;" class="select-filter-selected"  *ngIf="selectedMethod === 'range'">ת. סיום</div>
+     
+    </div>
+       <div style="width: 50%;display: inline-flex;" class="select-filter-selected">
+        <input [formControl]="inputFormControl" (keyup)="onDateKeyUp(inputFormControl)" (click)="inputClick(inputFormControl,0)"  (change)="inputChange(inputFormControl,0)" matInput style="margin-left: -10px; direction: ltr;" ><mat-datepicker-toggle ></mat-datepicker-toggle>
     </div>
 
-        <div style="width: 50%;display: inline-flex;" class="select-filter-selected" *ngIf="selectedMethod === 'range'">
-            <input (click)="inputFocused=1" matInput  style="    margin-left: -50px;"  [(ngModel)]="filterValue2" ><mat-datepicker-toggle ></mat-datepicker-toggle>
-        </div>
-    <mat-calendar *ngIf="!inputFocused else sec" #matCalendar (selectedChange)="dateSelected($event)"  selected="{{filterValue}}"></mat-calendar>
-    <ng-template #sec>    <mat-calendar #matCalendar (selectedChange)="dateSelected2($event)"  selected="{{filterValue2}}"></mat-calendar>
-</ng-template>
+    <div style="width: 50%;display: inline-flex;" class="select-filter-selected" *ngIf="selectedMethod === 'range'">
+        <input [formControl]="inputFormControl2" (keyup)="onDateKeyUp(inputFormControl2)" (change)="inputChange(inputFormControl2,2)" (click)="inputClick(inputFormControl2,1)" matInput  style="margin-left: -10px; direction: ltr;" ><mat-datepicker-toggle ></mat-datepicker-toggle>
+    </div>
+    <mat-calendar  #matCalendar (selectedChange)="dateSelected($event,inputFocused?inputFormControl2:inputFormControl,inputFocused)"  selected="{{inputFormControl.value}}"></mat-calendar>
+    <!-- <ng-template #sec>  *ngIf="!inputFocused else sec"  <mat-calendar #matCalendar (selectedChange)="dateSelected2($event)"  selected="{{filterValue2}}"></mat-calendar> -->
+<!-- </ng-template> -->
 </div>
 
 

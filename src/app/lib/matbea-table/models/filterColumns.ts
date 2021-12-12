@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@angular/core";
+import { Inject, Injectable } from '@angular/core';
 // import { object } from "@storybook/addon-knobs";
 
 export class FilterColumn {
@@ -7,7 +7,7 @@ export class FilterColumn {
   columnnameenglish!: string;
   columnnamehebrew!: string;
   associatedcolumnname!: string;
-  columnformatter!:string
+  columnformatter!: string;
 
   filterValue!: string;
   stringFilterValue: string;
@@ -24,7 +24,10 @@ export class FilterColumn {
   }
 
   checkFilter(line: any): boolean {
-    return this.filterValue === ((line[this.associatedcolumnname]||line[this.columnnameenglish.trim()]));
+    return (
+      this.filterValue ===
+      (line[this.associatedcolumnname] || line[this.columnnameenglish.trim()])
+    );
   }
 }
 
@@ -37,32 +40,61 @@ export class SelectFilterColumn extends FilterColumn {
   }
 
   checkFilter(line: any): boolean {
-    return this.filterValue === ((line[this.associatedcolumnname]||line[this.columnnameenglish.trim()]));
+    return (
+      this.filterValue ===
+      (line[this.associatedcolumnname] || line[this.columnnameenglish.trim()])
+    );
+  }
+}
+
+export class BooleanFilterColumn extends FilterColumn {
+  booleanValue!: boolean;
+  constructor(col: any) {
+    super(col);
+    this.booleanValue = this.getBool(col.filterValue);
+  }
+
+  getBool(val: any) {
+    return !!JSON.parse(val);
+  }
+
+  checkFilter(line: any): boolean {
+    const lineValue = this.getBool(
+      line[this.associatedcolumnname] || line[this.columnnameenglish.trim()]
+    );
+    return this.booleanValue === lineValue;
   }
 }
 @Injectable({ providedIn: 'root' })
 export class StringFilterColumn extends FilterColumn {
+
   methodOptions: { [key: string]: any } = {
     contain: {
       name: 'מכיל',
-      check: (filterValue: string, lineValue: string) => lineValue.includes(filterValue)
+      check: (filterValue: string, lineValue: string) =>
+        lineValue.includes(filterValue),
     },
     startWith: {
       name: 'מתחיל ב',
-      check: (filterValue: string, lineValue: string) => lineValue.startsWith(filterValue)
-    }
+      check: (filterValue: string, lineValue: string) =>
+        lineValue.startsWith(filterValue),
+    },
   };
+
   filterMethodKey!: string;
 
   constructor(@Inject('defaultCol') col: any) {
     super(col);
     this.filterMethodKey = col?.filterMethodKey;
   }
+
   checkFilter(line: any): boolean {
-    if (!((line[this.associatedcolumnname]||line[this.columnnameenglish.trim()]))) return false;
-    if (typeof ((line[this.associatedcolumnname]||line[this.columnnameenglish.trim()])) === "object")
-      return this.methodOptions[this.filterMethodKey].check(this.filterValue, ((line[this.associatedcolumnname]||line[this.columnnameenglish.trim()]))[0]);
-    return this.methodOptions[this.filterMethodKey].check(this.filterValue, ((line[this.associatedcolumnname]||line[this.columnnameenglish.trim()])));
+    const lineValue=(line[this.associatedcolumnname] || line[this.columnnameenglish.trim()]);
+    if (!lineValue)
+      return false;
+    if (typeof lineValue === 'object')
+      return this.methodOptions[this.filterMethodKey].check(this.filterValue,lineValue[0]);
+    return this.methodOptions[this.filterMethodKey].check(this.filterValue,lineValue);
   }
 }
 
@@ -92,7 +124,7 @@ export class NumericFilterColumn extends FilterColumn {
         secondValueForRange: string
       ) =>
         (Number(lineValue) - Number(filterValue)) *
-        (Number(secondValueForRange) - Number(lineValue)) >=
+          (Number(secondValueForRange) - Number(lineValue)) >=
         0,
     },
   };
@@ -109,7 +141,7 @@ export class NumericFilterColumn extends FilterColumn {
   checkFilter(line: any): boolean {
     return this.methodOptions[this.filterMethodKey].check(
       this.filterValue,
-      ((line[this.associatedcolumnname]||line[this.columnnameenglish.trim()])),
+      line[this.associatedcolumnname] || line[this.columnnameenglish.trim()],
       this.secondValueForRange
     );
   }
@@ -127,17 +159,15 @@ export class MultiSelectFilterColumn extends FilterColumn {
   checkFilter(line: any): boolean {
     //TODO
     return !!this.selectedOptions.find(
-      (op) => op === ((line[this.associatedcolumnname]||line[this.columnnameenglish.trim()]))
+      (op) =>
+        op ===
+        (line[this.associatedcolumnname] || line[this.columnnameenglish.trim()])
     );
   }
 }
 
-
-
 @Injectable({ providedIn: 'root' })
 export class DateFilterColumn extends FilterColumn {
-
-
   public methodOptions: { [key: string]: any } = {
     in: {
       name: 'בתאריך',
@@ -161,8 +191,11 @@ export class DateFilterColumn extends FilterColumn {
         lineValue: string,
         secondValueForRange: string
       ) =>
-      (this.prepareDate(lineValue) - this.prepareDate(filterValue)) *(this.prepareDate(secondValueForRange) -  this.prepareDate(lineValue)) >=0,
-      }
+        (this.prepareDate(lineValue) - this.prepareDate(filterValue)) *
+          (this.prepareDate(secondValueForRange) -
+            this.prepareDate(lineValue)) >=
+        0,
+    },
   };
 
   filterMethodKey!: string;
@@ -174,12 +207,14 @@ export class DateFilterColumn extends FilterColumn {
     this.filterMethodKey = col.filterMethodKey;
   }
   checkFilter(line: any): boolean {
-    const date=((line[this.associatedcolumnname]||line[this.columnnameenglish.trim()]))
-    const d=new Date(date / 10000,date % 10000/100 , date % 100);
+    let dateString = line[this.associatedcolumnname] || line[this.columnnameenglish.trim()];
+    let date = new Date(dateString);
+    if(!date.getTime())
+      date= new Date(dateString / 10000, (dateString % 10000) / 100, dateString % 100);
 
     return this.methodOptions[this.filterMethodKey].check(
       this.filterValue,
-      d,
+      date,
       this.secondValueForRange
     );
   }

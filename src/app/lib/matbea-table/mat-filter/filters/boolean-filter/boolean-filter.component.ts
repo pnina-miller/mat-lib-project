@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FilterColumn, SelectFilterColumn } from 'src/app/lib/matbea-table/models/filterColumns';
+import { FilterColumn, SelectFilterColumn, BooleanFilterColumn } from 'src/app/lib/matbea-table/models/filterColumns';
 import { MatTableService } from 'src/app/lib/matbea-table/services/mat-table.service';
 
 @Component({
@@ -22,8 +22,8 @@ onChange(value: any){
   this.filterValue=value;
 }
 
-saveFilter(){debugger
-  const stringFilterValue=this.filterValue?'כן':'לא'
+saveFilter(){
+  const stringFilterValue=this.filterValue=='false'?'לא':'כן'
   this.filterService.setFilter(new BooleanFilterColumn({...this.filterColumn,stringFilterValue:stringFilterValue,filterValue:this.filterValue, booleanValue:this.filterValue}));
 }
 }

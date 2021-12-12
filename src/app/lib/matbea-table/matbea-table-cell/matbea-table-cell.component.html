@@ -1,9 +1,9 @@
 <ng-container [ngSwitch]="column.columnformatter">
 
   <ng-container *ngSwitchCase="'array'">
-  <span [matTooltip]="item[column.columnnameenglish]" matBadgePosition="above before" matBadgeSize="small"
+  <div [matTooltip]="item[column.columnnameenglish]" matBadgePosition="above before" matBadgeSize="small"
         [matBadge]="item[column.columnnameenglish].length>1?item[column.columnnameenglish].length:null">
-    {{item[column.columnnameenglish][0]}}</span>
+    {{item[column.columnnameenglish][0]}}</div>
   </ng-container>
 
   <ng-container *ngSwitchCase="'checkbox'">

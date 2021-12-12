@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core'
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MatTableService} from "../../../services/mat-table.service";
 import {SelectFilterColumn} from "../../../models/filterColumns";
+import { RadioButtonTabEntry } from 'src/app/lib/radio-button-tab/radio-button-tab.component';
 
 @Component({
   selector: 'app-select-filter',
@@ -16,7 +17,7 @@ export class SelectFilterComponent implements OnInit {
   options!: FormGroup;
   hideRequiredControl = new FormControl(false);
   stringFilterValue=''
-  optionsArr:RadioButtonTabEntry[];
+  optionsArr!:RadioButtonTabEntry[];
   valid:boolean = true;
 
   ngOnInit(): void {
