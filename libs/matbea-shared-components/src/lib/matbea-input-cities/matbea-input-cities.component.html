@@ -1,0 +1,25 @@
+<div class="noPadding rowCell" *ngIf="!disabled" >   
+        <mat-form-field color="warn" class="noPadding rowCell40"  [appearance]="!disabled ? '' : 'none'">               
+            <mat-label>{{ lable }}</mat-label> 
+            
+            <input  type="text"                    
+                    aria-label="Number"
+                    matInput
+                    [(ngModel)]="selectedCity"
+                    [formControl]="citiesControl" 
+                    maxlength="40" required   
+                    [disabled]="disabled"                 
+                    [matAutocomplete]="auto">
+                    
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let comboEntry of filteredCitiesComboBox | async" [value]="comboEntry.description">
+                  {{comboEntry.description}}
+                </mat-option>
+              </mat-autocomplete>
+
+        </mat-form-field>
+    </div>
+
+    <div class="noPadding rowCell" *ngIf="disabled" >   
+        <matbea-input type="string" [lable]="lable"  [value]="selectedCity" maxlength="40" disabled="true" required ></matbea-input>
+    </div>

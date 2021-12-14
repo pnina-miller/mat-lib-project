@@ -1,0 +1,52 @@
+.rowCell {
+    box-sizing: border-box;
+    width:100%;
+    float: left;
+    padding: 0px;
+
+}
+
+.horizontalLayout {
+    white-space : nowrap;
+    overflow : hidden;
+    vertical-align : top;
+    display : inline-block;
+}
+
+.layoutbacking {
+ border-radius : 15px;
+    background : #CCCCCC;
+       padding : 0px;
+        margin : 0px;
+}
+
+
+
+.rowCell5 {
+    width:5%;
+}
+
+.rowCell10 {
+    width:10%;
+}
+
+.rowCell15{
+    margin: 0em 1em;
+}
+.rowCell20{
+    width:20%;
+}
+.hierarchy-wraper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    align-content: center;
+    align-items: center;
+    padding: 0px;    
+}
+
+.spaceBetweenCombo{
+    width:30px;
+}

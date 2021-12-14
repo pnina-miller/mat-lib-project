@@ -1,0 +1,29 @@
+.errorMsgLbl {
+    color: orangered;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    flex-wrap: nowrap;
+    justify-self: start;
+}
+
+.containerColLeft {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.containerColRight{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}

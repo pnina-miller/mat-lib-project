@@ -1,0 +1,72 @@
+@import '../variables.scss';
+.button{
+  padding: 0em;
+}
+
+.matbea-raised-button{
+width: 126px;
+height: 28px;
+background: $unnamed-color-c01039;
+border-radius: 14px;
+border-color:transparent;
+font-weight: bold;
+vertical-align: baseline;
+letter-spacing: $unnamed-character-spacing-0;
+color: $unnamed-color-ffffff;
+text-align: center;
+opacity: 1;
+&:hover{
+  background: $unnamed-color-ed1b2e 0% 0% no-repeat padding-box;
+
+}
+&:active{
+  background: $unnamed-color-c01039 0% 0% no-repeat padding-box;
+}
+&:disabled{
+  background: $unnamed-color-e3e3e3 0% 0% no-repeat padding-box;
+  color: $unnamed-color-a8a8a8;
+  
+}
+}
+.matbea-stroked-button{
+width: 126px;
+height: 28px;
+border: 1px solid $unnamed-color-ce0f19;
+border-radius: 14px;
+opacity: 1;
+background-color: transparent;
+color: $unnamed-color-c10f3a;
+font-weight: bold;
+vertical-align: baseline;
+&:hover{
+  border-color: $unnamed-color-ed1b2e;
+}
+&:active{
+  border-color: $unnamed-color-c01039;
+}
+&:disabled{
+  border-color:  $unnamed-color-c4c7cc;
+  color: $unnamed-color-c4c7cc;
+}
+}
+.matbea-regular-button{
+  width: 170px;
+height: 30px;
+background: $unnamed-color-4c7fc5 0% 0% no-repeat padding-box;
+border-radius: 0px 0px 2px 2px;
+opacity: 1;
+color: $unnamed-color-ffffff;
+&:hover{
+background-color: $unnamed-color-558cd8;
+}
+&:disabled{
+  background: $unnamed-color-e3e3e3 0% 0% no-repeat padding-box;
+  color: $unnamed-color-a8a8a8;
+}
+}
+
+.matbea-button-icon-svg{
+  width: 15px;
+  height: 15px;
+}
+

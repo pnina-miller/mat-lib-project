@@ -1,0 +1,11 @@
+
+
+<matbea-matbea-hierarchy-general-combo
+    hierarchyLabel = "סקטור"
+    [hierarchyComboIninitValue]="kodSector"
+    [isComboDisabled]="isComboDisabled"
+    [hierarchyCombInputKod]="misparAgaf"
+    [hierarchyComboKod]="kodSector"
+    hierarchyService="/common/sectors"
+    (hierarchyChanged)="sectorComboChanged($event)">
+</matbea-matbea-hierarchy-general-combo>

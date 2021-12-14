@@ -1,0 +1,41 @@
+<div class="temp">
+
+<!--    <mat-divider style="width: 100%;"></mat-divider>-->
+    <div class='matbea-list-picker'>
+
+        <div class='matbea-column'>
+            <div class="matbea-column-titel">
+                <span>אפשרויות</span>
+            </div>
+            <div cdkDropList class='matbea-column-list' #toChoose="cdkDropList" [cdkDropListData]="toChooseList"
+                [cdkDropListConnectedTo]="[inUse]" (cdkDropListDropped)="drop($event)" >
+
+                <div *ngFor="let item of toChooseList" cdkDrag cdkDragLockAxis="y">
+                    <matbea-picker-element (doClick)="onMoveToUse(item)" [value]="item"></matbea-picker-element>
+                </div>
+
+            </div>
+        </div>
+        <mat-divider [vertical]="true" style=' border-right-width: 2px;'></mat-divider>
+        <div class='matbea-column'>
+            <div style=" display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;"><span class="matbea-column-titel">בשימוש</span>
+                <span class="small-lable">נבחרו {{inUseList.length+locked.length}} מתוך
+                    {{limit}}</span></div>
+            <div cdkDropList class='matbea-column-list' #inUse="cdkDropList" [cdkDropListData]="inUseList"
+                [cdkDropListConnectedTo]="[toChoose]" (cdkDropListDropped)="drop($event)" >
+                <div *ngFor="let item of locked">
+                    <matbea-picker-element [disabled]="true" [value]="item"></matbea-picker-element>
+                </div>
+                <div *ngFor="let item of inUseList" cdkDrag cdkDragLockAxis="y">
+                    <matbea-picker-element type='remove' (doClick)="onMoveToChoose(item)" [value]="item">
+                    </matbea-picker-element>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    <mat-divider style="width: 100%;"></mat-divider>-->
+</div>

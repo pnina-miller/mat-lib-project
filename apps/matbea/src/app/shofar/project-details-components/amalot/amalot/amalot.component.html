@@ -1,0 +1,17 @@
+<div  *ngIf="isNatunimExt">
+
+  <matbea-amalot-edit 
+    *ngIf="isEditMode"
+    [amalotInfoResp]="amalotInfoResp">
+  </matbea-amalot-edit>
+  
+  <matbea-amalot-view 
+    *ngIf="!isEditMode"
+    [amalotInfoResp]="amalotInfoResp">
+  </matbea-amalot-view>
+
+</div>
+
+<div *ngIf="!isNatunimExt">
+  <matbea-lebel class="errorMsgLbl">{{message}}</matbea-lebel>
+</div>

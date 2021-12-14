@@ -1,0 +1,85 @@
+.bigLabel{
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.rowCell {
+    box-sizing: border-box;
+    width:100%;
+    float: left;
+    padding: 15px;
+   
+}
+
+.horizontalLayout {
+    white-space : nowrap; 
+       overflow : hidden; 
+ vertical-align : top;
+  
+        display : inline-block;
+}
+
+.layoutbacking {
+ border-radius : 15px;
+    background : #CCCCCC;
+       padding : 5px;
+        margin : 5px;
+}
+
+
+
+.rowCell90 {   
+    width:90%;    
+}
+
+.mat-row #delete-cheshbon-button {
+    display: none;
+}
+
+.mat-row:hover #delete-cheshbon-button {
+    display: block;
+}
+
+.mat-row #empty-span {
+    display: block;
+}
+
+.mat-row:hover #empty-span {
+    display: none;
+}
+
+.mat-row:hover {
+    background-color: rgb(167, 162, 162);
+  }
+
+ 
+
+.mat-column-metegHanpakatArvuyotLink{
+    flex: 0 0 10%;
+    min-width: 10%;
+    width:10%;
+    max-width: 10%;
+}
+
+.mat-column-misparSnif{
+    flex: 0 0 10%;
+    min-width: 10%;
+    width:10%;
+    max-width: 10%;
+}
+
+.mat-column-misparBank{
+    flex: 0 0 10%;
+    min-width: 10%;
+    width:10%;
+    max-width: 10%;
+}
+
+.mat-column-metegHanpakatArvuyotRemove{
+    flex: 0 0 10%;
+    min-width: 10%;
+    width:10%;
+    max-width: 10%;
+}

@@ -1,0 +1,28 @@
+<div class="stepperPanelDiv">
+    <mat-form-field  color="warn">
+        <form [formGroup]="kodMutavFormGroup">
+            <mat-label class="bigLabel">נא להזין את קוד המוטב:</mat-label>
+            <div>&nbsp;</div>
+            <input matInput type="number"  (change)="wizardData.kodMutavBeShovar=$event.target.value" [value]="wizardData.kodMutavBeShovar" placeholder="6 ספרות כפי שהתקבל בXX" onKeyPress="if(this.value.length==7) return false;"  required/>            
+            <mat-error *ngIf="errorMsg!=''">{{ errorMsg }}</mat-error>
+        </form>
+    </mat-form-field>
+    
+    <div class="kodMutavHintText">
+        <b>חשוב: </b> לחשבון זה קיימים יותר מ-4 בעלים. <br>
+        התקדמות בתהליך תגדיר אותו מסוג קבוצת רכישה <br>
+        הוא ינוהל ללא הפקת ערבויות חוק מכר. <br>
+    </div>
+   
+</div>
+
+<matbea-divider [vertical]='false' style="height: 0em; margin: 0em 0em;"></matbea-divider>
+
+<div class="rowCell noMargins">    
+    <div  class="rowCell rowCell50 alignLeft" >        
+        <matbea-button style="  margin-bottom: 0.5em;" type="matbea-raised" (onClick)="next();" >הבא</matbea-button>
+    </div>
+    <div class="rowCell rowCell50 alignRight" >        
+        <matbea-button style="  margin-bottom: 0.5em;" type="matbea-raised" (onClick)="cancel();" >ביטול</matbea-button>
+    </div>
+</div>

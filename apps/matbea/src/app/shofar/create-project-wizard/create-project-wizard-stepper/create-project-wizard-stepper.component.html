@@ -1,0 +1,51 @@
+
+<matbea-create-project-wizard-header [wizardData]="wizardData"></matbea-create-project-wizard-header>
+
+
+<!--
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  -->
+
+<div style="height:90px" >&nbsp;</div>
+
+
+  <mat-horizontal-stepper #wizardStepper [selectedIndex]="selectedIndex" [linear]="isLinear" (selectionChange)="onSelectionChange($event)" #stepper >
+
+    <mat-step   [editable]="true" [stepControl]="kodMutavGroup" [stepControl]="kodMutavGroup" label="קוד מוטב" (click)="selectedIndex=0">
+      <form [formGroup]="kodMutavGroup" >        
+        <matbea-get-kod-mutav [wizardData]="wizardData" [wizardStepper]="wizardStepper" [dialogRef]="dialogRef"></matbea-get-kod-mutav>
+      </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="basicDetailsFormGroup" label="פרטים בסיסייים"  (click)="selectedIndex=0">
+      <form [formGroup]="basicDetailsFormGroup">
+        <matbea-basic-details [wizardData]="wizardData" [wizardStepper]="wizardStepper"></matbea-basic-details>
+
+        
+      </form>
+    </mat-step>
+
+
+    <mat-step [stepControl]="mikumVeKarkaFormGroup" label="מיקום וקרקע">      
+      <matbea-mikum-ve-karka  [wizardData]="wizardData" [wizardStepper]="wizardStepper"></matbea-mikum-ve-karka>
+      
+     
+    </mat-step>
+
+
+    <mat-step [stepControl]="netuneyAmalotFormGroup" label="נתוני עמלות">      
+      <matbea-netuney-amalot [wizardData]="wizardData"  [wizardStepper]="wizardStepper" ></matbea-netuney-amalot>
+
+     
+    
+    </mat-step>
+
+  </mat-horizontal-stepper>
+   
+  
+
+
+  

@@ -1,0 +1,8 @@
+{
+  "envName": "development",
+  "port": "5000",
+  "ng": {
+    "context": "",
+    "staticFolder": "/opt/nodejs/apps/matbea/shofar/matbea"
+  }
+}

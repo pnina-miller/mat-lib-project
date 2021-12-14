@@ -1,0 +1,145 @@
+input[matinput]::-webkit-outer-spin-button,
+input[matinput]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.rowCell {
+    box-sizing: border-box;
+    width:100%;
+    float: left;
+    padding: 15px;
+   
+}
+
+.horizontalLayout {
+    white-space : nowrap; 
+       overflow : hidden; 
+ vertical-align : top;
+  
+        display : inline-block;
+}
+
+.layoutbacking {
+ border-radius : 15px;
+    background : #CCCCCC;
+       padding : 5px;
+        margin : 5px;
+}
+
+
+
+.rowCell5 {   
+    width:5%;    
+}
+
+.rowCell10 {   
+    width:10%;    
+}
+
+.rowCell15{
+   margin: 0em 1em;
+}
+
+.rowCell20 {   
+    width:20%;    
+}
+
+.rowCell25 {   
+    width:25%;    
+}
+
+.rowCell30 {   
+    width:30%;    
+}
+
+.rowCell40 {   
+    width:40%;    
+}
+
+.rowCell50 {   
+    width:50%;    
+}
+
+.rowCell60 {   
+    width:60%;    
+}
+
+.rowCell70 {   
+    width:70%;    
+}
+
+.rowCell80 {   
+    width:80%;    
+}
+
+.rowCell90 {   
+    width:90%;    
+}
+
+.rowCell100 {   
+    width:100%;    
+}
+
+.verticalLayout{
+    display: block;
+}
+
+.stepperPanelDiv{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: rtl;height:400px; 
+}
+
+.alignLeft{
+    text-align: left;
+}
+
+.alignRight{
+    text-align: right;
+}
+
+.bigLabel{
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.spanSeperator{
+    display: inline-block;
+}
+
+.noPadding{
+    padding:0px;
+    margin: 0px;
+}
+
+.noWrap{
+    white-space: nowrap;
+}
+
+.redBg{
+    background-color: red;
+}
+
+
+::ng-deep .mat-horizontal-stepper-header-container {
+    pointer-events: none ;
+  }
+
+.alignTop{
+    vertical-align: top;
+}
+
+.nextPrevButtonsPossition{
+    width:70%;
+    position: absolute;
+    bottom: 10%;
+}
+
+.noMargins{
+    margin: 0px;
+    padding: 0px;
+}
+

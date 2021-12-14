@@ -1,0 +1,23 @@
+<div class="matbea-input" [ngClass]="lableClass">
+  <ng-container *ngIf='lable'>
+    <div class="form-field-lable">{{lable}}</div>
+  </ng-container>
+  <mat-form-field color="warn" [ngClass]="ngclass" [class]="classs">
+    <input matInput [placeholder]="placeholder" [readonly]="disabled" [(ngModel)]="value" [formControl]='inputFormControl'
+           (keypress)="keypress" [maxLength]="limit" (input)="getValueChange($event)"
+           [matAutocomplete]="auto" [type]="type" (click)="click" [id]="id">
+    <div matPrefix class="form-field-prefix" *ngIf="prefix">{{prefix}}</div>
+    <div matSuffix class="form-field-suffix" *ngIf="suffix">{{suffix}}</div>
+    <matbea-icon-button matPrefix *ngIf="iconButtomPrefixName" [icon]="iconButtomPrefixName"
+                        [disabled]="iconButtomPrefixDisabled" [tooltip]="iconButtomPrefixTooltip"></matbea-icon-button>
+    <mat-error *ngIf="inputFormControl&&inputFormControl.invalid">{{getErrorMessage()}}</mat-error>
+    <mat-hint *ngIf='hint'>{{hint}}</mat-hint>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of autocomplete" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+
+

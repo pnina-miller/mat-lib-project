@@ -1,0 +1,21 @@
+<div *ngIf="isNatunimExt">
+    <matbea-natuney-mashkanta-edit [projectId] = "projectId" 
+                                   [mashkantaInfoResp] = "mashkantaInfoResp" 
+                                   [amalotInfResp] = "amalotInfResp"
+                                   [dargatMashkantaLst] = "dargatMashkantaLst"
+                                   [savePressed]="getChildsChenges.asObservable()"
+                                   (save)="save($event)"
+                                   *ngIf="isEditMode">
+    </matbea-natuney-mashkanta-edit> 
+    <matbea-natuney-mashkanta-view [projectId] = "projectId" 
+                                   [mashkantaInfoResp] = "mashkantaInfoResp" 
+                                   [amalotInfResp] = "amalotInfResp"
+                                   [dargatMashkantaLst] = "dargatMashkantaLst"
+                                   *ngIf="!isEditMode">
+    </matbea-natuney-mashkanta-view>
+</div>
+
+
+<div *ngIf="!isNatunimExt">
+    <matbea-lebel class="errorMsgLbl">{{message}}</matbea-lebel>
+</div>

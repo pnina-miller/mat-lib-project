@@ -1,0 +1,37 @@
+<div id="container">
+        <div class="containerCol">
+            <matbea-lebel class="form-field-lable-light">דמי טיפול באשראי ובטחונות</matbea-lebel>
+            <mat-radio-group aria-labelledby="radio-group-label" class="radio-group">
+            <mat-radio-button class="radio-button" *ngFor="let kodAmla of kodeyAmalot" 
+              [value]="kodAmla.kod"
+              [checked]="kodAmla.kod==amalotInfoResp.kodAmala"
+              (change)="onChangeRadio($event)">
+              <matbea-label *ngIf="kodAmla.kod == 1 || kodAmla.kod == 3">{{kodAmla.name}}</matbea-label>
+              <matbea-input [lable]="kodAmla.name" *ngIf="kodAmla.kod == 4" [(value)]="amalotInfoResp.sachHakolAmalaNeto"></matbea-input>
+              <matbea-input [lable]="kodAmla.name + ' %  '" *ngIf="kodAmla.kod == 2" [(value)]="amalotInfoResp.shiurHncaAmalatTipul"></matbea-input> 
+
+            </mat-radio-button>
+            
+          </mat-radio-group>
+        </div>
+        <div class="containerCol">
+          <matbea-lebel class="form-field-lable-light">שיעור עמלות ערבות חוק מכר לשנה</matbea-lebel>
+          <table>
+            <tr>
+              <td>עם היתר בנייה</td>
+              <td>%</td>
+              <td><matbea-input [(value)]="amalotInfoResp.shiurAmlatArvutSna"></matbea-input></td>
+            </tr>
+            <tr>
+              <td>לדירה מאוכלוסת</td>
+              <td>%</td>
+              <td><matbea-input [(value)]="amalotInfoResp.shiurAmlArvDiraOcls"></matbea-input></td>
+            </tr>
+            <tr>
+              <td>ללא היתר</td>
+              <td>%</td>
+              <td><matbea-input [(value)]="amalotInfoResp.shiurAmlArvLloHeter"></matbea-input></td>
+            </tr>
+          </table>
+        </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="stepperPanelDiv">
+    <div class="rowCell noPadding" >        
+
+        <div class="rowCell25 horizontalLayout alignRight" >            
+            <matbea-combo lable="איזור" lablePosition="top" (value)="wizardData.misparEzor=$event.id" [options]="ezorComboBox" [valueToDefoult]="wizardData.misparEzor"  ></matbea-combo>
+        </div>
+
+        <span class="spanSeperator rowCell10"></span>
+
+        <mat-form-field color="warn" class="noPadding rowCell50 alignTop"  appearance="none">               
+            <mat-label>קרקע</mat-label><br/>
+            <input matInput type="string"  style="display:none;"  required/>
+            <matbea-radio-button-tab [dataList]="karkaComboBox" [(value)]="wizardData.kodBaalutKarka" (selectedButtonChanged)="selectedKarkaChanged($event)" ></matbea-radio-button-tab>        
+        </mat-form-field>
+    </div>
+
+
+    <div class="noPadding rowCell">   
+        <matbea-matbea-input-cities lable="ישוב" ([selectedCity])="wizardData.teurShemYishuvCds" (selectedCityChanged)="wizardData.teurShemYishuvCds = $event;" ></matbea-matbea-input-cities>
+    </div>
+
+
+    <div class="noPadding rowCell">          
+        <matbea-checkbox lable="יהודה ושומרון"  [checked]="wizardData.metegGarBaEzor == 1" (valueChange)="selectYehudaVeShomronChk($event.checked)" ></matbea-checkbox>
+    </div>
+
+    <div class="rowCell">  &nbsp; </div>
+
+    <div class="rowCell noPadding" style="display:none;">   
+        <mat-form-field color="warn" class="rowCell40 noPadding">               
+            <mat-label>הערות</mat-label>   
+            <input matInput #commentText type="string" [(ngModel)]="wizardData.shuratMelel800"  maxlength="150" />
+            <mat-hint align="end"> 150 / {{commentText.value.length}} </mat-hint>
+        </mat-form-field>
+    </div>
+
+    <span  class="rowCell noPadding ">
+        <matbea-input lable="הערות" lablePosition="top" matInput #commentText type="string" [(value)]="wizardData.shuratMelel800" limit="150"  maxlength="150" hint="150 / {{commentText.value.length}}" ></matbea-input>
+    </span>
+
+
+    <div class="rowCell" noWrap>
+        <mat-form-field color="warn" class="rowCell80" appearance="none">
+            <form >
+                <input matInput style="display:none;"/>            
+                <mat-error *ngIf="errorMsg!=''">{{ errorMsg }}</mat-error>
+            </form>
+        </mat-form-field>
+    </div>
+</div>
+
+
+<matbea-divider [vertical]='false' style="height: 0em; margin: 0em 0em;"></matbea-divider>
+
+<div class="rowCell">    
+    <div  class="rowCell rowCell50 alignLeft" >        
+        <matbea-button style="  margin-bottom: 0.5em;" type="matbea-raised" (onClick)="next();" >הבא</matbea-button>
+    </div>
+    <div class="rowCell rowCell50 alignRight" >        
+        <matbea-button style="  margin-bottom: 0.5em;" type="matbea-raised" (onClick)="previouse();" >הקודם</matbea-button>
+    </div>
+</div>

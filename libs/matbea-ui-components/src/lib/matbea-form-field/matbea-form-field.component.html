@@ -1,0 +1,16 @@
+<div class="matbea-form-field"><ng-container *ngIf='prefix'><div class="form-field-lable">{{prefix}}</div></ng-container>
+<mat-form-field color="warn" >
+    <mat-label>{{label}}</mat-label>
+    <mat-select *ngIf="type=='select'" disableOptionCentering (selectionChange)="getValue($event)" [placeholder]="placeholder"  [(value)]="defaultInSelector" [disabled]="isDisable" panelClass="panelClassSelect">
+      <mat-option *ngFor="let option of value" [value]="option.id" [style]="option.style">
+        {{option.value}}
+      </mat-option>
+    </mat-select>
+  <input matInput *ngIf="type=='input'" (input)="getValue($event)" [disabled]="isDisable" [placeholder]="placeholder" [(ngModel)]="value">
+  <mat-hint>{{hint}}</mat-hint>
+  <textarea matInput *ngIf="type=='textarea'" (change)="getValue($event)" [disabled]="isDisable" [placeholder]="placeholder" [(ngModel)]="value"></textarea>
+  <mat-error *ngIf="error">{{errorValue}}</mat-error>
+  </mat-form-field>
+</div>
+
+

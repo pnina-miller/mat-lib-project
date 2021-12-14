@@ -1,0 +1,83 @@
+
+.project-details{
+height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.project-details-header-top{
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  height: 4%;
+  width: 100%;
+}
+matbea-project-details-header{
+  min-height: 90px;
+  min-width: fit-content;
+  width: 100%;
+  margin-bottom: 2%;
+}
+matbea-project-basic-details-container{
+  grid-area: basic-details;
+
+}
+
+matbea-shlavim-container{
+  grid-area: shlavim;
+
+}
+matbea-cheshbonot-container{
+  grid-area: cheshbonot;
+
+}
+matbea-amalot-container{
+  grid-area: amalot;
+
+}
+matbea-kablanim-container{
+  grid-area: kablanim;
+
+}
+matbea-mashkanta-container{
+  grid-area: mashkanta;
+
+}
+
+.project-details-content{
+  width: 100%;
+  height: 82%;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: [row1-start] 3fr [row1-end row2-start] 2fr [row2-end row3-start] 3fr [row3-end];
+  grid-template-columns: [first] 41% [line2] 28% [line3] 28% [end];
+  justify-content: space-between;
+  justify-items: stretch;
+  grid-template-areas:
+        "basic-details shlavim shlavim"
+        "basic-details cheshbonot cheshbonot"
+        "amalot kablanim mashkanta";
+}
+@media (max-width: 1200px) {
+  .project-details-content{
+    overflow: auto;
+    grid-template: auto;
+    grid-template-columns: [first] 100% [end];
+
+    grid-template-areas:
+    "basic-details"
+    "shlavim"
+    "cheshbonot"
+    "amalot"
+    "kablanim"
+    "mashkanta";
+  }
+
+}

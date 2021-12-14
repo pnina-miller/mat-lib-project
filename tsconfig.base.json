@@ -1,0 +1,31 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pdesks/matbea-ui-components": [
+        "libs/matbea-ui-components/src/index.ts"
+      ],
+      "@pdesks/matbea-shared-components": [
+        "libs/matbea-shared-components/src/index.ts"
+      ],
+      "@shofar/store":[
+        "apps/matbea/src/app/shofar/store/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

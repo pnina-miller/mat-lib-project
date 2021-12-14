@@ -1,0 +1,79 @@
+<div class="stepperPanelDiv">
+    <div class="rowCell">
+
+        <div class="horizontalLayout rowCell50 alignRight">
+            <mat-form-field class="rowCell40" style="vertical-align: top;"  appearance="none">               
+                <mat-label>דמי טיפול באשראי ובטחונות</mat-label>   
+                <input matInput type="string"  style="display:none;"  required/>
+
+                <div style="height:30px;"></div>
+
+                <matbea-radio-button-tab [dataList]="dmeyTipulButtonsArray" [(value)]="wizardData.kodAmala" (selectedButtonChanged)="dmeyTipulButtonsChanged($event)" ></matbea-radio-button-tab>        
+
+                <br/>
+                
+
+                <span  class="rowCell40 horizontalLayout" style="{{ (wizardData.kodAmala  == undefined || wizardData.kodAmala == '0' || wizardData.kodAmala == '1' || wizardData.kodAmala == '4') ? 'display:none;' : 'display: block;' }}">
+                    <matbea-input type="number" #schumDmeyTipul [(value)]="wizardData.sachHakolAmalaNeto"  [hidden]="(wizardData.kodAmala == '0' || wizardData.kodAmala == '1' || wizardData.kodAmala == '4')"  onKeyPress="if(this.value.length==10) return false;"  ></matbea-input>
+                </span>
+
+                <div style="height:104px;"></div>
+            </mat-form-field>
+        </div>
+
+        
+        <div class="horizontalLayout rowCell50 alignRight">
+            <mat-form-field class="rowCell50" appearance="none">               
+                <mat-label>שיעור עמלות ערבות חוק מכר לשנה</mat-label>   
+                <input matInput type="string"  style="display:none;"  required/>
+                <br/>
+            </mat-form-field>
+                
+
+                <div class="rowCell ">                    
+                    <div style="width:50%">
+                        <span  class="rowCell20 " >
+                            <matbea-input lable="עם היתר בנייה" lablePosition="top" [(value)]="wizardData.shiurAmlatArvutSna" type="number"  onKeyPress="if(this.value.length==6) return false;"  required  ></matbea-input>
+                        </span>
+
+                    
+
+                        
+                        <span  class="rowCell20 " >
+                            <matbea-input lable="לדירה מאוכלסת" lablePosition="top" [(value)]="wizardData.shiurAmlArvDiraOcls" type="number"  onKeyPress="if(this.value.length==6) return false;"  required ></matbea-input>
+                        </span>
+
+                        
+
+                        
+                        <span  class="rowCell20 " >
+                            <matbea-input lable="ללא היתר" lablePosition="top" [(value)]="wizardData.shiurAmlArvLloHeter" type="number"  onKeyPress="if(this.value.length==6) return false;"  required ></matbea-input>
+                        </span>
+                    </div>
+                </div>
+        </div>
+        
+    </div>
+
+
+    <div class="rowCell" noWrap>
+        <mat-form-field class="rowCell80" appearance="none">
+            <form >
+                <input matInput style="display:none;"/>            
+                <mat-error *ngIf="errorMsg!=''">{{ errorMsg }}</mat-error>
+            </form>
+        </mat-form-field>
+    </div>
+</div>
+
+
+<matbea-divider [vertical]='false' style="height: 0em; margin: 0em 0em;"></matbea-divider>
+
+<div class="rowCell">    
+    <div  class="rowCell rowCell50 alignLeft" >        
+        <matbea-button style="  margin-bottom: 0.5em; white-space:nowrap" type="matbea-raised" (onClick)="next();" >סיום וצפיה בפרוייקט</matbea-button>
+    </div>
+    <div class="rowCell rowCell50 alignRight" >        
+        <matbea-button style="  margin-bottom: 0.5em;" type="matbea-raised" (onClick)="previouse();" >הקודם</matbea-button>
+    </div>
+</div>

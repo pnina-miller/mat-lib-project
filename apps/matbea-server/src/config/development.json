@@ -1,0 +1,6 @@
+{
+  "envName": "development",
+  "ng": {
+    "staticFolder": "/git/matbeaclient/dist/apps/matbea"
+  }
+}

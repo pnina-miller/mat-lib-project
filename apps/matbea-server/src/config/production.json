@@ -1,0 +1,12 @@
+{
+  "production" : true,
+  "envName": "production",
+  "port":"443",
+  "ssl": {
+    "key": "/usr/portals/ssl/tbbapp01.key",
+    "cert": "/usr/portals/ssl/tbbapp01.pem"
+  },
+  "ng": {
+    "staticFolder": "/ws/pdesks/dist/apps/matbea"
+  }
+}

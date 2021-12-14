@@ -1,0 +1,42 @@
+@import "..//variables.scss";
+
+.matbea-picker-title {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.mat-dialog-title {
+  display: block;
+  margin: -24px -24px 0px -24px !important;
+  padding: 5px 24px 10px 24px;
+  background: $unnamed-color-f1f6fb 0% 0% no-repeat padding-box;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  min-height: 15%;
+}
+
+.matbea-picker-title-text {
+  font-size: larger;
+  font-weight: bold;
+  letter-spacing: $unnamed-character-spacing-0;
+  color: $unnamed-color-242e49;
+  text-align: right;
+  opacity: 1;
+}
+
+.mat-dialog-actions {
+  padding: 0 24px;
+  margin: 0 -24px -24px -24px;
+  min-height: 10%;
+}
+.mat-dialog-content{
+  overflow: unset !important;
+  max-height: 80%;
+  min-height: 80%;
+  box-shadow: inset 0px -20px 11px #3152801a;
+}

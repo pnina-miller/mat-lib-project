@@ -1,0 +1,61 @@
+<div *ngIf="isDataReady" id="container">
+
+    <div class="containerColRight">
+        <div class ="element">
+            <div>
+                <matbea-lebel class="form-field-lable-light" id="fromDateMelel">התחייבות לרישום משכנתא מיום</matbea-lebel>
+            </div>
+            <div>
+                <matbea-lebel class="form-field-lable-right">
+                    {{dateStr}}
+                </matbea-lebel>
+            </div>
+        </div>
+        <div class ="element">
+            <div>
+                <matbea-lebel class="form-field-lable-light" id="fromDateMelel">דרגת המשכנתא</matbea-lebel>
+            </div>
+            <div>
+                <matbea-lebel class="form-field-lable-right">
+                    {{mashkantaInfoResp.teurDargatMsknt}}
+                </matbea-lebel>
+            </div>
+            <div>
+                <matbea-lebel class="form-field-lable-right">
+                    {{mashkantaInfoResp.melelDargatMashkanta}}
+                </matbea-lebel>
+            </div>
+        </div>
+    </div>
+    <div class="containerColLeft">
+        <div class ="element">
+            <div>
+                <matbea-lebel class="form-field-lable-light" id="fromDateMelel">מספר תיק / חוזה ברמ"י</matbea-lebel>
+            </div>
+            <div>
+                <matbea-lebel *ngIf="!basicDetailsEditMode" class="form-field-lable-right">
+                    {{mashkantaInfoResp.mezaheTikRmi}}
+                </matbea-lebel>
+            </div>
+        </div>
+
+        <div class ="element">
+            <div>
+                <matbea-lebel class="form-field-lable-light" id="fromDateMelel">סכום ההתחייבות</matbea-lebel>
+            </div>
+            <div>
+                <matbea-lebel class="form-field-lable-right" 
+                    *ngIf="mashkantaInfoResp.metegHagbala == 1"
+                    id="fromDateMelel">ללא הגבלת סכום
+                </matbea-lebel>
+            </div>
+            <div>
+                <matbea-lebel class="form-field-lable-right" 
+                    *ngIf="mashkantaInfoResp.metegHagbala != 1"
+                    id="fromDateMelel">
+                    {{mashkantaInfoResp.schumHitchayvutMsknt}}
+                </matbea-lebel>        
+            </div>
+        </div>
+    </div>
+</div>  

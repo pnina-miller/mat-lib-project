@@ -1,0 +1,9 @@
+
+  <button mat-button [color]="color"  [style]="style" [matTooltip]="tooltip" [matTooltipPosition]="positionTooltip" (click)="onClick.emit($event)" [disabled]="disabled" >
+    <ng-template [ngIf]="icon">
+      <ng-container *ngIf="svg; then svgIcon else noSvgIcon"></ng-container>
+      <ng-template #svgIcon><mat-icon  [svgIcon]="icon" class="matbea-button-icon-svg" aria-hidden="false"  aria-label="Example home icon"></mat-icon></ng-template>
+      <ng-template #noSvgIcon><mat-icon aria-hidden="false"  aria-label="Example home icon">{{icon}}</mat-icon></ng-template>
+    </ng-template>
+    <ng-content></ng-content>
+  </button>

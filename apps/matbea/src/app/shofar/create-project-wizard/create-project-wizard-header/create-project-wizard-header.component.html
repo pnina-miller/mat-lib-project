@@ -1,0 +1,43 @@
+<div class="rowCell horizontalLayout alignTop noWrap" style="display:flex; width:100%;">
+
+    <div class="matbea-header noWrap horizontalLayout alignTop" style="display:table-cell;width:25%; vertical-align: top;padding: 0;margin: 0;">הוספת פרויקט חדש&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    
+    
+    <div class="horizontalLayout" class="display-table-cell" style="width:70%">
+        <div style="display:flex; width:100%" *ngIf="wizardData.misparCheshbon != null && wizardData.misparCheshbon != 0">
+
+            <div class="divider-cell-div" >
+                <matbea-divider vertical='true' style="height: 7em; margin: 0em 0em;"></matbea-divider>
+            </div>
+            
+            
+            <div class="header-cell-div" >
+                    <div class="wizard-header-subtitle">קוד מוטב</div>
+                    <div class="wizard-header-field">{{ wizardData.kodMutavBeShovar }}</div>
+            </div>            
+
+            <div class="divider-cell-div" >
+                <matbea-divider vertical='true' style="height: 7em; margin: 0em 0em;"></matbea-divider>
+            </div>
+
+            <div class="header-cell-div" >
+                    <div class="wizard-header-subtitle">חשבון וסניף</div>
+                    <div class="wizard-header-field">{{ wizardData.misparCheshbon }}</div>
+            </div>
+
+            <div class="divider-cell-div" >
+                <matbea-divider vertical='true' style="height: 7em; margin: 0em 0em;"></matbea-divider>
+            </div>
+        
+            <div class="header-cell-div" >
+                    <div class="wizard-header-subtitle">שם חשבון</div>
+                    <div class="wizard-header-field">{{ wizardData.shemCheshbon }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="horizontalLayout" style="display:table-cell; width:20%; text-align: left; ">
+            <matbea-button style="  margin-bottom: 0.5em;"  (onClick)="closeDialog();" >X</matbea-button>
+    </div>
+
+<div>

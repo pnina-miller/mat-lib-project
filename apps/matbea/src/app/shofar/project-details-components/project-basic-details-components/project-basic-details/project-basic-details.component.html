@@ -1,0 +1,161 @@
+
+
+<div class="rowCell" *ngIf="projectDetails">
+   
+    
+    <mat-form-field class="rowCell25" [appearance]="editMode ? '' : 'none'">            
+        <mat-label class="generalLabel">תאריך הסכם ליווי</mat-label>
+        <input class="generalInputText" matInput [matDatepicker]="picker" [(ngModel)]="projectDetails.taarich8HeskemLivuyDt" [disabled]="!editMode">
+        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <span class="spanSeperator rowCell10" ></span>
+
+    <div class="rowCell25 horizontalLayout" > 
+        <matbea-combo lable="מפקח" (value)="projectDetails.kodShamaiMefakeach=$event.id" [options]="mefakeachComboBox" [valueToDefoult]="projectDetails.kodShamaiMefakeach" [disable]="!editMode"  ></matbea-combo>
+    </div>
+
+    <span class="spanSeperator rowCell10" ></span>
+
+    <div class="rowCell25 horizontalLayout" > 
+        <matbea-combo lable="סטטוס" (value)="projectDetails.kodStatusAcharon=$event.id" [options]="statusCombo" [valueToDefoult]="projectDetails.kodStatusAcharon" [disable]="!editMode"  ></matbea-combo>
+    </div>
+
+</div>
+
+
+<div class="rowCell" *ngIf="editMode && projectDetails" > 
+    <mat-form-field color="warn" class="rowCell80" appearance="none" >
+        <mat-label >שיטת הליווי</mat-label><br/>
+        <input matInput type="string"  style="display:none;"  required/>
+        <matbea-radio-button-tab [dataList]="shitatLivuyButtonsArray" [(value)]="projectDetails.kodShitatLivuy"  (selectedButtonChanged)="projectDetails.kodShitatLivuy=$event" ></matbea-radio-button-tab> <!-- (selectedButtonChanged)="selectedShitatLivuyChanged($event)"-->
+    </mat-form-field>
+</div>
+
+<div class="rowCell" *ngIf="editMode && projectDetails" > 
+    <mat-form-field color="warn" class="rowCell25" appearance="none">
+        <mat-label>דיוור מכתבי שחרור</mat-label>  <br/>
+        <input matInput type="string"  style="display:none;"  required/>
+        <matbea-radio-button-tab [dataList]="divurMichtavShichrurButtonsArray" [(value)]="projectDetails.kodChevratDivur" (selectedButtonChanged)="projectDetails.kodChevratDivur=$event" ></matbea-radio-button-tab> <!-- (selectedButtonChanged)="divurMichtavShichrurChanged($event)" -->
+    </mat-form-field>
+</div>
+
+
+<div class="rowCell" *ngIf="!editMode && projectDetails">
+    <mat-form-field class="rowCell25" *ngIf="!editMode" [appearance]="editMode ? '' : 'none'">
+        <mat-label class="generalLabel" >שיטת הליווי</mat-label>   
+        <input matInput class="generalInputText" type="string"  [(ngModel)]="projectDetails.teurShitatLivuy" maxlength="40" required  [disabled]="!editMode"/>
+    </mat-form-field>
+
+    <span class="spanSeperator rowCell10"  *ngIf="!editMode" ></span>
+
+    <mat-form-field class="rowCell25" [appearance]="editMode ? '' : 'none'">            
+        <mat-label class="generalLabel" >דיוור מכתבי שחרור</mat-label>
+        <input matInput class="generalInputText" type="string"  [(ngModel)]="projectDetails.teurChevratDivur" maxlength="40" required  [disabled]="!editMode"/>
+    </mat-form-field>
+
+    <span class="spanSeperator rowCell10" style="display: inline-block;"></span>
+
+   <!-- <mat-form-field class="rowCell25" [appearance]="editMode ? '' : 'none'">
+            <mat-label class="generalLabel">מק"ל</mat-label>   
+            <input matInput class="generalInputText" type="string"  [(ngModel)]="projectDetails.shemMenahelLakochot" [disabled]="!editMode" maxlength="40" required/>
+        </mat-form-field>-->
+
+    
+
+</div>
+
+
+
+<div class="rowCell horizontalLayout noWrap"  *ngIf="projectDetails">
+    
+    <div class="rowCell25 noWrap horizontalLayout">  
+            <mat-checkbox [checked]="projectDetails.mtgProyectSagurSdct == 1" (change)="projectDetails.mtgProyectSagurSdct = ($event.checked ? 1 : 0)"  [disabled]="!editMode">
+                <span class="checkboxLabel" > סינדיקציה </span>
+            </mat-checkbox>
+        </div>
+
+    <div class="rowCell25 noWrap horizontalLayout">
+        <mat-checkbox  [checked]="projectDetails.sugYeshutNhlProyect == 1" (change)="projectDetails.sugYeshutNhlProyect = ($event.checked ? 1 : 0)"  [disabled]="!editMode">
+            <span class="checkboxLabel" > קבוצת רכישה </span> 
+        </mat-checkbox>
+    </div>
+
+    <div class="rowCell25 noWrap horizontalLayout" >
+        <mat-checkbox [checked]="projectDetails.metegChiyuvMaam == 1" (change)="projectDetails.metegChiyuvMaam= ($event.checked ? 1 : 0)"   [disabled]="!editMode">
+            <span class="checkboxLabel" > ערבויות ללא מע"מ </span>
+        </mat-checkbox> 
+    </div>
+    
+    <div class="rowCell25 noWrap horizontalLayout">
+        <mat-checkbox  [checked]="projectDetails.metegYokra == 1" (change)="projectDetails.metegYokra = ($event.checked ? 1 : 0)"  [disabled]="!editMode">
+            <span class="checkboxLabel" >  יוקרה </span>
+        </mat-checkbox>
+    </div>
+
+</div>
+
+
+
+
+<div class="rowCell">
+    <hr/>
+</div>
+
+
+<div class="rowCell" *ngIf="editMode && projectDetails" > 
+    <mat-form-field color="warn" class="noPadding rowCell50" appearance="none">               
+        <mat-label>קרקע</mat-label><br/>
+        <input matInput type="string"  style="display:none;"  required/>
+        <matbea-radio-button-tab [dataList]="karkaComboBox" [(value)]="projectDetails.kodBaalutKarka" (selectedButtonChanged)="projectDetails.kodBaalutKarka=$event"  ></matbea-radio-button-tab>   <!-- (selectedButtonChanged)="selectedKarkaChanged($event)" -->
+    </mat-form-field>
+</div>
+
+
+
+<div class="rowCell horizontalLayout"  *ngIf="projectDetails" >
+   
+
+    <div class="rowCell25 horizontalLayout" > 
+        <matbea-combo lable="איזור" (value)="projectDetails.misparEzor=$event.id" [options]="ezorCombo" [valueToDefoult]="projectDetails.misparEzor"   [disable]="!editMode"  ></matbea-combo>
+    </div>
+
+
+    <span class="spanSeperator rowCell10 horizontalLayout" ></span>
+    
+   <div class="horizontalLayout">
+        <matbea-matbea-input-cities lable="ישוב" [selectedCity]="projectDetails.teurShemYishuvCds" (selectedCityChanged)="projectDetails.teurShemYishuvCds = $event;" [disabled]="!editMode" ></matbea-matbea-input-cities>
+    </div>
+
+    <span class="spanSeperator rowCell10 horizontalLayout" ></span>
+
+
+    <mat-form-field class="rowCell25" [appearance]="editMode ? '' : 'none'" *ngIf="!editMode" >
+        <mat-label class="generalLabel" >קרקע פרוייקט</mat-label>   
+        <input matInput type="string" class="generalInputText"  [(ngModel)]="projectDetails.teurBaalutKarka" maxlength="40" required  [disabled]="!editMode"/>
+    </mat-form-field>
+</div>
+
+
+
+
+<div class="noPadding rowCell"  *ngIf="projectDetails">    
+
+    <div class="noPadding rowCell25 horizontalLayout" >  
+            <mat-checkbox [checked]="projectDetails.metegGarBaEzor == 1" (change)="projectDetails.metegGarBaEzor = ($event.checked ? 1 : 0)"  [disabled]="!editMode" >
+                <span class="checkboxLabel" > יהודה ושומרון </span>
+            </mat-checkbox> 
+        </div>
+</div>
+
+
+
+<div class="rowCell" noWrap  *ngIf="projectDetails">
+    <mat-form-field color="warn" class="rowCell80" appearance="none">
+        <form >
+            <input matInput style="display:none;"/>            
+            <mat-error *ngIf="errorMsg!=''">{{ errorMsg }}</mat-error>
+        </form>
+    </mat-form-field>
+</div>

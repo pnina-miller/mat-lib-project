@@ -1,0 +1,44 @@
+{
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "affected": { "defaultBase": "master" },
+  "npmScope": "pdesks",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "coin": { "tags": [] },
+    "coin-e2e": { "tags": [], "implicitDependencies": ["coin"] },
+    "coin-server": { "tags": [] },
+    "matbea": { "tags": [] },
+    "matbea-e2e": { "tags": [], "implicitDependencies": ["matbea"] },
+    "matbea-server": { "tags": [] },
+    "matbea-ui-components": { "tags": [] },
+    "matbea-shared-components": { "tags": [] },
+    "matbea-shared-components-e2e": {
+      "tags": [],
+      "implicitDependencies": ["matbea-shared-components"]
+    },
+    "matbea-ui-components-e2e": {
+      "tags": [],
+      "implicitDependencies": ["matbea-ui-components"]
+    }
+  }
+}

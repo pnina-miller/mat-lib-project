@@ -1,116 +1,529 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "table-lib-try": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        },
-        "@schematics/angular:application": {
-          "strict": true
-        }
+  "cli": {
+    "analytics": "e4d2a5de-ae17-4b49-8ad0-713fea00f556"
+  },
+  "defaultProject": "matbea",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
       },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "coin": {
+      "projectType": "application",
+      "root": "apps/coin",
+      "sourceRoot": "apps/coin/src",
+      "prefix": "desks",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/table-lib-try",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
-            ],
+            "outputPath": "dist/apps/coin",
+            "index": "apps/coin/src/index.html",
+            "main": "apps/coin/src/main.ts",
+            "polyfills": "apps/coin/src/polyfills.ts",
+            "tsConfig": "apps/coin/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/coin/src/favicon.ico", "apps/coin/src/assets"],
+            "styles": ["apps/coin/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/coin/src/environments/environment.ts",
+                  "with": "apps/coin/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
-              ],
+              ]
+            }
+          }
+        },
+
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "coin:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/coin/src/**/*.ts",
+              "apps/coin/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/coin"],
+          "options": {
+            "jestConfig": "apps/coin/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "coin-e2e": {
+      "root": "apps/coin-e2e",
+      "sourceRoot": "apps/coin-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/coin-e2e/cypress.json",
+            "tsConfig": "apps/coin-e2e/tsconfig.e2e.json",
+            "devServerTarget": "coin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "coin:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/coin-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "coin-server": {
+      "root": "apps/coin-server",
+      "sourceRoot": "apps/coin-server/src",
+      "projectType": "application",
+      "prefix": "coin-server",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/coin-server",
+            "main": "apps/coin-server/src/main.ts",
+            "tsConfig": "apps/coin-server/tsconfig.app.json",
+            "assets": [
+              "apps/coin-server/src/assets",
+              "apps/coin-server/src/config"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "coin-server:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/coin-server/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/coin-server"],
+          "options": {
+            "jestConfig": "apps/coin-server/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "matbea": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/matbea",
+      "sourceRoot": "apps/matbea/src",
+      "prefix": "matbea",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/matbea",
+            "index": "apps/matbea/src/index.html",
+            "main": "apps/matbea/src/main.ts",
+            "polyfills": "apps/matbea/src/polyfills.ts",
+            "tsConfig": "apps/matbea/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/matbea/src/favicon.ico", "apps/matbea/src/assets"],
+            "styles": ["apps/matbea/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/matbea/src/environments/environment.ts",
+                  "with": "apps/matbea/src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
-          },
-          "defaultConfiguration": "production"
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "matbea:build"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "table-lib-try:build:production"
-            },
-            "development": {
-              "browserTarget": "table-lib-try:build:development"
+              "browserTarget": "matbea:build:production"
             }
-          },
-          "defaultConfiguration": "development"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "table-lib-try:build"
+            "browserTarget": "matbea:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/matbea/src/**/*.ts",
+              "apps/matbea/src/**/*.html"
+            ]
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/matbea"],
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "jestConfig": "apps/matbea/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "aot": false
+    },
+    "matbea-e2e": {
+      "root": "apps/matbea-e2e",
+      "sourceRoot": "apps/matbea-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/matbea-e2e/cypress.json",
+            "tsConfig": "apps/matbea-e2e/tsconfig.e2e.json",
+            "devServerTarget": "matbea:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "matbea:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/matbea-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "matbea-server": {
+      "root": "apps/matbea-server",
+      "sourceRoot": "apps/matbea-server/src",
+      "projectType": "application",
+      "prefix": "matbea-server",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/matbea-server",
+            "main": "apps/matbea-server/src/main.ts",
+            "tsConfig": "apps/matbea-server/tsconfig.app.json",
+            "assets": ["apps/matbea-server/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/matbea-server/src/environments/environment.ts",
+                  "with": "apps/matbea-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "matbea-server:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/matbea-server/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/matbea-server"],
+          "options": {
+            "jestConfig": "apps/matbea-server/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "matbea-ui-components": {
+      "projectType": "library",
+      "root": "libs/matbea-ui-components",
+      "sourceRoot": "libs/matbea-ui-components/src",
+      "prefix": "matbea",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/matbea-ui-components/src/**/*.ts",
+              "libs/matbea-ui-components/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/matbea-ui-components"],
+          "options": {
+            "jestConfig": "libs/matbea-ui-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/matbea-ui-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/matbea-ui-components",
+            "config": {
+              "configFolder": "libs/matbea-ui-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "matbea-shared-components": {
+      "projectType": "library",
+      "root": "libs/matbea-shared-components",
+      "sourceRoot": "libs/matbea-shared-components/src",
+      "prefix": "matbea",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/matbea-shared-components/src/**/*.ts",
+              "libs/matbea-shared-components/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/matbea-shared-components"],
+          "options": {
+            "jestConfig": "libs/matbea-shared-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/matbea-shared-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/matbea-shared-components",
+            "config": {
+              "configFolder": "libs/matbea-shared-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "matbea-shared-components-e2e": {
+      "root": "apps/matbea-shared-components-e2e",
+      "sourceRoot": "apps/matbea-shared-components-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/matbea-shared-components-e2e/cypress.json",
+            "tsConfig": "apps/matbea-shared-components-e2e/tsconfig.e2e.json",
+            "devServerTarget": "matbea-shared-components:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "matbea-shared-components:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/matbea-shared-components-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "matbea-ui-components-e2e": {
+      "root": "apps/matbea-ui-components-e2e",
+      "sourceRoot": "apps/matbea-ui-components-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/matbea-ui-components-e2e/cypress.json",
+            "tsConfig": "apps/matbea-ui-components-e2e/tsconfig.e2e.json",
+            "devServerTarget": "matbea-ui-components:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "matbea-ui-components:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/matbea-ui-components-e2e/**/*.{js,ts}"]
           }
         }
       }
     }
-  },
-  "defaultProject": "table-lib-try"
+  }
 }

@@ -1,0 +1,10 @@
+<div *ngIf="isVisible == 'true'">
+    <matbea-matbea-hierarchy-general-combo
+        hierarchyLabel="חטיבה"
+        [hierarchyComboIninitValue]="misparChativaInputInit"
+        [isComboDisabled]="isComboDisabled"
+        [hierarchyComboKod]="misparChativaInputInit"
+        hierarchyService="/common/chativot"
+        (hierarchyChanged)="chativaComboChanged($event)">
+    </matbea-matbea-hierarchy-general-combo>
+</div>

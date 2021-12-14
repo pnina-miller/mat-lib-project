@@ -1,0 +1,20 @@
+<!--
+<div style="overflow: hidden;text-overflow: ellipsis;direction: rtl;">
+    <ng-container *ngIf='hierarchyLabel'><span class="form-field-lable">{{hierarchyLabel}}</span></ng-container>
+    <mat-form-field color="warn" style="margin-right: 0.5em;" >
+        <input matInput type="text" style="display:none"/>
+        <span style="white-space: nowrap">
+           
+
+            <mat-select matInput disableOptionCentering [(value)]="hierarchyComboKod" (selectionChange)="hierarchyComboChanged($event)" [disabled]="isComboDisabled=='true'" panelClass="panelClassSelect">
+                <mat-option *ngFor="let comboEntry of hierarchyCombo" [value]="comboEntry.value">
+                    {{comboEntry.description}}
+                </mat-option>
+            </mat-select>
+        </span>
+    </mat-form-field>
+</div>
+-->
+
+
+<matbea-combo [lable]="hierarchyLabel"  (value)="hierarchyComboChanged($event)" [options]="hierarchyCombo" [valueToDefoult]="hierarchyComboKod" [disable]="isComboDisabled" ></matbea-combo>

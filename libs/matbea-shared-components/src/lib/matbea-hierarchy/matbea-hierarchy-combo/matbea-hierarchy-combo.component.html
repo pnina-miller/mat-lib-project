@@ -1,0 +1,24 @@
+<div class="hierarchy-wraper"  >
+    <div class="{{ layoutClass }}" *ngIf="isChativaVisible=='true'">
+        <pdesks-matbea-chativa-combo (chativaChanged)="chativaChanged($event)" [misparChativaInputInit]="misparChativa" [isComboDisabled]="isChativaDisabled" [isChativaVisible]="isChativaVisible"></pdesks-matbea-chativa-combo>
+    </div>
+
+    <span class="spaceBetweenCombo" *ngIf="isChativaVisible=='true'"></span>
+
+    <div class="{{ layoutClass }}">
+        <pdesks-matbea-agaf-combo   [misparChativa]="misparChativa" (agafChanged)="agafChanged($event)"     [misparAgaf]="misparAgaf"   [isComboDisabled]="isAgafDisabled"  ></pdesks-matbea-agaf-combo>
+    </div>
+
+    <span class="spaceBetweenCombo"></span>
+
+    <div class="{{ layoutClass }}">
+        <pdesks-matbea-sector-combo [misparAgaf]="misparAgaf"       (sectorChanged)="sectorChanged($event)" [kodSector]="kodSector"     [isComboDisabled]="isSectorDisabled"></pdesks-matbea-sector-combo>
+    </div>
+
+    <span class="spaceBetweenCombo"></span>
+
+    <div class="{{ layoutClass }}">
+        <pdesks-matbea-makal-combo  [kodSector]="kodSector"         (makalChanged)="makalChanged($event)"   [misparMakal]="misparMakal" [isComboDisabled]="isMakalDisabled"></pdesks-matbea-makal-combo>
+    </div>
+</div>
+

@@ -1,0 +1,34 @@
+<ng-container>
+  <div class="project-details-header" [ngClass]="class">
+  <div class="project-details-header-lable">
+    <span class="form-field-lable-light"> {{project?.misparProyectSagur}}</span>
+  </div>
+  <div class="project-details-header-nitunim">
+    <div class="project-details-header-setor">
+      <matbea-input [disabled]="change" disabledTransparent="true" [value]="project?.shemProyectSagur" (valueChange)="shemProyectSagur=$event"></matbea-input>
+      <matbea-input [disabled]="change" disabledTransparent="true" [value]="project?.shemProyectSagurAng" (valueChange)="shemProyectSagurAng= $event"></matbea-input>
+    </div>
+    <matbea-divider vertical="true"></matbea-divider>
+    <div class="project-details-header-setor">
+      <span class="form-field-lable-light">מק"ל</span>
+      <span >{{project?.shemMenahelLakochot}}</span>
+    </div>
+    <matbea-divider vertical="true"></matbea-divider>
+    <div class="project-details-header-setor">
+      <span class="form-field-lable-light">חשבון מוביל</span>
+      <span >{{project?.misparSnif}}-{{project?.misparCheshbon}}</span>
+    </div>
+    <matbea-divider vertical="true"></matbea-divider>
+    <div class="project-details-header-setor">
+      <span class="form-field-lable-light">קוד מוטב</span>
+      <span >{{project?.kodMutavBeShovar}}</span>
+    </div>
+    <matbea-divider vertical="true"></matbea-divider>
+    <div class="project-details-header-setor">
+      <span class="form-field-lable-light">הערות מיוחדות</span>
+      <matbea-input [disabled]="change" disabledTransparent="true" [(value)]="shuratMelel800"></matbea-input>
+    </div>
+  </div>
+    <matbea-shmor-shinui-button shkifut="true" (shinui)="onShinui($event)"></matbea-shmor-shinui-button>
+</div>
+</ng-container>

@@ -1,0 +1,16 @@
+<div  class="matbea-combo" [ngClass]="lableClass"> <ng-container *ngIf='lable'><div class="form-field-lable">{{lable}}</div></ng-container>
+<mat-form-field color="warn"  [ngClass]="class" >
+    <mat-select [panelClass]="panelClassSelect" disableOptionCentering  [id]="id" (selectionChange)="selectionChange($event)" (openedChange)="openChange($event)" [placeholder]="placeholder"  [(value)]="valueToDefoult" [disabled]="disable" >
+        <mat-option *ngFor="let option of options" [value]="option.id" [disabled]="option.disable" [style]="option.style">
+            {{option.value}}
+        </mat-option>
+    </mat-select>
+
+  <div matPrefix class="form-field-prefix" *ngIf="prefix">{{prefix}}</div>
+  <div matSuffix class="form-field-suffix" *ngIf="suffix">{{suffix}}</div>
+  <matbea-icon-button matPrefix *ngIf="iconButtomPrefixName"  [icon]="iconButtomPrefixName" [disabled]="iconButtomPrefixDisabled" [tooltip]="iconButtomPrefixTooltip" ></matbea-icon-button>
+    <mat-error *ngIf=true>error</mat-error>
+    <mat-hint *ngIf='hint'>{{hint}}</mat-hint>
+</mat-form-field>
+</div>
+

@@ -1,0 +1,16 @@
+<div style="width:100%; height: 100%">
+  <matbea-slice-data titel="חשבונות">
+    <matbea-slice-data-suffix >
+      <matbea-button type='matbea-stroked'  (onClick)="openAddCheshbonPopup()" >
+         + הוספת חשבון
+
+      </matbea-button>
+
+    </matbea-slice-data-suffix>
+
+    <matbea-slice-data-content style="width:100%">
+      <matbea-cheshbonot [misparProyectSagur]="misparProyectSagur" [misparBank]="misparBank"></matbea-cheshbonot>
+    </matbea-slice-data-content>
+  </matbea-slice-data>
+
+</div>

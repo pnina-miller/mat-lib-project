@@ -1,0 +1,42 @@
+{
+  "debugMode": false,
+  "maxAge": 900,
+  "envName": "default",
+  "port": "4600",
+  "ng": {
+    "context": ""
+  },
+  "api": {
+    "context": "/bnhp-api"
+  },
+  "log": {
+    "maxLogSize": 30000000,
+    "level": "info",
+    "backups": 3,
+    "compress": true
+  },
+  "helmet": {
+    "frameguard": {
+      "action": "same-origin"
+    },
+    "contentSecurityPolicy": {
+      "directives": {
+        "defaultSrc": [
+          "'self'",
+          "data:"
+        ],
+        "scriptSrc": [
+          "'self'",
+          "'unsafe-inline'"
+        ],
+        "styleSrc": [
+          "'self'",
+          "'unsafe-inline'"
+        ]
+      }
+    }
+  },
+  "keys": {
+
+  }
+}
