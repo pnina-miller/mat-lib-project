@@ -8,8 +8,19 @@
               <th mat-header-cell style=" min-width: 40px;" *matHeaderCellDef >
                 {{column.columnTitle}}
               </th>
-              <td mat-cell [style]="column.style" *matCellDef="let project;">
+              <td  mat-cell [style]="column.style" *matCellDef="let project;">
                 <matbea-table-cell [item]="project" [column]="column" ></matbea-table-cell>
+                <!-- <ng-template #menu> <matbea-arichat-shalav-menu></matbea-arichat-shalav-menu></ng-template> -->
+              
+               
+              </td>
+            </ng-container>
+            <ng-container [matColumnDef]="'menu'" >
+              <th mat-header-cell style=" min-width: 40px;" *matHeaderCellDef >
+                menu
+              </th>
+              <td  mat-cell [style]="'column.style'" *matCellDef="let project">
+                 <matbea-arichat-shalav-menu></matbea-arichat-shalav-menu>
               </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>

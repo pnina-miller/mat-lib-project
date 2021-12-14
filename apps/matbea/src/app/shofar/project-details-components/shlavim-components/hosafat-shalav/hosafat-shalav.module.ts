@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HosafatCheshbonComponent } from './hosafat-cheshbon.component'
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -17,11 +16,13 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatbeaButtonModule } from '../../../../../../../../libs/matbea-ui-components/src/lib/matbea-button/matbea-button.module';
+import { HosafatShalavComponent } from './hosafat-shalav.component';
+import { MatbeaIconButtonModule } from '@pdesks/matbea-ui-components';
 
 
 
 @NgModule({
-  declarations: [HosafatCheshbonComponent],
+  declarations: [HosafatShalavComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -34,13 +35,14 @@ import { MatbeaButtonModule } from '../../../../../../../../libs/matbea-ui-compo
     MatFormFieldModule,
     MatInputModule,
     MatbeaButtonModule,
+    MatbeaIconButtonModule,
     MatDialogModule,
     MatSelectModule,
     TextFieldModule,
     ReactiveFormsModule,
     MatDividerModule,
-    MatCheckboxModule,
-    MatFormFieldModule
-  ], exports: [HosafatCheshbonComponent]
+    MatCheckboxModule, 
+  MatFormFieldModule ],
+  exports:[HosafatShalavComponent]
 })
-export class HosafatCheshbonModule { }
+export class HosafatShalavModule { }

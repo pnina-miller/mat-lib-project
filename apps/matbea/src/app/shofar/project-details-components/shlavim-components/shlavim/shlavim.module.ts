@@ -20,11 +20,19 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatbeaButtonModule } from '../../../../../../../../libs/matbea-ui-components/src/lib/matbea-button/matbea-button.module';
 import { MatbeaLebelModule } from '../../../../../../../../libs/matbea-ui-components/src/lib/matbea-lebel/matbea-lebel.module'
 import { ShlavimComponent } from './shlavim.component';
-
+import { HosafatShalavModule } from '../hosafat-shalav/hosafat-shalav.module';
+import { ArichatShalavMenuComponent } from '../arichat-shalav-menu/arichat-shalav-menu.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {
+  MatbeaDetailsSteperModule,
+  MatbeaIconButtonModule,
+  MatbeaSliceDataContainerModule,
+  MatbeaSlideToggleModule
+} from "@pdesks/matbea-ui-components";
 
 
 @NgModule({
-  declarations: [ShlavimComponent],
+  declarations: [ShlavimComponent, ArichatShalavMenuComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -44,8 +52,11 @@ import { ShlavimComponent } from './shlavim.component';
     MatbeaLebelModule,
     MatRadioModule,
     MatDialogModule,
-    MatbeaTableModule
-    ],
-  exports:[ShlavimComponent]
+    MatbeaTableModule,
+    HosafatShalavModule,
+    MatMenuModule,
+    MatbeaIconButtonModule
+      ],
+  exports:[ShlavimComponent, ArichatShalavMenuComponent]
 })
 export class ShlavimModule { }

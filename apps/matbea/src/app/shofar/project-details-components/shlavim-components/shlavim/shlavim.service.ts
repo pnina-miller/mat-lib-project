@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
+import { ShlavimComponent } from './shlavim.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShlavimService {
-  openHosafatCheshbonPopup() {
-    throw new Error('Method not implemented.');
+  shlavimComponent: ShlavimComponent;
+
+  init(shlavimComponent: ShlavimComponent): void{
+      this.shlavimComponent = shlavimComponent;
   }
 
-  constructor() { }
+
+  openHosafatCheshbonPopup(): void{
+      this.shlavimComponent.openHosafatCheshbonPopup()
+  }
 }
