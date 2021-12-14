@@ -1,0 +1,31 @@
+{
+  "avcmp02m": {
+      "shemProyectSagur":"shemProyectSagur",
+    "misparProyectSagur": "misparProyectSagur",
+    "kodMutavBeShovar": "kodMutavBeShovar",
+    "taarich8HeskemLivuy": "20111111",
+    "shemProyectSagurAng": "gerfref",
+    "shuratMelel800": "gerfref",
+    "shemMenahelLakochot": "gerfref",
+    "misparSnif": "cfewfew",
+    "misparCheshbon": "cfewfew"
+  },
+  "citiesComboBox": "dd",
+  "divurMichtavShichrurCombo": "dsfds",
+  "ezorCombo": [{ "id": "ezorC1ombo",
+    "value": "ezorCo2mbo",
+    "shortDesc": "ez3orCombo",
+    "longDesc": "ezo4rCombo"},
+    { "id": "ezorCo5mbo",
+        "value": "ez6orCombo",
+        "shortDesc": "ez7orCombo",
+        "longDesc": "ezo8rCombo"}],
+  "shemMefakeachCombo":[{ "id": "string1",
+    "value": "string2",
+    "shortDesc": "string3",
+    "longDesc": "string4"},
+    { "id": "string1",
+        "value": "string2",
+        "shortDesc": "string3",
+        "longDesc": "string4"}]
+}
