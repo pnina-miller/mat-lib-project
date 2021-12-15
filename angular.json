@@ -48,7 +48,8 @@
             "tsConfig": "apps/coin/tsconfig.app.json",
             "aot": true,
             "assets": ["apps/coin/src/favicon.ico", "apps/coin/src/assets"],
-            "styles": ["apps/coin/src/styles.scss"],
+            "styles": ["apps/coin/src/styles.scss",  "node_modules/material-design-icons/iconfont/material-icons.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -202,7 +203,8 @@
             "tsConfig": "apps/matbea/tsconfig.app.json",
             "aot": true,
             "assets": ["apps/matbea/src/favicon.ico", "apps/matbea/src/assets"],
-            "styles": ["apps/matbea/src/styles.scss"],
+            "styles": ["apps/matbea/src/styles.scss",  "node_modules/material-design-icons/iconfont/material-icons.css"
+            ],
             "scripts": []
           },
           "configurations": {

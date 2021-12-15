@@ -1,9 +1,0 @@
-
-
-<div >
-    <button *ngFor="let button of buttonsArray" 
-        [ngClass]="selectedButton != button.id ? 'radio-button-tab-button radio-button-tab-btn-border radio-button-tab-btn-white' : 'radio-button-tab-button radio-button-tab-btn-border radio-button-tab-btn-selected'" 
-        (click)="selectionChaned(button.id)">
-            {{ button.description }}
-    </button>
-</div>

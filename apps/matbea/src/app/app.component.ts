@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-
-
-
 import { Store } from '@ngrx/store';
 import * as ShofarActions from './shofar/store/actions/shofar.actions';
 import *as ShofarSelectors from './shofar/store/selectors/shofar.selectors';
