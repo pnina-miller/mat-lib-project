@@ -10,7 +10,7 @@ import { ShofarServices } from '../../../services/shofar-services';
 @Component({
   selector: 'matbea-hosafat-shalav',
   templateUrl: './hosafat-shalav.component.html',
-  styleUrls: ['./hosafat-shalav.component.css']
+  styleUrls: ['./hosafat-shalav.component.scss']
 })
 export class HosafatShalavComponent implements OnInit {
 

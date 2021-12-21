@@ -21,3 +21,10 @@
 
 <!-- <p *ngIf="selectedMethod !== 'range'">{{convertDate(filterValue)}}</p> -->
 <!-- <p> {{convertDate(filterValue)}}  - {{convertDate(filterValue2)}}</p> -->
+
+
+<mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker class="fixed-open" #picker opened="true"></mat-datepicker>
+  </mat-form-field>
