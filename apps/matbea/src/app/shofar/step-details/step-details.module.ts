@@ -8,7 +8,8 @@ import {
   MatbeaIconButtonModule,
   MatbeaSliceDataContainerModule,
   MatbeaSlideToggleModule,
-  MatbeaTableModule
+  MatbeaTableModule,
+  PipesModule
 } from "@pdesks/matbea-ui-components";
 
 import { UnitsComponentComponent } from '../step-details-components/units-component/units-component.component';
@@ -23,7 +24,9 @@ import { UnitsHeaderComponentComponent } from '../step-details-components/units-
     ProjectDetailsHeaderModule,
     MatbeaIconButtonModule,
     MatbeaDetailsSteperModule,
-    MatbeaTableModule
+    MatbeaTableModule,
+    PipesModule,
+
   ]
 })
 export class StepDetailsModule { }

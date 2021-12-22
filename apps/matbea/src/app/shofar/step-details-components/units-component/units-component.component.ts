@@ -11,7 +11,7 @@ import { ColumnDefinition } from '../../store/models/column-definition.model';
 export class UnitsComponentComponent implements OnInit {
   unitsList: any[]=[];
   dataSource:MatTableDataSource<any>=new MatTableDataSource<any>();
-  displayedColumns: any[] = [];
+  displayedColumns: any[] = [{columnnameenglish:'\u001a',display:'1',ordernumber:0,columnformatter:'checkbox'}];
   loadingTable = true;
 
   constructor(private shofarServices: ShofarServices) {}
@@ -20,9 +20,10 @@ export class UnitsComponentComponent implements OnInit {
     this.shofarServices.getyechidot(2).subscribe((data: any) => {
       this.unitsList = data.data.avctl071List.fullList;
       this.dataSource=new MatTableDataSource(this.unitsList);
-      this.displayedColumns = Object.keys(this.unitsList[0]).map((key,index) => ({
+      this.displayedColumns =this.displayedColumns.concat(Object.keys(this.unitsList[0]).map((key,index) => ({
         columnnameenglish: key,display:'1',ordernumber:index,columnformatter:''
-      }));
+      })));
+      this.unitsList=this.unitsList.map(u=>({...u,check:false}))
       this.loadingTable=false;
       
     });
