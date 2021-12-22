@@ -45,7 +45,7 @@ export class MatbeaIconButtonComponent implements OnInit,OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-debugger
+
     if (svgIcons.includes(this.icon)&&this.icon) {
       this.svg ="svgIcon";
     } else if(this.icon){

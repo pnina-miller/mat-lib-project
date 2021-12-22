@@ -5,7 +5,9 @@ const col= require('./data/tableColumns.json')
 const data= require('./data/dataSource.json')
 const details= require('./data/projectDetails.json')
 const reshimatShlavim= require('./data/shlavim.json')
-// Add headers before the routes are defined
+const getpirteyShalav= require('./data/getpirteyShalav.json')
+const getyechidot= require('./data/getyechidot.json')
+
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -22,8 +24,14 @@ app.get('/shofar/combobox', (req, res) => {console.log('shofar/combobox');
   res.json({data:{projectStatusCombo:data}})
 })
 app.get('/shofar/shlavim/get', (req, res) => {console.log('shofar/shlavim');
-  res.json({"metadata":{"validations":{}}, "data":{"reshimatShlavimList":reshimatShlavim}}
-  )
+  res.json({"metadata":{"validations":{}}, "data":{"reshimatShlavimList":reshimatShlavim}} )
+})
+app.get('/shofar/projects/:misparShalv/shlavim', (req, res) => {console.log('getpirteyShalav');
+  res.json(getpirteyShalav);
+})
+
+app.get('/shofar/projects/v1/steps/appartments/:misparShalv/1/1', (req, res) => {console.log('getyechidot');
+  res.json(getyechidot)
 })
 app.get('/shofar/projects', (req, res) => {console.log('shofar/projects');
   res.json(data)

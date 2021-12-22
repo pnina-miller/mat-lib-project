@@ -71,7 +71,7 @@ export class MatTableService {
   }
 
   initDataSource(data: any) {
-    this.dataSource = new MatTableDataSource<any>(data.data.projectStatusCombo);
+    this.dataSource = new MatTableDataSource<any>(data?.data?.projectStatusCombo || data.filteredData);
     this.displayDataSource.next(this.dataSource);
     this.dataChanged();
   }

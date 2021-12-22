@@ -15,9 +15,6 @@ import { ProjectDetailsData } from "../project-details-components/project-basic-
     providedIn: 'root',
   })
 export class ShofarServices{
-  getShlavim(misparProyectSagur: string) {
-    return this.httpClient.request("get", this.urlPrefix + '/shofar/shlavim/get', { headers: this.getHeader(), params: {'kodMutavBeShovar': 'kodMutav'} });
-  }
     params: HttpParams;
     urlPrefix: string = MatbeaUtils.getServicePrefix();
 
@@ -27,7 +24,7 @@ export class ShofarServices{
         return this.httpClient.request("get", this.urlPrefix + '/shofar/pirteyProject/get', { headers: this.getHeader(), params: {'kodMutavBeShovar': kodMutav} });
     }
 
-    public getPirteyProject(kodMutav: string, misparProyectSagur: string){
+    public getPirteyProject(kodMutav: string, misparProyectSagur: string){//this
         return this.httpClient.request("get", this.urlPrefix + '/shofar/pirteyProject/get', { headers: this.getHeader(), params: {'kodMutavBeShovar': kodMutav, 'misparProyectSagur': misparProyectSagur} });
     }
 
@@ -56,6 +53,17 @@ export class ShofarServices{
         return this.httpClient.request("get", this.urlPrefix + '/shofar/chshbonotproject/remove', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     }
 
+  getShlavim(misparProyectSagur: string) {
+    return this.httpClient.request("get", this.urlPrefix + '/shofar/shlavim/get', { headers: this.getHeader(), params: {'kodMutavBeShovar': 'kodMutav'} });
+  }
+
+  getpirteyShalav(misparShalv:number) {
+    return this.httpClient.request("get", this.urlPrefix + '/shofar/projects/'+misparShalv+'/shlavim', { headers: this.getHeader(), params: {'kodMutavBeShovar': 'kodMutav'} });
+  }
+  
+  getyechidot(misparShalv:number) {
+    return this.httpClient.request("get", this.urlPrefix + '/shofar/projects/v1/steps/appartments/'+misparShalv+'/1/1', { headers: this.getHeader() });
+  }
     public hagderKeArvut(misparProyectSagur: string, misparBank: string, misparSnif: string, misparCheshbon: string){
         return this.httpClient.request("get", this.urlPrefix + '/shofar/chshbonotproject/hagderKeArvut', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     }

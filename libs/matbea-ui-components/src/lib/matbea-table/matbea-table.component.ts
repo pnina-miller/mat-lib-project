@@ -72,6 +72,9 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       return Number(a.ordernumber) - Number(b.ordernumber)
     }).map((e) => e.columnnameenglish);
     this.displayedColumns = this.displayedColumnsTemp;
+    if(this.dataSource$){
+      this._dataSource=this.dataSource$;
+    }
     this.matTableService.init('','',this._dataSource,this.displayedColumns.map((col)=> new FilterColumn(col)));
     this.matTableService.displayDataSource.subscribe(data=>{this.dataSource = data;this.changeDetector.detectChanges()})
     this.ngAfterViewInit();
@@ -80,6 +83,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     console.log("OnInit in matbea-table", this);
+    if(!this.dataSource$){
     this.matTableService.loadDataSource('http://localhost:8080/shofar/combobox').subscribe((list:any) => {
       if(this.dataSource) this.dataSource.data = list.data.projectStatusCombo;
       this._dataSource=list;
@@ -87,11 +91,12 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
     });
   }
+}
 
   onClick(row: any): void {
     console.clear();
-    console.log(row);
-    let id = row.id;
+    console.log(row);//check how to do this
+    let id = `${row.id}&${row.misparProyectSagur}&${row.kodMutavBeShovar}`;
     this.router.navigate([this.navTo + id]);
     this.row.emit(row);
 
