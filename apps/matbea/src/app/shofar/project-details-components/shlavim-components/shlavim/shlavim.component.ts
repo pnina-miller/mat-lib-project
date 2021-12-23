@@ -14,7 +14,8 @@ export class ShlavimComponent implements OnInit {
   openHosafatCheshbonPopup() {
     const dialogRef = this.dialog.open(HosafatShalavComponent, {
       width: '50%',
-      height: '70%', 
+      height: '50%', 
+      panelClass:'hosafat-shalav-container',
       data: {},    
     });
 

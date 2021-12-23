@@ -47,7 +47,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   @Input('displayedColumns') displayedColumnsTemp!: ColumnDefinition[];
-  @Input() dataSource$!: Observable<any>;
+  @Input() dataSource$!: any;
   @Input() navTo: string = null;
   @Input() paginatorOn: boolean = false;
   @Input() loading = true;
@@ -72,7 +72,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       return Number(a.ordernumber) - Number(b.ordernumber)
     }).map((e) => e.columnnameenglish);
     this.displayedColumns = this.displayedColumnsTemp;
-    if(this.dataSource$){
+    if(this.dataSource$.filteredData){
       this._dataSource=this.dataSource$;
     }
     this.matTableService.init('','',this._dataSource,this.displayedColumns.map((col)=> new FilterColumn(col)));
@@ -83,7 +83,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     console.log("OnInit in matbea-table", this);
-    if(!this.dataSource$){
+    if(!this.dataSource$.filteredData){
     this.matTableService.loadDataSource('http://localhost:8080/shofar/combobox').subscribe((list:any) => {
       if(this.dataSource) this.dataSource.data = list.data.projectStatusCombo;
       this._dataSource=list;

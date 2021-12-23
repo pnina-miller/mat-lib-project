@@ -41,7 +41,16 @@
       </div>
 
       <div class="project-details-header-setor">
-        <span class="form-field-lable-light">הוספת יחידה (תפריט)</span>
+        <span>  <matbea-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" icon="more_vert">וספת יחידות</matbea-icon-button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <span>באופן ידני</span>
+            </button>
+            <button mat-menu-item (click)="addUnitsAction()">
+              <span> כקובץ</span>
+            </button>
+          </mat-menu>
+        </span>
       </div>
 </div>
       <!-- <matbea-shmor-shinui-button shkifut="true" (shinui)="onShinui($event)"></matbea-shmor-shinui-button> -->

@@ -14,6 +14,7 @@ import {
 
 import { UnitsComponentComponent } from '../step-details-components/units-component/units-component.component';
 import { UnitsHeaderComponentComponent } from '../step-details-components/units-header-component/units-header-component.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { UnitsHeaderComponentComponent } from '../step-details-components/units-
     MatbeaDetailsSteperModule,
     MatbeaTableModule,
     PipesModule,
+    MatMenuModule
 
   ]
 })

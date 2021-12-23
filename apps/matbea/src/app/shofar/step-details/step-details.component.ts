@@ -39,7 +39,7 @@ export class StepDetailsComponent implements OnInit {
       this.kodMutavBeShovar = Number(this.id.split('&')[1]);
       this.steps.push(
         { name: 'רשימת פרויקטים', routTo: 'table' },
-        { name: 'היילין מתחם הבורסה', routTo: '' },
+        { name: 'היילין מתחם הבורסה', routTo: 'table/details/'+this.id },
         { name: 'בניין 1', routTo: '' }
       );
       this.shofarServices

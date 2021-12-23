@@ -14,58 +14,42 @@ import { ShofarServices } from '../../../services/shofar-services';
 })
 export class HosafatShalavComponent implements OnInit {
 
-  misparSnif: string;
-  misparCheshbon: string;
-  misparBank: string = '12';
-  misparProject: string = '226';
+  levelId: string = '';
+  endDate: Date;
+  lastDate: Date;
+  heiter: boolean;
+  target: any[] = [];
+  misparProject: string;
+  misparBank: string;
 
-  pirteyCheshbon: PirteyCheshbon;
-  bealimLeCheshbonList: BealimLeCheshbon[] = null;
-  displayedColumns: string[] = ['shemLakoachKolel', 'misparLakoach'];
-  chkChatimatBealimBeCheshbon: boolean = false;
+  // errorMsg: string;
+showSuccess=false;
 
-  errorMsg: string = "";
-  cheshbonFormGroup: FormGroup;
-
-  constructor(private http: HttpClient, private shofarServices: ShofarServices,
+  constructor(private shofarServices: ShofarServices,
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: {}) {
 
-      let inputParams = this.data as HosafatCheshbonInputParams;
-      this.misparProject = inputParams.misparProyectSagur;
-      this.misparBank = inputParams.misparBank;
-     }
+    let inputParams = this.data as HosafatCheshbonInputParams;
+    this.misparProject = inputParams.misparProyectSagur;
+    this.misparBank = inputParams.misparBank;
+  }
 
   ngOnInit(): void {
-    
   }
 
 
-  getPirteyCheshbon(){
-    this.errorMsg = "";
-    this.bealimLeCheshbonList = null;
+  targetChanged(num: number) {
+    this.target.push(num)
+  }
 
-    this.shofarServices.getPirteyCheshbon(this.misparProject, this.misparBank, this.misparSnif, this.misparCheshbon).subscribe(resp => {      
-      let generalResponse = resp as GeneralResponse;
-     
-      if(generalResponse.messages != null && generalResponse.messages.global.fyi.length > 0){
-        this.errorMsg = generalResponse.messages.global.fyi[0].message;       
-      }else{
-        this.bealimLeCheshbonList = (generalResponse.data as PirteyCheshbonResponse).bealimLeCheshbonList;  
-        this.pirteyCheshbon = (generalResponse.data as PirteyCheshbonResponse).pirteyCheshbon;
-      }
+  cancel() {
+    this.dialogRef.close();
 
-      
-    },
-    (error) => {                              //Error callback
-      console.error('error caught in component' + error)
-    })
   }
 
 
-
-  hosafatCheshbon(){
-    this.shofarServices.hosefCheshbon(this.misparProject, this.misparBank, this.misparSnif, this.misparCheshbon).subscribe(resp => {      
+  save() {
+    /*this.shofarServices.hosefShalav().subscribe(resp => {      
       let generalResponse = resp as GeneralResponse;
      
       if(generalResponse.messages != null && generalResponse.messages.global.fyi.length > 0){
@@ -78,32 +62,18 @@ export class HosafatShalavComponent implements OnInit {
     },
     (error) => {                              //Error callback
       console.error('error caught in component' + error)
-    })
+    })*/
+    this.dialogRef.updateSize('50%','30%')
+    this.showSuccess=true;
   }
 
-
-  selectChatimatBealimBeCheshbon($event): void{
-    this.chkChatimatBealimBeCheshbon = $event;
+  addUnits(){
+    this.dialogRef.close();
   }
-
 }
 
-export interface PirteyCheshbonResponse{
-  bealimLeCheshbonList: BealimLeCheshbon[];
-  pirteyCheshbon: PirteyCheshbon;
-}
-
-export interface BealimLeCheshbon{
-  shemLakoachKolel: string
-  misparLakoach: string
-}
-
-export interface HosafatCheshbonInputParams{
+interface HosafatCheshbonInputParams {
   misparBank: string;
   misparProyectSagur: string;
-}
 
-export interface PirteyCheshbon{
-  misparCheshbon: string;
-  shemCheshbon: string;
 }

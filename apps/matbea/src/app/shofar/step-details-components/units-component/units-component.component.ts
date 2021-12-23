@@ -22,7 +22,7 @@ export class UnitsComponentComponent implements OnInit {
       this.dataSource=new MatTableDataSource(this.unitsList);
       this.displayedColumns =this.displayedColumns.concat(Object.keys(this.unitsList[0]).map((key,index) => ({
         columnnameenglish: key,display:'1',ordernumber:index,columnformatter:''
-      })));
+      }))).slice(0,6);
       this.unitsList=this.unitsList.map(u=>({...u,check:false}))
       this.loadingTable=false;
       
