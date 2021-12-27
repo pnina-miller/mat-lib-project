@@ -1,9 +1,9 @@
 <ng-container [ngSwitch]="column.columnformatter">
 
   <ng-container *ngSwitchCase="'array'">
-  <div [matTooltip]="item[column.columnnameenglish]" matBadgePosition="above before" matBadgeSize="small"
-        [matBadge]="item[column.columnnameenglish].length>1?item[column.columnnameenglish].length:null">
-    {{item[column.columnnameenglish][0]}}</div>
+    <span [matTooltip]="item[column.columnnameenglish]" matBadgePosition="above before" matBadgeSize="small"
+      [matBadge]="item[column.columnnameenglish].length>1?item[column.columnnameenglish].length:null">
+      {{item[column.columnnameenglish][0]}}</span>
   </ng-container>
 
   <ng-container *ngSwitchCase="'checkbox'">
@@ -11,13 +11,23 @@
   </ng-container>
   <ng-container *ngSwitchCase="'status'">
     <span [style]=style class="matbea-table-cell-status" [ngClass]='class'>
-    <div class="matbea-table-cell-status-point"></div>
-<span>{{item[column.columnnameenglish]}}</span>
+      <div class="matbea-table-cell-status-point"></div>
+      <span>{{item[column.columnnameenglish]}}</span>
     </span>
+  </ng-container>
+  <ng-container *ngSwitchCase="'link'">
+    <span [style]=style class="matbea-table-cell-status" [ngClass]='class'>
+      <a [routerLink]="item[action]">{{item[column.columnnameenglish]}}</a>
+    </span>
+  </ng-container>
+  <ng-container *ngSwitchCase="'menu'">
+<matbea-menu (clickedItem)="clickInMenu.emit({event:$event, item:item})" [items]="column.object">
+  <matbea-icon icon="more_vert"></matbea-icon>
+</matbea-menu>
   </ng-container>
   <ng-container *ngSwitchDefault>
     <span>
-      {{item[column.columnnameenglish.trim()]|pipeName:column.columnformatter}}
+      {{item[column.columnnameenglish]|pipeName:column.columnformatter}}
     </span>
 
   </ng-container>
