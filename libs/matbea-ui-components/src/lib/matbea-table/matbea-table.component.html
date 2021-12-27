@@ -7,7 +7,7 @@
           {{column.columnnamehebrew?column.columnnamehebrew:column.columnnameenglish}}
         </th>
         <td mat-cell [style]="column.style" *matCellDef="let project;">
-          <matbea-table-cell [item]="project" [column]="column" ></matbea-table-cell>
+          <matbea-table-cell [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>
@@ -15,7 +15,7 @@
       </tr>
     </table>
   </div>
-  <div *ngIf="!dataSource?.data||dataSource?.data?.length==0"class='matbea-table-not-information' >
+  <div *ngIf="!dataSource.data||dataSource.data.length==0"class='matbea-table-not-information' >
     <div>
       <ng-container *ngFor="let message of messages">
         <span>{{message}}</span>
@@ -24,7 +24,7 @@
     </div>
   </div>
   <div *ngIf=loading class="matbea-table-loading"></div>
- <!-- <mat-paginator *ngIf="paginatorOn" class="matbea-table-paginator" 
-   showFirstLastButtons></mat-paginator>  [pageSizeOptions]="[5, 10, 20,50,100]" -->
+  <mat-paginator *ngIf="paginatorOn" class="matbea-table-paginator" [pageSizeOptions]="[5, 10, 20,50,100]"
+    showFirstLastButtons></mat-paginator>
 </div>
 </ng-container>
