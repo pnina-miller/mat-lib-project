@@ -1,4 +1,15 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, TemplateRef, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+  TemplateRef,
+  ElementRef,
+  AfterViewInit,
+  EventEmitter, Output
+} from '@angular/core';
 import { PipePipe } from '../../pipes/pipe.pipe';
 import { ColumnDefinition } from '../../models/column-definition.model';
 
@@ -10,20 +21,23 @@ import { ColumnDefinition } from '../../models/column-definition.model';
 
 })
 export class MatbeaTableCellComponent implements OnInit, OnChanges{
-  @Input() column!: ColumnDefinition;
-  @Input() item!: any;
-  @Input() style: any;
+  @Input() column: ColumnDefinition;
+  @Input() item: any;
+  @Input() style;
 
-  formater: any;
-  action: any;
+  formater;
+  action;
   class: any;
+  @Output()clickInMenu= new EventEmitter();
 
 
   constructor() {
 
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
 if(this.item[this.column.columnnameenglish]=='פעיל'){
@@ -34,7 +48,7 @@ else if(this.item[this.column.columnnameenglish]=='הסתיים'){
 }
 
   }
-  getTemplate() {
+  getTemplate(column) {
     return this.column.columnformatter;
   }
 }
