@@ -43,7 +43,7 @@ export class HosafatYechidaComponent implements OnInit {
   }
 
   save() {
-    debugger
+    
     this.dialogRef.close();
   }
 }

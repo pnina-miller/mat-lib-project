@@ -20,10 +20,11 @@
       <a [routerLink]="item[action]">{{item[column.columnnameenglish]}}</a>
     </span>
   </ng-container>
-  <ng-container *ngSwitchCase="'menu'">
-<matbea-menu (clickedItem)="clickInMenu.emit({event:$event, item:item})" [items]="column.object">
+  <ng-container *ngSwitchCase="'menu'">menu
+    <matbea-menu></matbea-menu>
+<!--//temp <matbea-menu (clickedItem)="clickInMenu.emit({event:$event, item:item})" [items]="column.object">
   <matbea-icon icon="more_vert"></matbea-icon>
-</matbea-menu>
+</matbea-menu> -->
   </ng-container>
   <ng-container *ngSwitchDefault>
     <span>

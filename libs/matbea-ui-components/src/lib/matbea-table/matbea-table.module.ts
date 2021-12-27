@@ -44,6 +44,7 @@ import { MatbeaInputModule } from '../matbea-input/matbea-input.module';
 import { MatbeaButtonModule, MatbeaCheckboxModule, MatbeaIconModule, RadioButtonTabModule } from '..';
 import { MatbeaComboModule } from '../drag-page/matbea-combo/matbea-combo.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatbeaMenuModule } from '../matbea-menu/matbea-menu.module';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatbeaButtonModule,
     MatbeaIconButtonModule,
     MatbeaComboModule,
-    RadioButtonTabModule
+    RadioButtonTabModule,
   ],
   exports: [
     MatbeaTableComponent,
@@ -110,7 +111,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     BooleanFilterComponent,
     MultiSelectFilterComponent,
     NumericFilterComponent,
-    MatFilterComponent
+    MatFilterComponent,
+    MatbeaMenuModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: new MatbeaPaginatorIntl() },

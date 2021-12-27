@@ -12,7 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -24,10 +24,7 @@ import { HosafatShalavModule } from '../hosafat-shalav/hosafat-shalav.module';
 import { ArichatShalavMenuComponent } from '../arichat-shalav-menu/arichat-shalav-menu.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {
-  MatbeaDetailsSteperModule,
   MatbeaIconButtonModule,
-  MatbeaSliceDataContainerModule,
-  MatbeaSlideToggleModule
 } from "@pdesks/matbea-ui-components";
 
 
@@ -55,7 +52,8 @@ import {
     MatbeaTableModule,
     HosafatShalavModule,
     MatMenuModule,
-    MatbeaIconButtonModule
+    MatbeaIconButtonModule,
+    MatbeaTableModule,
       ],
   exports:[ShlavimComponent, ArichatShalavMenuComponent]
 })
