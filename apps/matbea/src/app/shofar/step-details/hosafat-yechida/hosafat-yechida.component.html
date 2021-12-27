@@ -1,48 +1,37 @@
-    <div class="dialog-title">
-        <h1 mat-dialog-title>הוספת יחידה</h1>
+<div class="dialog-title">
+    <h1 mat-dialog-title>הוספת יחידה</h1>
+</div>
+<form  class="dialog-content"[formGroup]="yechidaForm">
+    <div class="shalav-input input-unitId">
+        <matbea-input type="string" lable="זיהוי יחידה" lablePosition="top" [inputFormControl]="yechidaForm.controls.unitId" required></matbea-input>
     </div>
-    <div class="dialog-content">
 
-         <div class="shalav-input input-unitId">
-            <span>זיהוי יחידה</span>
-            <mat-form-field>
-                <input matInput type="string" (change)="unitId=$event.target.value" [value]="unitId" required />
-            </mat-form-field>
-        </div>
+    <div class="shalav-input input-shovi">
+        <matbea-input type="string" lable="הערכת שווי לפי דוח 0" lablePosition="top" [inputFormControl]="yechidaForm.controls.shovi" required>
+        </matbea-input>
+    </div>
 
- <div class="shalav-input input-shovi">
-            <span>הערכת שווי לפי דוח 0</span>
-            <mat-form-field>
-                <input matInput type="string" (change)="shovi=$event.target.value" [value]="shovi" required />
-            </mat-form-field>
-        </div>
 
-        
-        <div class="shalav-input input-teur">
-            <span>תאור יחידה</span>
-            <mat-form-field>
-                <input matInput type="string" (change)="teur=$event.target.value" [value]="teur" required />
-            </mat-form-field>
-        </div>
-        
-        <div class="shalav-input input-migrash">
-           <span>מגרש</span>
-           <mat-form-field>
-               <input matInput type="string" (change)="migrash=$event.target.value" [value]="migrash" required />
-           </mat-form-field>
-       </div>
+    <div class="shalav-input input-teur">
+        <matbea-input type="string" lable="תאור יחידה" lablePosition="top" [inputFormControl]="yechidaForm.controls.teur" required></matbea-input>
+    </div>
 
-       <div class="shalav-input input-yeud">
+    <div class="shalav-input input-migrash">
+        <matbea-input type="string" lable="מגרש" lablePosition="top" [inputFormControl]="yechidaForm.controls.migrash" required></matbea-input>
+    </div>
+
+    <div class="shalav-input input-yeud">
         <span>ייעוד היחידה</span>
-        <matbea-radio-button-tab [dataList]="yeudDataList"
-            (selectedButtonChanged)="yeud=$event"></matbea-radio-button-tab>
+        <matbea-radio-button-tab [dataList]="yeudDataList" (selectedButtonChanged)="yeud=$event">
+        </matbea-radio-button-tab>
     </div>
 
     <div class="shalav-input input-hearot">
         <span>הערות</span>
-        <matbea-form-field type="textarea" ([value])="hearot" ></matbea-form-field>
+        <matbea-form-field type="textarea" [(value)]="hearot"></matbea-form-field>
     </div>
-      <!-- 
+</form>
+    <!-- 
 
 
 
@@ -63,9 +52,9 @@
                 </div>
             </div>
         </div> -->
-    </div>
 
-    <div class="dialog-footer">
-        <matbea-button size='m' type="matbea-stroked" (onClick)="cancel()" textLable="ביטול">ביטול</matbea-button>
-        <matbea-button size='m' type="matbea-raised" (onClick)="save()" textLable="אישור">שמירה</matbea-button>
-    </div>
+
+<div class="dialog-footer">
+    <matbea-button size='m' type="matbea-stroked" (onClick)="cancel()" textLable="ביטול">ביטול</matbea-button>
+    <matbea-button size='m' type="matbea-raised" (onClick)="save()" textLable="אישור">שמירה</matbea-button>
+</div>

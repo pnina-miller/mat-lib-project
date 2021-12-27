@@ -17,7 +17,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatbeaButtonModule } from '../../../../../../../../libs/matbea-ui-components/src/lib/matbea-button/matbea-button.module';
 import { HosafatShalavComponent } from './hosafat-shalav.component';
-import { MatbeaIconButtonModule, RadioButtonTabModule, MatbeaCheckboxModule } from '@pdesks/matbea-ui-components';
+import { MatbeaIconButtonModule, RadioButtonTabModule, MatbeaCheckboxModule, MatbeaInputModule } from '@pdesks/matbea-ui-components';
 
 
 
@@ -44,7 +44,8 @@ import { MatbeaIconButtonModule, RadioButtonTabModule, MatbeaCheckboxModule } fr
     MatCheckboxModule,
     MatFormFieldModule,
     RadioButtonTabModule,
-    MatbeaCheckboxModule
+    MatbeaCheckboxModule,
+    MatbeaInputModule
   ],
   exports: [HosafatShalavComponent]
 })

@@ -6,24 +6,15 @@
     <div class="dialog-content">
 
         <div class="shalav-input input-levelId">
-            <span>זיהוי שלב</span>
-            <mat-form-field>
-                <input matInput type="string" (change)="levelId=$event.target.value" [value]="levelId" required />
-            </mat-form-field>
+            <matbea-input type="string" lable="זיהוי שלב" lablePosition="top" [(value)]="levelId" required ></matbea-input>
         </div>
 
         <div class="shalav-input input-endDate">
-            <span>מועד סיום צפוי ע"פ דוח מפקח</span>
-            <mat-form-field>
-                <input matInput type="date" (change)="endDate=$event.target.value" [value]="endDate" required />
-            </mat-form-field>
+            <matbea-input type="date" lable='מועד סיום צפוי ע"פ דוח מפקח' lablePosition="top" [(value)]="endDate" required ></matbea-input>
         </div>
 
         <div class="shalav-input input-lastDate">
-            <span>מועד אחרון למתן היתר בניה</span>
-            <mat-form-field>
-                <input matInput type="date" (change)="lastDate=$event.target.value" [value]="lastDate" required />
-            </mat-form-field>
+            <matbea-input type="date" lable="מועד אחרון למתן היתר בניה" lablePosition="top" [(value)]="lastDate" required ></matbea-input>
         </div>
 
         <div class="shalav-input input-heiter">
