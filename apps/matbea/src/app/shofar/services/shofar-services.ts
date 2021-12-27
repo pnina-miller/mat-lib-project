@@ -45,7 +45,7 @@ export class ShofarServices{
         return this.httpClient.request("get", this.urlPrefix + '/shofar/createProjectWizard/save', { headers: this.getHeader(), params: {'projectDetailsData': JSON.stringify(wizardData)} });
     }
 
-    public getCheshbonotProject(misparProyectSagur: string){
+    public getCheshbonotProject(misparProyectSagur: string){//this
         return this.httpClient.request("get", this.urlPrefix + '/shofar/chshbonotproject/get', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur} });
     }
 

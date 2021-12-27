@@ -17,13 +17,14 @@ export class StepDetailsComponent implements OnInit {
   id: any;
   kodMutavBeShovar: number;
   misparProyectSagur: number;
-  step: any;
+  shalav: any;
   project: any;
   projectsList$ = this.store$.select(ShofarSelectors.getProjectsWithFilter);
   project$ = this.storeProjectDetails$.select(
     ProjectDetailsSelectors.getProject
   );
   steps: { name: string; routTo: string }[] = [];
+  misparShalav: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,24 +34,22 @@ export class StepDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe((params) => {debugger
+      this.misparShalav=params.get('misparShalav');
       this.id = params.get('id');
       this.misparProyectSagur = Number(this.id.split('&')[0]);
       this.kodMutavBeShovar = Number(this.id.split('&')[1]);
-      this.steps.push(
-        { name: 'רשימת פרויקטים', routTo: 'table' },
-        { name: 'היילין מתחם הבורסה', routTo: 'table/details/'+this.id },
-        { name: 'בניין 1', routTo: '' }
-      );
       this.shofarServices
         .getpirteyShalav(this.misparProyectSagur)
         .subscribe((resp: any) => {
-          this.step = resp.data.reshimatShlavimList[0];
+          this.shalav = resp.data.reshimatShlavimList.find(s=>s.misparShalav===this.misparShalav);debugger
+          this.steps=[...this.steps,{ name:  resp.data.reshimatShlavimList[0].teurHaShlav, routTo: '' }];
         });
 
       this.project$.subscribe(
         (project) => {
           if (project) {
+            this.steps=[ { name: 'רשימת פרויקטים', routTo: 'table' }, { name: project.shemProyectSagur, routTo: 'table/details/'+this.id }, ...this.steps ];
             this.project = project;
           } else {
             this.storeProjectDetails$.dispatch(
@@ -87,3 +86,5 @@ export class StepDetailsComponent implements OnInit {
     });
   }
 }
+
+

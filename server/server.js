@@ -26,6 +26,9 @@ app.get('/shofar/combobox', (req, res) => {console.log('shofar/combobox');
 app.get('/shofar/shlavim/get', (req, res) => {console.log('shofar/shlavim');
   res.json({"metadata":{"validations":{}}, "data":{"reshimatShlavimList":reshimatShlavim}} )
 })
+app.get('/shofar/chshbonotproject/get', (req, res) => {console.log('shofar/shlavim');
+  res.json({"metadata":{"validations":{}}, "data":{"cheshbonotList":reshimatShlavim}} )
+})
 app.get('/shofar/projects/:misparShalv/shlavim', (req, res) => {console.log('getpirteyShalav');
   res.json(getpirteyShalav);
 })

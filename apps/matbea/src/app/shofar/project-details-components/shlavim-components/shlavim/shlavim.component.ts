@@ -2,6 +2,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { HosafatShalavComponent } from '../hosafat-shalav/hosafat-shalav.component';
 import { ShlavimService } from './shlavim.service';
 
@@ -24,7 +25,7 @@ export class ShlavimComponent implements OnInit {
     });   }
 
   @Input('shlavim') shlavim: any[];
-  displayedColumns=[{columnnameenglish:'teurHaShlav',columnTitle:'זיהוי שלב', columnformatter:'link'},
+  displayedColumns=[{columnnameenglish:'misparShlav',columnTitle:'זיהוי שלב', columnformatter:'link'},
 {columnnameenglish:'teurYeudShlav',columnTitle:'ייעוד', columnformatter:''},
 {columnnameenglish:'misparYechidotBeSlv',columnTitle:"מס' יחידות", columnformatter:''},
 {columnnameenglish:'taarich8SiyumTzafui',columnTitle:'מועד סיום צפוי', columnformatter:'Int2DateFormatter'},
@@ -33,10 +34,15 @@ export class ShlavimComponent implements OnInit {
 {columnnameenglish:'shemGoremMemamen',columnTitle:'שותף מממן', columnformatter:''}]
 
   columsToDisplay=this.displayedColumns.map(col=>col.columnnameenglish).concat('menu')
-  constructor(public dialog: MatDialog,public shlavimService: ShlavimService) { }
+  constructor(public dialog: MatDialog,public shlavimService: ShlavimService, private router: Router) { }
 
   ngOnInit(): void {
     this.shlavimService.init(this)
+  }
+
+  onDbClick(row:any){console.log('row',row);
+    if(row.misparYechidotBeSlv>0)
+    this.router.navigate([this.router.url,'units',row.misparShlav]);
   }
 
 }

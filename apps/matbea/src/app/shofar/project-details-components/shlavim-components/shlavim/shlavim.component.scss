@@ -53,6 +53,9 @@
 
 .mat-row:hover {
     background-color: rgb(167, 162, 162);
+    .shalav-menu-button{
+        display: block;
+    }
   }
 
  
@@ -83,4 +86,8 @@
     min-width: 10%;
     width:10%;
     max-width: 10%;
+}
+
+.shalav-menu-button{
+    display: none;
 }

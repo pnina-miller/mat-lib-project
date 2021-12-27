@@ -1,0 +1,93 @@
+.shalav-input {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.shalav-input ::ng-deep span {
+    font-size: small;
+}
+
+.input-yeud {
+    .checkbox-wrapper {
+        display: flex;
+    }
+    grid-area: yeud;
+}
+.input-unitId {
+    grid-area: unitId;
+}
+.input-shovi {
+    grid-area: shovi;
+}
+.input-teur {
+    grid-area: teur;
+}
+.input-migrash {
+    grid-area: migrash;
+}
+.input-hearot {
+    grid-area: hearot;
+}
+.success-content {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-right: 50px;
+
+    .success-title {
+        font-size: x-large;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+    .success-text {
+    }
+}
+
+::ng-deep .hosafat-shalav-container {
+    .mat-dialog-container {
+        padding: 0px;
+        border-radius: 5px;
+    }
+    .dialog-title {
+        .mat-dialog-title {
+            font-weight: bold;
+        }
+        border-radius: 5px;
+        padding: 20px;
+        background: rgb(245, 242, 242);
+
+        height: 70px;
+        grid-gap: 10px;
+        vertical-align: middle;
+    }
+    .dialog-content {
+        display: grid;
+        height: 330px;
+        grid-gap: 20px;
+        grid-template-rows: 25% 25% 25% 25%;
+        grid-template-columns: 40% 40% 10%;
+
+        grid-template-areas:
+            "unitId shovi"
+            "teur migrash"
+            "yeud yeud"
+            "hearot hearot";
+    }
+         
+
+    .dialog-footer {
+        padding: 5px;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        border-top: 0.5px solid gray;
+        align-items: center;
+    }
+
+    .success-footer{
+        justify-content: flex-end;
+    }
+}

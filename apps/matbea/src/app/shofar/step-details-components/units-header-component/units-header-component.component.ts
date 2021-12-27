@@ -1,4 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { HosafatYechidaComponent } from '../../step-details/hosafat-yechida/hosafat-yechida.component';
 
 @Component({
   selector: 'matbea-units-header-component',
@@ -7,12 +9,19 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 })
 export class UnitsHeaderComponentComponent implements OnInit {
 
-  @Input() step:any
+  @Input() shalav:any
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
-
+  addUnitsAction(){
+    const dialogRef = this.dialog.open(HosafatYechidaComponent, {
+      width: '50%',
+      height: '50%', 
+      panelClass:'hosafat-shalav-container',
+      data: {},    
+    });
+  }
 }

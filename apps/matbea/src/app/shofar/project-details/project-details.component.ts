@@ -32,9 +32,9 @@ export class ProjectDetailsComponent implements OnInit {
       this.id = params.get('id');
       this.misparProyectSagur = this.id.split('&')[0];
       this.kodMutavBeShovar = this.id.split('&')[1];
-      this.steps.push({name: 'רשימת פרויקטים', routTo: 'table'}, {name: 'היילין מתחם הבורסה', routTo: ''})
       this.project$.subscribe((project) => {
         if(project){
+      this.steps=[{name: 'רשימת פרויקטים', routTo: 'table'}, {name: project.shemProyectSagur, routTo: ''}];
           this.misparProyectSagur=project.misparProyectSagur;
           this.kodMutavBeShovar= project.kodMutavBeShovar;
         } else {
