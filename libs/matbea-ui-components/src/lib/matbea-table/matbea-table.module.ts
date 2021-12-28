@@ -98,6 +98,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatbeaIconButtonModule,
     MatbeaComboModule,
     RadioButtonTabModule,
+    MatMenuModule
   ],
   exports: [
     MatbeaTableComponent,
@@ -110,8 +111,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     BooleanFilterComponent,
     MultiSelectFilterComponent,
     NumericFilterComponent,
-    MatFilterComponent
-    ],
+    MatFilterComponent,
+  ],
   providers: [
     { provide: MatPaginatorIntl, useValue: new MatbeaPaginatorIntl() },
     MatTableService,
