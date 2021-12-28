@@ -110,3 +110,4 @@ app.get('/*', (req, res) => {console.log('all');
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+app.addListener('error', err => {console.log('error: ',err);})

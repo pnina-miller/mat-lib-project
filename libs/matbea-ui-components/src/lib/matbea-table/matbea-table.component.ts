@@ -96,8 +96,10 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   onClick(row: any): void {
     console.clear();
     console.log(row);//check how to do this
-    let id = `${row.id}&${row.misparProyectSagur}&${row.kodMutavBeShovar}`;//TODO: fix it
+    if(this.navTo){
+    let id = `${row.id ||''}&${row.misparProyectSagur ||''}&${row.kodMutavBeShovar||''}`;//TODO: fix it
     this.router.navigate([this.navTo + id]);
+    }
     this.row.emit(row);
 
   }
