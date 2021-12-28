@@ -20,7 +20,6 @@ export class ShlavimContainerComponent implements OnInit {
   
   ngOnInit(): void {
     this.shofarServices.getShlavim(this.misparProyectSagur).subscribe((resp: any) => { this.shlavim = new MatTableDataSource(resp.data.reshimatShlavimList); })
-
   }
 
 

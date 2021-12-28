@@ -13,7 +13,7 @@ export class UnitsHeaderComponentComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {debugger
   }
 
   addUnitsAction(){

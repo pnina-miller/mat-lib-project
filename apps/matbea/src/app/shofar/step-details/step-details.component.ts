@@ -34,7 +34,7 @@ export class StepDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe((params) => {debugger
       this.misparShalav=params.get('misparShalav');
       this.id = params.get('id');
       this.misparProyectSagur = Number(this.id.split('&')[0]);
@@ -42,7 +42,7 @@ export class StepDetailsComponent implements OnInit {
       this.shofarServices
         .getpirteyShalav(this.misparProyectSagur)
         .subscribe((resp: any) => {
-          this.shalav = resp.data.reshimatShlavimList.find(s=>s.misparShlav===this.misparShalav);
+          this.shalav = resp.data.reshimatShlavimList.find(s=>s.misparShlav===this.misparShalav);debugger
           this.steps=[...this.steps,{ name:  resp.data.reshimatShlavimList[0].teurHaShlav, routTo: '' }];
         });
 
