@@ -38,7 +38,7 @@ export class UnitsComponentComponent implements OnInit {
   ngOnInit() {
     //TODO: check how to do this
     this.shofarServices.getyechidot(2).subscribe((data: any) => {
-      this.unitsList = data.data.avctl071List.fullList;debugger
+      this.unitsList = data.data.avctl071List.fullList;
       this.dataSource=new MatTableDataSource(this.unitsList);
       this.displayedColumns =COLUMNS;
       this.unitsList=this.unitsList.map(u=>({...u,check:false}))
