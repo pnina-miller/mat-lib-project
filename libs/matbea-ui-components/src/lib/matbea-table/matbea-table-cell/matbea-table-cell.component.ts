@@ -1,3 +1,4 @@
+
 import {
   Component,
   OnInit,
@@ -36,7 +37,8 @@ export class MatbeaTableCellComponent implements OnInit, OnChanges{
   }
 
   ngOnInit(): void {
- }
+
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
 if(this.item[this.column.columnnameenglish]=='פעיל'){

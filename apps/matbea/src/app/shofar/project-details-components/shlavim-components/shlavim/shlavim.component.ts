@@ -13,20 +13,23 @@ import { ShlavimService } from './shlavim.service';
   styleUrls: ['./shlavim.component.scss']
 })
 export class ShlavimComponent implements OnInit {
-  openHosafatCheshbonPopup() {
+  openHosafatShalavPopup(misparProyectSagur, item=null) {
+    this.dialog.closeAll()
     const dialogRef = this.dialog.open(HosafatShalavComponent, {
       width: '50%',
       height: '50%',
       panelClass: 'hosafat-shalav-container',
-      data: {},
+      data: {misparProyectSagur:misparProyectSagur},
     });
 
     dialogRef.afterClosed().subscribe(newProject => {
-      // this.getCheshbonotProject();     
+      // this.getCheshbonotProject();    
     });
   }
 
   @Input('shlavim') shlavim;
+  @Input() misparProyectSagur;
+
   displayedColumns = [{ columnnameenglish: 'misparShlav', columnnamehebrew: 'זיהוי שלב', columnformatter: 'link', display: '1' },
   { columnnameenglish: 'teurYeudShlav', columnnamehebrew: 'ייעוד', columnformatter: '', display: '1' },
   { columnnameenglish: 'misparYechidotBeSlv', columnnamehebrew: "מס' יחידות", columnformatter: '', display: '1' },
@@ -36,10 +39,10 @@ export class ShlavimComponent implements OnInit {
   { columnnameenglish: 'shemGoremMemamen', columnnamehebrew: 'שותף מממן', columnformatter: '', display: '1' },
   {
     columnnameenglish: 'menu', columnnamehebrew: '', columnformatter: 'menu', display: '1', object: [
-      { "id": 0, "name": "עריכת השלב", "disabled": false, "role": "menuitem" },
-      { "id": 1, "name": "הוספת יחידות", "disabled": false, "role": "menuitem" }, {
-        "id": 2, "name": "הוספת יחידות כקובץ", "disabled": false, "role": "menuitem"
-      },]
+      { "id": 0, "name": "עריכת השלב", "disabled": false, "role": "menuitem", action:(item)=>{this.openHosafatShalavPopup(this.misparProyectSagur ,item)} },
+      { "id": 1, "name": "הוספת יחידות", "disabled": false, "role": "menuitem", action:(item)=>{ this.router.navigate([this.router.url,item.misparShlav,'units']);} }, {
+        "id": 2, "name": "הוספת יחידות כקובץ", "disabled": false, "role": "menuitem", action:()=>{ alert(' הוספת יחידות כקובץ לא זמינה כרגע')}}
+      ]
   }]
 
   // columsToDisplay = this.displayedColumns.map(col => col.columnnameenglish).concat('menu')
@@ -52,11 +55,12 @@ export class ShlavimComponent implements OnInit {
   onDbClick(row: any) {
     console.log('row', row);
     if (row.misparYechidotBeSlv > 0)
-      this.router.navigate([this.router.url, 'units', row.misparShlav]);
+      this.router.navigate([this.router.url, row.misparShlav, 'units']);
   }
 
   clickInRow(e){
-    alert('h')
+    e.event.action(e.item)
+    // alert('h'+e)
   }
 
 }

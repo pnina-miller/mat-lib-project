@@ -1,13 +1,13 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HosafatYechidaComponent } from '../../step-details/hosafat-yechida/hosafat-yechida.component';
+import { HosafatYechidaComponent } from '../hosafat-yechida/hosafat-yechida.component';
 
 @Component({
-  selector: 'matbea-units-header-component',
-  templateUrl: './units-header-component.component.html',
-  styleUrls: ['./units-header-component.component.scss']
+  selector: 'matbea-units-header',
+  templateUrl: './units-header.component.html',
+  styleUrls: ['./units-header.component.scss']
 })
-export class UnitsHeaderComponentComponent implements OnInit {
+export class UnitsHeaderComponent implements OnInit {
 
   @Input() shalav:any
 

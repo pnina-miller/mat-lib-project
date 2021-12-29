@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatTableComponent } from './mat-table.component';
+import { MatbeaMenuComponent } from './matbea-menu.component';
 
-describe('MatTableComponent', () => {
-  let component: MatTableComponent;
-  let fixture: ComponentFixture<MatTableComponent>;
+describe('MatbeaMenuComponent', () => {
+  let component: MatbeaMenuComponent;
+  let fixture: ComponentFixture<MatbeaMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MatTableComponent ]
+      declarations: [ MatbeaMenuComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MatTableComponent);
+    fixture = TestBed.createComponent(MatbeaMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

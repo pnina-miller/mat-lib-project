@@ -1,3 +1,5 @@
+
+
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -6,20 +8,18 @@ import {
   OnInit,
   SimpleChanges,
   ViewChild,
-  OnChanges,
-  OnDestroy, Output, EventEmitter, ChangeDetectorRef
+  OnChanges, Output, EventEmitter, ChangeDetectorRef
 } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {Observable, Subscription} from 'rxjs';
-import {MatTableDataSource} from '@angular/material/table';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ColumnDefinition} from '../models/column-definition.model';
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatDialog} from "@angular/material/dialog";
 import {MatTableService} from "./services/mat-table.service";
 import {FilterColumn} from "./models/filterColumns";
-
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'matbea-table',
@@ -32,29 +32,29 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   dataSource: any;
   _dataSource: any;
   columsToDisplay: string[] = [];
-  displayedColumns!: ColumnDefinition[];
-  sub!: Subscription;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  displayedColumns: ColumnDefinition[];
+  sub: Subscription;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit() {
-    if (this.dataSource?.data) {
+    if (this.dataSource.data) {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.dataSource.filter
     }
   }
 
-  @Input('displayedColumns') displayedColumnsTemp!: ColumnDefinition[];
-  @Input() dataSource$!: any;
+  @Input('displayedColumns') displayedColumnsTemp: ColumnDefinition[];
+  @Input() dataSource$: Observable<any>;
   @Input() navTo: string = null;
   @Input() paginatorOn: boolean = false;
   @Input() loading = true;
-  @Input() messages!:[];
+  @Input() messages:[];
   @Output() row= new EventEmitter();
   @Output() dataSourceChangeLength = new EventEmitter<number>();
-  @Output()clickInRow= new EventEmitter();
   updateFilters: any;
+  @Output()clickInRow= new EventEmitter();
 
   constructor(private route: ActivatedRoute, private router: Router,private _liveAnnouncer: LiveAnnouncer,
   public dialog: MatDialog,
@@ -63,43 +63,42 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
     // this.dataSource = new MatTableDataSource([]);
   }
 
+
   ngOnChanges(changes: SimpleChanges): void {
     console.log("SimpleChanges in matbea-table", this);
-    
-    this.columsToDisplay = this.displayedColumnsTemp.filter(e => {
-      return e.display == '1';
-    }).sort((a, b) => {
+    this.dataSource$.subscribe((list) => {
+      if(this.dataSource) this.dataSource.data = list || [];
+      this._dataSource=list;
+    });
+    this.columsToDisplay = this.displayedColumnsTemp
+    .filter(e => {
+      return true;// e.display == '1';
+    })
+    .sort((a, b) => {
       return Number(a.ordernumber) - Number(b.ordernumber)
     }).map((e) => e.columnnameenglish);
     this.displayedColumns = this.displayedColumnsTemp;
-    if(this.dataSource$.filteredData){
-      this._dataSource=this.dataSource$;
-    }
+
     this.matTableService.init('','',this._dataSource,this.displayedColumns.map((col)=> new FilterColumn(col)));
-    this.matTableService.displayDataSource.subscribe(data=>{this.dataSource = data;this.changeDetector.detectChanges()})
+    this.matTableService.displayDataSource.subscribe(data=>{this.dataSource = data;
+      this.changeDetector.detectChanges();
+      this.dataSourceChangeLength.emit(this.dataSource.data?.length);
+
+    })
     this.ngAfterViewInit();
 
   }
 
   ngOnInit(): void {
     console.log("OnInit in matbea-table", this);
-    if(!this.dataSource$.filteredData){//TODO:remove this
-    this.matTableService.loadDataSource('http://localhost:8080/shofar/combobox').subscribe((list:any) => {
-      if(this.dataSource) this.dataSource.data = list.data.projectStatusCombo;
-      this._dataSource=list;
-      this.matTableService.init('','',this._dataSource,this.displayedColumns.map((col)=> new FilterColumn(col)));
 
-    });
   }
-}
 
   onClick(row: any): void {
     console.clear();
-    console.log(row);//check how to do this
-    if(this.navTo){
-    let id = `${row.id ||''}&${row.misparProyectSagur ||''}&${row.kodMutavBeShovar||''}`;//TODO: fix it
+    console.log(row);
+    let id = row.id;
     this.router.navigate([this.navTo + id]);
-    }
     this.row.emit(row);
 
   }

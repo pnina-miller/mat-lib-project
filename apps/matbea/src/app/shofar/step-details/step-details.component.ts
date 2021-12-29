@@ -1,3 +1,5 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -40,10 +42,10 @@ export class StepDetailsComponent implements OnInit {
       this.misparProyectSagur = Number(this.id.split('&')[0]);
       this.kodMutavBeShovar = Number(this.id.split('&')[1]);
       this.shofarServices
-        .getpirteyShalav(this.misparProyectSagur)
+        .getpirteyShalav(this.misparProyectSagur,1)
         .subscribe((resp: any) => {
-          this.shalav = resp.data.reshimatShlavimList.find(s=>s.misparShlav===this.misparShalav);
-          this.steps=[...this.steps,{ name:  resp.data.reshimatShlavimList[0].teurHaShlav, routTo: '' }];
+          this.shalav = resp.data.avcmp06m;
+          this.steps=[...this.steps,{ name:  resp.data.avcmp06m.teurHaShlav, routTo: '' }];
         });
 
       this.project$.subscribe(
@@ -67,12 +69,12 @@ export class StepDetailsComponent implements OnInit {
       );
       this.projectsList$.subscribe(
         (projectsList) => {
-          let selectedProject = projectsList.filter((project) => {
+          let selectedProject = projectsList?.filter((project) => {
             if (project.misparProyectSagur == this.project.misparProyectSagur)
               return true;
           });
 
-          if (selectedProject.length > 0) {
+          if (selectedProject?.length > 0) {
             this.project.kodMutavBeShovar = selectedProject[0].kodMutavBeShovar;
           }
         },
@@ -86,5 +88,4 @@ export class StepDetailsComponent implements OnInit {
     });
   }
 }
-
 

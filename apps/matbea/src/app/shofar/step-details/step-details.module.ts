@@ -13,16 +13,16 @@ import {
   PipesModule,
 } from '@pdesks/matbea-ui-components';
 
-import { UnitsComponentComponent } from '../step-details-components/units-component/units-component.component';
-import { UnitsHeaderComponentComponent } from '../step-details-components/units-header-component/units-header-component.component';
+import { UnitsComponent } from '../step-details/units/units.component';
+import { UnitsHeaderComponent } from './units-header/units-header.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { HosafatYechidaModule } from './hosafat-yechida/hosafat-yechida.module';
 
 @NgModule({
   declarations: [
     StepDetailsComponent,
-    UnitsComponentComponent,
-    UnitsHeaderComponentComponent,
+    UnitsComponent,
+    UnitsHeaderComponent,
   ],
   imports: [
     CommonModule,

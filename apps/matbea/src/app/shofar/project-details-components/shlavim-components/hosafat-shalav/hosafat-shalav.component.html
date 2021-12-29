@@ -27,26 +27,26 @@
             <span> ייעוד השלב</span>
             <div class=checkbox-wrapper>
                 <div>
-                    <matbea-checkbox lable="מגורים" (valueChange)="targetChanged(1)"></matbea-checkbox>
+                    <matbea-checkbox lable="מגורים" (valueChange)="targetChanged('MetegYeudMegurim')"></matbea-checkbox>
                 </div>
                 <div>
-                    <matbea-checkbox lable="מסחר" (valueChange)="targetChanged(2)"></matbea-checkbox>
+                    <matbea-checkbox lable="מסחר" (valueChange)="targetChanged('MetegYeudMischar')"></matbea-checkbox>
                 </div>
                <div>
-                <matbea-checkbox lable="משרדים" (valueChange)="targetChanged(3)"></matbea-checkbox>
+                <matbea-checkbox lable="משרדים" (valueChange)="targetChanged('MetegYeudMisradim')"></matbea-checkbox>
                 </div>
                 <div>
-                    <matbea-checkbox lable="אחר" (valueChange)="targetChanged(4)"></matbea-checkbox>
+                    <matbea-checkbox lable="אחר" (valueChange)="targetChanged(MetegYeudAcher)"></matbea-checkbox>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="dialog-footer">
-        <matbea-button size='m' type="matbea-stroked" (onClick)="cancel()" textLable="ביטול">ביטול</matbea-button>
-        <matbea-button size='m' type="matbea-raised" (onClick)="save()" textLable="אישור">שמירה</matbea-button>
+        <matbea-button size='m' type="matbea-stroked" (click)="cancel()" textLable="ביטול">ביטול</matbea-button>
+        <matbea-button size='m' type="matbea-raised" (click)="save()" textLable="אישור">שמירה</matbea-button>
     </div>
-</ng-tamplate> 
+</ng-tamplate>
 
 <ng-template #successMassege>
     <div class="dialog-title"> </div>
@@ -55,11 +55,11 @@
         <span class="success-text">תרצה/י להמשיך מכאן להוספה של יחידות?</span>
     </div>
     <div class="dialog-footer success-footer">
-        <matbea-button type="matbea-stroked" size='l' (onClick)="cancel()" textLable="לא">
+        <matbea-button type="matbea-stroked" size='l' (click)="cancel()" textLable="לא">
         לא, אוסיף אותן בהמשך
         </matbea-button>
 
-        <matbea-button size='l'  type="matbea-raised" (onClick)="addUnits()" textLable="כן" >
+        <matbea-button size='l'  type="matbea-raised" (click)="addUnits()" textLable="כן" >
             כן
         </matbea-button>
 

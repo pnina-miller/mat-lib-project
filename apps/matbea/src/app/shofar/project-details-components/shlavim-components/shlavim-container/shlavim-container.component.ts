@@ -1,10 +1,7 @@
-
-
 import { Component, Input, OnInit } from '@angular/core';
-import { ShlavimService } from '../shlavim/shlavim.service';
+import { Observable } from 'rxjs';
 import { ShofarServices } from '../../../services/shofar-services';
-import { CheshbonotService } from '../../cheshbonot-components/cheshbonot/cheshbonot.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { ShlavimService } from '../shlavim/shlavim.service';
 
 @Component({
   selector: 'matbea-shlavim-container',
@@ -12,19 +9,23 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./shlavim-container.component.scss']
 })
 export class ShlavimContainerComponent implements OnInit {
-  shlavim: MatTableDataSource<any>;
-
   @Input('misparProyectSagur') misparProyectSagur: string;
 
   constructor(public shlavimService: ShlavimService, private shofarServices: ShofarServices) { }
-  
-  ngOnInit(): void {
-    this.shofarServices.getShlavim(this.misparProyectSagur).subscribe((resp: any) => { this.shlavim = new MatTableDataSource(resp.data.reshimatShlavimList); })
-  }
 
+  shlavim = Observable.create(observer => {
+    this.shofarServices.getShlavim(this.misparProyectSagur).subscribe(res => {
+      observer.next(res.data.reshimatShlavimList)
+    })
+  })
+
+  ngOnInit(): void {
+
+  }
 
   openAddShlavimPopup(): void {
     console.log("openAddCheshbonPopup......");
-    this.shlavimService.openHosafatCheshbonPopup();
+    this.shlavimService.openHosafatShalavPopup(this.misparProyectSagur);
   }
 }
+

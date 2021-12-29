@@ -1,5 +1,7 @@
+
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
 import { ShofarServices } from '../../services/shofar-services';
 
 const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:' ',ordernumber:0,columnformatter:'checkbox'},
@@ -19,31 +21,40 @@ const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:' ',ordernum
 {columnnamehebrew:"פנקסי שוברים - הוזמנו", columnformatter:' ', display:'1', columnnameenglish:'kamutPinkasimMuzmenet'},
 {columnnamehebrew:"פנקסי שוברים – סטטוס אחרון", columnformatter:' ', display:'1', columnnameenglish:'teurStsHazmanatPnk '},
 {columnnamehebrew:"טיפול בערבויות – שינוי סוג", columnformatter:' ', display:'1', columnnameenglish:'statusShinuy'},
-{columnnamehebrew:"טיפול בערבויות – ביטול", columnformatter:' ', display:'1', columnnameenglish:'kodStatusBitulArvut'} 
+{columnnamehebrew:"טיפול בערבויות – ביטול", columnformatter:' ', display:'1', columnnameenglish:'kodStatusBitulArvut'}
 ]
 
 
 @Component({
-  selector: 'matbea-units-component',
-  templateUrl: './units-component.component.html',
-  styleUrls: ['./units-component.component.css'],
+  selector: 'matbea-units',
+  templateUrl: './units.component.html',
+  styleUrls: ['./units.component.scss'],
 })
-export class UnitsComponentComponent implements OnInit {
-  unitsList: any[]=[];
-  dataSource:MatTableDataSource<any>=new MatTableDataSource<any>();
+export class UnitsComponent implements OnInit {
+  // dataSource:MatTableDataSource<any>=new MatTableDataSource<any>();
+
+@Input() misparProyectSagur:number;
+@Input() misparShalav:number;
+
   displayedColumns: any[] = [];
   loadingTable = true;
 
+  dataSource = Observable.create(observer => {
+    this.shofarServices.getyechidot(this.misparProyectSagur,this.misparShalav).subscribe((res:any) => {
+      this.loadingTable=false;
+      observer.next(res.data.avctl071List.fullList)
+    })
+  })
+
   constructor(private shofarServices: ShofarServices) {}
   ngOnInit() {
-    //TODO: check how to do this
-    this.shofarServices.getyechidot(2).subscribe((data: any) => {
-      this.unitsList = data.data.avctl071List.fullList;
-      this.dataSource=new MatTableDataSource(this.unitsList);
       this.displayedColumns =COLUMNS;
-      this.unitsList=this.unitsList.map(u=>({...u,check:false}))
-      this.loadingTable=false;
-      
-    });
+    //TODO: check how to do this
+    // this.shofarServices.getyechidot(2).subscribe((data: any) => {
+    //   this.unitsList = data.data.avctl071List.fullList;
+    //   this.dataSource=new MatTableDataSource(this.unitsList);
+    //   this.unitsList=this.unitsList.map(u=>({...u,check:false}))
+     
+    // });
   }
 }

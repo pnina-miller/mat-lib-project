@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GeneralResponse } from 'libs/matbea-shared-components/src/lib/beans/general-response';
@@ -5,6 +6,7 @@ import { FormGroup } from '@angular/forms';
 
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogTitle } from '@angular/material/dialog';
 import { ShofarServices } from '../../../services/shofar-services';
+import { shalavDataType } from '../../../step-details/hosafat-yechida/step.data';
 
 
 @Component({
@@ -14,16 +16,19 @@ import { ShofarServices } from '../../../services/shofar-services';
 })
 export class HosafatShalavComponent implements OnInit {
 
+shalavForm:FormGroup;
+
   levelId: string = '';
-  endDate: Date;
-  lastDate: Date;
-  heiter: boolean;
-  target: any[] = [];
-  misparProject: string;
-  misparBank: string;
+  endDate: string;
+  lastDate: string;
+  heiter: string;
+ target= {metegYeudMegurim:0, metegYeudMischar:0, metegYeudMisradim:0, metegYeudAcher:0}
+
+ misparProject: number;
 
   // errorMsg: string;
-showSuccess=false;
+  showSuccess = false;
+  errorMsg: string;
 
   constructor(private shofarServices: ShofarServices,
     public dialogRef: MatDialogRef<any>,
@@ -31,49 +36,54 @@ showSuccess=false;
 
     let inputParams = this.data as HosafatCheshbonInputParams;
     this.misparProject = inputParams.misparProyectSagur;
-    this.misparBank = inputParams.misparBank;
   }
 
   ngOnInit(): void {
+   
   }
 
 
   targetChanged(num: number) {
-    this.target.push(num)
+    this.target[num]=1
   }
 
   cancel() {
     this.dialogRef.close();
 
   }
-
-
+is=false
   save() {
-    /*this.shofarServices.hosefShalav().subscribe(resp => {      
+    if(this.is){this.is=true
+    const data = {
+      misparProyectSagur:this.misparProject,
+      metegHeterBniya:this.heiter=="true"?1:0,
+      taarich8HeterBniya: Number(this.lastDate.replace(/\-/ig, '')),
+      taarich8SiyumTzafui: Number(this.endDate.replace(/\-/ig, '')),
+      teurHaShlav: this.levelId,
+      teurTochnitBinyanIr:'gergg',
+      ...this.target
+    } as shalavDataType;
+    this.shofarServices.saveShalav(data, this.misparProject).subscribe(resp => {
       let generalResponse = resp as GeneralResponse;
-     
-      if(generalResponse.messages != null && generalResponse.messages.global.fyi.length > 0){
-        this.errorMsg = generalResponse.messages.global.fyi[0].message;   
-      }else{
-        this.dialogRef.close();      
+      if (generalResponse.messages != null && generalResponse.messages.global.errors.length > 0) {
+        this.errorMsg = generalResponse.messages.global.errors[0].message;
+      } else {
+        this.dialogRef.updateSize('50%', '30%')
+        this.showSuccess = true;
       }
-
-      
     },
-    (error) => {                              //Error callback
-      console.error('error caught in component' + error)
-    })*/
-    this.dialogRef.updateSize('50%','30%')
-    this.showSuccess=true;
+      (error) => {
+        console.error('error caught in component' + error)
+      })
+    }
   }
 
-  addUnits(){
+  addUnits() {
     this.dialogRef.close();
   }
 }
 
 interface HosafatCheshbonInputParams {
-  misparBank: string;
-  misparProyectSagur: string;
+  misparProyectSagur: number;
 
 }

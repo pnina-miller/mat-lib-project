@@ -1,5 +1,5 @@
+
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ShofarServices } from '../../services/shofar-services';
 
@@ -9,16 +9,12 @@ import { ShofarServices } from '../../services/shofar-services';
   styleUrls: ['./hosafat-yechida.component.scss'],
 })
 export class HosafatYechidaComponent implements OnInit {
-
-  yechidaForm = new FormGroup({
-    unitId: new FormControl(),
-    shovi: new FormControl(),
-    teur: new FormControl(),
-    migrash: new FormControl(),
-  })
-
-  yeud: string = '';
-  hearot: string = '';
+  unitId: string='';
+  shovi: string='';
+  teur: string='';
+  migrash: string='';
+  yeud: string='';
+  hearot:string='';
 
   yeudDataList = [
     { id: 'megurim', description: 'מגורים' },
@@ -34,16 +30,15 @@ export class HosafatYechidaComponent implements OnInit {
     let inputParams = this.data;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
-  targetChanged(num: number) { }
+  targetChanged(num: number) {}
 
   cancel() {
     this.dialogRef.close();
   }
 
   save() {
-    
     this.dialogRef.close();
   }
 }

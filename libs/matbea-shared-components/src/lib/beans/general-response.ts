@@ -14,7 +14,8 @@ export interface ErrorMessageList{
 }
 
 export interface ErrorList{
-    fyi: Error[];
+    errors : Error[];
+    fyi : Error[];
 }
 
 export interface Error{

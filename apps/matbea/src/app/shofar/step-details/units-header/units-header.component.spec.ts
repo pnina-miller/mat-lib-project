@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnitsHeaderComponentComponent } from './units-header-component.component';
+import { UnitsHeaderComponentComponent } from './units-header.component';
 
 describe('UnitsHeaderComponentComponent', () => {
   let component: UnitsHeaderComponentComponent;
