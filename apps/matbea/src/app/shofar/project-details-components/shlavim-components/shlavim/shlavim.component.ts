@@ -27,7 +27,7 @@ export class ShlavimComponent implements OnInit {
     });
   }
 
-  @Input('shlavim') shlavim;
+  @Input('$shlavim') $shlavim;
   @Input() misparProyectSagur;
 
   displayedColumns = [{ columnnameenglish: 'misparShlav', columnnamehebrew: 'זיהוי שלב', columnformatter: 'link', display: '1' },

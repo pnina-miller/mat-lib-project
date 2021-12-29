@@ -13,7 +13,7 @@ export class ShlavimContainerComponent implements OnInit {
 
   constructor(public shlavimService: ShlavimService, private shofarServices: ShofarServices) { }
 
-  shlavim = Observable.create(observer => {
+  $shlavim = Observable.create(observer => {
     this.shofarServices.getShlavim(this.misparProyectSagur).subscribe(res => {
       observer.next(res.data.reshimatShlavimList)
     })

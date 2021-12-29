@@ -70,12 +70,12 @@ export class StepDetailsComponent implements OnInit {
       this.projectsList$.subscribe(
         (projectsList) => {
           let selectedProject = projectsList?.filter((project) => {
-            if (project.misparProyectSagur == this.project.misparProyectSagur)
+            if (project.misparProyectSagur == this.misparProyectSagur)
               return true;
           });
 
           if (selectedProject?.length > 0) {
-            this.project.kodMutavBeShovar = selectedProject[0].kodMutavBeShovar;
+            this.kodMutavBeShovar = selectedProject[0].kodMutavBeShovar;
           }
         },
         (err) => {
