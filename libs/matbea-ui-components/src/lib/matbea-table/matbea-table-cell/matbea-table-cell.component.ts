@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { PipePipe } from '../../pipes/pipe.pipe';
 import { ColumnDefinition } from '../../models/column-definition.model';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -30,13 +31,16 @@ export class MatbeaTableCellComponent implements OnInit, OnChanges{
   action;
   class: any;
   @Output()clickInMenu= new EventEmitter();
+  @Output()onRowSelected= new EventEmitter();
 
+  selectControl:FormControl = new FormControl();
 
   constructor() {
 
   }
 
   ngOnInit(): void {
+    this.selectControl.valueChanges.subscribe((value:any) => { this.onRowSelected.emit({target:this.item.misparShura, value})})
 
   }
 

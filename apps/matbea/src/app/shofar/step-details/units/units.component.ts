@@ -39,7 +39,8 @@ export class UnitsComponent implements OnInit {
   displayedColumns: any[] = [];
   loadingTable = true;
 
-  dataSource = Observable.create(observer => {
+  dataSource;
+  dataSource$ = Observable.create(observer => {
     this.shofarServices.getyechidot(this.misparProyectSagur,this.misparShalav).subscribe((res:any) => {
       this.loadingTable=false;
       observer.next(res.data.avctl071List.fullList)
@@ -49,12 +50,14 @@ export class UnitsComponent implements OnInit {
   constructor(private shofarServices: ShofarServices) {}
   ngOnInit() {
       this.displayedColumns =COLUMNS;
-    //TODO: check how to do this
-    // this.shofarServices.getyechidot(2).subscribe((data: any) => {
-    //   this.unitsList = data.data.avctl071List.fullList;
-    //   this.dataSource=new MatTableDataSource(this.unitsList);
-    //   this.unitsList=this.unitsList.map(u=>({...u,check:false}))
+    //TODO: check duplicate call
+    this.shofarServices.getyechidot(this.misparProyectSagur,this.misparShalav).subscribe((res: any) => {
+      this.dataSource=res.data.avctl071List.fullList
      
-    // });
+    });
   }
+  selectedRows:number[]=[];
+//   selectedRowsChanged(selectedRows: number[]){
+// this.selectedRows=selectedRows;
+//   }
 }

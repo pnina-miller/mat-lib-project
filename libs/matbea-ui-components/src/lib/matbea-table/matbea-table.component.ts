@@ -9,16 +9,16 @@ import {
   ViewChild,
   OnChanges, Output, EventEmitter, ChangeDetectorRef
 } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort, Sort} from '@angular/material/sort';
-import {Observable, Subscription} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ColumnDefinition} from '../models/column-definition.model';
-import {LiveAnnouncer} from "@angular/cdk/a11y";
-import {MatDialog} from "@angular/material/dialog";
-import {MatTableService} from "./services/mat-table.service";
-import {FilterColumn} from "./models/filterColumns";
-import {MatTableDataSource} from "@angular/material/table";
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ColumnDefinition } from '../models/column-definition.model';
+import { LiveAnnouncer } from "@angular/cdk/a11y";
+import { MatDialog } from "@angular/material/dialog";
+import { MatTableService } from "./services/mat-table.service";
+import { FilterColumn } from "./models/filterColumns";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: 'matbea-table',
@@ -49,16 +49,18 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() navTo: string = null;
   @Input() paginatorOn: boolean = false;
   @Input() loading = true;
-  @Input() messages:[];
-  @Output() row= new EventEmitter();
+  @Input() messages: [];
+  @Output() row = new EventEmitter();
   @Output() dataSourceChangeLength = new EventEmitter<number>();
   updateFilters: any;
-  @Output()clickInRow= new EventEmitter();
-
-  constructor(private route: ActivatedRoute, private router: Router,private _liveAnnouncer: LiveAnnouncer,
-  public dialog: MatDialog,
-  private changeDetector: ChangeDetectorRef,
-  public matTableService: MatTableService) {
+  @Output() clickInRow = new EventEmitter();
+  @Output() selectedRowsChanged = new EventEmitter();
+  @Input()  selectedRows!: number[];
+  @Output() selectedRowsChange = new EventEmitter<number[]>();
+  constructor(private route: ActivatedRoute, private router: Router, private _liveAnnouncer: LiveAnnouncer,
+    public dialog: MatDialog,
+    private changeDetector: ChangeDetectorRef,
+    public matTableService: MatTableService) {
     // this.dataSource = new MatTableDataSource([]);
   }
 
@@ -66,20 +68,21 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log("SimpleChanges in matbea-table", this);
     this.dataSource$.subscribe((list) => {
-      if(this.dataSource) this.dataSource.data = list || [];
-      this._dataSource=list;
+      if (this.dataSource) this.dataSource.data = list || [];
+      this._dataSource = list;
     });
     this.columsToDisplay = this.displayedColumnsTemp
-    .filter(e => {
-      return true;// e.display == '1';
-    })
-    .sort((a, b) => {
-      return Number(a.ordernumber) - Number(b.ordernumber)
-    }).map((e) => e.columnnameenglish);
+      .filter(e => {
+        return true;// e.display == '1';
+      })
+      .sort((a, b) => {
+        return Number(a.ordernumber) - Number(b.ordernumber)
+      }).map((e) => e.columnnameenglish);
     this.displayedColumns = this.displayedColumnsTemp;
 
-    this.matTableService.init('','',this._dataSource,this.displayedColumns.map((col)=> new FilterColumn(col)));
-    this.matTableService.displayDataSource.subscribe(data=>{this.dataSource = data;
+    this.matTableService.init('', '', this._dataSource, this.displayedColumns.map((col) => new FilterColumn(col)));
+    this.matTableService.displayDataSource.subscribe(data => {
+      this.dataSource = data;
       this.changeDetector.detectChanges();
       this.dataSourceChangeLength.emit(this.dataSource.data?.length);
 
@@ -97,9 +100,22 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
     console.clear();
     console.log(row);
     let id = row.id;
-    this.router.navigate([this.navTo + id]);
+    if(this.navTo){
+     this.router.navigate([this.navTo + id]); 
+    }
+   
     this.row.emit(row);
 
+  }
+
+  onRowSelected(event: any): void {
+    if (event.value){
+      this.selectedRows.push(event.target);
+    }else{
+      this.selectedRows.forEach((row,i) => { if(row===event.target) this.selectedRows.splice(i,1); } );
+      // this.selectedRows = this.selectedRows.filter(row => row!==event.target);
+      }
+      this.selectedRowsChanged.emit(this.selectedRows)
   }
 
   announceSortChange(sortState: Sort) {

@@ -7,6 +7,7 @@ import {
   MatbeaButtonModule,
   MatbeaDetailsSteperModule,
   MatbeaIconButtonModule,
+  MatbeaInputModule,
   MatbeaSliceDataContainerModule,
   MatbeaSlideToggleModule,
   MatbeaTableModule,
@@ -17,12 +18,14 @@ import { UnitsComponent } from '../step-details/units/units.component';
 import { UnitsHeaderComponent } from './units-header/units-header.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { HosafatYechidaModule } from './hosafat-yechida/hosafat-yechida.module';
+import { ActionBarComponent } from './action-bar/action-bar.component';
 
 @NgModule({
   declarations: [
     StepDetailsComponent,
     UnitsComponent,
     UnitsHeaderComponent,
+    ActionBarComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { HosafatYechidaModule } from './hosafat-yechida/hosafat-yechida.module';
     PipesModule,
     MatMenuModule,
     MatbeaButtonModule,
-    HosafatYechidaModule
+    HosafatYechidaModule,
+    MatbeaInputModule
   ],
 })
 export class StepDetailsModule {}

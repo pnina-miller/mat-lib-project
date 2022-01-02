@@ -7,7 +7,7 @@
             {{column.columnnamehebrew?column.columnnamehebrew:column.columnnameenglish}}
           </th>
           <td mat-cell [style]="column.style" *matCellDef="let project;">
-            <matbea-table-cell [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
+            <matbea-table-cell (onRowSelected)="onRowSelected($event)" [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>
