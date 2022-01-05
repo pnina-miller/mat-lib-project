@@ -43,27 +43,12 @@
     <span>הערות</span>
     <matbea-form-field type="textarea" ([value])="hearot" ></matbea-form-field>
 </div>
-  <!--
-
-
-
-    <div class="shalav-input input-target">
-        <span> ייעוד השלב</span>
-        <div class=checkbox-wrapper>
-            <div>
-                <matbea-checkbox lable="מגורים" (valueChange)="targetChanged(1)"></matbea-checkbox>
-            </div>
-            <div>
-                <matbea-checkbox lable="מסחר" (valueChange)="targetChanged(2)"></matbea-checkbox>
-            </div>
-           <div>
-            <matbea-checkbox lable="משרדים" (valueChange)="targetChanged(3)"></matbea-checkbox>
-            </div>
-            <div>
-                <matbea-checkbox lable="אחר" (valueChange)="targetChanged(4)"></matbea-checkbox>
-            </div>
-        </div>
-    </div> -->
+ 
+<div class="shalav-input gush-chelka">
+    <span>פרטי גוש וחלקה</span>
+    <matbea-icon-button icon="plus" (onClick)="addLine()"></matbea-icon-button>
+</div>
+ 
 </div>
 
 <div class="dialog-footer">

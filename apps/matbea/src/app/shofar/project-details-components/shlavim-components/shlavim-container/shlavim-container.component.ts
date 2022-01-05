@@ -9,7 +9,7 @@ import { ShlavimService } from '../shlavim/shlavim.service';
   styleUrls: ['./shlavim-container.component.scss']
 })
 export class ShlavimContainerComponent implements OnInit {
-  @Input('misparProyectSagur') misparProyectSagur: string;
+  @Input('misparProyectSagur') misparProyectSagur: number;
 
   constructor(public shlavimService: ShlavimService, private shofarServices: ShofarServices) { }
 

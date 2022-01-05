@@ -20,7 +20,6 @@ export class StepDetailsComponent implements OnInit {
   kodMutavBeShovar: number;
   misparProyectSagur: number;
   shalav: any;
-  project: any;
   projectsList$ = this.store$.select(ShofarSelectors.getProjectsWithFilter);
   project$ = this.storeProjectDetails$.select(
     ProjectDetailsSelectors.getProject
@@ -41,9 +40,7 @@ export class StepDetailsComponent implements OnInit {
       this.id = params.get('id');
       this.misparProyectSagur = Number(this.id.split('&')[0]);
       this.kodMutavBeShovar = Number(this.id.split('&')[1]);
-      this.shofarServices
-        .getpirteyShalav(this.misparProyectSagur,1)
-        .subscribe((resp: any) => {
+      this.shofarServices.getpirteyShalav(this.misparProyectSagur,1).subscribe((resp: any) => {
           this.shalav = resp.data.avcmp06m;
           this.steps=[...this.steps,{ name:  resp.data.avcmp06m.teurHaShlav, routTo: '' }];
         });
@@ -52,7 +49,7 @@ export class StepDetailsComponent implements OnInit {
         (project) => {
           if (project) {
             this.steps=[ { name: 'רשימת פרויקטים', routTo: 'table' }, { name: project.shemProyectSagur, routTo: 'table/details/'+this.id }, ...this.steps ];
-            this.project = project;
+            this.shalav = project;
           } else {
             this.storeProjectDetails$.dispatch(
               ProjectDetailsActions.init({

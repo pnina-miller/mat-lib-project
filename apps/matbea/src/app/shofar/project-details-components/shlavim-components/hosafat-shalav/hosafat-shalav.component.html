@@ -3,44 +3,43 @@
         <h1 mat-dialog-title>הוספת שלב</h1>
     </div>
 
-    <div class="dialog-content">
-
-        <div class="shalav-input input-levelId">
-            <matbea-input type="string" lable="זיהוי שלב" lablePosition="top" [(value)]="levelId" required ></matbea-input>
+        <form class="dialog-content" *ngIf="shalavForm" [formGroup]="shalavForm">
+        <div class="shalav-input input-teurHaShlav">
+            <matbea-input type="string" [error-messages]="{required:'שדה זה הוא חובה'}" lable="זיהוי שלב" lablePosition="top" [inputFormControl]="shalavForm.controls.teurHaShlavControl" required ></matbea-input>
         </div>
 
-        <div class="shalav-input input-endDate">
-            <matbea-input type="date" lable='מועד סיום צפוי ע"פ דוח מפקח' lablePosition="top" [(value)]="endDate" required ></matbea-input>
+        <div class="shalav-input input-taarich8SiyumTzafui">
+            <matbea-input type="date" lable='מועד סיום צפוי ע"פ דוח מפקח'  [error-messages]="{required:'שדה זה הוא חובה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8SiyumTzafuiControl" required ></matbea-input>
         </div>
 
-        <div class="shalav-input input-lastDate">
-            <matbea-input type="date" lable="מועד אחרון למתן היתר בניה" lablePosition="top" [(value)]="lastDate" required ></matbea-input>
+        <div class="shalav-input input-taarich8HeterBniya">
+            <matbea-input type="date" lable="מועד אחרון למתן היתר בניה"  [error-messages]="{required:'שדה זה הוא חובה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8HeterBniyaControl" required ></matbea-input>
         </div>
 
-        <div class="shalav-input input-heiter">
+        <div class="shalav-input input-heterBniya">
             <span>קיים היתר בניה</span>
             <matbea-radio-button-tab [dataList]="[{id:'true',description:'כן'},{id:'false',description:'לא'}]"
-                (selectedButtonChanged)="heiter=$event"></matbea-radio-button-tab>
+                (selectedButtonChanged)="heterBniya=$event"></matbea-radio-button-tab>
         </div>
 
-        <div class="shalav-input input-target">
+        <div class="shalav-input input-yeud">
             <span> ייעוד השלב</span>
             <div class=checkbox-wrapper>
                 <div>
-                    <matbea-checkbox lable="מגורים" (valueChange)="targetChanged('MetegYeudMegurim')"></matbea-checkbox>
+                    <matbea-checkbox lable="מגורים" (valueChange)="yeudChanged('MetegYeudMegurim')"></matbea-checkbox>
                 </div>
                 <div>
-                    <matbea-checkbox lable="מסחר" (valueChange)="targetChanged('MetegYeudMischar')"></matbea-checkbox>
+                    <matbea-checkbox lable="מסחר" (valueChange)="yeudChanged('MetegYeudMischar')"></matbea-checkbox>
                 </div>
                <div>
-                <matbea-checkbox lable="משרדים" (valueChange)="targetChanged('MetegYeudMisradim')"></matbea-checkbox>
+                <matbea-checkbox lable="משרדים" (valueChange)="yeudChanged('MetegYeudMisradim')"></matbea-checkbox>
                 </div>
                 <div>
-                    <matbea-checkbox lable="אחר" (valueChange)="targetChanged(MetegYeudAcher)"></matbea-checkbox>
+                    <matbea-checkbox lable="אחר" (valueChange)="yeudChanged(MetegYeudAcher)"></matbea-checkbox>
                 </div>
             </div>
         </div>
-    </div>
+        </form>
 
     <div class="dialog-footer">
         <matbea-button size='m' type="matbea-stroked" (click)="cancel()" textLable="ביטול">ביטול</matbea-button>

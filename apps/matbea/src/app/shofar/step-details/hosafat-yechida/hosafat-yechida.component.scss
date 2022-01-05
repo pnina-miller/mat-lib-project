@@ -29,6 +29,9 @@
 .input-hearot {
     grid-area: hearot;
 }
+.gush-chelka{
+    grid-area: gush-chelka;
+}
 .success-content {
     height: 150px;
     display: flex;
@@ -65,16 +68,16 @@
     }
     .dialog-content {
         display: grid;
-        height: 330px;
+        height: 75%;//440px;
         grid-gap: 20px;
-        grid-template-rows: 25% 25% 25% 25%;
+        grid-template-rows: 20% 20% 20% 40%;
         grid-template-columns: 40% 40% 10%;
 
         grid-template-areas:
             "unitId shovi"
-            "teur migrash"
-            "yeud yeud"
-            "hearot hearot";
+            "teur yeud"
+            "migrash hearot"
+            "gush-chelka gush-chelka ";
     }
          
 

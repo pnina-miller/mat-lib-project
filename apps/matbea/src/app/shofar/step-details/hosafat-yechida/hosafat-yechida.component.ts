@@ -41,4 +41,8 @@ export class HosafatYechidaComponent implements OnInit {
   save() {
     this.dialogRef.close();
   }
+
+  addLine(){
+    
+  }
 }

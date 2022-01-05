@@ -21,7 +21,6 @@ import { MatbeaButtonModule } from '../../../../../../../../libs/matbea-ui-compo
 import { MatbeaLebelModule } from '../../../../../../../../libs/matbea-ui-components/src/lib/matbea-lebel/matbea-lebel.module'
 import { ShlavimComponent } from './shlavim.component';
 import { HosafatShalavModule } from '../hosafat-shalav/hosafat-shalav.module';
-import { ArichatShalavMenuComponent } from '../arichat-shalav-menu/arichat-shalav-menu.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {
   MatbeaIconButtonModule,
@@ -29,7 +28,7 @@ import {
 
 
 @NgModule({
-  declarations: [ShlavimComponent, ArichatShalavMenuComponent],
+  declarations: [ShlavimComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -55,6 +54,6 @@ import {
     MatbeaIconButtonModule,
     MatbeaTableModule,
       ],
-  exports:[ShlavimComponent, ArichatShalavMenuComponent]
+  exports:[ShlavimComponent]
 })
 export class ShlavimModule { }

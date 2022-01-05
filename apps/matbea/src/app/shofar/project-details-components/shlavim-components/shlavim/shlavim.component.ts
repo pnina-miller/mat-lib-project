@@ -1,6 +1,6 @@
 
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ColumnDefinition } from 'libs/matbea-ui-components/src/lib/models/column-definition.model';
@@ -12,14 +12,14 @@ import { ShlavimService } from './shlavim.service';
   templateUrl: './shlavim.component.html',
   styleUrls: ['./shlavim.component.scss']
 })
-export class ShlavimComponent implements OnInit {
+export class ShlavimComponent implements OnInit, OnChanges {
   openHosafatShalavPopup(misparProyectSagur, item=null) {
     this.dialog.closeAll()
     const dialogRef = this.dialog.open(HosafatShalavComponent, {
       width: '50%',
       height: '50%',
       panelClass: 'hosafat-shalav-container',
-      data: {misparProyectSagur:misparProyectSagur},
+      data: {misparProyectSagur:misparProyectSagur,item:item},
     });
 
     dialogRef.afterClosed().subscribe(newProject => {
@@ -28,9 +28,9 @@ export class ShlavimComponent implements OnInit {
   }
 
   @Input('$shlavim') $shlavim;
-  @Input() misparProyectSagur;
+  @Input('misparProyectSagur') misparProyectSagur: string;
 
-  displayedColumns = [{ columnnameenglish: 'misparShlav', columnnamehebrew: 'זיהוי שלב', columnformatter: 'link', display: '1' },
+  displayedColumns = [{ columnnameenglish: 'teurHaShlav', columnnamehebrew: 'זיהוי שלב', columnformatter: 'link', display: '1' },
   { columnnameenglish: 'teurYeudShlav', columnnamehebrew: 'ייעוד', columnformatter: '', display: '1' },
   { columnnameenglish: 'misparYechidotBeSlv', columnnamehebrew: "מס' יחידות", columnformatter: '', display: '1' },
   { columnnameenglish: 'taarich8SiyumTzafui', columnnamehebrew: 'מועד סיום צפוי', columnformatter: 'Int2DateFormatter', display: '1' },
@@ -47,6 +47,8 @@ export class ShlavimComponent implements OnInit {
 
   // columsToDisplay = this.displayedColumns.map(col => col.columnnameenglish).concat('menu')
   constructor(public dialog: MatDialog, public shlavimService: ShlavimService, private router: Router) { }
+  ngOnChanges(changes: SimpleChanges): void {
+  }
 
   ngOnInit(): void {
     this.shlavimService.init(this)
@@ -56,6 +58,9 @@ export class ShlavimComponent implements OnInit {
     console.log('row', row);
     if (row.misparYechidotBeSlv > 0)
       this.router.navigate([this.router.url, row.misparShlav, 'units']);
+      else
+      this.router.navigate([this.router.url]);
+
   }
 
   clickInRow(e){

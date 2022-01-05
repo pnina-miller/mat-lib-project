@@ -1,10 +1,9 @@
 
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { GeneralResponse } from 'libs/matbea-shared-components/src/lib/beans/general-response';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ShofarServices } from '../../../services/shofar-services';
 import { shalavDataType } from '../../../step-details/hosafat-yechida/step.data';
 
@@ -18,50 +17,60 @@ export class HosafatShalavComponent implements OnInit {
 
 shalavForm:FormGroup;
 
-  levelId: string = '';
-  endDate: string;
-  lastDate: string;
-  heiter: string;
- target= {metegYeudMegurim:0, metegYeudMischar:0, metegYeudMisradim:0, metegYeudAcher:0}
+  heterBniya;
+ yeud= {metegYeudMegurim:0, metegYeudMischar:0, metegYeudMisradim:0, metegYeudAcher:0}
 
  misparProject: number;
-
+shalav:any;
   // errorMsg: string;
   showSuccess = false;
   errorMsg: string;
 
   constructor(private shofarServices: ShofarServices,
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: {}) {
-
-    let inputParams = this.data as HosafatCheshbonInputParams;
-    this.misparProject = inputParams.misparProyectSagur;
+    @Inject(MAT_DIALOG_DATA) public data:HosafatCheshbonInputParams ) {
+    this.misparProject = data.misparProyectSagur;
   }
 
   ngOnInit(): void {
-   
+    //TODO: set value in matbea input
+    this.shalavForm=new FormGroup({
+      teurHaShlavControl:new FormControl(this.data.item?.teurHaShlav, Validators.required),
+      taarich8SiyumTzafuiControl: new FormControl(this.data.item?.taarich8SiyumTzafui, Validators.required),
+      taarich8HeterBniyaControl: new FormControl(this.data.item?.taarich8HeterBniya, Validators.required),
+    });
+
   }
 
 
-  targetChanged(num: number) {
-    this.target[num]=1
+  yeudChanged(num: number) {
+    this.yeud[num]='1'
   }
 
   cancel() {
     this.dialogRef.close();
 
   }
-is=false
-  save() {
-    if(this.is){this.is=true
+// is=false
+
+validateData(){
+ return this.shalavForm.valid 
+}
+save() {//TODO: validate all
+  if(!this.validateData()){
+    alert('error')
+    return;
+  }
+    // if(!this.is){this.is=true
     const data = {
+      ...this.data.item,
       misparProyectSagur:this.misparProject,
-      metegHeterBniya:this.heiter=="true"?1:0,
-      taarich8HeterBniya: Number(this.lastDate.replace(/\-/ig, '')),
-      taarich8SiyumTzafui: Number(this.endDate.replace(/\-/ig, '')),
-      teurHaShlav: this.levelId,
+      metegHeterBniya:this.heterBniya=="true"?1:0,
+      taarich8HeterBniya: Number(this.shalavForm.value.taarich8HeterBniyaControl.replace(/\-/ig, '')),
+      taarich8SiyumTzafui: Number(this.shalavForm.value.taarich8SiyumTzafuiControl.replace(/\-/ig, '')),
+      teurHaShlav: this.shalavForm.value.teurHaShlavControl,
       teurTochnitBinyanIr:'gergg',
-      ...this.target
+      ...this.yeud
     } as shalavDataType;
     this.shofarServices.saveShalav(data, this.misparProject).subscribe(resp => {
       let generalResponse = resp as GeneralResponse;
@@ -75,7 +84,7 @@ is=false
       (error) => {
         console.error('error caught in component' + error)
       })
-    }
+    // }
   }
 
   addUnits() {
@@ -85,5 +94,5 @@ is=false
 
 interface HosafatCheshbonInputParams {
   misparProyectSagur: number;
-
+  item:any;
 }

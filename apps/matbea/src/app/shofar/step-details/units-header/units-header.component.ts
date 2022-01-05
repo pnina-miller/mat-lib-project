@@ -14,12 +14,13 @@ export class UnitsHeaderComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.addUnitsAction();//temp
   }
 
   addUnitsAction(){
     const dialogRef = this.dialog.open(HosafatYechidaComponent, {
       width: '50%',
-      height: '50%', 
+      height: '100%', 
       panelClass:'hosafat-shalav-container',
       data: {},    
     });

@@ -92,6 +92,10 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if(this.dataSource$ instanceof MatTableDataSource )
+    console.log('data source ' + this.dataSource);
+    if(this.dataSource$ instanceof Observable)
+    console.log('observable ');
     console.log("OnInit in matbea-table", this);
 
   }

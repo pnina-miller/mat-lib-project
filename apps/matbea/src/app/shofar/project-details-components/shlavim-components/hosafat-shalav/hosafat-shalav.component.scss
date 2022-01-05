@@ -8,23 +8,23 @@
     font-size: small;
 }
 
-.input-target {
+.input-yeud {
     .checkbox-wrapper {
         display: flex;
     }
     grid-area: targ;
 }
-.input-heiter {
-    grid-area: heiter;
+.input-heterBniya {
+    grid-area: heterBniya;
 }
-.input-lastDate {
-    grid-area: lastDate;
+.input-taarich8HeterBniya {
+    grid-area: taarich8HeterBniya;
 }
-.input-endDate {
-    grid-area: endDate;
+.input-taarich8SiyumTzafui {
+    grid-area: taarich8SiyumTzafui;
 }
-.input-levelId {
-    grid-area: levelId;
+.input-teurHaShlav {
+    grid-area: teurHaShlav;
 }
 .success-content {
     height: 150px;
@@ -68,8 +68,8 @@
         grid-template-columns: 40% 40% 10%;
 
         grid-template-areas:
-            "levelId endDate "
-            "lastDate heiter "
+            "teurHaShlav taarich8SiyumTzafui "
+            "taarich8HeterBniya heterBniya "
             "targ targ";
     }
     .dialog-footer {
