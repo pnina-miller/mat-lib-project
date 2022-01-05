@@ -9,6 +9,7 @@ const details = require('./data/projectDetails.json');
 const reshimatShlavim = require('./data/shlavim.json');
 const getpirteyShalav = require('./data/getpirteyShalav.json');
 const getyechidot = require('./data/getyechidot.json');
+const gushChelka = require('./data/gushChelka.json');
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -61,6 +62,12 @@ app.get(
   (req, res) => {
     console.log('getpirteyShalav');
     res.json(getpirteyShalav);
+  }
+);
+
+app.get('/matbea/shofar/projects/v1/shlav/yechida/215/1/0', (req, res) => {
+    console.log('getpirteyShalav');
+    res.json(gushChelka);
   }
 );
 interface Shalav {

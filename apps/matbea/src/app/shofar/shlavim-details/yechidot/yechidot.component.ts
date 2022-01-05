@@ -1,6 +1,5 @@
 
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { ShofarServices } from '../../services/shofar-services';
 
@@ -26,11 +25,11 @@ const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:' ',ordernum
 
 
 @Component({
-  selector: 'matbea-units',
-  templateUrl: './units.component.html',
-  styleUrls: ['./units.component.scss'],
+  selector: 'matbea-yechidot',
+  templateUrl: './yechidot.component.html',
+  styleUrls: ['./yechidot.component.scss'],
 })
-export class UnitsComponent implements OnInit {
+export class YechidotComponent implements OnInit {
   // dataSource:MatTableDataSource<any>=new MatTableDataSource<any>();
 
 @Input() misparProyectSagur:number;
@@ -38,6 +37,7 @@ export class UnitsComponent implements OnInit {
 
   displayedColumns: any[] = [];
   loadingTable = true;
+  selectedRows:number[]=[];
 
   dataSource;
   dataSource$ = Observable.create(observer => {
@@ -56,8 +56,5 @@ export class UnitsComponent implements OnInit {
      
     });
   }
-  selectedRows:number[]=[];
-//   selectedRowsChanged(selectedRows: number[]){
-// this.selectedRows=selectedRows;
-//   }
+
 }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnitsComponent } from './units.component';
+import { YechidotHeaderComponent } from './yechidot-header.component';
 
-describe('UnitsComponent', () => {
-  let component: UnitsComponent;
-  let fixture: ComponentFixture<UnitsComponent>;
+describe('YechidotHeaderComponentComponent', () => {
+  let component: YechidotHeaderComponent;
+  let fixture: ComponentFixture<YechidotHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UnitsComponent ]
+      declarations: [ YechidotHeaderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UnitsComponent);
+    fixture = TestBed.createComponent(YechidotHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

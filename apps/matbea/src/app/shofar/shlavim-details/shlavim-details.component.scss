@@ -1,5 +1,5 @@
 
-.step-details{
+.shlavim-details{
   overflow-x: hidden;
     height: 100%;
       width: 100%;
@@ -10,7 +10,7 @@
       justify-content: space-between;
       align-items: stretch;
     }
-    .step-details-header-top{
+    .shlavim-details-header-top{
       display: flex;
       flex-direction: row-reverse;
       flex-wrap: nowrap;
@@ -26,19 +26,19 @@
       width: 100%;
       margin-bottom: 2%;
     }
-    matbea-units-component{
+    matbea-yechidot-component{
       grid-area: units-details;
     
     }
     
-    matbea-units-header-component{
+    matbea-yechidot-header-component{
       grid-area: units-header;
     
     }
 
 
 
-    .step-details-content{
+    .shlavim-details-content{
       width: 100%;
       height: 100%;
       display: grid;
@@ -50,7 +50,7 @@
             "units-header"
             "units-details"    }
     @media (max-width: 1200px) {
-      .step-details-content{
+      .shlavim-details-content{
         overflow: auto;
         grid-template: auto;
         grid-template-columns: [first] 100% [end];

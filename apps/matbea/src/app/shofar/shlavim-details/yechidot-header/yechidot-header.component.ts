@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { HosafatYechidaComponent } from '../hosafat-yechida/hosafat-yechida.component';
 
 @Component({
-  selector: 'matbea-units-header',
-  templateUrl: './units-header.component.html',
-  styleUrls: ['./units-header.component.scss']
+  selector: 'matbea-yechidot-header',
+  templateUrl: './yechidot-header.component.html',
+  styleUrls: ['./yechidot-header.component.scss']
 })
-export class UnitsHeaderComponent implements OnInit {
+export class YechidotHeaderComponent implements OnInit {
 
   @Input() shalav:any
 

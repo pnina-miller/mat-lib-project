@@ -54,7 +54,6 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() dataSourceChangeLength = new EventEmitter<number>();
   updateFilters: any;
   @Output() clickInRow = new EventEmitter();
-  @Output() selectedRowsChanged = new EventEmitter();
   @Input()  selectedRows!: number[];
   @Output() selectedRowsChange = new EventEmitter<number[]>();
   constructor(private route: ActivatedRoute, private router: Router, private _liveAnnouncer: LiveAnnouncer,
@@ -119,7 +118,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.selectedRows.forEach((row,i) => { if(row===event.target) this.selectedRows.splice(i,1); } );
       // this.selectedRows = this.selectedRows.filter(row => row!==event.target);
       }
-      this.selectedRowsChanged.emit(this.selectedRows)
+      this.selectedRowsChange.emit(this.selectedRows)
   }
 
   announceSortChange(sortState: Sort) {

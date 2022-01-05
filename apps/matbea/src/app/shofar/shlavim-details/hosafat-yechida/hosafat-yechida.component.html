@@ -1,0 +1,51 @@
+
+<div class="dialog-title">
+    <h1 mat-dialog-title>הוספת יחידה</h1>
+</div>
+<div class="dialog-content">
+
+     <div class="yechida-input input-unitId">
+        <matbea-input type="string" [error-messages]="{required:'שדה זה הוא חובה'}" lable="זיהוי יחידה" lablePosition="top" [inputFormControl]="YechidaForm.controls.YachidaIdControl" required ></matbea-input>
+    </div>
+
+<div class="yechida-input input-shovi">
+        <matbea-input type="string" [error-messages]="{required:'שדה זה הוא חובה'}" lable=" הערכת שווי לפי דוח 0" lablePosition="top" [inputFormControl]="YechidaForm.controls.shoviControl" required ></matbea-input>
+    </div>
+
+   
+    <div class="yechida-input input-teur">
+        <matbea-input type="string" [error-messages]="{required:'שדה זה הוא חובה'}" lable=" תאור יחידה" lablePosition="top" [inputFormControl]="YechidaForm.controls.teurYachidaControl" required ></matbea-input>
+    </div>
+   
+    <div class="yechida-input input-migrash">
+       <matbea-input type="string" [error-messages]="{required:'שדה זה הוא חובה'}" lable="מגרש" lablePosition="top" [inputFormControl]="YechidaForm.controls.migrashControl" required ></matbea-input>
+    </div>
+
+   <div class="yechida-input input-yeud">
+    <span>ייעוד היחידה</span>
+    <matbea-radio-button-tab [dataList]="yeudDataList"
+        (selectedButtonChanged)="yeud=$event"></matbea-radio-button-tab>
+</div>
+
+<div class="yechida-input input-hearot">
+    <span>הערות</span>
+    <matbea-form-field type="textarea" ([value])="hearot" ></matbea-form-field>
+</div>
+ 
+<div class="yechida-input gush-chelka">
+    <span>פרטי גוש וחלקה</span>
+    <matbea-icon-button icon="plus" (onClick)="addLine()"></matbea-icon-button>
+    <div>
+        <div *ngFor="let row of gushChelkaList">
+<span>{{row.misparGush}}</span>:
+<span>{{row.teurChelka}}</span>
+        </div>
+    </div>
+</div>
+ 
+</div>
+
+<div class="dialog-footer">
+    <matbea-button size='m' type="matbea-stroked" (onClick)="cancel()" textLable="ביטול">ביטול</matbea-button>
+    <matbea-button size='m' type="matbea-raised" (onClick)="save()" textLable="אישור">שמירה</matbea-button>
+</div>

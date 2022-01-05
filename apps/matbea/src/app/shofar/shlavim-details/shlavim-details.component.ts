@@ -11,11 +11,11 @@ import * as ProjectDetailsActions from '../store/actions/project-details.actions
 import { ShofarServices } from '../services/shofar-services';
 
 @Component({
-  selector: 'matbea-step-details',
-  templateUrl: './step-details.component.html',
-  styleUrls: ['./step-details.component.scss'],
+  selector: 'matbea-shlavim-details',
+  templateUrl: './shlavim-details.component.html',
+  styleUrls: ['./shlavim-details.component.scss'],
 })
-export class StepDetailsComponent implements OnInit {
+export class ShlavimDetailsComponent implements OnInit {
   id: any;
   kodMutavBeShovar: number;
   misparProyectSagur: number;

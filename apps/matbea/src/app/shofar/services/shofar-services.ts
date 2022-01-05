@@ -12,7 +12,7 @@ import { saveMskDataType } from '../project-details-components/mashkanta/natuney
 import { MatbeaUtils } from "../utils/matbea-utils-components";
 import { AmalotDataType } from "../project-details-components/amalot/amalot/amalot.data";
 // import { SqlResult } from "../../../../../../libs/matbea-shared-components/src/lib/beans/general-response";
-import { shalavDataType } from "../step-details/hosafat-yechida/step.data";
+import { shalavDataType } from "../shlavim-details/hosafat-yechida/step.data";
 
 @Injectable({
     providedIn: 'root',
@@ -133,6 +133,10 @@ export class ShofarServices{
       }
       getShlavim(misparProyectSagur): Observable<any> {
     return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/' + misparProyectSagur + '/shlavim');
+      }
+
+      getGushChelka(){
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/v1/shlav/yechida/215/1/0');
       }
       getProjectsListWithHierarhia(object){
         let params= new HttpParams();

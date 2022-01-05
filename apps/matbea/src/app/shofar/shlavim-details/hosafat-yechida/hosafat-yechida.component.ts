@@ -1,5 +1,6 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ShofarServices } from '../../services/shofar-services';
 
@@ -9,19 +10,21 @@ import { ShofarServices } from '../../services/shofar-services';
   styleUrls: ['./hosafat-yechida.component.scss'],
 })
 export class HosafatYechidaComponent implements OnInit {
-  unitId: string='';
-  shovi: string='';
-  teur: string='';
-  migrash: string='';
   yeud: string='';
   hearot:string='';
-
+  YechidaForm = new FormGroup({
+    YachidaIdControl:new FormControl(),
+    teurYachidaControl:new FormControl(),
+    shoviControl:new FormControl(),
+    migrashControl:new FormControl(),
+  })
   yeudDataList = [
     { id: 'megurim', description: 'מגורים' },
     { id: 'mischar', description: 'מסחר' },
     { id: 'misradim', description: 'משרדים' },
     { id: 'acher', description: 'אחר' },
   ];
+  gushChelkaList:any[]
   constructor(
     private shofarServices: ShofarServices,
     public dialogRef: MatDialogRef<any>,
@@ -30,7 +33,11 @@ export class HosafatYechidaComponent implements OnInit {
     let inputParams = this.data;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.shofarServices.getGushChelka().subscribe((data:any)=>{
+      this.gushChelkaList=data.data.gushChelka.fullList;
+    })
+  }
 
   targetChanged(num: number) {}
 
@@ -39,6 +46,12 @@ export class HosafatYechidaComponent implements OnInit {
   }
 
   save() {
+    const data={
+      ...this.YechidaForm.value,
+      yeud:this.yeud,
+      hearot:this.hearot
+    }
+    console.log(data);
     this.dialogRef.close();
   }
 
