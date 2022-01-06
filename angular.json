@@ -1,6 +1,7 @@
 {
   "version": 1,
   "cli": {
+    "defaultCollection": "@nrwl/angular",
     "analytics": "e4d2a5de-ae17-4b49-8ad0-713fea00f556"
   },
   "defaultProject": "matbea",
@@ -48,8 +49,7 @@
             "tsConfig": "apps/coin/tsconfig.app.json",
             "aot": true,
             "assets": ["apps/coin/src/favicon.ico", "apps/coin/src/assets"],
-            "styles": ["apps/coin/src/styles.scss",  "node_modules/material-design-icons/iconfont/material-icons.css"
-            ],
+            "styles": ["apps/coin/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -82,7 +82,18 @@
             }
           }
         },
-
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "coin:build",
+            "proxyConfig": "apps/coin/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "coin:build:production"
+            }
+          }
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -203,8 +214,7 @@
             "tsConfig": "apps/matbea/tsconfig.app.json",
             "aot": true,
             "assets": ["apps/matbea/src/favicon.ico", "apps/matbea/src/assets"],
-            "styles": ["apps/matbea/src/styles.scss",  "node_modules/material-design-icons/iconfont/material-icons.css"
-            ],
+            "styles": ["apps/matbea/src/styles.scss"],
             "scripts": []
           },
           "configurations": {

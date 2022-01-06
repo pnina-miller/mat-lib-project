@@ -7,13 +7,13 @@
   </div>
 </div>
 <div class="shura-hierarhia">
-<matbea-button style="  margin-bottom: 0.5em;" type="matbea-raised" (onClick)="findProjects()" >הצג</matbea-button>
+<matbea-button style="  margin-bottom: 0.5em;" type="matbea-raised" (click)="findProjects()" >הצג</matbea-button>
 <combo-status-project [options]="valueToSelectStatus"  (selected)="outFromSelectStatus($event)"></combo-status-project>
   <matbea-divider [vertical]='true' style="height: 2em; margin: 0em 0.5em;"></matbea-divider>
   <matbea-hierarchy (fromHierarchia)="fromHierarchia($event)"></matbea-hierarchy>
 </div>
 <!-- <matbea-divider></matbea-divider> -->
-<matbea-buttons-for-table></matbea-buttons-for-table>
+<matbea-buttons-for-table ></matbea-buttons-for-table>
 <projects-list></projects-list>
 
 </div>

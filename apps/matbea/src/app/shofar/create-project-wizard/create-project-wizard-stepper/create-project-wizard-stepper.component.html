@@ -13,14 +13,14 @@
 
   <mat-horizontal-stepper #wizardStepper [selectedIndex]="selectedIndex" [linear]="isLinear" (selectionChange)="onSelectionChange($event)" #stepper >
 
-    <mat-step   [editable]="true" [stepControl]="kodMutavGroup" [stepControl]="kodMutavGroup" label="קוד מוטב" (click)="selectedIndex=0">
+    <mat-step   [editable]="true" [stepControl]="kodMutavGroup" [stepControl]="kodMutavGroup" label="קוד מוטב">
       <form [formGroup]="kodMutavGroup" >        
         <matbea-get-kod-mutav [wizardData]="wizardData" [wizardStepper]="wizardStepper" [dialogRef]="dialogRef"></matbea-get-kod-mutav>
       </form>
     </mat-step>
 
 
-    <mat-step [stepControl]="basicDetailsFormGroup" label="פרטים בסיסייים"  (click)="selectedIndex=0">
+    <mat-step [stepControl]="basicDetailsFormGroup" label="פרטים בסיסייים" >
       <form [formGroup]="basicDetailsFormGroup">
         <matbea-basic-details [wizardData]="wizardData" [wizardStepper]="wizardStepper"></matbea-basic-details>
 

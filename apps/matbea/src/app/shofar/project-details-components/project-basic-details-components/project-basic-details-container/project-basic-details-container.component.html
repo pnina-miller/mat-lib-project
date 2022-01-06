@@ -1,7 +1,7 @@
 <ng-container>
     <matbea-slice-data [class]="class" titel="פרטים בסיסייים">
       <matbea-slice-data-suffix >
-        <matbea-shmor-shinui-button (shinui)="changeBasicDetailsMode($event)"></matbea-shmor-shinui-button>
+        <matbea-shmor-shinui-button shkifut="true" (shinui)="changeBasicDetailsMode($event)" [hold]="hold"></matbea-shmor-shinui-button>
 
         <!--<div *ngIf="!basicDetailsEditMode">
           <matbea-button type='stroked' icon='edit' (onClick)="changeBasicDetailsMode()" ></matbea-button>
@@ -12,8 +12,11 @@
 
       </matbea-slice-data-suffix>
 
-      <matbea-slice-data-content style="width:100%">
-        <matbea-project-basic-details [kodMutav]="kodMutav" [misparProject]="misparProject" ></matbea-project-basic-details>
+      <matbea-slice-data-content>
+
+        <matbea-project-basic-details [kodMutav]="kodMutav" [misparProject]="misparProject" [editMode]="editMode" (hold)="hold=$event" ></matbea-project-basic-details>
+
       </matbea-slice-data-content>
+
     </matbea-slice-data>
   </ng-container>

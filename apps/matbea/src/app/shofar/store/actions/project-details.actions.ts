@@ -26,18 +26,18 @@ export const loadProjectDetailsFailure = createAction(
 export const saveProjectDetails = createAction(
   'Save Project details in DB',
   props<{
-    project: {}
+    project: any;
   }>()
 );
 export const saveProjectDetailsSuccess = createAction(
   'Save Project details in DB Success',
   props<{
-    project: any
+    project: any, status:boolean
   }>()
 );
 export const saveProjectDetailsFailure = createAction(
   'Save Project details in DB Failure',
   props<{
-    project: any
+   message:string, status:boolean;
   }>()
 );

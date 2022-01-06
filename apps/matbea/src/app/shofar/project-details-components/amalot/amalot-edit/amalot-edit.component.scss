@@ -1,33 +1,123 @@
-.radio-group {
-    display: flex;
-    flex-direction: column;
-  }
-//   .radio-button {
-//     margin: 2%;
-//   }
-
-  #container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-    flex-wrap: nowrap;
-    justify-self: start;
+.inputCell{
+  width: 50px;
+  overflow : hidden; 
+  vertical-align : top;
+  display : inline-block;
+  margin-right: 0.5em;
 }
 
-.containerCol{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+#page {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-areas: "head2 . head1 head1 head1"
+                       "radio_grd . lbl1 prs1 inp1"
+                       "radio_grd . . err1 err1"
+                       "radio_grd . lbl2 prs2 inp2"
+                       "radio_grd . . err2 err2"
+                       "radio_grd . lbl3 prs3 inp3"
+                       "radio_grd . . err3 err3"
+                       "radio_grd . . . .";
+
+  grid-template-columns: 50% 5% 20% 5% 20%;
+  align-items: center;
 }
 
-.containerColRight{
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+.radio_grid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: "rb1 ."
+                       "rb2 rb2inp"
+                       ". rbErr2"
+                       "rb3 rd3inp"
+                       ". rbErr3"
+                       "rb4 .";
+  align-items: center;
+}
+
+.headerAmalot {
+  grid-area: head1;
+}
+
+.headerDmTipul{
+  grid-area: head2;
+
+}
+.radio{
+  grid-area: radio_grd;
+}
+.heiterLbl{
+  grid-area: lbl1;
+  text-align: bottom;
+}
+.heiterInpt{
+  grid-area: inp1;
+}
+.heiterPrsnt{
+  grid-area: prs1;
+}
+.leDiraLbl{
+  grid-area: lbl2;
+
+}
+.leDiraInpt{
+  grid-area: inp2;
+
+}
+.leDiraPrsnt{
+  grid-area: prs2;
+
+}
+.leloHeiterLbl{
+  grid-area: lbl3;
+
+}
+.leloHeiterInpt{
+  grid-area: inp3;
+
+}
+.leloHeiterPrsnt{
+  grid-area: prs3;
+}
+
+.radio_opt1{
+  grid-area: rb1;
+  padding-bottom: 12%;
+}
+.radio_opt2{
+  grid-area: rb2;
+  padding-bottom: 12%;
+}
+.radio_opt3{
+  grid-area: rb3;
+  padding-bottom: 12%;
+}
+.radio_opt4{
+  grid-area: rb4;
+  padding-bottom: 12%;
+}
+.rd_input2{
+  grid-area: rb2inp;
+}
+.rd_input3{
+  grid-area: rd3inp;
+}
+.errShiurHnca{
+  grid-area: rbErr2;
+}
+
+.errSechAmlt{
+  grid-area: rbErr3;
+}
+
+.errinp1{
+  grid-area: err1;
+}
+.errinp2{
+  grid-area: err2;
+}
+.errinp3{
+  grid-area: err3;
 }

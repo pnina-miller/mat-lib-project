@@ -1,0 +1,122 @@
+{
+  "/bnhp-api": {
+    "target": "http://localhost:3333",
+    "secure": false
+  },
+
+  "/common/agafim": {
+    "target": "http://localhost:8080/common/agafim",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/common/agafim" : ""}
+  },
+  "/common/sectors": {
+    "target": "http://localhost:8080/common/sectors",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/common/sectors" : ""}
+  },
+  "/common/makals": {
+    "target": "http://localhost:8080/common/makals",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/common/makals" : ""}
+  },
+  "/common/chativot": {
+    "target": "http://localhost:8080/common/chativot",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/common/chativot" : ""}
+  },
+  "/matbea/shofar/v1/projects": {
+    "target": "http://localhost:8080/matbea/shofar/v1/projects",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/matbea/shofar/v1/projects" : ""}
+  },
+  "/shofar/createProjectWizard/comboboxes": {
+    "target": "http://localhost:8080/shofar/createProjectWizard/comboboxes",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/createProjectWizard/comboboxes" : ""}
+  },"/shofar/createProjectWizard/save": {
+    "target": "http://localhost:8080/shofar/createProjectWizard/save",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/createProjectWizard/save" : ""}
+  },"/shofar/createProjectWizard/getByMisparProject": {
+    "target": "http://localhost:8080/shofar/createProjectWizard/getByMisparProject",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/createProjectWizard/getByMisparProject" : ""}
+  },"/shofar/chshbonotproject/get": {
+    "target": "http://localhost:8080/shofar/chshbonotproject/get",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/chshbonotproject/get" : ""}
+  },"/shofar/cheshbonot/getPirteyCheshbon": {
+    "target": "http://localhost:8080/shofar/cheshbonot/getPirteyCheshbon",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/cheshbonot/getPirteyCheshbon" : ""}
+  },"/shofar/cheshbonot/add": {
+    "target": "http://localhost:8080/shofar/cheshbonot/add",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/cheshbonot/add" : ""}
+  },"/shofar/chshbonotproject/remove": {
+    "target": "http://localhost:8080/shofar/chshbonotproject/remove",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/chshbonotproject/remove" : ""}
+  },"/shofar/chshbonotproject/hagderKeArvut": {
+    "target": "http://localhost:8080/shofar/chshbonotproject/hagderKeArvut",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/chshbonotproject/hagderKeArvut" : ""}
+  },"/shofar/natuney-mashkanta": {
+    "target": "http://localhost:8080/shofar/natuney-mashkanta",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/natuney-mashkanta" : ""}
+  }, "/shofar/mashkanta-save": {
+    "target": "http://localhost:8080/shofar/mashkanta-save",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/mashkanta-save" : ""}
+  },"/shofar/kablanim": {
+    "target": "http://localhost:8080/shofar/kablanim",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/kablanim" : ""}
+  },"/shofar/amalotsave": {
+    "target": "http://localhost:8080/shofar/amalotsave",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/amalotsave" : ""}
+  },"/shofar/amalot": {
+    "target": "http://localhost:8080/shofar/amalot",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/amalot" : ""}
+  }
+
+}

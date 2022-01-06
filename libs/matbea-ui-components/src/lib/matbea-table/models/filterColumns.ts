@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-// import { object } from "@storybook/addon-knobs";
+import { object } from "@storybook/addon-knobs";
 
 export class FilterColumn {
   ordernumber!: string;

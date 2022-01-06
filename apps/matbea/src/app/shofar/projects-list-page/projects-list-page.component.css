@@ -6,7 +6,8 @@
   align-content: space-around;
   flex-direction: row;
   align-items: center;
-  height: 14%;
+  min-height: 70px;
+  margin-bottom: 2em;
 
 
 }
@@ -21,7 +22,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   align-content: stretch;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: stretch;
   height: 100%;
  }
@@ -50,20 +51,26 @@
     min-height: 100px;
   }
   .shura-heder{
-    min-height: 200px;
+    min-height: 130px;
   }
   projects-list{
-    height: 50%;
+    min-height: 50%;
   }
 }
  projects-list{
-   height: 75%;
+   max-height: 75%;
+   min-height: 75%;
  }
  matbea-buttons-for-table{
-   height: 5%;
-   min-height: 40px;
+   min-height: fit-content;
+   margin-bottom: 0.5em;
  }
 matbea-hipus-lefi-pertey-project{
   min-width: 465px;
 }
 
+@media (max-width: 710px){
+  .shura-heder{
+    min-height: 171px;
+  }
+}

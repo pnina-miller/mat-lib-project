@@ -1,37 +1,121 @@
-<div id="container">
-        <div class="containerCol">
-            <matbea-lebel class="form-field-lable-light">דמי טיפול באשראי ובטחונות</matbea-lebel>
-            <mat-radio-group aria-labelledby="radio-group-label" class="radio-group">
-            <mat-radio-button class="radio-button" *ngFor="let kodAmla of kodeyAmalot" 
-              [value]="kodAmla.kod"
-              [checked]="kodAmla.kod==amalotInfoResp.kodAmala"
-              (change)="onChangeRadio($event)">
-              <matbea-label *ngIf="kodAmla.kod == 1 || kodAmla.kod == 3">{{kodAmla.name}}</matbea-label>
-              <matbea-input [lable]="kodAmla.name" *ngIf="kodAmla.kod == 4" [(value)]="amalotInfoResp.sachHakolAmalaNeto"></matbea-input>
-              <matbea-input [lable]="kodAmla.name + ' %  '" *ngIf="kodAmla.kod == 2" [(value)]="amalotInfoResp.shiurHncaAmalatTipul"></matbea-input> 
+<section id="page">
+  <div class="headerAmalot">
+    <matbea-lebel class="form-field-lable-light">
+      שיעור עמלות ערבות חוק מכר לשנה
+    </matbea-lebel>
+  </div>
+  <div class="headerDmTipul">
+    <matbea-lebel class="form-field-lable-light">
+      דמי טיפול באשראי ובטחונות
+    </matbea-lebel>
+  </div>
+  <div class="heiterLbl">
+    עם היתר בנייה
+  </div>
+  <div class="heiterInpt">
+    <matbea-input 
+      [(value)]="amalotInfoResp.shiurAmlatArvutSna"
+      class="inputCell"
+      (input)="inputAmlArvSna()">
+    </matbea-input>
+  </div>
+  <div class="heiterPrsnt">
+    %
+  </div>
 
-            </mat-radio-button>
-            
-          </mat-radio-group>
+  <div class="leDiraLbl">
+    לדירה מאוכלוסת
+  </div>
+  <div class="leDiraInpt">
+    <matbea-input 
+      [(value)]="amalotInfoResp.shiurAmlArvDiraOcls"
+      class="inputCell"
+      (input)="inputDiraOcl()">
+    </matbea-input>
+  </div>
+  <div class="leDiraPrsnt">
+    %
+  </div>
+  
+  <div class="leloHeiterLbl" style="vertical-align: bottom;">
+    ללא היתר
+  </div>
+  <div class="leloHeiterInpt">
+    <matbea-input 
+      [(value)]="amalotInfoResp.shiurAmlArvLloHeter"
+      class="inputCell"
+      (input)="inputLeLoHeter()">
+    </matbea-input>
+  </div>
+  <div class="leloHeiterPrsnt">
+    %
+  </div>
+  <div class="errinp2">
+    <mat-error *ngIf="isDiraOclErr">{{ amlotInpErrMsg }}</mat-error>
+  </div>
+  <div class="errinp1">
+    <mat-error *ngIf="isAmlImHeterErr">{{ amlotInpErrMsg }}</mat-error>
+  </div>
+  <div class="errinp3">
+    <mat-error *ngIf="isLoHeterErr">{{ amlotInpErrMsg }}</mat-error>
+  </div>
+  <div class="radio">
+    <div class="radio_grid">
+        <div class="radio_opt1">
+          <mat-radio-button 
+            class="radio-button"
+            [value]="kodeyAmalot[0].kod"
+            [checked]="kodeyAmalot[0].kod==amalotInfoResp.kodAmala"
+            (change)="onChangeRadio($event)">{{kodeyAmalot[0].name}}
+          </mat-radio-button>
         </div>
-        <div class="containerCol">
-          <matbea-lebel class="form-field-lable-light">שיעור עמלות ערבות חוק מכר לשנה</matbea-lebel>
-          <table>
-            <tr>
-              <td>עם היתר בנייה</td>
-              <td>%</td>
-              <td><matbea-input [(value)]="amalotInfoResp.shiurAmlatArvutSna"></matbea-input></td>
-            </tr>
-            <tr>
-              <td>לדירה מאוכלוסת</td>
-              <td>%</td>
-              <td><matbea-input [(value)]="amalotInfoResp.shiurAmlArvDiraOcls"></matbea-input></td>
-            </tr>
-            <tr>
-              <td>ללא היתר</td>
-              <td>%</td>
-              <td><matbea-input [(value)]="amalotInfoResp.shiurAmlArvLloHeter"></matbea-input></td>
-            </tr>
-          </table>
+        <div class="radio_opt2">
+          <mat-radio-button 
+            class="radio-button"
+            [value]="kodeyAmalot[1].kod"
+            [checked]="kodeyAmalot[1].kod==amalotInfoResp.kodAmala"
+            (change)="onChangeRadio($event)">{{kodeyAmalot[1].name}}
+          </mat-radio-button>         
         </div>
-</div>
+        <div class="radio_opt3">
+          <mat-radio-button
+            class="radio-button"
+            [value]="kodeyAmalot[2].kod"
+            [checked]="kodeyAmalot[2].kod==amalotInfoResp.kodAmala"
+            (change)="onChangeRadio($event)">{{kodeyAmalot[2].name}}
+          </mat-radio-button>
+        </div>
+        <div class="radio_opt4">
+          <mat-radio-button
+            class="radio-button"
+            [value]="kodeyAmalot[3].kod"
+            [checked]="kodeyAmalot[3].kod==amalotInfoResp.kodAmala"
+            (change)="onChangeRadio($event)">{{kodeyAmalot[3].name}}
+          </mat-radio-button>
+      </div>      
+      <div class="rd_input2">
+        <matbea-input
+          *ngIf="amalotInfoResp.kodAmala == '2'" 
+          [(value)]="amalotInfoResp.shiurHncaAmalatTipul"
+          (input)="inputHncaAmltChanged()"
+          lable="%"
+          class="inputCell">
+        </matbea-input> 
+      </div>
+      <div class="rd_input3">
+        <matbea-input  
+          *ngIf="amalotInfoResp.kodAmala == '4'" 
+          [(value)]="amalotInfoResp.sachHakolAmalaNeto"
+          (input)="inputSachAmltChanged()"
+          class="inputCell">
+        </matbea-input>
+      </div>
+      <div class="errSechAmlt" *ngIf="amalotInfoResp.kodAmala == '4'" >
+        <mat-error *ngIf="isSeckAmltErr">{{ sechAmltErrMsg }}</mat-error>
+      </div>
+      <div class="errShiurHnca" *ngIf="amalotInfoResp.kodAmala == '2'">
+        <mat-error *ngIf="isShiurHncaErr">{{ shiurHncaErrMsg }}</mat-error>
+      </div>
+    </div>
+  </div>
+</section>

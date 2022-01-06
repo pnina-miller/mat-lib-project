@@ -24,6 +24,8 @@ export class KablanimComponent implements OnInit {
   kablanimList: kablanimListType;
   isLoaded = false;
   message = "";
+  kvztRehishaMsg = "הפרויקט הוא מסוג קבוצת רכישה ולכן ללא קבלנים";
+  sugYeshut: number = 0;
 
 
   constructor(private http: HttpClient, private shofarServices : ShofarServices) { }
@@ -32,8 +34,9 @@ export class KablanimComponent implements OnInit {
     this.shofarServices.getReshimatKablanim(this.projectId).subscribe(resp => {      
 
       this.infoGenResp = resp as GeneralResponse;
-      this.isNatunimExt = (this.infoGenResp.messages == undefined)? true: false;
-      this.message = (this.isNatunimExt)? "" : this.infoGenResp.messages.global.fyi[0].message;  
+      this.isNatunimExt = (this.infoGenResp.messages == undefined || this.infoGenResp.messages.global.errors.length == 0)? true: false;
+      this.sugYeshut = this.infoGenResp.data["sugYeshutProyect"];
+      this.message = (this.isNatunimExt)? "" : this.infoGenResp.messages.global.errors[0].message;  
       this.kablanimList = this.infoGenResp.data["kablanimList"] as kablanimListType;
       this.isLoaded = true;
     },

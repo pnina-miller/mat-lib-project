@@ -1,0 +1,8 @@
+<ng-container>
+  <mat-button-toggle-group [name]="name" [disabled]="disabled" (valueChange)="valueChange.emit($event)" [vertical]="vertical" [multiple]="multiple" [appearance]="appearance">
+    <ng-container *ngFor="let toggle of value">
+      <mat-button-toggle [value]='toggle.value' [name]="toggle.name" [disabled]="toggle.disabled" [appearance]="toggle.appearance" (change)="valueChangeInToggle.emit({name:toggle.name,value: $event.value})"
+                         [id]="toggle.id" [checked]="toggle.checked" >{{toggle.name}}</mat-button-toggle>
+    </ng-container>
+  </mat-button-toggle-group>
+</ng-container>

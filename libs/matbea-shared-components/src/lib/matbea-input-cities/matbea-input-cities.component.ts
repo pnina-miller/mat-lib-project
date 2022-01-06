@@ -23,7 +23,11 @@ export class MatbeaInputCitiesComponent implements OnInit {
   @Input('selectedCity') selectedCity: string;
   @Input('lable') lable: string;
   @Input('disabled') disabled: boolean;
+  @Input('iconButtomPrefixName') iconButtomPrefixName: string;
+  @Input('lablePosition') lablePosition: string;
+  @Input('disabledTransparent') disabledTransparent: string;
   @Output() selectedCityChanged = new EventEmitter<String>();
+  @Output() selectedCityIdChanged = new EventEmitter<String>();
 
   constructor(private http: HttpClient, private shofarServices: ShofarServices) { }
 
@@ -47,12 +51,24 @@ export class MatbeaInputCitiesComponent implements OnInit {
 
           this.citiesControl.valueChanges.subscribe(
             value => {
+              let cityId = this.getCitiyId(value);
               this.selectedCityChanged.emit(value);
+              this.selectedCityIdChanged.emit(cityId);
             }
           )
     });
   }
 
+
+  private getCitiyId(selectedValue: string): string{
+    let results = this.citiesList.filter(entry => entry.value == selectedValue);
+    
+    if(results.length == 1){
+      return results[0].id;
+    }
+
+    return "";
+  }
  
 
   private _filter(name: string): GeneralComboEntry[] {

@@ -1,5 +1,5 @@
 <mat-radio-group [ngClass]="groupClass" class="" (change)="getGroupChange($event)" [disabled]="groupDisable" [labelPosition]="groupLabelPosition" [name]="groupName" [required]="groupRequired" [id]="groupId" [tabIndex]="groupTabIndex" [value]="groupValue" [selected]="selected">
-  <ng-container *ngFor="let option of options">mat-radio-button
-    <!-- <mat-radio-button class="matbea-radio-button" [ngClass]="option.class" [labelPosition]="labelPosition" [id]="option.id" [required]="option.required" [name]="option.name" [disabled]="option.disabled" [checked]="option.checked"  [tabIndex]="tabIndex" (change)="getValueChange($event)" [value]="option.value">{{option.value}}</mat-radio-button> -->
+  <ng-container *ngFor="let option of options">
+    <mat-radio-button class="matbea-radio-button" [ngClass]="option.class" [labelPosition]="labelPosition" [id]="option.id" [required]="option.required" [name]="option.name" [disabled]="option.disabled" [checked]="option.checked"  [tabIndex]="tabIndex" (change)="getValueChange($event)" [value]="option.value">{{option.value}}</mat-radio-button>
   </ng-container>
 </mat-radio-group>

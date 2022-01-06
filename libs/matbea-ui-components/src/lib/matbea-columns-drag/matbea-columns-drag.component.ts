@@ -10,11 +10,11 @@ export class MatbeaColumnsDragComponent implements OnInit, OnChanges {
   constructor() {
   }
 
-  @Input() inUseList!: string[];
-  @Input() toChooseList!: string[];
-  @Input() locked!: string[];
-  @Input() limit!: number;
-  type:any;
+  @Input() inUseList: string[];
+  @Input() toChooseList: string[];
+  @Input() locked: string[];
+  @Input() limit: number;
+  type;
 
   ngOnInit(): void {
 
@@ -31,7 +31,7 @@ export class MatbeaColumnsDragComponent implements OnInit, OnChanges {
     }
   }
 
-  onMoveToChoose(st:any) {
+  onMoveToChoose(st) {
     let temp = this.inUseList.indexOf(st)
     let tempList = this.inUseList.splice(temp, 1);
     if (!this.toChooseList.includes(st)) {
@@ -39,7 +39,7 @@ export class MatbeaColumnsDragComponent implements OnInit, OnChanges {
     }
   }
 
-  onMoveToUse(st:any) {
+  onMoveToUse(st) {
     let lim = Number(this.limit) - this.locked.length;
     if (this.inUseList.length < lim) {
       let temp = this.toChooseList.indexOf(st)

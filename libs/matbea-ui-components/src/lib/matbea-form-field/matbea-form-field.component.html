@@ -1,5 +1,4 @@
-<div class="matbea-form-field">
-  <ng-container *ngIf='prefix'><div class="form-field-lable">{{prefix}}</div></ng-container>
+<div class="matbea-form-field"><ng-container *ngIf='prefix'><div class="form-field-lable">{{prefix}}</div></ng-container>
 <mat-form-field color="warn" >
     <mat-label>{{label}}</mat-label>
     <mat-select *ngIf="type=='select'" disableOptionCentering (selectionChange)="getValue($event)" [placeholder]="placeholder"  [(value)]="defaultInSelector" [disabled]="isDisable" panelClass="panelClassSelect">

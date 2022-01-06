@@ -1,24 +1,25 @@
-<div style="     display: flex;
+<ng-container><div style="     display: flex;
 flex-direction: row-reverse;
 flex-wrap: nowrap;
 align-content: center;
 justify-content: space-between;
-align-items: center;">
+align-items: flex-end;">
   <div class="buttons" style="    display: flex;
   flex-direction: row-reverse;
   flex-wrap: nowrap;
   align-content: center;
   justify-content: flex-start;
   align-items: flex-end;
-  width: 15%;">
+  width: 160px;">
     <matbea-icon-button icon="matbea-download" ></matbea-icon-button>
     <matbea-icon-button icon="matbea-print" ></matbea-icon-button>
     <matbea-mat-filter></matbea-mat-filter>
     <matbea-open-column-picker-button></matbea-open-column-picker-button>
   </div>
-  <div class="toChips" style="width: 60%;"></div>
+<!--  <div class="toChips" style="width: 60%;"></div>-->
 
 <matbea-filter-chips-wrapper></matbea-filter-chips-wrapper>
   <div class="button-for-table-right"><span class="form-field-lable">סה"כ {{dataSourceLenght}} פרויקטים</span><span class="form-field-lable-light"> (הסכומים מוצגים באלפים) </span></div>
 
 </div>
+</ng-container>

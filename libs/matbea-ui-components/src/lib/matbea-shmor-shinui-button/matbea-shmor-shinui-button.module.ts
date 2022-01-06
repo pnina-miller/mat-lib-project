@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatbeaShmorShinuiButtonComponent } from './matbea-shmor-shinui-button.component';
-import {MatbeaButtonModule, MatbeaIconButtonModule} from '../index';
+import {MatbeaButtonModule, MatbeaIconButtonModule} from '@pdesks/matbea-ui-components';
 
 
 

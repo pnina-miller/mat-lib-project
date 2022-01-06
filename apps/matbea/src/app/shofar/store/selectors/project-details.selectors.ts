@@ -16,8 +16,43 @@ export const getProject= createSelector(
   projectDetailsState ,
   (projectDetailsState) => projectDetailsState.project
 );
-
-
-
-
-
+export const getCitiesComboBox= createSelector(
+  projectDetailsState ,
+  (projectDetailsState) => projectDetailsState.citiesComboBox
+);
+export const getDivurMichtavShichrurCombo= createSelector(
+  projectDetailsState ,
+  (projectDetailsState) => projectDetailsState.divurMichtavShichrurCombo
+);
+export const getKarkaProyectCombo= createSelector(
+  projectDetailsState ,
+  (projectDetailsState) => projectDetailsState.karkaProyectCombo
+);
+export const getEzorCombo= createSelector(
+  projectDetailsState ,
+  (projectDetailsState) => projectDetailsState.ezorCombo
+);
+export const getShemMefakeachCombo= createSelector(
+  projectDetailsState ,
+  (projectDetailsState) => projectDetailsState.shemMefakeachCombo
+);
+export const getShitatLivuyCombo= createSelector(
+  projectDetailsState ,
+  (projectDetailsState) => projectDetailsState.shitatLivuyCombo
+);
+export const getStatusCombo= createSelector(
+  projectDetailsState ,
+  (projectDetailsState) => projectDetailsState.statusCombo
+);
+export const getPratimBsisiim= createSelector(
+  projectDetailsState ,
+   (projectDetailsState) => {return {project: projectDetailsState.project,
+     citiesComboBox: projectDetailsState.citiesComboBox,
+    divurMichtavShichrurCombo: projectDetailsState.divurMichtavShichrurCombo,
+     karkaProyectCombo: projectDetailsState.karkaProyectCombo,
+     ezorCombo: projectDetailsState.ezorCombo,
+     shemMefakeachCombo: projectDetailsState.shemMefakeachCombo,
+     shitatLivuyCombo: projectDetailsState.shitatLivuyCombo,
+     statusCombo: projectDetailsState.statusCombo}}
+  // (projectDetailsState) =>projectDetailsState.project
+);

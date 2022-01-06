@@ -1,87 +1,145 @@
-.shalav-input {
+input[matinput]::-webkit-outer-spin-button,
+input[matinput]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.rowCell {
+    box-sizing: border-box;
+    width:100%;
+    float: left;
     padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.shalav-input ::ng-deep span {
-    font-size: small;
+   
 }
 
-.input-yeud {
-    .checkbox-wrapper {
-        display: flex;
-    }
-    grid-area: targ;
-}
-.input-heterBniya {
-    grid-area: heterBniya;
-}
-.input-taarich8HeterBniya {
-    grid-area: taarich8HeterBniya;
-}
-.input-taarich8SiyumTzafui {
-    grid-area: taarich8SiyumTzafui;
-}
-.input-teurHaShlav {
-    grid-area: teurHaShlav;
-}
-.success-content {
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding-right: 50px;
-
-    .success-title {
-        font-size: x-large;
-        font-weight: bold;
-        margin-bottom: 30px;
-    }
-    .success-text {
-    }
+.horizontalLayout {
+    white-space : nowrap; 
+       overflow : hidden; 
+ vertical-align : top;
+  
+        display : inline-block;
 }
 
-::ng-deep .hosafat-shalav-container {
-    .mat-dialog-container {
-        padding: 0px;
-        border-radius: 5px;
-    }
-    .dialog-title {
-        .mat-dialog-title {
-            font-weight: bold;
-        }
-        border-radius: 5px;
-        padding: 20px;
-        background: rgb(245, 242, 242);
+.layoutbacking {
+ border-radius : 15px;
+    background : #CCCCCC;
+       padding : 5px;
+        margin : 5px;
+}
 
-        height: 70px;
-        grid-gap: 10px;
-        vertical-align: middle;
-    }
-    .dialog-content {
-        display: grid;
-        height: 330px;
-        grid-gap: 20px;
-        grid-template-rows: 30% 30% 30%;
-        grid-template-columns: 40% 40% 10%;
 
-        grid-template-areas:
-            "teurHaShlav taarich8SiyumTzafui "
-            "taarich8HeterBniya heterBniya "
-            "targ targ";
-    }
-    .dialog-footer {
-        padding: 5px;
-        height: 60px;
-        display: flex;
-        justify-content: space-between;
-        border-top: 0.5px solid gray;
-        align-items: center;
-    }
 
-    .success-footer{
-        justify-content: flex-end;
-    }
+.rowCell5 {   
+    width:5%;    
+}
+
+.rowCell10 {   
+    width:10%;    
+}
+
+.rowCell15{
+    margin: 0em 1em;
+}
+
+.rowCell20 {   
+    width:20%;    
+}
+
+.rowCell25 {   
+    width:25%;    
+}
+
+.rowCell30 {   
+    width:30%;    
+}
+
+.rowCell40 {   
+    width:40%;    
+}
+
+.rowCell50 {   
+    width:50%;    
+}
+
+.rowCell60 {   
+    width:60%;    
+}
+
+.rowCell70 {   
+    width:70%;    
+}
+
+.rowCell80 {   
+    width:80%;    
+}
+
+.rowCell90 {   
+    width:90%;    
+}
+
+.rowCell100 {   
+    width:100%;    
+}
+
+.verticalLayout{
+    display: block;
+}
+
+.stepperPanelDiv{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: rtl;height:420px;
+}
+
+.alignLeft{
+    text-align: left;
+}
+
+.alignRight{
+    text-align: right;
+}
+
+.bigLabel{
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.spanSeperator{
+    display: inline-block;
+}
+
+.noPadding{
+    padding:0px;
+    margin: 0px;
+}
+
+.noWrap{
+    white-space: nowrap;
+}
+
+.redBg{
+    background-color: red;
+}
+
+
+::ng-deep .mat-horizontal-stepper-header-container {
+    pointer-events: none ;
+  }
+
+  .bealimLeCheshbonBG{
+      background-color: grayscale($color: #f5f5f5);
+  }
+
+  .bealimLeCheshbonBorder{
+    border: 1px solid gray;
+}
+
+.dialog-title {
+	padding: 0;
+    background: rgb(245, 242, 242);
+    font-weight: bold;
+    height: 50px;
+    vertical-align: middle;
 }

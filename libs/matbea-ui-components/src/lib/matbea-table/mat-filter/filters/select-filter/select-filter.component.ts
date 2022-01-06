@@ -2,7 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core'
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MatTableService} from "../../../services/mat-table.service";
 import {SelectFilterColumn} from "../../../models/filterColumns";
-import { RadioButtonTabEntry } from '../../../../radio-button-tab/radio-button-tab.component';
+import { RadioButtonTabEntry } from 'libs/matbea-ui-components/src/lib/radio-button-tab/radio-button-tab.component';
+
 @Component({
   selector: 'app-select-filter',
   templateUrl: './select-filter.component.html',
@@ -16,7 +17,7 @@ export class SelectFilterComponent implements OnInit {
   options!: FormGroup;
   hideRequiredControl = new FormControl(false);
   stringFilterValue=''
-  optionsArr!:RadioButtonTabEntry[];
+  optionsArr:RadioButtonTabEntry[];
   valid:boolean = true;
 
   ngOnInit(): void {
@@ -24,7 +25,7 @@ export class SelectFilterComponent implements OnInit {
     this.optionsArr=this.filterColumn.options.map(option=>({id:option,description:option}));
   }
 
-  onChange(value: any){
+  onChange(value: any){debugger
     this.stringFilterValue=value
   }
 
@@ -46,3 +47,4 @@ export class SelectFilterComponent implements OnInit {
 
   }*/
 }
+

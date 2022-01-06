@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatbeaButtonComponent } from './matbea-button.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatButtonModule} from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import {MatIconModule} from '@angular/material/icon';
 
 
 

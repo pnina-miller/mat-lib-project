@@ -19,7 +19,8 @@ export const svgIcons = [
   "matbea-filter",
   "matbea-print",
   "matbea-search",
-  "matbea-sort"
+  "matbea-sort",
+  "matbea-back"
 ]
 
 
@@ -37,14 +38,14 @@ export class MatbeaButtonComponent implements OnInit, OnChanges {
   @Output() onClick = new EventEmitter<any>();
   @Input() positionTooltip: PositionTooltip = 'above';
   @Input() tooltip: string = '';
-  @Input() size!: string;
+  @Input() size: string;
   @Input() type: 'mat-stroked' | 'mat-raised' | 'mat-def' | 'mat-flat' | 'matbea-raised' | 'def' | 'matbea-stroked'|'matbea-regular' = 'def';
   @Input() style = "";
-  @Input() color!: null | "primary" | "accent" | "warn";
-  @Input() icon!: string;
-  @ViewChild('noSvgIcon', { static: false}) noSvgIcon!:TemplateRef<any>;
-  @ViewChild('svgIcon', { static: false}) svgIcon!:TemplateRef<any>;
-  svg!:boolean | null;
+  @Input() color: null | "primary" | "accent" | "warn";
+  @Input() icon: string;
+  @ViewChild('noSvgIcon', { static: false}) noSvgIcon:TemplateRef<any>;
+  @ViewChild('svgIcon', { static: false}) svgIcon:TemplateRef<any>;
+  svg:boolean;
   private element: ElementRef;
 
 

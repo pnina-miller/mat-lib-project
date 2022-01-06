@@ -26,6 +26,15 @@ const projectDetailsReducer = createReducer(
     shemMefakeachCombo: action.shemMefakeachCombo,
     shitatLivuyCombo: action.shitatLivuyCombo,
     statusCombo: action.statusCombo
+  })),
+  on(ProjectDetailsActions.saveProjectDetailsSuccess,(state,action)=>({
+    ...state,
+      project:action.project,
+  })),
+  on(ProjectDetailsActions.saveProjectDetailsFailure,(state,action)=>({
+    ...state,
+    project:state.project,
+    message:action.message
   }))
 
 );

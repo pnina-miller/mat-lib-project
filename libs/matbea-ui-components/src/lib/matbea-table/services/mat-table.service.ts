@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { FilterColumn, MultiSelectFilterColumn, SelectFilterColumn } from '../models/filterColumns';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -33,10 +34,10 @@ export class MatTableService {
     if (this.displayDataSource.getValue() && this.columnDefinitions.getValue())
       this.columnDefinitions.getValue().forEach((col) => {
         if (col.columnfiltertype === 'SELECT'){
-          this.getColumnOptions(col.ordernumber,col.associatedcolumnname|| col.columnnameenglish.trim(),SelectFilterColumn);
+          this.getColumnOptions(col.ordernumber,col.columnnameenglish,SelectFilterColumn);
         }
         if (col.columnfiltertype === 'MULTISELECT'){
-          this.getColumnOptions(col.ordernumber,col.associatedcolumnname|| col.columnnameenglish.trim(),MultiSelectFilterColumn);
+          this.getColumnOptions(col.ordernumber,col.columnnameenglish,MultiSelectFilterColumn);
         }
       });
   }
@@ -50,28 +51,27 @@ export class MatTableService {
     columnDefinitions: FilterColumn[],
     updateFilters: Function = () => {}
   ): void {
-    if (this.dataSource.filteredData.length === 0) {//?
+    this.resetFilters()
+    // if (this.dataSource.filteredData.length === 0) {//?
       if (tableDataSource) this.initDataSource(tableDataSource);
       else if (dataSourceUrl)
         this.loadDataSource(dataSourceUrl).subscribe((res) =>
           this.initDataSource(res)
         );
-        else console.warn('mat table error: No data source')
-    }
+    // }
     
-    if (this.columnDefinitions.getValue().length === 0) {
+    // if (this.columnDefinitions.getValue().length === 0) {
       if (columnDefinitions) this.initColumns(columnDefinitions);
       else if (columnDefinitionsUrl)
         this.loadColumnDefinition(columnDefinitionsUrl).subscribe((res) =>
           this.initColumns(res)
         );
-        else console.warn('mat table error: No column definition')
-    }
+    // }
     this.updateFilters = updateFilters;
   }
 
-  initDataSource(data: any) {
-    this.dataSource = new MatTableDataSource<any>( data.filteredData ||data);
+  initDataSource(data: any[]) {
+    this.dataSource = new MatTableDataSource<any>(data);
     this.displayDataSource.next(this.dataSource);
     this.dataChanged();
   }
@@ -93,7 +93,7 @@ export class MatTableService {
     getColumnOptions(orderNumber: string, columnName: string, clazz:any):void {
     let options = [
       ...new Set(
-        this.dataSource.filteredData.map((column) => column[columnName])
+        this.dataSource.filteredData?.map((column) => column[columnName])
       ),
     ];
     let columns = this.columnDefinitions.getValue();

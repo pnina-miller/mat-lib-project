@@ -4,7 +4,6 @@ import * as ProjectDetailsSelectors from '../../store/selectors/project-details.
 import {Subscription} from "rxjs";
 import {StateProjectDetails} from "../../store/state/project-details.state";
 import * as ProjectDetailsActions from '../../store/actions/project-details.actions';
-import {ProjectDetailsData} from "../project-basic-details-components/project-basic-details/project-basic-details.component";
 
 
 @Component({
@@ -14,7 +13,7 @@ import {ProjectDetailsData} from "../project-basic-details-components/project-ba
 })
 export class ProjectDetailsHeaderComponent implements OnInit, OnChanges {
   project$ = this.store$.select(ProjectDetailsSelectors.getProject);
-  project: ProjectDetailsData;
+  project={}
   shemProyectSagur = '';
   shemProyectSagurAng = '';
   shuratMelel800 = '';

@@ -66,7 +66,7 @@ export class CheshbonotComponent implements OnInit {
   openHosafatCheshbonPopup(): void{
     const dialogRef = this.dialog.open(HosafatCheshbonComponent, {
       width: '50%',
-      height: '70%', 
+      height: '75%', 
       data: {misparProyectSagur: this.misparProyectSagur, misparBank: this.misparBank},    
     });
 
@@ -82,8 +82,8 @@ export class CheshbonotComponent implements OnInit {
     this.shofarServices.removeCheshbon(this.misparProyectSagur, misparBank, misparSnif, misparCheshbon).subscribe(resp => {      
       let generalResponse = resp as GeneralResponse;
      
-      if(generalResponse.messages != null && generalResponse.messages.global.fyi.length > 0){
-        this.errorMsg = generalResponse.messages.global.fyi[0].message;       
+      if(generalResponse.messages != null && generalResponse.messages.global.errors.length > 0){
+        this.errorMsg = generalResponse.messages.global.errors[0].message;       
       }else{
         this.getCheshbonotProject();
       }
@@ -97,8 +97,8 @@ export class CheshbonotComponent implements OnInit {
     this.shofarServices.hagderKeArvut(this.misparProyectSagur, misparBank, misparSnif, misparCheshbon).subscribe(resp => {      
       let generalResponse = resp as GeneralResponse;
      
-      if(generalResponse.messages != null && generalResponse.messages.global.fyi.length > 0){
-        this.errorMsg = generalResponse.messages.global.fyi[0].message;       
+      if(generalResponse.messages != null && generalResponse.messages.global.errors.length > 0){
+        this.errorMsg = generalResponse.messages.global.errors[0].message;       
       }else{
         this.getCheshbonotProject();
       }

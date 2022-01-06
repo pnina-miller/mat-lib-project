@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ɵɵtrustConstantResourceUrl, NgZone } from '@angular/core';
+import { Component, OnInit, Input, ɵɵtrustConstantResourceUrl, NgZone, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ShofarServices } from '../../../services/shofar-services';
 import { GeneralResponse } from 'libs/matbea-shared-components/src/lib/beans/general-response';
@@ -22,9 +22,9 @@ export class NatuneyMashkantaComponent implements OnInit {
   @Input() projectId: any;
   @Input() events: Observable<void>;
   @Input() isEditMode = false;
-  getChildsChenges: Subject<void> = new Subject<void>();
-
+  @Output() okToSwitchMode: EventEmitter<boolean> = new EventEmitter();
   
+  getChildsChenges: Subject<void> = new Subject<void>();
   mashkantaInfoResp: MashkantaType;
   amalotInfResp: AmalotType;
   dargatMashkantaLst: GeneralComboEntry[];
@@ -33,8 +33,7 @@ export class NatuneyMashkantaComponent implements OnInit {
   message = "";
   private eventsSubscription: Subscription;
 
-  constructor(private http: HttpClient, private shofarServices : ShofarServices, 
-              public datepipe: DatePipe, private zone: NgZone,  private router: Router) {
+  constructor(private shofarServices : ShofarServices, public datepipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -45,11 +44,10 @@ export class NatuneyMashkantaComponent implements OnInit {
 
   getPirteyMsknt() {
     this.shofarServices.getNatuneyMashkanta(this.projectId).subscribe(resp => {      
-      this.zone.run(() => {
         this.infoGenResp = resp as GeneralResponse;
-        if(this.infoGenResp.messages != undefined){
+        if(this.infoGenResp.messages != undefined && this.infoGenResp.messages.global.errors.length > 0){
           this.isNatunimExt = false;
-          this.message = this.infoGenResp.messages.global.fyi[0].message;
+          this.message = this.infoGenResp.messages.global.errors[0].message;
         }else{
           this.isNatunimExt = true;
           this.message = "";
@@ -60,7 +58,6 @@ export class NatuneyMashkantaComponent implements OnInit {
       },
       (error) => { 
         console.error('error caught in component' + error)
-      })
     });
 
   }
@@ -72,27 +69,16 @@ export class NatuneyMashkantaComponent implements OnInit {
   saveMashkantaPressed(){
     this.getChildsChenges.next();
   }
-  
-  inputCheck() {
-    let isFullInput = true;
-    if(!this.isNatunimExt || 
-        this.mashkantaInfoResp.metegHagbala == 0 && this.mashkantaInfoResp.schumHitchayvutMsknt == 0 ||
-        this.mashkantaInfoResp.teurDargatMsknt != 'ראשונה' && this.mashkantaInfoResp.melelDargatMashkanta == ""){
-      isFullInput = false;
-    }
-    return isFullInput;
-  }
+
 
   save($event: MashkantaType){
     this.mashkantaInfoResp = $event;
-    if(this.inputCheck()){
-      let  saveData: saveMskDataType = {mashkanta: this.mashkantaInfoResp, amalot: this.amalotInfResp};
-      this.shofarServices.setNatuneyMashkanta(saveData).subscribe(resp => {
-        this.zone.run(() => {
-          console.log("---> succeed");
+    let  saveData: saveMskDataType = {mashkanta: this.mashkantaInfoResp, amalot: this.amalotInfResp};
+    this.shofarServices.setNatuneyMashkanta(saveData).subscribe(resp => {
+      if(resp){
           this.getPirteyMsknt();
-        })
-      });    
-    }
+          this.okToSwitchMode.emit(true);
+      }
+    });    
   }
 }

@@ -6,6 +6,6 @@
     [isComboDisabled]="isComboDisabled"
     [hierarchyCombInputKod]="misparAgaf"
     [hierarchyComboKod]="kodSector"
-    hierarchyService="/common/sectors"
+    hierarchyService="/matbea/common/v1/hierarchy/chativot/agafim/{{misparAgaf}}/sectors"
     (hierarchyChanged)="sectorComboChanged($event)">
 </matbea-matbea-hierarchy-general-combo>

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {createEffect, Actions, ofType} from '@ngrx/effects';
-// import {fetch} from '@nrwl/angular';
+import {fetch} from '@nrwl/angular';
 import * as ShofarActions from '../actions/shofar.actions';
 import {mergeMap, map, tap, take} from 'rxjs/operators';
 

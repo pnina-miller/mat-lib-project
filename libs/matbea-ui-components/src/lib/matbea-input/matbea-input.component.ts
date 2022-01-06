@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
+import { startWith, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'matbea-input',
@@ -8,33 +10,34 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from "@angular/form
 })
 export class MatbeaInputComponent implements OnInit, OnChanges {
 
-  limitNumber!: number;
-  @Input() lable!: string;
+  limitNumber: number;
+  @Input() lable: string;
   ngclass: string = '';
-  @Input() placeholder!: string;
-  @Input() value!: string | number;
+  @Input() placeholder: string;
+  @Input() value: string | number;
   @Input() limit: number = 70;
-  @Input() type!: string;
+  @Input() type: string;
   @Output() click = new EventEmitter();
   @Input() disabled: boolean =false;
-  @Input() prefix!: string;
-  @Input() suffix!: string;
-  @Input() iconButtomPrefixName!: string;
-  @Input() iconButtomPrefixDisabled!: boolean;
-  @Input() iconButtomPrefixTooltip!: string;
-  @Input() hint!: string;
+  @Input() prefix: string;
+  @Input() suffix: string;
+  @Input() iconButtomPrefixName: string;
+  @Input() iconButtomPrefixDisabled: boolean;
+  @Input() iconButtomPrefixTooltip: string;
+  @Input() hint: string;
   @Output() valueChange = new EventEmitter();
   @Output() keypress = new EventEmitter()
-  @Input() id!: string;
+  @Input() id: string;
   lableClass: any;
   @Input() lablePosition: 'start' | 'end' | 'top' = 'start';
-  @Input() autocomplete!: any[];
+  @Input() autocomplete: string[];
   @Input() transparent: boolean = true;
   @Input('disabledTransparent') disabledTransparent: boolean = false;
   @Input() class: string = '';
   classs: any;
-  @Input() inputFormControl!: FormControl;
-  @Input('error-messages') errorMessage!: { [k: string]: string };
+  @Input() inputFormControl= new FormControl();
+  @Input('error-messages') errorMessage: { [k: string]: string };
+  filteredOptions: Observable<string[]>;
 
 
 
@@ -55,7 +58,6 @@ export class MatbeaInputComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.inputFormControl=this.inputFormControl?this.inputFormControl: new FormControl();
-    this.inputFormControl.setValue(this.inputFormControl.value)
     console.log("changes: ", changes);
     this.limitNumber = (10 ^ this.limit);
     if (changes.value) {
@@ -86,12 +88,23 @@ export class MatbeaInputComponent implements OnInit, OnChanges {
         this.classs = this.classs+' matbea-form-field-disabled-transparent'
       }
     }
+    if(this.autocomplete){
+      this.filteredOptions = this.inputFormControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      )
+    }
+  
 
   }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
+    return this.autocomplete.filter(option => option.toLowerCase().includes(filterValue));
+  }
   getErrorMessage() {
     if(this.inputFormControl){
-      let keys = Object.keys(this.inputFormControl.errors || {});
+      let keys = Object.keys(this.inputFormControl.errors);
       let message = ''
       if (this.errorMessage) {
         keys.forEach((k) => {
@@ -100,6 +113,6 @@ export class MatbeaInputComponent implements OnInit, OnChanges {
       }
       return message ? message : 'error';
     }
-return;
+
   }
 }

@@ -15,7 +15,7 @@ export class ProjectBasicDetailsService {
 
 
     changeMode(): void{
-        this.baicDetails.changeMode();
+        // this.baicDetails.changeMode();
     }
 
     isEditMode(): boolean{
@@ -23,7 +23,7 @@ export class ProjectBasicDetailsService {
     }
 
     save(projectBasicDetailsContainerRef: ProjectBasicDetailsContainerComponent): void{
-        this.baicDetails.saveProjectDetails(projectBasicDetailsContainerRef);
+        // this.baicDetails.saveProjectDetails(projectBasicDetailsContainerRef);
     }
-  
+
 }

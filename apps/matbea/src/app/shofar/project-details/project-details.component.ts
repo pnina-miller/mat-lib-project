@@ -32,13 +32,13 @@ export class ProjectDetailsComponent implements OnInit {
       this.id = params.get('id');
       this.misparProyectSagur = this.id.split('&')[0];
       this.kodMutavBeShovar = this.id.split('&')[1];
+      this.steps.push({name: 'רשימת פרויקטים', routTo: 'table'}, {name: 'היילין מתחם הבורסה', routTo: ''})
       this.project$.subscribe((project) => {
         if(project){
-      this.steps=[{name: 'רשימת פרויקטים', routTo: 'table'}, {name: project.shemProyectSagur, routTo: ''}];
           this.misparProyectSagur=project.misparProyectSagur;
           this.kodMutavBeShovar= project.kodMutavBeShovar;
         } else {
-          this.storeProjectDetails$.dispatch(ProjectDetailsActions.init({id:this.id, kodMutav:3/*home:this.kodMutavBeShovar*/, misparProyectSagur:this.misparProyectSagur}))
+          this.storeProjectDetails$.dispatch(ProjectDetailsActions.init({id:this.id, kodMutav:this.kodMutavBeShovar, misparProyectSagur:this.misparProyectSagur}))
         }
           console.log('Project from store', project);
         },
@@ -49,12 +49,12 @@ export class ProjectDetailsComponent implements OnInit {
       this.projectsList$.subscribe(
         (projectsList) => {
 
-          let selectedProject = projectsList.filter((project) => {
+          let selectedProject = projectsList?.filter((project) => {
             if (project.misparProyectSagur == this.misparProyectSagur)
               return true;
           })
 
-          if (selectedProject.length > 0) {
+          if (selectedProject?.length > 0) {
             this.kodMutavBeShovar = selectedProject[0].kodMutavBeShovar;
           }
 

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatbeaInputComponent } from './matbea-input.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatbeaIconButtonModule } from "../index";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import {MatbeaInputComponent} from "./matbea-input.component";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatbeaIconButtonModule} from "../matbea-icon-button/matbea-icon-button.module";
+
 
 
 
@@ -13,15 +14,15 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
   declarations: [
     MatbeaInputComponent
   ],
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatbeaIconButtonModule,
-    FormsModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+      MatbeaIconButtonModule
+    ],
   exports: [
     MatbeaInputComponent
   ]

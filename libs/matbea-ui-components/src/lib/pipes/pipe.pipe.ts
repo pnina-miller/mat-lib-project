@@ -6,7 +6,7 @@ import {PipeTransform, Pipe} from '@angular/core'
 export class PipePipe implements PipeTransform {
 
   transform(value: any, formater: any): any {
-    if (formater.toLowerCase() == "int2dateformatter") {
+    if (formater&&formater.toLowerCase() == "int2dateformatter") {
       if (value) {
         if (value.length == 8) {
 
@@ -20,7 +20,7 @@ export class PipePipe implements PipeTransform {
 
       }
     }
-    if (formater.toLowerCase() == "percent") {
+    if (formater&&formater.toLowerCase() == "percent") {
 
       if (value) {
         value = parseFloat(value).toFixed(2).toString();
@@ -30,7 +30,7 @@ export class PipePipe implements PipeTransform {
       }
 
     }
-    if (formater.toLowerCase() == "yesno") {
+    if (formater&&formater.toLowerCase() == "yesno") {
 
       value = Number.parseInt(value);
       if (value == 1) {
@@ -39,7 +39,7 @@ export class PipePipe implements PipeTransform {
         return 'לא';
       }
     }
-    if (formater.toLowerCase() == 'currency') {
+    if (formater&&formater.toLowerCase() == 'currency') {
       value = parseFloat(value).toFixed(0).toString();
       if (value.length > 3) {
         let des = value.substring(value.length - 3);

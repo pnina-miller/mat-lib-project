@@ -28,7 +28,7 @@ export const getUpdateInDBColumnDefinitions=createSelector(
 )
 export const getProjectsWithFilter=createSelector(
   state,
-  (state)=>{; return state.projectsWithFilter}
+  (state)=>state.projectsWithFilter
 )
 export const getStatusProjects = createSelector(
   state,
@@ -45,6 +45,10 @@ export const getLoadingTable= createSelector(
 export const getMessagesToTable= createSelector(
   state,
   (state)=>state.messagesToTable
+)
+export const getProjectListLenght= createSelector(
+  state,
+  (state)=> state.projectListLenght
 )
 
 

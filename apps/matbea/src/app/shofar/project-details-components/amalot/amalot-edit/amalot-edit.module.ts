@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AmalotEditComponent } from './amalot-edit.component'
 import { MatbeaFormFieldModule, MatbeaLebelModule, MatbeaInputModule} from "@pdesks/matbea-ui-components";
 import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -11,7 +13,8 @@ import { MatRadioModule } from '@angular/material/radio';
   imports: [
     CommonModule,
     MatbeaFormFieldModule, MatbeaLebelModule, MatbeaInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatInputModule    
   ],
   exports: [
     AmalotEditComponent

@@ -1,0 +1,14 @@
+@import "libs/matbea-ui-components/assets/variables.scss";
+.mat-button-toggle{
+  background: transparent 0% 0% no-repeat padding-box;
+  border: 1px solid $unnamed-color-717171;
+  border-radius: 0px 2px 2px 0px;
+  color: $unnamed-color-717171;
+  &.mat-button-toggle-checked {
+    background: $unnamed-color-f1f6fb 0% 0% no-repeat padding-box;
+    border: 1px solid $unnamed-color-4c7fc5;
+    border-radius: 0px 2px 2px 0px;
+    color: $unnamed-color-4c7fc5;
+  }
+}
+

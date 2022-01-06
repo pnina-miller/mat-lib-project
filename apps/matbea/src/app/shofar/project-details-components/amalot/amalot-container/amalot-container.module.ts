@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AmalotContainerComponent } from './amalot-container.component';
 import { AmalotModule } from '../amalot/amalot.module';
-import { MatbeaSliceDataContainerModule, MatbeaButtonModule, MatbeaIconButtonModule } from "@pdesks/matbea-ui-components";
+import { MatbeaSliceDataContainerModule, MatbeaButtonModule, MatbeaIconButtonModule, MatbeaShmorShinuiButtonModule } from "@pdesks/matbea-ui-components";
+
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MatbeaSliceDataContainerModule, MatbeaButtonModule, MatbeaIconButtonMod
     AmalotModule,
     MatbeaSliceDataContainerModule,
     MatbeaButtonModule,
-    MatbeaIconButtonModule
+    MatbeaIconButtonModule, 
+    MatbeaShmorShinuiButtonModule
   ],
   exports: [
     AmalotContainerComponent

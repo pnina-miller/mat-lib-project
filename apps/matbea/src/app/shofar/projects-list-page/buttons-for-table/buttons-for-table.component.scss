@@ -3,5 +3,11 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  width: 21em;
+  align-items: center;
+  min-width: 280px;
+  min-height: 40px;
+}
+matbea-filter-chips-wrapper{
+  height: 100%;
+  width: 60%;
 }

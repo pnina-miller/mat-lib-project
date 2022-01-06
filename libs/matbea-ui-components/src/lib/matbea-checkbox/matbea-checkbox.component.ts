@@ -7,16 +7,16 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
   styleUrls: ['./matbea-checkbox.component.scss']
 })
 export class MatbeaCheckboxComponent implements OnInit {
-  @Input() id!: string;
-  @Input() disabled!: boolean;
-  @Input() labelPosition!: 'before' | 'after';
-  @Input() indeterminate!: boolean;
-  @Input() checked!: boolean;
-  @Input() required!: boolean;
+  @Input() id: string;
+  @Input() disabled: boolean;
+  @Input() labelPosition: 'before' | 'after';
+  @Input() indeterminate: boolean;
+  @Input() checked: boolean;
+  @Input() required: boolean;
   @Input() tabIndex: any;
-  @Input() value!: boolean;
-  @Input() name!: string;
-  @Input() lable!: string;
+  @Input() value: boolean;
+  @Input() name: string;
+  @Input() lable: string;
   @Output() valueChange = new EventEmitter();
   @Output() indeterminateChange =new EventEmitter();
 
@@ -29,7 +29,7 @@ export class MatbeaCheckboxComponent implements OnInit {
 
   change($event: MatCheckboxChange) {
     console.log('change :', $event)
-    this.valueChange.emit($event);
+    this.valueChange.emit($event.checked);
   }
 
   getIndeterminateChange($event: boolean) {

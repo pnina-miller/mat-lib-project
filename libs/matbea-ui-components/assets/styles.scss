@@ -2,22 +2,24 @@
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
+
   ::-webkit-scrollbar {
     width: 4px;
   }
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background:transparent;
+    background: transparent;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #dfe2e8;
     border-radius: 4px;
-    &:hover{
+
+    &:hover {
       background: $unnamed-color-8991a1;
-  }
+    }
   }
 
 }
@@ -71,13 +73,15 @@ body {
   background: $matbea-page-background-color 0% 0% no-repeat padding-box;
 
 }
-.small-lable{
+
+.small-lable {
   text-align: center;
   letter-spacing: 0px;
-  color:$unnamed-color-8991a1;
+  color: $unnamed-color-8991a1;
   opacity: 1;
   font-size: small;
 }
+
 .mat-sort-header-arrow.ng-trigger.ng-trigger-arrowPosition {
   transform: translateY(0%) !important;
 }
@@ -166,7 +170,9 @@ div.cdk-overlay-pane {
 .matbea-form-field-transparent .mat-form-field-infix {
   background-color: transparent !important;
 }
-
+.mat-form-field{
+  width: 100%;
+}
 .mat-form-field-appearance-legacy .mat-form-field-infix {
 
   background-color: $unnamed-color-ffffff;
@@ -205,6 +211,9 @@ matbea-table-cell {
   white-space: nowrap;
 }
 
+.mat-form-field.mat-focused .mat-form-field-ripple{
+  background-color: $unnamed-color-717171;
+}
 .matbea-form-field-disabled-transparent {
   .mat-form-field-underline {
     background-image: none !important;
@@ -220,14 +229,24 @@ matbea-table-cell {
   }
 
   &.mat-form-field-disabled {
+    .mat-form-field-prefix{
+display: none;
+    }
     .mat-form-field-subscript-wrapper {
       display: none;
     }
   }
-
+ & .mat-select.mat-select-disabled .mat-select-arrow{
+    color: transparent;
+  }
 }
 matbea-icon{
   display: inline-flex;
+  // align-items: flex-end;
+  .mat-icon{
+    height: 100%;
+    width: 100%;
+  }
 }
 
 // checkbox
@@ -242,10 +261,11 @@ matbea-icon{
       .mat-checkbox-checkmark-path {
         stroke: $unnamed-color-8991a1 !important;
       }
+
       .mat-checkbox-background {
         &:after {
           content: none;
-          color:  $unnamed-color-8991a1 !important;
+          color: $unnamed-color-8991a1 !important;
         }
       }
     }
@@ -255,7 +275,7 @@ matbea-icon{
     .mat-checkbox-background {
       &:after {
         content: 'x';
-        color:  $unnamed-color-8991a1 !important;
+        color: $unnamed-color-8991a1 !important;
       }
     }
   }
@@ -325,20 +345,25 @@ matbea-icon{
   }
 
 }
-.cdk-drag-preview{
-  matbea-picker-element{
-    .item-card.mat-card{
-      .item-card-text{
-        color:  $unnamed-color-4c7fc5;
+
+.cdk-drag-preview {
+  matbea-picker-element {
+    .item-card.mat-card {
+      .item-card-text {
+        color: $unnamed-color-4c7fc5;
       }
+
       background-color: $unnamed-color-e4edf7;
-      mat-icon{
-        color:  $unnamed-color-4c7fc5;
+
+      mat-icon {
+        color: $unnamed-color-4c7fc5;
 
       }
-    }}
+    }
+  }
 }
-mat-dialog-container{
+
+mat-dialog-container {
   overflow: unset !important;
 }
 
@@ -353,32 +378,130 @@ matbea-columns-picker {
   width: 100%;
 
 }
-// slide toggle
-.mat-slide-toggle.mat-checked{
 
-  & .mat-slide-toggle-thumb{
+// slide toggle
+.mat-slide-toggle{
+  & .mat-slide-toggle-thumb {
+  background-color: $unnamed-color-8991a1;
+  }
+&.mat-checked {
+
+  & .mat-slide-toggle-thumb {
     background: $unnamed-color-1a73e8;
     box-shadow: 0px 3px 6px #00000029;
 
   }
-  & .mat-slide-toggle-bar{
+
+  & .mat-slide-toggle-bar {
     background: $unnamed-color-1a73e8_05;
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 10px;
 
   }
-  & .mat-ripple-element{
+
+  & .mat-ripple-element {
     background-color: $unnamed-color-1a73e8;
   }
 
+}}
+
+
+.mat-calendar {
+  background-color: $unnamed-color-f1f6fb;
 }
-.over-matbea-slice-data{
-  & .mat-card{
-    height: auto !important;
+
+.mat-calendar-body-selected {
+  background-color: $unnamed-color-4c7fc5;
+}
+
+.mat-calendar-body-in-comparison-range {
+  &::before {
+    background: rgb(249 27 0 / 20%);
+  }
+}
+
+.mat-calendar-body-in-range::before {
+  background: rgba(76, 127, 197, .2);
+}
+
+.mat-calendar-body-comparison-end::after, .mat-calendar-body-comparison-end:not(.mat-calendar-body-comparison-bridge-end)::before, .mat-calendar-body-range-end::after, .mat-calendar-body-range-end:not(.mat-calendar-body-in-comparison-range)::before {
+  width: 100% !important;
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+
+.mat-calendar-body-comparison-start::after, .mat-calendar-body-comparison-start:not(.mat-calendar-body-comparison-bridge-start)::before, .mat-calendar-body-range-start:not(.mat-calendar-body-in-comparison-range)::before, .mat-calendar-body-range-start::after {
+  left: 0% !important;
+  width: 100% !important;
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+
+}
+.mat-tooltip{
+  background: $unnamed-color-ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 6px $unnamed-color-343d4ec2!important;
+  color: $unnamed-color-343d4ec2 !important;
+  border-radius: 2px;
+  font-size: 12px;
+}
+.mat-badge-content{
+  border-radius: 0!important;
+  background: $unnamed-color-ffffff;
+  color: $unnamed-color-343d4ec2!important;
+  border:0.5px solid $unnamed-color-343d4ec2;
+  opacity: 0.75;
+}
+.mat-icon{
+    color: $matbea-icon-button-color !important;
+    fill: $matbea-icon-button-color !important;
+    &:hover{
+      color: $unnamed-color-4e8de2 !important;
+      fill: $unnamed-color-4e8de2 !important;
+    }
+    &:active:hover{
+      color: $unnamed-color-242e49 !important;
+      fill: $unnamed-color-242e49 !important;
+    }
+
+
+  .mat-button-disabled &{
+   color: $unnamed-color-dee0e4 !important;
+   fill:   $unnamed-color-dee0e4 !important;
+   &:active:hover{
+     color:   $unnamed-color-dee0e4 !important;
+     fill:  $unnamed-color-dee0e4 !important;
+   }
+   &:hover{
+    color:  $unnamed-color-dee0e4 !important;
+    fill:  $unnamed-color-dee0e4 !important;
+   }
+  }
+}
+.mat-chip-remove{
+  min-height: 24px;
+  min-width: 24px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+matbea-lebel{
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
+  font-weight: bold;
+}
+.over-matbea-slice-data {
+ .matbea-slice-data{
+    height: fit-content !important;
+    position: relative;
     z-index: 1;
   }
 }
-matbea-slice-data-suffix{
-  margin-left: 1em;
-}
-

@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MatTableService } from "../../../services/mat-table.service";
-import { NumericFilterColumn } from "../../../models/filterColumns";
+import { Component, Input, OnInit, OnChanges  } from '@angular/core';
+import {MatTableService} from "../../../services/mat-table.service";
+import {NumericFilterColumn} from "../../../models/filterColumns";
 import { FormControl, Validators } from '@angular/forms';
+import { RadioButtonTabEntry } from 'libs/matbea-ui-components/src/lib/radio-button-tab/radio-button-tab.component';
 
 @Component({
   selector: 'app-numeric-filter',
@@ -69,9 +70,13 @@ export class NumericFilterComponent implements OnChanges {
     }
   
   */
-
+checkValidation(){
+   if (this.selectedMethod !== this.optionsArr[3].id &&this.inputFormControl.valid ) return true
+      if(this.selectedMethod === this.optionsArr[3].id && this.inputFormControl2.valid)return true
+      return false
+}
   saveFilter() {
-    if (this.inputFormControl.valid && this.inputFormControl2.valid) {
+   if(this.checkValidation()){
       const filterValue = this.inputFormControl.value
       const secondValueForRange = this.inputFormControl2.value
       let stringFilterValue = `${this.methodOptions[this.selectedMethod]?.name}  ${filterValue}

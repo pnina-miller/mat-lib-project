@@ -47,8 +47,8 @@ export class HosafatCheshbonComponent implements OnInit {
     this.shofarServices.getPirteyCheshbon(this.misparProject, this.misparBank, this.misparSnif, this.misparCheshbon).subscribe(resp => {      
       let generalResponse = resp as GeneralResponse;
      
-      if(generalResponse.messages != null && generalResponse.messages.global.fyi.length > 0){
-        this.errorMsg = generalResponse.messages.global.fyi[0].message;       
+      if(generalResponse.messages != null && generalResponse.messages.global.errors.length > 0){
+        this.errorMsg = generalResponse.messages.global.errors[0].message;       
       }else{
         this.bealimLeCheshbonList = (generalResponse.data as PirteyCheshbonResponse).bealimLeCheshbonList;  
         this.pirteyCheshbon = (generalResponse.data as PirteyCheshbonResponse).pirteyCheshbon;
@@ -67,8 +67,8 @@ export class HosafatCheshbonComponent implements OnInit {
     this.shofarServices.hosefCheshbon(this.misparProject, this.misparBank, this.misparSnif, this.misparCheshbon).subscribe(resp => {      
       let generalResponse = resp as GeneralResponse;
      
-      if(generalResponse.messages != null && generalResponse.messages.global.fyi.length > 0){
-        this.errorMsg = generalResponse.messages.global.fyi[0].message;   
+      if(generalResponse.messages != null && generalResponse.messages.global.errors.length > 0){
+        this.errorMsg = generalResponse.messages.global.errors[0].message;   
       }else{
         this.dialogRef.close();      
       }

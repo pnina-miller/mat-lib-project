@@ -5,19 +5,19 @@
       class="filter-search-wrapper"
         *ngIf="!selectedFilterColumn; else filterHeader"
       >
+        <matbea-icon-button disabled="true" icon="search" [inline]="true"></matbea-icon-button>
         <matbea-input
           (valueChange)="onKeyUp($event)"
           class="filter-search-input"
           [placeholder]="'חיפוש'"
         ></matbea-input>
-        <matbea-icon icon="search" [inline]="true"></matbea-icon>
       </div>
       <ng-template #filterHeader>
         <matbea-icon-button
           (onClick)="goBack()"
           icon="matbea-back"
         ></matbea-icon-button>
-        {{ selectedFilterColumn?.columnnamehebrew }}
+       <span>{{ selectedFilterColumn?.columnnamehebrew }}</span> 
       </ng-template>
     </div>
 

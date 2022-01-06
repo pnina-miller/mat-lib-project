@@ -17,6 +17,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatbeaButtonModule } from '../../../../../../../../libs/matbea-ui-components/src/lib/matbea-button/matbea-button.module';
+import { MatbeaInputModule } from '@pdesks/matbea-ui-components';
 
 
 
@@ -40,7 +41,7 @@ import { MatbeaButtonModule } from '../../../../../../../../libs/matbea-ui-compo
     ReactiveFormsModule,
     MatDividerModule,
     MatCheckboxModule,
-    MatFormFieldModule
+    MatbeaInputModule,
   ], exports: [HosafatCheshbonComponent]
 })
 export class HosafatCheshbonModule { }

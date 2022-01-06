@@ -12,6 +12,7 @@ export class MashkantaContainerComponent implements OnInit {
   @Input() projectId:any;
   @Output() saveBtnPressed = new EventEmitter<"">();
   isEditMode = false;
+  class = '';
   constructor() { }
   
   emitEventToChild() {
@@ -23,10 +24,25 @@ export class MashkantaContainerComponent implements OnInit {
   saveMashkanta(){
     this.saveBtnPressed.emit();
   }
-  changeMode(): void{
+  changeMode($event): void{
+    if(!$event){
+      this.class='over-matbea-slice-data';
+    }else {
+      this.class='';
+    }
     if(this.isEditMode){
       this.emitEventToChild();
+    }else{
+      this.switchMode();
     }
+  }
+  okToSwitchMode($event: boolean){
+    if($event){
+      this.switchMode();
+      this.class='';    }
+  }
+
+  switchMode() {
     this.isEditMode = !this.isEditMode;
   }
 

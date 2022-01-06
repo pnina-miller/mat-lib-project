@@ -8,6 +8,7 @@ import {ColumnDefinition} from '../../store/models/column-definition.model';
 import {Project} from "../../store/models/project.model";
 import {StateProjectDetails} from "../../store/state/project-details.state";
 import * as ProjectDetailsAction from "../../store/actions/project-details.actions";
+import * as ShofarActions from "../../store/actions/shofar.actions";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ProjectsListComponent implements OnInit {
   loadingTable = true;
   messages: any[];
   messages$ = this.store$.select(ShofarSelectors.getMessagesToTable);
+  projectListLenght: number;
 
 
   constructor(private route: ActivatedRoute, private store$: Store<State>, private storeProjectDetails$: Store<StateProjectDetails>) {
@@ -56,5 +58,13 @@ export class ProjectsListComponent implements OnInit {
   toDeteils($event: Project) {
     this.storeProjectDetails$.dispatch(ProjectDetailsAction.init({id: $event.id, kodMutav: $event.kodMutavBeShovar, misparProyectSagur: $event.misparProyectSagur}))
 
+  }
+
+  changeProjectListLenght($event: number) {
+    this.store$.dispatch(ShofarActions.setProjectListLenght({projectListLenght:$event}));
+  }
+
+  console($event: any) {
+    console.log('CLICK IN ROW MENU');
   }
 }

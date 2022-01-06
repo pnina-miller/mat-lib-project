@@ -1,4 +1,18 @@
 <div class="drag-page" >
+  <table mat-table [dataSource]="values" class="mat-elevation-z8">
+
+  <ng-container *ngFor="let col of displayedColumns" matColumnDef={{col}}>
+    <th mat-header-cell *matHeaderCellDef> {{col}} </th>
+    <td mat-cell *matCellDef="let element"> <span> {{element[col]}} </span> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+  <!-- <div style="width: 200px; height: 200px">
+    <mat-calendar (selectedChange)="selectedCh($event)"></mat-calendar>
+  </div>
   <div style="width: 200px; height: 200px; border: #0094ba 1px solid" cdkDrag cdkDragBoundary="div">
 
   </div>
@@ -7,4 +21,43 @@
   <matbea-input [(value)]="value" [error-messages]="errorMessages" [inputFormControl]="form" [autocomplete]="complete"> </matbea-input>
   <span>{{value}}</span>
   <matbea-icon icon="edit" inline="true" (click)="onClick()"></matbea-icon>
+<div>
+  <matbea-button-toggle multiple="true" [value]="values" (valueChange)="valueChange($event)"></matbea-button-toggle>
+  <mat-form-field class="example-form-field">
+    <mat-label>First campaign</mat-label>
+    <mat-date-range-input [formGroup]="campaignOne"
+      [rangePicker]="campaignOnePicker"
+      [comparisonStart]="campaignTwo.value.start"
+      [comparisonEnd]="campaignTwo.value.end">
+      <input matStartDate placeholder="Start date" formControlName="start">
+      <input matEndDate placeholder="End date" formControlName="end">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+    <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+  </mat-form-field>
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Second campaign</mat-label>
+    <mat-date-range-input [formGroup]="campaignTwo"
+      [rangePicker]="campaignTwoPicker"
+      [comparisonStart]="campaignOne.value.start"
+      [comparisonEnd]="campaignOne.value.end">
+      <input matStartDate placeholder="Start date" formControlName="start">
+      <input matEndDate placeholder="End date" formControlName="end">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="campaignTwoPicker">
+      <matbea-icon matDatepickerToggleIcon icon="calendar"></matbea-icon>
+    </mat-datepicker-toggle>
+    <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
+  </mat-form-field>
+</div> -->
+
 </div>
+<matbea-button-toggle  (valueChange)="console($event)"  [value]="values"></matbea-button-toggle>
+<matbea-menu [items]="items" (close)="console($event)" (clickedItem)="console($event)">
+  <matbea-button>open</matbea-button>
+</matbea-menu>
+
+<matbea-menu [items]="items1">
+  <matbea-button>triger</matbea-button>
+</matbea-menu>

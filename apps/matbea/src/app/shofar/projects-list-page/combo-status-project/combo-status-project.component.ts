@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { MatbeaComboComponent } from 'libs/matbea-ui-components/src/lib/drag-page/matbea-combo/matbea-combo.component';
+import { MatbeaComboComponent } from 'libs/matbea-ui-components/src/lib/matbea-combo/matbea-combo.component';
 
 const culam = "כולם"
+const pail = 'פעיל'
 
 @Component({
   selector: 'combo-status-project',
@@ -36,10 +37,10 @@ export class ComboStatusProjectComponent implements OnInit, OnChanges {
     if (this.options && (changes.options.currentValue != changes.options.previousValue)) {
       this.valueToSelectStatus = this.options.map((v) => {
         let style = ""
-        if (v.value == culam) {
+        if (v.defaultValue=='true') {
           this.defaultInSelector = v.id;
         }
-        if (v.value == 'פעיל') {
+        if (v.value == pail) {
          style = "color: #7DD24E"
         }
 

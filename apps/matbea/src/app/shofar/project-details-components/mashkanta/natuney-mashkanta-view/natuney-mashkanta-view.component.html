@@ -2,8 +2,8 @@
 
     <div class="containerColRight">
         <div class ="element">
-            <div>
-                <matbea-lebel class="form-field-lable-light" id="fromDateMelel">התחייבות לרישום משכנתא מיום</matbea-lebel>
+            <div class="lable_padding">
+                <matbea-lebel class="form-field-lable-light">התחייבות לרישום משכנתא מיום</matbea-lebel>
             </div>
             <div>
                 <matbea-lebel class="form-field-lable-right">
@@ -12,8 +12,8 @@
             </div>
         </div>
         <div class ="element">
-            <div>
-                <matbea-lebel class="form-field-lable-light" id="fromDateMelel">דרגת המשכנתא</matbea-lebel>
+            <div class="lable_padding">
+                <matbea-lebel class="form-field-lable-light">דרגת המשכנתא</matbea-lebel>
             </div>
             <div>
                 <matbea-lebel class="form-field-lable-right">
@@ -29,8 +29,8 @@
     </div>
     <div class="containerColLeft">
         <div class ="element">
-            <div>
-                <matbea-lebel class="form-field-lable-light" id="fromDateMelel">מספר תיק / חוזה ברמ"י</matbea-lebel>
+            <div  class="lable_padding" > 
+                <matbea-lebel class="form-field-lable-light">מספר תיק / חוזה ברמ"י</matbea-lebel>
             </div>
             <div>
                 <matbea-lebel *ngIf="!basicDetailsEditMode" class="form-field-lable-right">
@@ -40,14 +40,12 @@
         </div>
 
         <div class ="element">
-            <div>
-                <matbea-lebel class="form-field-lable-light" id="fromDateMelel">סכום ההתחייבות</matbea-lebel>
+            <div  class="lable_padding">
+                <matbea-lebel class="form-field-lable-light">סכום ההתחייבות</matbea-lebel>
             </div>
             <div>
                 <matbea-lebel class="form-field-lable-right" 
-                    *ngIf="mashkantaInfoResp.metegHagbala == 1"
-                    id="fromDateMelel">ללא הגבלת סכום
-                </matbea-lebel>
+                    *ngIf="mashkantaInfoResp.metegHagbala == 1">ללא הגבלת סכום</matbea-lebel>
             </div>
             <div>
                 <matbea-lebel class="form-field-lable-right" 

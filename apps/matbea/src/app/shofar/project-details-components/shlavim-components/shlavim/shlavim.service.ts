@@ -12,7 +12,7 @@ export class ShlavimService {
   }
 
 
-  openHosafatShalavPopup(misparProyectSagur: any, item?: any): void{
-      this.shlavimComponent.openHosafatShalavPopup(misparProyectSagur, item)
+  openHosafatCheshbonPopup(): void{
+      this.shlavimComponent.openHosafatCheshbonPopup()
   }
 }

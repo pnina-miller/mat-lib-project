@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatbeaIconButtonComponent } from './matbea-icon-button.component';
 import {MatButtonModule} from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatbeaIconModule} from "../matbea-icon/matbea-icon.module";
 
 @NgModule({
   declarations: [
@@ -13,13 +13,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   imports: [
     CommonModule,
     MatButtonModule,
-    MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatbeaIconModule
   ],
   exports:[
     MatbeaIconButtonComponent,
-    // MatButtonModule,
-    // MatIconModule
   ]
 })
 export class MatbeaIconButtonModule { }

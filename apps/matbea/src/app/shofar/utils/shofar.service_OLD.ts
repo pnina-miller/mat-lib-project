@@ -64,7 +64,7 @@
 //  res[colName]=colOrder;
 // return ;
 // });
-//   return this.http.putRequest('/shofar/projects/columns/update',res);
+//   return this.http.putRequest('/matbea/shofar/v1/tables/columns/update',res);
 // }
 
 //   getProjectByMisparProject(wizardData: CreateProjectWizardData):Observable<any>{

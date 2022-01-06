@@ -1,22 +1,30 @@
 <div id="comboStatusProject">
 
-    <matbea-combo lable=" חיפוש לפי" (value)="onChange($event)" [options]="dataSource" [valueToDefoult]="selectedValue.id"  ></matbea-combo>
+    <matbea-combo lable=" חיפוש לפי" (value)="onChange($event)" [options]="dataSource" transparent="true" [valueToDefoult]="selectedValue.id"  ></matbea-combo>
 
     <form (ngSubmit)="logValue($event)" style="display: flex; flex-direction: row; flex-wrap: wrap;">
        <section *ngFor="let val of sortByValues; let i = index;">
-             <mat-form-field class="matbea-form-fild" *ngIf="selectedValue.id==val.id">
-                <input  matInput type="text"
+             <!-- <matbea-form-field type="input" *ngIf="selectedValue.id==val.id"
+                placeholder={{val.name}} [(value)]="val.value">
+             </matbea-form-field> -->
+                <!-- <input  matInput type="text"
                 [(ngModel)]="val.value" name="input"
                 placeholder={{val.name}}           
                 oninput="(input.value=input.value.replace(/\D+/g, ''))"
                 (input)="inputChanged(val) "
-                >
-            </mat-form-field>       
+                > -->
+            <!-- </mat-form-field>        -->
+            <matbea-input
+                *ngIf="selectedValue.id==val.id"
+                placeholder={{val.name}} [(value)]="val.value"
+                (input)="inputChanged(val)">
+            </matbea-input>
        </section>
      </form>
   
     <matbea-icon-button (onClick)="onChangeInInput($event)"  icon="matbea-search" tooltip="search"></matbea-icon-button>
   </div>
-  <div *ngIf="!isLegalSrchInp">
-    <matbea-lebel style="color:orangered; font-size: small; text-align: center;">{{message}}</matbea-lebel>
-  </div>
+  <!-- <div *ngIf="!isLegalSrchInp"> -->
+    <!-- <matbea-lebel style="color:orangered; font-size: small; text-align: center;">{{message}}</matbea-lebel> -->
+    <mat-error *ngIf="!isLegalSrchInp">{{ message }}</mat-error>
+  <!-- </div> -->

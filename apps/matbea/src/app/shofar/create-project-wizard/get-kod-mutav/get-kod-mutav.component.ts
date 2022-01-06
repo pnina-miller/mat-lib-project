@@ -45,8 +45,8 @@ export class GetKodMutavComponent implements OnInit {
       this.wizardData.kodMutavBeShovar = avcmp02m.kodMutavBeShovar;      
       console.log(generalResponse);
 
-      if(generalResponse.messages != null && generalResponse.messages.global.fyi.length > 0){
-        this.errorMsg = generalResponse.messages.global.fyi[0].message;
+      if(generalResponse.messages != null && generalResponse.messages.global.errors.length > 0){
+        this.errorMsg = generalResponse.messages.global.errors[0].message;
         this.wizardStepper.selectedIndex = 0;
       }else{
         this.wizardData.kodMutavBeShovar = avcmp02m.kodMutavBeShovar;

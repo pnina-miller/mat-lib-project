@@ -1,11 +1,10 @@
-
 import { Component, OnInit, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { GeneralResponse } from 'libs/matbea-shared-components/src/lib/beans/general-response';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogTitle } from '@angular/material/dialog';
 import { ShofarServices } from '../../../services/shofar-services';
-import { shalavDataType } from '../../../shlavim-details/hosafat-yechida/step.data';
 
 
 @Component({
@@ -15,84 +14,96 @@ import { shalavDataType } from '../../../shlavim-details/hosafat-yechida/step.da
 })
 export class HosafatShalavComponent implements OnInit {
 
-shalavForm:FormGroup;
+  misparSnif: string;
+  misparCheshbon: string;
+  misparBank: string = '12';
+  misparProject: string = '226';
 
-  heterBniya;
- yeud= {metegYeudMegurim:0, metegYeudMischar:0, metegYeudMisradim:0, metegYeudAcher:0}
+  pirteyCheshbon: PirteyCheshbon;
+  bealimLeCheshbonList: BealimLeCheshbon[] = null;
+  displayedColumns: string[] = ['shemLakoachKolel', 'misparLakoach'];
+  chkChatimatBealimBeCheshbon: boolean = false;
 
- misparProject: number;
-shalav:any;
-  // errorMsg: string;
-  showSuccess = false;
-  errorMsg: string;
+  errorMsg: string = "";
+  cheshbonFormGroup: FormGroup;
 
-  constructor(private shofarServices: ShofarServices,
+  constructor(private http: HttpClient, private shofarServices: ShofarServices,
     public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data:HosafatCheshbonInputParams ) {
-    this.misparProject = data.misparProyectSagur;
-  }
+    @Inject(MAT_DIALOG_DATA) public data: {}) {
+
+      let inputParams = this.data as HosafatCheshbonInputParams;
+      this.misparProject = inputParams.misparProyectSagur;
+      this.misparBank = inputParams.misparBank;
+     }
 
   ngOnInit(): void {
-    //TODO: set value in matbea input
-    this.shalavForm=new FormGroup({
-      teurHaShlavControl:new FormControl(this.data.item?.teurHaShlav, Validators.required),
-      taarich8SiyumTzafuiControl: new FormControl(this.data.item?.taarich8SiyumTzafui, Validators.required),
-      taarich8HeterBniyaControl: new FormControl(this.data.item?.taarich8HeterBniya, Validators.required),
-    });
-
+    
   }
 
 
-  yeudChanged(num: number) {
-    this.yeud[num]='1'
-  }
+  getPirteyCheshbon(){
+    this.errorMsg = "";
+    this.bealimLeCheshbonList = null;
 
-  cancel() {
-    this.dialogRef.close();
-
-  }
-// is=false
-
-validateData(){
- return this.shalavForm.valid 
-}
-save() {//TODO: validate all
-  if(!this.validateData()){
-    alert('error')
-    return;
-  }
-    // if(!this.is){this.is=true
-    const data = {
-      ...this.data.item,
-      misparProyectSagur:this.misparProject,
-      metegHeterBniya:this.heterBniya=="true"?1:0,
-      taarich8HeterBniya: Number(this.shalavForm.value.taarich8HeterBniyaControl.replace(/\-/ig, '')),
-      taarich8SiyumTzafui: Number(this.shalavForm.value.taarich8SiyumTzafuiControl.replace(/\-/ig, '')),
-      teurHaShlav: this.shalavForm.value.teurHaShlavControl,
-      teurTochnitBinyanIr:'gergg',
-      ...this.yeud
-    } as shalavDataType;
-    this.shofarServices.saveShalav(data, this.misparProject).subscribe(resp => {
+    this.shofarServices.getPirteyCheshbon(this.misparProject, this.misparBank, this.misparSnif, this.misparCheshbon).subscribe(resp => {      
       let generalResponse = resp as GeneralResponse;
-      if (generalResponse.messages != null && generalResponse.messages.global.errors.length > 0) {
-        this.errorMsg = generalResponse.messages.global.errors[0].message;
-      } else {
-        this.dialogRef.updateSize('50%', '30%')
-        this.showSuccess = true;
+     
+      if(generalResponse.messages != null && generalResponse.messages.global.errors.length > 0){
+        this.errorMsg = generalResponse.messages.global.errors[0].message;       
+      }else{
+        this.bealimLeCheshbonList = (generalResponse.data as PirteyCheshbonResponse).bealimLeCheshbonList;  
+        this.pirteyCheshbon = (generalResponse.data as PirteyCheshbonResponse).pirteyCheshbon;
       }
+
+      
     },
-      (error) => {
-        console.error('error caught in component' + error)
-      })
-    // }
+    (error) => {                              //Error callback
+      console.error('error caught in component' + error)
+    })
   }
 
-  addUnits() {
-    this.dialogRef.close();
+
+
+  hosafatCheshbon(){
+    this.shofarServices.hosefCheshbon(this.misparProject, this.misparBank, this.misparSnif, this.misparCheshbon).subscribe(resp => {      
+      let generalResponse = resp as GeneralResponse;
+     
+      if(generalResponse.messages != null && generalResponse.messages.global.errors.length > 0){
+        this.errorMsg = generalResponse.messages.global.errors[0].message;   
+      }else{
+        this.dialogRef.close();      
+      }
+
+      
+    },
+    (error) => {                              //Error callback
+      console.error('error caught in component' + error)
+    })
   }
+
+
+  selectChatimatBealimBeCheshbon($event): void{
+    this.chkChatimatBealimBeCheshbon = $event;
+  }
+
 }
 
-interface HosafatCheshbonInputParams {
-  misparProyectSagur: number;
-  item:any;
+export interface PirteyCheshbonResponse{
+  bealimLeCheshbonList: BealimLeCheshbon[];
+  pirteyCheshbon: PirteyCheshbon;
+}
+
+export interface BealimLeCheshbon{
+  shemLakoachKolel: string
+  misparLakoach: string
+}
+
+export interface HosafatCheshbonInputParams{
+  misparBank: string;
+  misparProyectSagur: string;
+}
+
+export interface PirteyCheshbon{
+  misparCheshbon: string;
+  shemCheshbon: string;
 }

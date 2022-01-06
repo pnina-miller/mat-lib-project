@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatbeaSearchTypeComponent } from './matbea-search-type.component';
-import { MatbeaIconButtonModule, MatbeaFormFieldModule, MatbeaLebelModule, MatbeaComboModule } from "@pdesks/matbea-ui-components";
+import { MatbeaIconButtonModule, MatbeaFormFieldModule, MatbeaLebelModule, MatbeaComboModule, MatbeaInputModule} from "@pdesks/matbea-ui-components";
 
 
 
@@ -21,7 +21,8 @@ import { MatbeaIconButtonModule, MatbeaFormFieldModule, MatbeaLebelModule, Matbe
     MatbeaIconButtonModule,
     MatbeaFormFieldModule,
     MatbeaLebelModule,
-    MatbeaComboModule
+    MatbeaComboModule,
+    MatbeaInputModule
   ],
   exports:[
     MatbeaSearchTypeComponent

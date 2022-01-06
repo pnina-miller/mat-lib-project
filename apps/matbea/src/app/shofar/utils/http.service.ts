@@ -59,19 +59,19 @@ export class HttpService {
   }
 
   putRequest(url: string, body: any, params?: HttpParams): Observable<any> {
-    let computeUrl = config.getEnvironmentHost() + url;
+    //let computeUrl = config.getEnvironmentHost() + url;
     console.log('puting request to url: ' + url + ' with body: ' + JSON.stringify(body) + ' in envar' + environment.host)
-    console.log('+++++++++++++++sending put request to url: ' + computeUrl)
+    console.log('+++++++++++++++sending put request to url: ' + url)
       this.params = params?this.params:undefined;
 
-    return this.http.put(computeUrl, body, {
+    return this.http.put(url, body, {
       // headers: this.headers,
       // observe: 'response',
       // params: this.params,
       responseType: 'json',
 
     }).pipe(
-      catchError(this.handleError<any>(`put to ${computeUrl} in HttpServise error`, []))
+      catchError(this.handleError<any>(`put to ${url} in HttpServise error`, []))
     )
   }
 

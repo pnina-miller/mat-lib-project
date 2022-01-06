@@ -1,40 +1,212 @@
+<!-- 
 <div *ngIf="isDataReady" id="container">
 
     <div class="containerColRight">
-        <matbea-lebel class="form-field-lable-light" id="fromDateMelel">התחייבות לרישום משכנתא מיום</matbea-lebel>
-        <mat-form-field color="warn" class="rowCell25" >
+     
+        <matbea-lebel class="form-field-lable-light rowCell80">התחייבות לרישום משכנתא מיום</matbea-lebel>
+   
+        <div class="rowCell80">
+            <mat-form-field color="warn" class="margin" >
+                <input matInput [matDatepicker]="picker" 
+                    [matDatepickerFilter]="mashkantaDateFilter" 
+                    [(ngModel)]="mashkantaInfoResp.tar8HchvLeRsmMskntDt"
+                    (dateInput)="dateChange($event)" (dateChange)="dateChange($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
 
+        <div class="rowCell80">
+            <matbea-lebel class="form-field-lable-light" id="fromDateMelel">דרגת המשכנתא</matbea-lebel>
+        </div>
+        <div class="rowCell80 margin" style="white-space:nowrap; overflow : hidden;vertical-align : top; display : inline-block;">
+            <matbea-combo 
+                lable="" 
+                (value)="dargaChange($event)" 
+                [options]="valueToSelectStatus" 
+                [valueToDefoult]="selectedDarga" >
+            </matbea-combo>
+        </div>
+        
+        <div class="rowCell80 margin" *ngIf="mashkantaInfoResp.teurDargatMsknt != 'ראשונה'">
+            <matbea-input 
+               [(value)]="mashkantaInfoResp.melelDargatMashkanta">
+            </matbea-input>
+        </div>
+
+    </div>
+    <div class="containerColLeft">
+        <matbea-lebel class="form-field-lable-light rowCell80">מספר תיק / חוזה ברמ"י</matbea-lebel>
+        <div class="rowCell80 margin">
+            <matbea-input [(value)]="mashkantaInfoResp.mezaheTikRmi"></matbea-input>
+        </div>
+
+        <matbea-lebel class="form-field-lable-light rowCell80" id="fromDateMelel">סכום ההתחייבות</matbea-lebel>
+        <div class="rowCell80 margin">
+            <matbea-checkbox        
+                [checked]="mashkantaInfoResp.metegHagbala == 1" 
+                (value) = "mashkantaInfoResp.metegHagbala" 
+                (valueChange) = "hagbalaChecked($event)"
+                lable="ללא הגבלת סכום">
+            </matbea-checkbox> 
+        </div>
+        <div class="rowCell80">
+            <matbea-input [(value)]="mashkantaInfoResp.schumHitchayvutMsknt" *ngIf="mashkantaInfoResp.metegHagbala == 0"></matbea-input>
+        </div>
+
+    </div>
+
+</div>
+<div>
+    <mat-error *ngIf="inputErrorMsg!=''">{{inputErrorMsg}}</mat-error>
+</div> -->
+
+<!-- <div class="container" *ngIf="isDataReady"> -->
+    
+    <!-- <div class="header1">
+        <matbea-lebel class="form-field-lable-light">מספר תיק / חוזה ברמ"י</matbea-lebel>
+    </div>
+
+    <div class="header2">
+        <matbea-lebel class="form-field-lable-light">התחייבות לרישום משכנתא מיום</matbea-lebel>
+    </div>
+
+    <div class="input1">
+        <matbea-input [(value)]="mashkantaInfoResp.mezaheTikRmi"></matbea-input>
+    </div>
+ 
+    <div class="date">
+        <mat-form-field color="warn">
             <input matInput [matDatepicker]="picker" 
                 [matDatepickerFilter]="mashkantaDateFilter" 
                 [(ngModel)]="mashkantaInfoResp.tar8HchvLeRsmMskntDt"
                 (dateInput)="dateChange($event)" (dateChange)="dateChange($event)">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-
         </mat-form-field>
+    </div>
 
+    <div class="header3">
+        <matbea-lebel class="form-field-lable-light" id="fromDateMelel">סכום ההתחייבות</matbea-lebel>
+    </div>
+    
+    <div class="header4">
         <matbea-lebel class="form-field-lable-light" id="fromDateMelel">דרגת המשכנתא</matbea-lebel>
-        <matbea-combo lable="" (value)="dargaChange($event)" [options]="valueToSelectStatus" [valueToDefoult]="selectedDarga" >
+    </div>
+    
+    <div class="checkBx">
+        <matbea-checkbox        
+            [checked]="mashkantaInfoResp.metegHagbala == 1" 
+            (value) = "mashkantaInfoResp.metegHagbala" 
+            (valueChange) = "hagbalaChecked($event)"
+            lable="ללא הגבלת סכום">
+        </matbea-checkbox> 
+    </div>
+    <div class="combo" >
+        <matbea-combo 
+            lable="" 
+            (value)="dargaChange($event)" 
+            [options]="valueToSelectStatus" 
+            [valueToDefoult]="selectedDarga" >
         </matbea-combo>
-        
-        <matbea-input [(value)]="mashkantaInfoResp.melelDargatMashkanta" *ngIf="mashkantaInfoResp.teurDargatMsknt != 'ראשונה'"></matbea-input>
-
     </div>
-    <div class="containerColLeft">
-        <matbea-lebel class="form-field-lable-light" id="fromDateMelel">מספר תיק / חוזה ברמ"י</matbea-lebel>
-        <matbea-input [(value)]="mashkantaInfoResp.mezaheTikRmi"></matbea-input>
-
-    <matbea-lebel class="form-field-lable-light" id="fromDateMelel">סכום ההתחייבות</matbea-lebel>
-    <matbea-checkbox        
-           [checked]="mashkantaInfoResp.metegHagbala == 1" 
-           (value) = "mashkantaInfoResp.metegHagbala" 
-           (valueChange) = "hagbalaChecked($event)"
-           lable="ללא הגבלת סכום">
-    </matbea-checkbox> 
-     <br/>
-
-    <matbea-input [(value)]="mashkantaInfoResp.schumHitchayvutMsknt" *ngIf="mashkantaInfoResp.metegHagbala == 0"></matbea-input>
-
+    <div class="input2" *ngIf="mashkantaInfoResp.metegHagbala == 0">
+        <matbea-input [(value)]="mashkantaInfoResp.schumHitchayvutMsknt"></matbea-input>
     </div>
 
-</div>
+    <div class="input3" *ngIf="mashkantaInfoResp.teurDargatMsknt != 'ראשונה'">
+        <matbea-input 
+           [(value)]="mashkantaInfoResp.melelDargatMashkanta">
+        </matbea-input> 
+    </div> -->
+
+<!-- </div> -->
+
+<div class="grid-container">
+    <div class="grid-item">
+        <matbea-lebel class="form-field-lable-light">
+            התחייבות לרישום משכנתא מיום
+        </matbea-lebel>
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item">
+        <matbea-lebel class="form-field-lable-light">
+            מספר תיק / חוזה ברמ"י
+        </matbea-lebel>
+    </div>
+    <div class="grid-item">
+        <mat-form-field color="warn" class="inputMargin inputCell">
+            <input matInput [matDatepicker]="picker" 
+                [matDatepickerFilter]="mashkantaDateFilter" 
+                [(ngModel)]="mashkantaInfoResp.tar8HchvLeRsmMskntDt"
+                (dateInput)="dateChange()" (dateChange)="dateChange()">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>    
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item">
+        <matbea-input 
+            [(value)]="mashkantaInfoResp.mezaheTikRmi" 
+            class="inputCell">
+        </matbea-input>  
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item">
+        <matbea-lebel class="form-field-lable-light">
+            דרגת המשכנתא
+        </matbea-lebel>
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item">
+        <matbea-lebel 
+            class="form-field-lable-light" >
+            סכום ההתחייבות
+        </matbea-lebel>
+    </div>   
+    <div class="grid-item">
+        <matbea-combo
+            class="inputCell"
+            lable="" 
+            (value)="dargaChange($event)" 
+            [options]="valueToSelectStatus" 
+            [valueToDefoult]="selectedDarga" >
+        </matbea-combo>
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item">   
+        <matbea-checkbox
+            class="inputCell"          
+            [checked]="mashkantaInfoResp.metegHagbala == 1" 
+            (value) = "mashkantaInfoResp.metegHagbala" 
+            (valueChange) = "hagbalaChecked($event)"
+            lable="ללא הגבלת סכום">
+            </matbea-checkbox>
+    </div>
+    <div  class="grid-item">
+        <matbea-input
+            class="inputCell"  
+            [(value)]="mashkantaInfoResp.melelDargatMashkanta" 
+            *ngIf="mashkantaInfoResp.teurDargatMsknt != 'ראשונה'"
+            (input)="inputChanged('melelDarga')">
+        </matbea-input> 
+    </div>
+    <div  class="grid-item"></div>
+    <div class="grid-item" >
+        <matbea-input
+            class="inputCell" 
+            [(value)]="mashkantaInfoResp.schumHitchayvutMsknt"
+            *ngIf="mashkantaInfoResp.metegHagbala == 0"
+            (input)="inputChanged('schum')">
+        </matbea-input>
+    </div>
+    <div class="grid-item">
+        <mat-error *ngIf="isMelelErr">{{ melelErrMsg }}</mat-error>
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item">
+        <mat-error *ngIf="isSchumErr">{{ schumErrMsg }}</mat-error>
+    </div>
+  </div>

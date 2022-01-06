@@ -1,180 +1,215 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { GeneralResponse, Error } from 'libs/matbea-shared-components/src/lib/beans/general-response';
-
-import { Observable } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { startWith, map } from 'rxjs/operators';
-import { ProjectBasicDetailsService } from './project-basic-details.service';
-import { GeneralComboEntry } from '../../../../../../../../libs/matbea-shared-components/src/lib/matbea-hierarchy/matbea-hierarchy-general-combo/general-combo-interface';
-import { ShofarServices } from '../../../services/shofar-services';
-import { SHITAT_LIVUY_BUTTONS_ARRAY, DIVUR_MICHTAV_SHICHRUR_BUTTONS_ARRAY, KARKA_PROJECT_BUTTONS_ARRAY } from '../../../common-components/common-shofar-constants';
-import { RadioButtonTabEntry } from '../../../../../../../../libs/matbea-ui-components/src/lib/radio-button-tab/radio-button-tab.component';
-import { ProjectBasicDetailsContainerComponent } from '../project-basic-details-container/project-basic-details-container.component';
+import {Component, OnInit, Input, EventEmitter, Output, OnChanges, SimpleChanges} from '@angular/core';
+import {Subscription} from 'rxjs';
+import * as ProjectDetailsSelectors from '../../../store/selectors/project-details.selectors';
+import {Store} from "@ngrx/store";
+import {StateProjectDetails} from "../../../store/state/project-details.state";
+import * as ProjectDetailsActions from '../../../store/actions/project-details.actions';
+import { Message } from '../../../../../../../../libs/matbea-shared-components/src/lib/beans/general-response';
 
 
+function getDateFromString(taarich8HeskemLivuy: String): Date {
+  if (taarich8HeskemLivuy && taarich8HeskemLivuy.trim().length == 8) {
+    let year = Number.parseInt(taarich8HeskemLivuy.substr(0, 4));
+    let mounth = Number.parseInt(taarich8HeskemLivuy.substr(4, 2));
+    let day = Number.parseInt(taarich8HeskemLivuy.substr(6, 2));
+    let data = new Date();
+    data.setFullYear(year, mounth, day);
+    return data;
+  }
+}
 
+function getStringFromDate(taarich8HeskemLivuy: Date): string {
+  let month: string = taarich8HeskemLivuy.getMonth().toString();
+  let day: string = taarich8HeskemLivuy.getDay().toString();
+  
+  if (month.length < 2) {
+    month = '0' + month;
+  }
 
+  if (day.length < 2) {
+    day = '0' + day
+  }
+
+  return `${taarich8HeskemLivuy.getFullYear()}${month}${day}`;
+}
 
 @Component({
   selector: 'matbea-project-basic-details',
   templateUrl: './project-basic-details.component.html',
   styleUrls: ['./project-basic-details.component.scss']
 })
-export class ProjectBasicDetailsComponent implements OnInit {
+export class ProjectBasicDetailsComponent implements OnInit,OnChanges {
   @Input('kodMutav') kodMutav: string;
   @Input('misparProject') misparProject: string;
-
-  projectDetails: ProjectDetailsData;
-  mefakeachComboBox: GeneralComboEntry[];
-  statusCombo: GeneralComboEntry[];
-  ezorCombo: GeneralComboEntry[];
-  citiesComboBox: GeneralComboEntry[];
-
-  citiesControl = new FormControl();
-  filteredCitiesComboBox: Observable<GeneralComboEntry[]>;
-
-  editMode: boolean = false;
-
-  shitatLivuyButtonsArray: RadioButtonTabEntry[] = SHITAT_LIVUY_BUTTONS_ARRAY;
-  divurMichtavShichrurButtonsArray: RadioButtonTabEntry[] = DIVUR_MICHTAV_SHICHRUR_BUTTONS_ARRAY;
-  karkaComboBox: RadioButtonTabEntry[] = KARKA_PROJECT_BUTTONS_ARRAY;
-
+  @Output() hold= new EventEmitter();
+  @Input() editMode: boolean = false;
+  projectDetails_$ = this.store$.select(ProjectDetailsSelectors.getProject);
+  mefakeachComboBox_$ = this.store$.select(ProjectDetailsSelectors.getShemMefakeachCombo);
+  statusCombo_$ = this.store$.select(ProjectDetailsSelectors.getStatusCombo);
+  ezorCombo_$ = this.store$.select(ProjectDetailsSelectors.getEzorCombo);
+  citiesComboBox_$ = this.store$.select(ProjectDetailsSelectors.getCitiesComboBox);
+  shitatLivuyCombo_$ = this.store$.select(ProjectDetailsSelectors.getShitatLivuyCombo);
+  divurMichtavShichrurCombo_$ = this.store$.select(ProjectDetailsSelectors.getDivurMichtavShichrurCombo);
+  karkaProyectCombo_$ = this.store$.select(ProjectDetailsSelectors.getKarkaProyectCombo);
+  //
+  project: any;
+  mefakeachComboBox_;
+  statusCombo_;
+  ezorCombo_;
+  citiesComboBox_;
+  shitatLivuyCombo_;
+  divurMichtavShichrurCombo_;
+  karkaProyectCombo_;
+  taarich8HeskemLivuy_;
+  sub: Subscription = new Subscription();
   errorMsg: string = "";
 
-  constructor(private http: HttpClient, private shofarServices: ShofarServices, public basicDetailsService: ProjectBasicDetailsService) { }
 
+  constructor(private store$: Store<StateProjectDetails>) {
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    if(changes?.editMode&&!changes.editMode.firstChange){
+      this.changeMode(changes?.editMode.currentValue)
+    }
+  }
   ngOnInit(): void {
-    this.basicDetailsService.init(this);
-    this.getPirteyProject();
+    this.sub.add(
+      this.projectDetails_$.subscribe(
+        (project) => {
+          this.project={};
+          if (project) {
+            let keys = Object.keys(project);
+            keys.map(k => {
+              this.project[k] = project[k];
+            })
+            this.taarich8HeskemLivuy_ = getDateFromString(this.project['taarich8HeskemLivuy'])
+          }
+        }
+      )
+    );
+    this.sub.add(
+      this.mefakeachComboBox_$.subscribe(
+        (mefakeach) => {
+          if (mefakeach) {
+            this.mefakeachComboBox_ = mefakeach.map(m => {
+                return {id: m.id, value: m.value, disable: (m.value == 'בחר')}
+              }
+            )
+          }
+        }
+      )
+    );
+    this.sub.add(
+      this.statusCombo_$.subscribe(
+        (status) => {
+          if (status) {
+            this.statusCombo_ = status.map(s => {
+              return {id: s.id, value: s.value}
+            })
+          }
+        }
+      )
+    );
+    this.sub.add(
+      this.ezorCombo_$.subscribe(
+        (ezor) => {
+          if (ezor) {
+            this.ezorCombo_ = ezor.map(e => {
+              return {id: e.id, value: e.value, disable: (e.value == 'בחר')}
+            })
+          }
+        }
+      )
+    )
+    this.sub.add(
+      this.citiesComboBox_$.subscribe(
+        (citi) => {
+          if (citi) {
+            this.citiesComboBox_ = citi.map(c => c.value);
+          }
+        }
+      )
+    )
+    this.sub.add(
+      this.shitatLivuyCombo_$.subscribe(
+        (shita) => {
+          if (shita)
+            this.shitatLivuyCombo_ = shita.filter(sh => sh.value != 'בחר').map(sh => {
+              return {value: sh.id, name: sh.value};
+            })
+        }
+      )
+    )
+    this.sub.add(
+      this.divurMichtavShichrurCombo_$.subscribe(
+        (divur) => {
+          if (divur) {
+            this.divurMichtavShichrurCombo_ = divur.map(d => {
+              let div = {value: d.value, name: d.shortDesc}
+              return div;
+            })
+          }
+        }
+      )
+    )
+    this.sub.add(
+      this.karkaProyectCombo_$.subscribe(
+        (karka) => {
+          if (karka) {
+            this.karkaProyectCombo_ = karka.filter(k => k.shortDesc != "בחר").map((k) => {
+              return {value: k.value, name: k.shortDesc}
+            })
+          }
+        }
+      )
+    )
   }
 
-
-
-  getPirteyProject(): void{
-    this.errorMsg = "";
-    this.shofarServices.getPirteyProject(this.kodMutav, this.misparProject).subscribe(resp => {            
-      let generalResponse = resp as GeneralResponse;
-      this.projectDetails = (generalResponse.data as ProjectDetailsResponse).avcmp02m;
-      this.mefakeachComboBox = (generalResponse.data as ProjectDetailsResponse).shemMefakeachCombo;
-      this.statusCombo = (generalResponse.data as ProjectDetailsResponse).statusCombo;
-      this.ezorCombo = (generalResponse.data as ProjectDetailsResponse).ezorCombo;
-      this.citiesComboBox = (generalResponse.data  as ProjectDetailsResponse).citiesComboBox;
-
-      let taarichLivuyYear = Number(this.projectDetails.taarich8HeskemLivuy.substring(0, 4));
-      let taarichLivuyMonth = Number(this.projectDetails.taarich8HeskemLivuy.substring(4, 6)) - 1;
-      let taarichLivuyDay = Number(this.projectDetails.taarich8HeskemLivuy.substring(6, 8));
-      this.projectDetails.taarich8HeskemLivuyDt = new Date(taarichLivuyYear, taarichLivuyMonth, taarichLivuyDay);
-     
-
-      this.filteredCitiesComboBox = this.citiesControl.valueChanges
-          .pipe(
-            startWith(''),
-            map(id => typeof id === 'string' ? id : id.description),
-            map(value => value ? this._filter(value) : this.citiesComboBox.slice())
-          );
-    });     
-    
-  }
-
-
-  changeMode(): void{
-    this.editMode = !this.editMode;
-  }
-
-  private _filter(name: string): GeneralComboEntry[] {
-    const filterValue = name.toLowerCase();
-
-    return this.citiesComboBox.filter(option => option.value.toLowerCase().indexOf(filterValue) === 0);
-  }
-
-
-
-  saveProjectDetails(projectBasicDetailsContainerRef: ProjectBasicDetailsContainerComponent): void{   
-    this.errorMsg = "";
-    this.projectDetails.taarich8HeskemLivuy = this.convertDateToSting(this.projectDetails.taarich8HeskemLivuyDt);
-      
-    this.shofarServices.savePirteyProject(this.projectDetails).subscribe(resp => {   
-      let generalResponse = resp as GeneralResponse;
-      if(generalResponse.messages != null && generalResponse.messages.global.fyi.length > 0){
-        let errorMessageArr: Error[] = generalResponse.messages.global.fyi;
-        this.errorMsg = errorMessageArr[0].message;
-      }else{
-        this.getPirteyProject();      
-        this.changeMode();   
-        projectBasicDetailsContainerRef.basicDetailsEditMode = false;     
-      }
-    }, error => {
-        this.errorMsg = error.message;        
-    },);
-  
-  }
-
-  convertDateToSting(date: Date): string{
-    let year: string = "" + this.projectDetails.taarich8HeskemLivuyDt.getFullYear();
-    let month: string = "" + (this.projectDetails.taarich8HeskemLivuyDt.getMonth() + 1);
-    if(month.length == 1){
-      month = "0" + month;
+  changeMode($event): boolean {
+    if (!$event) {
+      this.saveProjectDetails();
     }
-    let day: string = "" + (this.projectDetails.taarich8HeskemLivuyDt.getUTCDate() + 1);
-    if(day.length == 1){
-      day = "0" + day;
-    }
-    let taaraichLivuyDate: string = year + month + day;
-
-    return taaraichLivuyDate;
+     this.editMode = $event;
+    return true;
   }
 
+  saveProjectDetails(): void {
+    this.errorMsg = "";
+    this.store$.dispatch(ProjectDetailsActions.saveProjectDetails({project: this.project}))
+  }
+  setKodChevratDivur($event: any) {
+    console.log('setKodChevratDivur ', $event);
+    this.project['kodChevratDivur'] = $event?.value;
+    this.project['teurChevratDivur'] = $event.name;
+  }
+  setKodShitatLivuy($event: any) {
+    console.log('setKodShitatLivuy ', $event);
+    this.project['teurShitatLivuy'] = $event.name;
+    this.project['kodShitatLivuy'] = $event.value;
+  }
+  setKarkaProyect($event: any) {
+    console.log('setKarkaProyect ', $event);
+    this.project['kodBaalutKarka'] = $event.value;
+    this.project['teurBaalutKarka'] = $event.name;
+  }
+  console($event) {
+    console.log("console ", $event);
+
+  }
+  setTaarich8HeskemLivuy($event) {
+    this.taarich8HeskemLivuy_ = $event.value;
+    this.project['taarich8HeskemLivuy'] = getStringFromDate($event.value);
+
+  }
+  setStatusBitzua($event: any) {
+    this.project['kodStatusAcharon'] = $event?.id;
+    this.project['teurStatusBitzua'] = $event?.value;
+
+  }
+  setShamaiMefakeach($event: any) {
+    this.project['kodShamaiMefakeach'] = $event.id;
+    this.project['shemShamaiMefakeach'] = $event.value;
+  }
 }
 
-
-
-export interface ProjectDetailsResponse{
-  avcmp02m: ProjectDetailsData;
-  shemMefakeachCombo: GeneralComboEntry[];
-  statusCombo: GeneralComboEntry[];
-  ezorCombo: GeneralComboEntry[];
-  citiesComboBox: GeneralComboEntry[];
-}
-
-
-export interface ProjectDetailsData{
-  kodMutavBeShovar: string;
-  misparBank: number;
-  misparSnif: number;
-  misparCheshbon: number;
-  shemCheshbon: string;
-  kodBaalutKarka: string;
-  kodChevratDivur: string;
-  kodShamaiMefakeach: string;
-  kodShitatLivuy: string;
-  kodStatusAcharon: string;
-  metegChiyuvMaam: number;
-  metegPakadArvuyot: number;
-  metegPakadHatzeg: string;
-  metegPakadShmor: string;
-  metegYokra: number;
-  misparEzor: string;
-  misparMakalOPakid: string;
-  misparProyectSagur: string;  
-  misparYishuv: string;
-  misparZihuyLakoach: string;
-  moneHodaot: string;
-  mtgProyectSagurSdct: number;  
-  shemLakoachKolel: string;
-  shemMefakeachChadash: string;
-  shemMenahelLakochot: string;
-  shemProyectSagur: string;
-  shemProyectSagurAng: string;
-  shemShamaiMefakeach: string;
-  shuratMelel800: string;
-  taarich8HeskemLivuy: string;
-  taarich8HeskemLivuyDt: Date;
-  teurShemYishuvCds: string;
-  teurShitatLivuy: string;
-  teurStatusBitzua: string;
-  sugYeshutNhlProyect: number;
-  metegGarBaEzor: number;
-  teurChevratDivur: string;
-  teurBaalutKarka: string;
-}

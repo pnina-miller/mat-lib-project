@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import {OuterSubscriber} from 'rxjs/internal/OuterSubscriber';
+import {number} from "@storybook/addon-knobs";
 import {MatSelectChange} from "@angular/material/select";
 const leLoBhira='ללא בחירה'
 @Component({
@@ -11,14 +12,14 @@ export class MatbeaFormFieldComponent implements OnInit, OnChanges {
   @Output() valueOut = new EventEmitter<string | number>();
   @Input() type: 'select' | 'input' | 'textarea' = 'input';
   @Input() value: any|[{id:number, value:string}];
-  @Input() placeholder!: string;
+  @Input() placeholder: string;
   @Input() isDisable: boolean = false;
-  @Input() hint!: string;
+  @Input() hint: string;
   @Input() error: boolean = false;
-  @Input() errorValue!: string;
-  @Input() label!: string;
-  @Input() defaultInSelector!: number;
-  @Input() prefix!: string;
+  @Input() errorValue: string;
+  @Input() label: string;
+  @Input() defaultInSelector: number;
+  @Input() prefix: string;
   // @Input() doNotChose: boolean = false;
   // dataSourse = this.doNotChose ? [{id:-1, value:leLoBhira}]:[];
 

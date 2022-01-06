@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./matbea-details-steper.component.scss']
 })
 export class MatbeaDetailsSteperComponent implements OnInit {
-  @Input() steps!: {name:string, routTo: string}[] ;
+  @Input()steps: {name:string, routTo: string}[] ;
 
   constructor(private router: Router) { }
 

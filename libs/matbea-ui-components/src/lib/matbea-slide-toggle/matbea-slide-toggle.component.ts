@@ -7,17 +7,17 @@ import {MatSlideToggleChange} from "@angular/material/slide-toggle/slide-toggle"
   styleUrls: ['./matbea-slide-toggle.component.scss']
 })
 export class MatbeaSlideToggleComponent implements OnInit {
-  @Input() disabled!: boolean;
-  @Input() checked!: boolean;
-  @Input() disableRipple!: boolean;
-  @Input() id!: string;
+  @Input() disabled: boolean;
+  @Input() checked: boolean;
+  @Input() disableRipple: boolean;
+  @Input() id: string;
   @Input() labelPosition: 'before' | 'after'='before';
-  @Input() name!: string | null;
-  @Input() required!: boolean;
+  @Input() name: string | null;
+  @Input() required: boolean;
   @Output() change: EventEmitter<MatSlideToggleChange>= new EventEmitter<MatSlideToggleChange>();
-  @Output() toggleChange!: EventEmitter<void>;
-  @Input() classLable!: string;
-  @Input() lable!: string;
+  @Output() toggleChange: EventEmitter<void>;
+  @Input() classLable: string;
+  @Input() lable: string;
 
 
   constructor() {
@@ -26,4 +26,7 @@ export class MatbeaSlideToggleComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isChange($event: MatSlideToggleChange) {
+    this.change.emit($event);
+  }
 }

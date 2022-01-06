@@ -19,6 +19,8 @@ import {
   MatbeaSliceDataContainerModule,
   MatbeaSlideToggleModule
 } from "@pdesks/matbea-ui-components";
+import {MAT_DATE_LOCALE} from "@angular/material/core";
+
 
 
 
@@ -38,16 +40,19 @@ import {
     CheshbonotModule,
     HosafatCheshbonModule,
     CheshbonotContainerModule,
-    ShlavimContainerModule,
     ProjectBasicDetailsContainerModule,
     ProjectDetailsHeaderModule,
     MatbeaIconButtonModule,
     MatbeaDetailsSteperModule,
     MatbeaSliceDataContainerModule,
+    ShlavimContainerModule
 
   ],
   exports:[
     ProjectDetailsComponent
+  ],
+  providers:[
+    {provide: MAT_DATE_LOCALE, useValue: 'he-IL'},
   ]
 })
 export class ProjectDetailsModule { }

@@ -9,20 +9,19 @@
   <matbea-project-details-header></matbea-project-details-header>
 <div class ='project-details-content'>
 
-  <matbea-project-basic-details-container [kodMutav]="kodMutavBeShovar"
-                                          [misparProject]="misparProyectSagur"></matbea-project-basic-details-container>
-shlavim
-<matbea-shlavim-container [misparProyectSagur]="misparProyectSagur"></matbea-shlavim-container>
-  
-<matbea-cheshbonot-container [misparProyectSagur]="misparProyectSagur" misparBank="12"></matbea-cheshbonot-container>
+  <matbea-project-basic-details-container [kodMutav]="kodMutavBeShovar" [misparProject]="misparProyectSagur"></matbea-project-basic-details-container>
 
-  <matbea-amalot-container [projectId]="id"></matbea-amalot-container>
+  <matbea-shlavim-container  [misparProyectSagur]="misparProyectSagur"></matbea-shlavim-container>
 
+  <matbea-cheshbonot-container [misparProyectSagur]="misparProyectSagur" misparBank="12"></matbea-cheshbonot-container>
 
-  <matbea-kablanim-container [projectId]="id"></matbea-kablanim-container>
+  <matbea-amalot-container [projectId]="misparProyectSagur"></matbea-amalot-container>
 
 
-  <matbea-mashkanta-container [projectId]="id"></matbea-mashkanta-container>
+  <matbea-kablanim-container [projectId]="misparProyectSagur"></matbea-kablanim-container>
 
-</div>
+
+  <matbea-mashkanta-container [projectId]="misparProyectSagur"></matbea-mashkanta-container>
+
+
 </div>

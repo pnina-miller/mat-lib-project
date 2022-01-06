@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatbeaMenuComponent } from './matbea-menu.component'
-import { MatMenuModule } from '@angular/material/menu';
+import { MatbeaMenuComponent } from './matbea-menu.component';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 @NgModule({
-  declarations: [MatbeaMenuComponent],
+  declarations: [
+    MatbeaMenuComponent
+  ],
   imports: [
     CommonModule,
     MatMenuModule
-  ],exports: [MatbeaMenuComponent]
+  ],
+  exports: [
+    MatbeaMenuComponent
+  ]
 })
 export class MatbeaMenuModule { }

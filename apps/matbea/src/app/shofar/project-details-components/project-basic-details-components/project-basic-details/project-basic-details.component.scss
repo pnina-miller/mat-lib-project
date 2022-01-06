@@ -1,156 +1,249 @@
-input[matinput]::-webkit-outer-spin-button,
-input[matinput]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-
-
-
-.rowCell {
-    box-sizing: border-box;
-    width:100%;
-    float: left;
-    padding: 15px;
-   
-}
-
-.horizontalLayout {
-    white-space : nowrap; 
-       overflow : hidden; 
- vertical-align : top;
-  
-        display : inline-block;
-}
-
-.layoutbacking {
- border-radius : 15px;
-    background : #CCCCCC;
-       padding : 5px;
-        margin : 5px;
-}
-
-
-
-.rowCell5 {   
-    width:5%;    
-}
-
-.rowCell10 {   
-    width:10%;    
-}
-
-.rowCell15{
-    margin: 0em 1em;
-}
-
-.rowCell20 {   
-    width:20%;    
-}
-
-.rowCell25 {   
-    width:25%;    
-}
-
-.rowCell30 {   
-    width:30%;    
-}
-
-.rowCell40 {   
-    width:40%;    
-}
-
-.rowCell50 {   
-    width:50%;    
-}
-
-.rowCell60 {   
-    width:60%;    
-}
-
-.rowCell70 {   
-    width:70%;    
-}
-
-.rowCell80 {   
-    width:80%;    
-}
-
-.rowCell90 {   
-    width:90%;    
-}
-
-.rowCell100 {   
-    width:100%;    
-}
-
-.verticalLayout{
-    display: block;
-}
-
-.stepperPanelDiv{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    direction: rtl;height:420px;
-}
-
-.alignLeft{
-    text-align: left;
-}
-
-.alignRight{
-    text-align: right;
-}
-
-.bigLabel{
-    font-family: Arial;
-    font-size: 20px;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.generalLabel{
-    font-family: Arial;
-    font-size: 20px;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.checkboxLabel{
-    font-family: Arial;
-    font-size: 16px;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.generalInputText{
-    font-family: Arial;
-    font-size: 16px;    
-    white-space: nowrap;
-}
-
-.spanSeperator{
-    display: inline-block;
-}
-
-.noPadding{
-    padding:0px;
-    margin: 0px;
-}
-
-.noWrap{
-    white-space: nowrap;
-}
-
-.redBg{
-    background-color: red;
-}
-
-
-::ng-deep .mat-horizontal-stepper-header-container {
-    pointer-events: none ;
+.taarih {
+  grid-area: taarih;
+  mat-datepicker-toggle{
+    display: none;
   }
-
-  .rowHeight45{
-      line-height: 45px;      
+  mat-form-field{
+    margin-top: -1em;
   }
+  .edit-mode &{
+    mat-datepicker-toggle{
+      display: block;
+    }
+    mat-form-field{
+      margin-top: 0;
+    }
+  }
+ }
+
+.mefakeah {
+  grid-area: mefakeah;
+}
+
+.status {
+  grid-area: status;
+}
+
+.shitat-livui {
+  grid-area: shitat;
+}
+
+.divur {
+  grid-area: divur;
+}
+
+.checkboxs {
+  grid-area: checkboxs;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 20px
+;
+}
+
+.aizor {
+  grid-area: aizor;
+}
+
+.ishuv {
+  grid-area: ishuv;
+}
+
+.karka-proekt {
+  grid-area: karka-proekt;
+}
+
+.aizor-i-sh {
+  grid-area: aizor-i-sh;
+}
+
+.error {
+  grid-area: error;
+}
+
+
+.project-basic-details {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(50px, auto));
+  grid-template-rows:repeat(auto-fit, minmax(20%, auto));
+  grid-template-areas: "taarih mefakeah status"
+ "shitat divur ."
+ "checkboxs checkboxs checkboxs"
+  "aizor ishuv karka-proekt"
+  "aizor-i-sh aizor-i-sh error";
+
+  &.edit-mode {
+    grid-column-gap: 40px;
+    grid-template-rows: repeat(7,auto);
+    grid-template-areas: "taarih mefakeah status"
+    "shitat shitat shitat"
+    "divur divur divur"
+    "checkboxs checkboxs checkboxs"
+    "karka-proekt karka-proekt karka-proekt"
+    "aizor ishuv ."
+    "aizor-i-sh aizor-i-sh error";
+  }
+}
+
+//input[matinput]::-webkit-outer-spin-button,
+//input[matinput]::-webkit-inner-spin-button {
+//  -webkit-appearance: none;
+//  margin: 0;
+//}
+//
+//
+//
+//
+//.rowCell {
+//    box-sizing: border-box;
+//    width:100%;
+//    float: left;
+//    padding: 15px;
+//
+//}
+//
+//.horizontalLayout {
+//    white-space : nowrap;
+//       overflow : hidden;
+// vertical-align : top;
+//
+//        display : inline-block;
+//}
+//
+//.layoutbacking {
+// border-radius : 15px;
+//    background : #CCCCCC;
+//       padding : 5px;
+//        margin : 5px;
+//}
+//
+//
+//
+//.rowCell5 {
+//    width:5%;
+//}
+//
+//.rowCell10 {
+//    width:10%;
+//}
+//
+//.rowCell15{
+//    margin: 0em 1em;
+//}
+//
+//.rowCell20 {
+//    width:20%;
+//}
+//
+//.rowCell25 {
+//    width:25%;
+//}
+//
+//.rowCell30 {
+//    width:30%;
+//}
+//
+//.rowCell40 {
+//    width:40%;
+//}
+//
+//.rowCell50 {
+//    width:50%;
+//}
+//
+//.rowCell60 {
+//    width:60%;
+//}
+//
+//.rowCell70 {
+//    width:70%;
+//}
+//
+//.rowCell80 {
+//    width:80%;
+//}
+//
+//.rowCell90 {
+//    width:90%;
+//}
+//
+//.rowCell100 {
+//    width:100%;
+//}
+//
+//.verticalLayout{
+//    display: block;
+//}
+//
+//.stepperPanelDiv{
+//    overflow: hidden;
+//    text-overflow: ellipsis;
+//    direction: rtl;height:420px;
+//}
+//
+//.alignLeft{
+//    text-align: left;
+//}
+//
+//.alignRight{
+//    text-align: right;
+//}
+//
+//.bigLabel{
+//    font-family: Arial;
+//    font-size: 20px;
+//    font-weight: bold;
+//    white-space: nowrap;
+//}
+//
+//.generalLabel{
+//    font-family: Arial;
+//    font-size: 20px;
+//    font-weight: bold;
+//    white-space: nowrap;
+//}
+//
+//.checkboxLabel{
+//    font-family: Arial;
+//    font-size: 16px;
+//    font-weight: bold;
+//    white-space: nowrap;
+//}
+//
+//.generalInputText{
+//    font-family: Arial;
+//    font-size: 16px;
+//    white-space: nowrap;
+//}
+//
+//.spanSeperator{
+//    display: inline-block;
+//}
+//
+//.noPadding{
+//    padding:0px;
+//    margin: 0px;
+//}
+//
+//.noWrap{
+//    white-space: nowrap;
+//}
+//
+//.redBg{
+//    background-color: red;
+//}
+//
+//
+//::ng-deep .mat-horizontal-stepper-header-container {
+//    pointer-events: none ;
+//  }
+//
+//  .rowHeight45{
+//      line-height: 45px;
+//  }

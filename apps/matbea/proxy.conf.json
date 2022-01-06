@@ -1,0 +1,98 @@
+{
+  "/bnhp-api": {
+    "target": "http://localhost:3333",
+    "secure": false
+  },
+
+  "/common/agafim": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/common/agafim",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/common/agafim" : ""}
+  },
+  "/common/sectors": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/common/sectors",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/common/sectors" : ""}
+  },
+  "/common/makals": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/common/makals",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/common/makals" : ""}
+  },
+  "/common/chativot": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/common/chativot",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/common/chativot" : ""}
+  },
+  "/shofar/pirteyProject/get": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/shofar/pirteyProject/get",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/pirteyProject/get" : ""}
+  },
+  "/shofar/createProjectWizard/comboboxes": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/shofar/createProjectWizard/comboboxes",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/createProjectWizard/comboboxes" : ""}
+  },"/shofar/createProjectWizard/save": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/shofar/createProjectWizard/save",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/createProjectWizard/save" : ""}
+  },"/shofar/createProjectWizard/getByMisparProject": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/shofar/createProjectWizard/getByMisparProject",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/createProjectWizard/getByMisparProject" : ""}
+  },"/shofar/chshbonotproject/get": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/shofar/chshbonotproject/get",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/chshbonotproject/get" : ""}
+  },"/shofar/cheshbonot/getPirteyCheshbon": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/shofar/cheshbonot/getPirteyCheshbon",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/cheshbonot/getPirteyCheshbon" : ""}
+  },"/shofar/cheshbonot/add": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/shofar/cheshbonot/add",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/cheshbonot/add" : ""}
+  },"/shofar/chshbonotproject/remove": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/shofar/chshbonotproject/remove",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/chshbonotproject/remove" : ""}
+  },"/shofar/chshbonotproject/hagderKeArvut": {
+    "target": "http://testmatbea.bnhptest.com:9106/wps/PA_MatbeaShServer/shofar/chshbonotproject/hagderKeArvut",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/shofar/chshbonotproject/hagderKeArvut" : ""}
+  }
+  
+
+  
+
+  
+  
+ 
+}

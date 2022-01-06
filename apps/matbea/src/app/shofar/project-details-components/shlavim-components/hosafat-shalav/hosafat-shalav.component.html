@@ -1,66 +1,110 @@
-<ng-tamplate *ngIf="!showSuccess else successMassege">
-    <div class="dialog-title">
-        <h1 mat-dialog-title>הוספת שלב</h1>
-    </div>
+<div class="dialog-title">
+    <h1 mat-dialog-title >הוספת שלב</h1>
+</div>
+<!-- 
+div *ngIf="bealimLeCheshbonList == null"--
+    <div class="rowCell noWrap horizontalLayout ">
+        
+        <mat-form-field class="noPadding rowCell15">
+            <mat-label>סניף</mat-label>
+            <input matInput type="number"  (change)="misparSnif=$event.target.value" [value]="misparSnif" onKeyPress="if(this.value.length==3) return false;" [disabled]="bealimLeCheshbonList!=null" required/>            
+        </mat-form-field>
 
-        <form class="dialog-content" *ngIf="shalavForm" [formGroup]="shalavForm">
-        <div class="shalav-input input-teurHaShlav">
-            <matbea-input type="string" [error-messages]="{required:'שדה זה הוא חובה'}" lable="זיהוי שלב" lablePosition="top" [inputFormControl]="shalavForm.controls.teurHaShlavControl" required ></matbea-input>
-        </div>
+        <span class="spanSeperator rowCell10"></span>
 
-        <div class="shalav-input input-taarich8SiyumTzafui">
-            <matbea-input type="date" lable='מועד סיום צפוי ע"פ דוח מפקח'  [error-messages]="{required:'שדה זה הוא חובה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8SiyumTzafuiControl" required ></matbea-input>
-        </div>
+    
+        <mat-form-field class="noPadding rowCell15" >  
+            <mat-label>חשבון</mat-label>
+            <input matInput type="number"  (change)="misparCheshbon=$event.target.value" [value]="misparCheshbon" onKeyPress="if(this.value.length==6) return false;"  [disabled]="bealimLeCheshbonList!=null" required/>            
+        </mat-form-field>
 
-        <div class="shalav-input input-taarich8HeterBniya">
-            <matbea-input type="date" lable="מועד אחרון למתן היתר בניה"  [error-messages]="{required:'שדה זה הוא חובה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8HeterBniyaControl" required ></matbea-input>
-        </div>
+        <span class="spanSeperator rowCell10"></span>
 
-        <div class="shalav-input input-heterBniya">
-            <span>קיים היתר בניה</span>
-            <matbea-radio-button-tab [dataList]="[{id:'true',description:'כן'},{id:'false',description:'לא'}]"
-                (selectedButtonChanged)="heterBniya=$event"></matbea-radio-button-tab>
-        </div>
-
-        <div class="shalav-input input-yeud">
-            <span> ייעוד השלב</span>
-            <div class=checkbox-wrapper>
-                <div>
-                    <matbea-checkbox lable="מגורים" (valueChange)="yeudChanged('MetegYeudMegurim')"></matbea-checkbox>
-                </div>
-                <div>
-                    <matbea-checkbox lable="מסחר" (valueChange)="yeudChanged('MetegYeudMischar')"></matbea-checkbox>
-                </div>
-               <div>
-                <matbea-checkbox lable="משרדים" (valueChange)="yeudChanged('MetegYeudMisradim')"></matbea-checkbox>
-                </div>
-                <div>
-                    <matbea-checkbox lable="אחר" (valueChange)="yeudChanged(MetegYeudAcher)"></matbea-checkbox>
-                </div>
-            </div>
-        </div>
-        </form>
-
-    <div class="dialog-footer">
-        <matbea-button size='m' type="matbea-stroked" (click)="cancel()" textLable="ביטול">ביטול</matbea-button>
-        <matbea-button size='m' type="matbea-raised" (click)="save()" textLable="אישור">שמירה</matbea-button>
-    </div>
-</ng-tamplate>
-
-<ng-template #successMassege>
-    <div class="dialog-title"> </div>
-    <div class="success-content">
-        <span class="success-title">השלב נוסף בהצלחה!</span>
-        <span class="success-text">תרצה/י להמשיך מכאן להוספה של יחידות?</span>
-    </div>
-    <div class="dialog-footer success-footer">
-        <matbea-button type="matbea-stroked" size='l' (click)="cancel()" textLable="לא">
-        לא, אוסיף אותן בהמשך
-        </matbea-button>
-
-        <matbea-button size='l'  type="matbea-raised" (click)="addUnits()" textLable="כן" >
-            כן
-        </matbea-button>
+        <span class="rowCell25 noWrap"  >
+            <matbea-button size='l' (onClick)="getPirteyCheshbon()" textLable="איתור חשבון" [disabled]="bealimLeCheshbonList!=null">איתור חשבון</matbea-button>
+        </span>
 
     </div>
-</ng-template>
+
+    <div *ngIf="bealimLeCheshbonList == null" class="rowCell">
+        <mat-form-field class="noPadding rowCell70" appearance="none" >  
+            <form [formGroup]="cheshbonFormGroup">  
+                <input matInput type="number" style="display:none;" />
+                <mat-error *ngIf="errorMsg!=''" >{{ errorMsg }}</mat-error>
+            </form>
+        </mat-form-field>
+    </div>
+
+
+    
+
+<!--div--
+
+
+
+
+
+
+
+<div *ngIf="bealimLeCheshbonList != null">
+    <div  class="rowCell bealimLeCheshbonBG bealimLeCheshbonBorder ">   
+        <div class="rowCell">    
+            <span style="font-weight: bold;">שם החשבון </span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span> {{ pirteyCheshbon.shemCheshbon }} </span>        
+        </div>
+
+        <div class="rowCell">    
+            <hr/>
+        </div>
+
+        <div class="rowCell50">
+            <table mat-table class="bealimLeCheshbonBG " [dataSource]="bealimLeCheshbonList" style="overflow: auto; height: 100%; width: 100%;">
+
+                <ng-container matColumnDef="shemLakoachKolel">
+                    <th mat-header-cell *matHeaderCellDef>  בעל/ת החשבון </th>
+                    <td mat-cell *matCellDef="let element"> {{element.shemLakoachKolel}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="misparLakoach">
+                    <th mat-header-cell *matHeaderCellDef>  מזהה </th>
+                    <td mat-cell *matCellDef="let element"> {{element.misparLakoach}} </td>
+                </ng-container>
+                
+                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+
+        <div class="rowCell  alignRight"> 
+            <div class="rowCell50 alignRight">
+                <hr/>
+            </div>   
+        </div>
+
+        <div class="rowCell">
+            <mat-checkbox [value]="chkChatimatBealimBeCheshbon" (change)="selectChatimatBealimBeCheshbon($event.checked)" >
+                הבעלים בחשבון חתומים על הסכם הליווי
+            </mat-checkbox> 
+        </div>
+    </div>
+
+    <div class="rowCell noPadding">
+        <mat-form-field class="noPadding rowCell50" appearance="none" >  
+            <form [formGroup]="cheshbonFormGroup">  
+                <input matInput type="number" style="display:none;" />
+                <mat-error *ngIf="errorMsg!=''" >{{ errorMsg }}</mat-error>
+            </form>
+        </mat-form-field>
+    </div>
+
+
+    <div class="rowCell alignLeft">
+        <matbea-button size='l' (onClick)="hosafatCheshbon()" textLable="אישור" [disabled]="!chkChatimatBealimBeCheshbon">אישור</matbea-button>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <matbea-button size='l' (onClick)="this.dialogRef.close()" textLable="ביטול">ביטול</matbea-button>
+    </div>
+   
+
+</div> -->

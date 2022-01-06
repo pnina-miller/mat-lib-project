@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ShofarServices } from '../../../services/shofar-services';
 import { HttpClient } from '@angular/common/http';
 import { GeneralResponse } from 'libs/matbea-shared-components/src/lib/beans/general-response';
-import { Observable } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { AmalotDataType, kodAmalaType } from './amalot.data';
 
 @Component({
@@ -13,7 +13,11 @@ import { AmalotDataType, kodAmalaType } from './amalot.data';
 export class AmalotComponent implements OnInit {
   @Input() projectId:any;
   @Input() isEditMode;
-  @Input() events: Observable<void>;
+  @Input() savePrsdEvent: Observable<void>;
+  @Output() okToSwitchMode: EventEmitter<boolean> = new EventEmitter();
+  
+  private savePrsdEventSubscription: Subscription;
+
 
   infoGenResp: GeneralResponse;
   isNatunimExt = false;
@@ -26,19 +30,23 @@ export class AmalotComponent implements OnInit {
     {kod:"2", name:"שיעור הנחה"},
     {kod:"3", name:"תעריפון"}
   ];
-  constructor(private http: HttpClient, private shofarServices : ShofarServices) { }
+  getChildsChenges: Subject<void> = new Subject<void>();
+
+
+  constructor(private shofarServices : ShofarServices) { }
 
   ngOnInit(): void {
     this.getPirteyAmalot();
+    this.savePrsdEventSubscription = this.savePrsdEvent.subscribe(() => this.saveAmalotPressed());
   }
 
   getPirteyAmalot() {
     this.shofarServices.getNatuneyAmalot(this.projectId).subscribe(resp => {      
 
       this.infoGenResp = resp as GeneralResponse;
-      if(this.infoGenResp.messages != undefined){
+      if(this.infoGenResp.messages != undefined && this.infoGenResp.messages.global.errors.length > 0){
         this.isNatunimExt = false;
-        this.message = this.infoGenResp.messages.global.fyi[0].message;
+        this.message = this.infoGenResp.messages.global.errors[0].message;
       }else{
         this.isNatunimExt = true;
         this.message = "";
@@ -48,5 +56,21 @@ export class AmalotComponent implements OnInit {
     (error) => { 
       console.error('error caught in component' + error)
     })
+  }
+  
+  saveAmalotPressed(){
+    this.getChildsChenges.next();
+  }
+
+  save($event: AmalotDataType){
+    this.amalotInfoResp = $event;
+    if(this.amalotInfoResp != null){
+      this.shofarServices.saveAmalot(this.amalotInfoResp).subscribe(resp => {
+        if(resp){
+          this.getPirteyAmalot();
+          this.okToSwitchMode.emit(true);
+        }
+      });    
+    }
   }
 }

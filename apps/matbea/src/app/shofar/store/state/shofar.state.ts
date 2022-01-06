@@ -6,6 +6,7 @@ import { ColumnDefinition } from '../models/column-definition.model';
 
 export interface State {
 
+
   loadingColumnDefinitions: boolean;
   loadingProjects: boolean;
   loading: boolean;
@@ -18,7 +19,8 @@ export interface State {
   finderObject?: any
   teurStatusBitzuaInProjects?: string[]
   optionsComboStatus?: any,
-  messagesToTable?: any[]
+  messagesToTable?: any[],
+  projectListLenght?: number;
 
 }
 

@@ -5,7 +5,7 @@
     [isComboDisabled]="isComboDisabled"
     [hierarchyCombInputKod]="kodSector"
     [hierarchyComboKod]="misparMakal"
-    hierarchyService="/common/makals"
+    hierarchyService="/matbea/common/v1/hierarchy/chativot/agafim/sectors/{{kodSector}}/makals"
     (hierarchyChanged)="makalComboChanged($event)"
     >
 </matbea-matbea-hierarchy-general-combo>

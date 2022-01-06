@@ -75,6 +75,10 @@ on(ShofarActions.setLoadingTable, (state, action) => ({
   ...state,
   loadingTable: action.loadingTable
 })),
+  on(ShofarActions.setProjectListLenght,(state, action)=>({
+    ...state,
+    projectListLenght: action.projectListLenght
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

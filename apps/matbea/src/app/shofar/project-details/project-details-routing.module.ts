@@ -4,8 +4,7 @@ import { ProjectDetailsComponent } from './project-details.component';
 
 
 // const routes: Routes = [{path:"**",redirectTo:"", component: ProjectsListComponent},
-const routes: Routes = [{path:"", component: ProjectDetailsComponent}, 
-{path:":misparShalav/units", loadChildren: ()=> import('../shlavim-details/shlavim-details.module').then(m =>m.ShlavimDetailsModule)}];
+const routes: Routes = [{path:"", component: ProjectDetailsComponent}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

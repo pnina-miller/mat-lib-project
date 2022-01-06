@@ -1,20 +1,18 @@
-<matbea-slice-data titel="נתוני משכנתא">
+<ng-container>
+  <matbea-slice-data [class]="class" titel="נתוני משכנתא">
     <matbea-slice-data-suffix >
-    <div *ngIf="!isEditMode">
-      <matbea-button type='mat-stroked' icon='edit' (onClick)="changeMode()"></matbea-button>
-        </div>
-    <div *ngIf="isEditMode">
-      <matbea-button type='mat-stroked' icon='save' (onClick)="changeMode() "></matbea-button>
-          </div>
+      <matbea-shmor-shinui-button shkifut="true" (shinui)="changeMode($event)"></matbea-shmor-shinui-button>
     </matbea-slice-data-suffix>
-
-    <matbea-slice-data-content style="width:100%;">
-        <matbea-natuney-mashkanta
-        [projectId] = "projectId"
-        [isEditMode] = "isEditMode"
-        [events]="eventsSubject.asObservable()"></matbea-natuney-mashkanta>
-      </matbea-slice-data-content>
+  
+  <matbea-slice-data-content style="width:100%;">
+    <matbea-natuney-mashkanta
+      [projectId] = "projectId"
+      [isEditMode] = "isEditMode"
+      [events]="eventsSubject.asObservable()"
+      (okToSwitchMode)="okToSwitchMode($event)"></matbea-natuney-mashkanta>
+    </matbea-slice-data-content>
   </matbea-slice-data>
+</ng-container>
 
 
 

@@ -2,7 +2,9 @@
 
   <matbea-amalot-edit 
     *ngIf="isEditMode"
-    [amalotInfoResp]="amalotInfoResp">
+    [amalotInfoResp]="amalotInfoResp"
+    [savePressed]="getChildsChenges.asObservable()"
+    (save)="save($event)">
   </matbea-amalot-edit>
   
   <matbea-amalot-view 

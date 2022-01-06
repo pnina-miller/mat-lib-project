@@ -2,12 +2,12 @@
     <div class="containerCol">
         <matbea-lebel class="form-field-lable-light">דמי טיפול באשראי ובטחונות</matbea-lebel>
         <mat-radio-group aria-labelledby="radio-group-label" class="radio-group">
-        <mat-radio-button [disabled]="true" class="radio-button" *ngFor="let kodAmla of kodeyAmalot" 
+        <mat-radio-button [disabled]="true" class="radio-button" *ngFor="let kodAmla of kodeyAmtView" 
           [value]="kodAmla.kod"
           [checked]="kodAmla.kod==amalotInfoResp.kodAmala"
           (change)="onChangeRadio($event)">
           
-          {{kodAmla.name}}
+          {{kodAmla.name}} 
         </mat-radio-button>
         
       </mat-radio-group>

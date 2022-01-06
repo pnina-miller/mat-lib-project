@@ -1,7 +1,8 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableService } from '../../matbea-table/services/mat-table.service';
+import { MatTableService } from '../services/mat-table.service';
 import { FilterPopupComponent } from './filter-popup/filter-popup.component';
+
 
 @Component({
   selector: 'matbea-mat-filter',

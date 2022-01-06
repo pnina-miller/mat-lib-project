@@ -7,8 +7,8 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./radio-button-tab.component.scss']
 })
 export class RadioButtonTabComponent implements OnInit {
-  @Input('dataList') buttonsArray!: RadioButtonTabEntry[]; 
-  @Input('value') selectedButton!: string;
+  @Input('dataList') buttonsArray: RadioButtonTabEntry[]; 
+  @Input('value') selectedButton: string;
   @Output() selectedButtonChanged = new EventEmitter<String>();
 
 
@@ -18,7 +18,7 @@ export class RadioButtonTabComponent implements OnInit {
   }
 
 
-  selectionChaned(selectedButton:any){
+  selectionChaned(selectedButton){
     this.selectedButton = selectedButton; 
     this.selectedButtonChanged.emit(selectedButton);
   }

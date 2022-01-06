@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MatTableService} from "../../../../matbea-table/services/mat-table.service";
-import {MultiSelectFilterColumn} from "../../../../matbea-table/models/filterColumns";
+import { MatTableService } from "../../../services/mat-table.service";
+import { MultiSelectFilterColumn } from "../../../models/filterColumns";
 
 
 @Component({

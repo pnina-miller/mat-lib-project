@@ -1,7 +1,12 @@
-<button style="height: 100%" mat-icon-button [tabIndex]="tabIndex" [matTooltip]="tooltip" [color]="color" [matTooltipPosition]="positionTooltip" (click)="onClick.emit($event)" [disabled]= "disabled"  >
-  <ng-container *ngTemplateOutlet= 'svg =="svgIcon" ? svgIcon : noSvgIcon'> </ng-container>
-  <ng-template #svgIcon> <mat-icon  [svgIcon]="icon" aria-hidden="false" style="width: 17px; height: 17px;" aria-label="Example home icon"></mat-icon></ng-template>
-  <ng-template #noSvgIcon><mat-icon  aria-hidden="false" aria-label="Example home icon">{{icon}}</mat-icon></ng-template>
-
-    <!-- tooltip -->
+<button  mat-icon-button [tabIndex]="tabIndex" [matTooltip]="tooltip" [color]="color" [matTooltipPosition]="positionTooltip" (click)="onClick.emit($event)" [disabled]="disabled">
+  <ng-container [ngSwitch]="svg">
+    <ng-container *ngSwitchCase="'svg'">
+      <matbea-icon [svgIcon]="icon"  style="width: 17px; height: 17px;"></matbea-icon>
+    </ng-container>
+    <ng-container *ngSwitchCase="'icon'">
+      <matbea-icon [icon]="icon"></matbea-icon>
+    </ng-container>
+  </ng-container>
+  <!-- tooltip -->
 </button>
+

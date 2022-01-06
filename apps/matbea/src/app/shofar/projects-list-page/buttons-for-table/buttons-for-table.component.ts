@@ -13,6 +13,7 @@ import * as ShofarSelectors from '../../../shofar/store/selectors/shofar.selecto
 export class ButtonsForTableComponent implements OnInit, OnDestroy {
   dataSourceLenght: number = 0;
   dataSourceLenght$ = this.store$.select(ShofarSelectors.getProjectsWithFilter);
+  projectListLenght$=this.store$.select(ShofarSelectors.getProjectListLenght);
   sub: Subscription = new Subscription();
 
 
@@ -21,6 +22,11 @@ export class ButtonsForTableComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.sub.add(this.projectListLenght$.subscribe(
+      (lenght)=>{
+        this.dataSourceLenght= lenght
+      }
+    ));
     this.sub.add(this.dataSourceLenght$.subscribe(
       (v) => {
         this.dataSourceLenght = v ? v.length : this.dataSourceLenght;
@@ -33,10 +39,13 @@ export class ButtonsForTableComponent implements OnInit, OnDestroy {
         console.log("Continiu")
       }
     )
-    )
+    );
+
 
   }
-
+updateDataLength(length){
+  this.dataSourceLenght=length;
+}
   ngOnDestroy(): void {
     this.sub.unsubscribe()
     }

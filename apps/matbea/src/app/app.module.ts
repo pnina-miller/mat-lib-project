@@ -28,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import * as fromProjectDetails from './shofar/store/reducers/project-details.reducer';
 import { ProjectDetailsEffects } from './shofar/store/effects/project-details.effects';
+import {MAT_DATE_LOCALE} from "@angular/material/core";
 
 const effectsShofar = [
   ProjectsListEffects,
@@ -65,7 +66,8 @@ const effectsProjectDetails =[
     StoreModule.forFeature(fromProjectDetails.PROJECTDETAILS_FEATURE_KEY, fromProjectDetails.reducerProjectDetails),
     EffectsModule.forFeature(effectsProjectDetails),
   ],
-
+providers:
+  [],
   // providers: [AuthGuardService, {provide : LocationStrategy , useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
 })

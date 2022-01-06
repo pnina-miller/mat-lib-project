@@ -3,7 +3,6 @@ import {createEffect, Actions, ofType} from '@ngrx/effects';
 import * as ProjectDetailsActions from '../actions/project-details.actions';
 import {mergeMap, map} from "rxjs/operators";
 import {ShofarServices} from "../../services/shofar-services";
-import {ProjectDetailsData} from "../../project-details-components/project-basic-details-components/project-basic-details/project-basic-details.component";
 
 @Injectable()
 export class ProjectDetailsEffects {
@@ -14,15 +13,16 @@ export class ProjectDetailsEffects {
         this.service.getPirteyProject(action.kodMutav.toString(), action.misparProyectSagur.toString()).pipe(
           map((x) => {
             if (x['data']) {
+              console.log('project details effects ' + x['data'].toString)
               return ProjectDetailsActions.loadProjectDetailsSuccess({
                 project: x['data']['avcmp02m'],
                 citiesComboBox: x['data']['citiesComboBox'],
                 divurMichtavShichrurCombo: x['data']['divurMichtavShichrurCombo'],
                 ezorCombo: x['data']['ezorCombo'],
-                karkaProyectCombo: x['data']['ezorCombo'],
-                shemMefakeachCombo: x['data']['ezorCombo'],
-                shitatLivuyCombo: x['data']['ezorCombo'],
-                statusCombo: x['data']['ezorCombo']
+                karkaProyectCombo: x['data']['karkaProyectCombo'],
+                shemMefakeachCombo: x['data']['shemMefakeachCombo'],
+                shitatLivuyCombo: x['data']['shitatLivuyCombo'],
+                statusCombo: x['data']['statusCombo']
               });
             } else {
               return ProjectDetailsActions.loadProjectDetailsFailure({error: ""});
@@ -36,20 +36,18 @@ export class ProjectDetailsEffects {
     this.actions$.pipe(
       ofType(ProjectDetailsActions.saveProjectDetails),
       mergeMap((action) =>
-        this.service.savePirteyProject(action.project as ProjectDetailsData).pipe(
+        this.service.savePirteyProject(action.project).pipe(
           map((data) => {
-            if (data) {
-              return ProjectDetailsActions.loadProjectDetailsSuccess({
-                citiesComboBox: [],
-                divurMichtavShichrurCombo: [],
-                ezorCombo: [],
-                karkaProyectCombo: [],
-                shemMefakeachCombo: [],
-                shitatLivuyCombo: [],
-                statusCombo: [],
-                project:data['data'].pirteyProject.avcmp02m});
+            if (data&&data['data'].pirteyProject.avcmp02m) {
+              return ProjectDetailsActions.saveProjectDetailsSuccess({
+                project: data['data'].pirteyProject.avcmp02m,
+                status: true
+              });
             } else {
-              return ProjectDetailsActions.saveProjectDetailsFailure;
+              return ProjectDetailsActions.saveProjectDetailsFailure({
+                message: '',
+                status: false
+              });
             }
           }),
         )

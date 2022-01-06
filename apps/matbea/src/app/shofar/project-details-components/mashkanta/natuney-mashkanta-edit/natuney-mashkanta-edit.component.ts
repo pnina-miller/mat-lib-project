@@ -23,6 +23,10 @@ export class NatuneyMashkantaEditComponent implements OnInit {
 
   @Output() save: EventEmitter<MashkantaType> = new EventEmitter();
   private eventsSubscription: Subscription;
+  isMelelErr = false;
+  isSchumErr = false;
+  melelErrMsg = "יש להזין הסבר לדרגת משכנתא";
+  schumErrMsg = "יש להזין סכום התחייבות";
 
   mashkantaDateFilter  = (selectedDate: Date | null): boolean => {
     const today = new Date();    
@@ -30,7 +34,7 @@ export class NatuneyMashkantaEditComponent implements OnInit {
   }
   valueToSelectStatus: { id: number, value: string }[];
 
-  selectedDarga = 1;
+  selectedDarga;
   date = new FormControl(new Date());
   dateStr:string;
   mugbalLeSchum = "";   
@@ -52,14 +56,11 @@ export class NatuneyMashkantaEditComponent implements OnInit {
       let month = (Number(this.mashkantaInfoResp.tar8HchvLeRsmMsknt.substring(4, 6)))-1;
       let day = Number(this.mashkantaInfoResp.tar8HchvLeRsmMsknt.substring(6, 8));
       this.mashkantaInfoResp.tar8HchvLeRsmMskntDt = new Date(year, month, day);
-      this.isDataReady = true;
       this.getComboDarga();
+      this.isDataReady = true;
     }
   }
 
-  getPirteyMsknt() {
- 
-  }
 
   getComboDarga() {
     if(this.dargatMashkantaLst.length > 0){
@@ -100,7 +101,46 @@ export class NatuneyMashkantaEditComponent implements OnInit {
     }
     this.mashkantaInfoResp.tar8HchvLeRsmMsknt = year + month + day;
   }
+
+  inputCheck() {
+    let isFullInput = true;
+    if( this.isSchumHaser() || this.isMelelHaser()) {
+      isFullInput = false;
+    }
+    return isFullInput;
+  }
+  
   saveChanges() {
-    this.save.emit(this.mashkantaInfoResp);
+    if(this.inputCheck()){
+      this.save.emit(this.mashkantaInfoResp);
+    }
+    else{
+      this.showErrMsg();
+    }
+  }
+  showErrMsg() {
+    this.isMelelErr = this.isMelelHaser();
+    this.isSchumErr = this.isSchumHaser();
+  }
+
+  isMelelHaser(){
+    return (this.mashkantaInfoResp.teurDargatMsknt != 'ראשונה' && 
+            (this.mashkantaInfoResp.melelDargatMashkanta == "" || 
+            this.mashkantaInfoResp.melelDargatMashkanta == null))? 
+            true : false;
+  }
+  isSchumHaser(){
+    return (this.mashkantaInfoResp.metegHagbala == 0 && this.mashkantaInfoResp.schumHitchayvutMsknt == 0)?
+            true : false;
+  }
+  inputChanged(field: String){
+    switch (field) {
+      case 'schum':
+        this.isSchumErr = false;
+        break;
+      case 'melelDarga':
+        this.isMelelErr = false;
+        break;
+    }
   }
 }

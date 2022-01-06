@@ -10,11 +10,11 @@ export class ProjectBasicDetailsContainerComponent implements OnInit {
   @Input('kodMutav') kodMutav: string;
   @Input('misparProject') misparProject: string;
   class='';
+  hold: any;
+  editMode: boolean= false;
 
-  basicDetailsEditMode: boolean = false;
 
-
-  constructor(public basicDetails: ProjectBasicDetailsService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -22,19 +22,11 @@ export class ProjectBasicDetailsContainerComponent implements OnInit {
   changeBasicDetailsMode($event): void{
     if(!$event){
       this.class='over-matbea-slice-data';
+      this.editMode=true
     }else {
       this.class='';
+      this.editMode=false
     }
-    if(this.basicDetails.isEditMode()){
-      this.saveBasicDetails()
-    }else{
-      this.basicDetails.changeMode();
-      this.basicDetailsEditMode = this.basicDetails.isEditMode();
-    }
-  }
-
-  saveBasicDetails(): void{
-    this.basicDetails.save(this);
   }
 
 }

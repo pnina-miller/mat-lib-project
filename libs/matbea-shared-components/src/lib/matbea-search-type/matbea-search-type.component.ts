@@ -72,8 +72,9 @@ export class MatbeaSearchTypeComponent implements OnInit {
   }
 
   inputChanged(value: SortByValue){
+    value.value = value.value.replace(/\D+/g, '');
     this.name = value.name;
-    if(this.missingValArr.length > 0 ){
+    if(this.missingValArr.length > 0 && value.value != ''){
       let i = this.missingValArr.findIndex(this.isSameField, value.name);
       this.missingValArr.splice(i,1);
       this.generateMsg();

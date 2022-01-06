@@ -84,7 +84,7 @@ export const findProjectsWithHierarhia = createAction(
      sektor:string; makal:string; status:string; }>()
 )
 
-// export const loadProjectListFailure = createAction(
-//   'Load Project List Failure',
-//   props<{ error: any }>()
-// )
+export  const setProjectListLenght = createAction(
+  'Set project list lenght ',
+  props<{projectListLenght: number}>()
+)

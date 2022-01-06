@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {MatTableService} from "../../../services/mat-table.service";
 import {StringFilterColumn} from "../../../models/filterColumns";
 import { FormControl, Validators } from '@angular/forms';

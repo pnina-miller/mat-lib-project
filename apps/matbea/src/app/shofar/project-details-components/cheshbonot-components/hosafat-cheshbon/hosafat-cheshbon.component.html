@@ -5,18 +5,25 @@
 <!--div *ngIf="bealimLeCheshbonList == null"-->
     <div class="rowCell noWrap horizontalLayout ">
         
-        <mat-form-field class="noPadding rowCell15">
+<!--      <mat-form-field class="noPadding rowCell15">
             <mat-label>סניף</mat-label>
-            <input matInput type="number"  (change)="misparSnif=$event.target.value" [value]="misparSnif" onKeyPress="if(this.value.length==3) return false;" [disabled]="bealimLeCheshbonList!=null" required/>            
-        </mat-form-field>
+            <input matInput  type="number"  (change)="misparSnif=$event.target.value" [value]="misparSnif" onKeyPress="if(this.value.length==3) return false;" [disabled]="bealimLeCheshbonList!=null" required/>            
+        </mat-form-field>-->
+        <span  class="horizontalLayout rowCell25">
+            <matbea-input lable="סניף" lablePosition="top" [(value)]="misparSnif" type="number"  onKeyPress="if(this.value.length==3) return false;" [disabled]="bealimLeCheshbonList!=null" maxlength="3"  required ></matbea-input>
+        </span>
 
         <span class="spanSeperator rowCell10"></span>
 
     
-        <mat-form-field class="noPadding rowCell15" >  
+        <!--<mat-form-field class="noPadding rowCell15" >  
             <mat-label>חשבון</mat-label>
             <input matInput type="number"  (change)="misparCheshbon=$event.target.value" [value]="misparCheshbon" onKeyPress="if(this.value.length==6) return false;"  [disabled]="bealimLeCheshbonList!=null" required/>            
-        </mat-form-field>
+        </mat-form-field>-->
+
+        <span  class="horizontalLayout rowCell25">
+            <matbea-input lable="חשבון" lablePosition="top" [(value)]="misparCheshbon" type="number"  onKeyPress="if(this.value.length==6) return false;" [disabled]="bealimLeCheshbonList!=null" maxlength="6"  required ></matbea-input>
+        </span>
 
         <span class="spanSeperator rowCell10"></span>
 

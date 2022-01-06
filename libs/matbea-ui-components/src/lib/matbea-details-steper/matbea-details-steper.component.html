@@ -1,6 +1,5 @@
 <div class="matbea-details-steper">
   <ng-container  *ngFor="let step of steps">
-    <matbea-icon class="matbea-details-steper-step-icon" *ngIf="steps.length>1&& step!=steps[0]" icon="chevron_left" inline ></matbea-icon>
-      <a (click)="onClick(step.routTo)" class="matbea-details-steper-step-lable"> {{step.name}}</a>
+    <matbea-icon class="matbea-details-steper-step-icon" *ngIf="steps.length>1&& step!=steps[0]" icon="chevron_left" inline ></matbea-icon>  <a (click)="onClick(step.routTo)" class="matbea-details-steper-step-lable"> {{step.name}}</a>
   </ng-container>
 </div>

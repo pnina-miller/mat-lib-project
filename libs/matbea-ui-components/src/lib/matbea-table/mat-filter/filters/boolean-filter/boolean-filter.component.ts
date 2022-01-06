@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FilterColumn, SelectFilterColumn, BooleanFilterColumn } from '../../../models/filterColumns';
-import { MatTableService } from '../../../services/mat-table.service';
+import { BooleanFilterColumn, FilterColumn, SelectFilterColumn } from "../../../models/filterColumns";
+import { MatTableService } from "../../../services/mat-table.service";
 
 @Component({
   selector: 'app-boolean-filter',
@@ -23,7 +23,7 @@ onChange(value: any){
 }
 
 saveFilter(){
-  const stringFilterValue=this.filterValue=='false'?'לא':'כן'
+  const stringFilterValue=this.filterValue?'כן':'לא'
   this.filterService.setFilter(new BooleanFilterColumn({...this.filterColumn,stringFilterValue:stringFilterValue,filterValue:this.filterValue, booleanValue:this.filterValue}));
 }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-// import { any } from 'apps/matbea/src/app/shofar/store/models/column-definition.model';
+import { ColumnDefinition } from 'apps/matbea/src/app/shofar/store/models/column-definition.model';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 
@@ -17,12 +17,12 @@ export class MatbeaColumnsPickerComponent implements OnInit {
   locked: any[] = [];
   dataToBack: any[] = [];
   inUseListToBack: any[] = [];
-  limit!: number;
+  limit: number;
 
 
 
   constructor(public dialogRef: MatDialogRef<MatbeaColumnsPickerComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogData: { data: any[], saveInDB: boolean, limit: number }) { }
+    @Inject(MAT_DIALOG_DATA) public dialogData: { data: ColumnDefinition[], saveInDB: boolean, limit: number }) { }
 
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class MatbeaColumnsPickerComponent implements OnInit {
       }
     )
     this.saveInDB = this.dialogData.saveInDB;
-    this.limit= this.dialogData?.limit;
+    this.limit= this.dialogData?.limit?this.dialogData?.limit:null;
     console.log(this.dialogData.data);
   }
   onNoSave() {
@@ -50,29 +50,29 @@ export class MatbeaColumnsPickerComponent implements OnInit {
     this.inUseListToBack = this.locked.concat(this.inUseList);
     this.dataToBack = this.dialogData.data;
     this.dataToBack = this.dataToBack.map(
-      (v: any) => {
+      (v: ColumnDefinition) => {
         let keys =Object.keys(v);
-        let tempany:{[key: string]: any}={};
+        let tempColumnDefinition={};
         keys.forEach(key=>{
-          tempany[key]=v[key];
+          tempColumnDefinition[key]=v[key];
         });
-        tempany['display']=null;
-        tempany['ordernumber']=null;
+        tempColumnDefinition['display']=null;
+        tempColumnDefinition['ordernumber']=null;
         if (this.inUseListToBack.includes(v.columnnamehebrew)) {
-          tempany['display']= '1';
-          tempany['ordernumber'] = (this.inUseList.indexOf(v.columnnamehebrew) + 1).toString();
+          tempColumnDefinition['display']= '1';
+          tempColumnDefinition['ordernumber'] = (this.inUseList.indexOf(v.columnnamehebrew) + 1).toString();
         } else {
-          tempany['display'] = '0';
+          tempColumnDefinition['display'] = '0';
           let num= this.toChooseList.indexOf(v.columnnamehebrew);
           if(num<0){
-            tempany['ordernumber']=num
+            tempColumnDefinition['ordernumber']=num
           }else {
-            tempany['ordernumber'] = (num + this.inUseListToBack.length).toString();
+            tempColumnDefinition['ordernumber'] = (num + this.inUseListToBack.length).toString();
           }
 
         }
-        console.log('Sinun ba afterClose', tempany)
-        return tempany;
+        console.log('Sinun ba afterClose', tempColumnDefinition)
+        return tempColumnDefinition;
       }
     )
     this.dataToBack = this.dataToBack.sort((a, b) => {

@@ -10,6 +10,7 @@ export class AmalotContainerComponent implements OnInit {
   @Input() projectId:any;
   eventsSubject: Subject<void> = new Subject<void>();
   isEditMode = false;
+  class='';
 
   constructor() { }
   
@@ -19,11 +20,28 @@ export class AmalotContainerComponent implements OnInit {
   
   ngOnInit(): void {
   }
-  changeMode(): void{
+  changeMode($event): void{
+    if(!$event){
+      this.class='over-matbea-slice-data';
+    }else {
+      this.class='';
+    }
     if(this.isEditMode){
       this.emitEventToChild();
+    }else{
+      this.switchMode();
     }
-    this.isEditMode = !this.isEditMode;
   }
 
+  okToSwitchMode($event){
+    if($event){
+      this.switchMode();
+      this.class='';
+
+    }
+  }
+  switchMode() {
+    this.isEditMode = !this.isEditMode;
+  }
+  
 }

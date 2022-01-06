@@ -1,15 +1,9 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatCalendar } from '@angular/material/datepicker';
-import { DateFilterColumn } from '../../../models/filterColumns';
-import { MatTableService } from '../../../services/mat-table.service';
+import { DateFilterColumn } from "../../../models/filterColumns";
+import { MatTableService } from "../../../services/mat-table.service";
+
 
 const monthNames = [
   'January',
@@ -31,7 +25,7 @@ const monthNames = [
   templateUrl: './date-filter.component.html',
   styleUrls: ['./date-filter.component.scss'],
 })
-export class DateFilterComponent implements OnInit {
+export class DateFilterComponent implements OnInit, AfterViewInit {
   @Input() filterColumn: DateFilterColumn | undefined;
   @ViewChild(MatCalendar, { static: false }) calendar!: MatCalendar<Date>;
 
@@ -60,11 +54,16 @@ export class DateFilterComponent implements OnInit {
   ngOnInit(): void {
     this.inputFormControl.setValue('mm/dd/yyyy');
     this.inputFormControl2.setValue('mm/dd/yyyy');
+  
+  }
+
+  ngAfterViewInit():void{
+    // this.calendar.monthSelected.subscribe(()=>console.log('ggg'))  
+    // this.calendar.monthView.activeDateChange.subscribe(()=>console.log('ggg'))  
   }
 
   convertDate(date: Date) {
-    const arr = date?.toLocaleDateString().split('.');
-    return `${arr[1]}/${arr[0]}/${arr[2]}`;
+    return date?.toLocaleDateString();
   }
 
   onDateKeyUp(input: FormControl) {
@@ -102,25 +101,30 @@ export class DateFilterComponent implements OnInit {
     this.updateFilterValue(date);
   }
   
+  
   updateFilterValue(date: Date) {
     if (date.getTime()) {
       this.calendar.activeDate = date;
       this.filterValue[this.inputFocused] &&
-        this.colorSelected(this.filterValue[this.inputFocused], 'white');
+        this.colorSelected(this.filterValue[this.inputFocused], false);
       this.filterValue[this.inputFocused] = date;
-      setTimeout(() => this.colorSelected(date, 'red'), 1);
+      setTimeout(() => this.colorSelected(date, true), 0.1);
     }
   }
 
-  colorSelected(date: Date, color: string) {
-    const stringDate = `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  colorSelected(date: Date, selected: boolean) {
+    //home:
+    // const stringDate = `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    const stringDate = `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
     const el: any = document.querySelector(
       `.mat-calendar-body-cell[aria-label= "${stringDate}" ] .mat-calendar-body-cell-content`
     );
-    if (el) el.style.backgroundColor = color;
-    else console.log('date ' + stringDate + ' not found');
+    const selectedClass='mat-calendar-body-selected'
+    if (el) {
+      if(selected) el.classList.add(selectedClass);
+      else el.classList.remove(selectedClass)
+    }
   }
-
   saveFilter() {
     let stringFilterValue = `${
       this.dateFilterColumn.methodOptions[this.selectedMethod].name

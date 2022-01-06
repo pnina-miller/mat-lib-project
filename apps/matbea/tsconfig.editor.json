@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts", "../../libs/matbea-ui-components/src/lib/matbea-menu/matbea-menu.module.ts"],
+  "include": ["**/*.ts"],
   "compilerOptions": {
     "types": ["jest", "node"]
   }
