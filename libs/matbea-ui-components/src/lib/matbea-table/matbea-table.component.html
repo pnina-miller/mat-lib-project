@@ -1,3 +1,4 @@
+
 <ng-container >
   <div class="matbea-table-cotainer">
     <div class="matbea-table">
@@ -5,6 +6,12 @@
         <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of displayedColumns">
           <th mat-header-cell mat-sort-header style=" min-width: 40px;" *matHeaderCellDef sortActionDescription="Sort by {{column.columnnameenglish}}">
             {{column.columnnamehebrew?column.columnnamehebrew:column.columnnameenglish}}
+            <div *ngIf="column.columnformatter==='checkbox'" style="display: contents;">
+              <mat-checkbox [formControl]="selectControl" checked="" ></mat-checkbox>
+              <matbea-menu (clickedItem)="selectMethod($event)" [items]="[{ id: 0, name: 'הכל', disabled: false, role: 'menuitem'},{ id: 1, name: 'בטווח', disabled: false, role: 'menuitem'}]">
+                <matbea-icon icon="keyboard_arrow_down"></matbea-icon>
+              </matbea-menu>          
+            </div>
           </th>
           <td mat-cell [style]="column.style" *matCellDef="let project;">
             <matbea-table-cell (onRowSelected)="onRowSelected($event)" [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
@@ -28,3 +35,4 @@
       showFirstLastButtons></mat-paginator>
   </div>
   </ng-container>
+  

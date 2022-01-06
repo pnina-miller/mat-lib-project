@@ -12,7 +12,7 @@ import { saveMskDataType } from '../project-details-components/mashkanta/natuney
 import { MatbeaUtils } from "../utils/matbea-utils-components";
 import { AmalotDataType } from "../project-details-components/amalot/amalot/amalot.data";
 // import { SqlResult } from "../../../../../../libs/matbea-shared-components/src/lib/beans/general-response";
-import { shalavDataType } from "../shlavim-details/hosafat-yechida/step.data";
+import { shalavDataType } from "../shlavim-details/shalav.data";
 
 @Injectable({
     providedIn: 'root',
@@ -25,43 +25,43 @@ export class ShofarServices{
     constructor(private httpClient: HttpClient, private httpService: HttpService) { }
 
     public getKodMutva(kodMutav: string){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/pirteyProject/get', { headers: this.getHeader(), params: {'kodMutavBeShovar': kodMutav} });
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/projects/0/' + kodMutav + '/details', { headers: this.getHeader(), params: {'kodMutavBeShovar': kodMutav} });
     }
 
     public getPirteyProject(kodMutav: string, misparProyectSagur: string){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/pirteyProject/get', { headers: this.getHeader(), params: {'kodMutavBeShovar': kodMutav, 'misparProyectSagur': misparProyectSagur} });
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/projects/' + misparProyectSagur + '/' + kodMutav + '/details', { headers: this.getHeader(), params: {'kodMutavBeShovar': kodMutav, 'misparProyectSagur': misparProyectSagur} });
     }
 
     public savePirteyProject(projectDetailsData){
-      return this.httpClient.request("get", this.urlPrefix + '/shofar/projectDetails/save', { headers: this.getHeader(), params: {'projectDetailsData': JSON.stringify(projectDetailsData)} });
+      return this.httpClient.request("post", this.urlPrefix + '/matbea/shofar/V1/projects/' + projectDetailsData.misparProyectSagur + '/save', { headers: this.getHeader(), params: {'projectDetailsData': JSON.stringify(projectDetailsData)} });
   }
 
     public getCreateProjectWizardComboboxes(){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/createProjectWizard/comboboxes', { headers: this.getHeader(), params: {} });
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/project/wizard/projectdetallists', { headers: this.getHeader(), params: {} });
     }
 
     public getCitiesList(){
-      return this.httpClient.request("get", this.urlPrefix + '/common/cities/get', { headers: this.getHeader(), params: {} });
+      return this.httpClient.request("get", this.urlPrefix + '/matbea/common/v1/cities', { headers: this.getHeader(), params: {} });
     }
    
 
     public saveNewProject(wizardData: CreateProjectWizardData){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/createProjectWizard/save', { headers: this.getHeader(), params: {'projectDetailsData': JSON.stringify(wizardData)} });
+        return this.httpClient.request("post", this.urlPrefix + '/matbea/shofar/V1/project/wizard/save', { headers: this.getHeader(), params: {'projectDetailsData': JSON.stringify(wizardData)} });
     }
 
     public getCheshbonotProject(misparProyectSagur: string){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/chshbonotproject/get', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur} });
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/list', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur} });
     }
 
     public removeCheshbon(misparProyectSagur: string, misparBank: string, misparSnif: string, misparCheshbon: string){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/chshbonotproject/remove', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
+        return this.httpClient.request("post", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/' + misparBank + '/' + misparSnif + '/' + misparCheshbon + '/remove', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     }
 
     public hagderKeArvut(misparProyectSagur: string, misparBank: string, misparSnif: string, misparCheshbon: string){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/chshbonotproject/hagderKeArvut', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
+        return this.httpClient.request("post", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/' + misparBank + '/' + misparSnif + '/' + misparCheshbon + '/update', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     }
 
-    getpirteyShalav(misparProyectSagur: number, misparShalv:number) {
+    getpirteyShalav(misparProyectSagur: number, misparShalv:number) {//404
       return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/v1/steps/'+misparProyectSagur+'/'+misparShalv, { headers: this.getHeader() });
     }
 
@@ -70,15 +70,17 @@ export class ShofarServices{
     }
 
     getyechidot(misparProyectSagur:number, misparShalv:number) {
-      return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/v1/steps/appartments/'+misparProyectSagur+'/'+misparShalv+'/1', { headers: this.getHeader() });
+      return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/projects/steps/appartments/'+misparProyectSagur+'/'+misparShalv+'/1', { headers: this.getHeader() });
     }
    
-    public getPirteyCheshbon(misparProject: string, misparBank: string, misparSnif: string, misparCheshbon: string){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/cheshbonot/getPirteyCheshbon', { headers: this.getHeader(), params: {'misparProyectSagur': misparProject, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
+    // public getPirteyCheshbon(misparProject: string, misparBank: string, misparSnif: string, misparCheshbon: string){
+    //     return this.httpClient.request("get", this.urlPrefix + '/shofar/cheshbonot/getPirteyCheshbon', { headers: this.getHeader(), params: {'misparProyectSagur': misparProject, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
+    public getPirteyCheshbon(misparProyectSagur: string, misparBank: string, misparSnif: string, misparCheshbon: string){
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/' + misparBank + '/' + misparSnif + '/' + misparCheshbon + '/popup/add', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     }
 
-    public hosefCheshbon(misparProject: string, misparBank: string, misparSnif: string, misparCheshbon: string){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/cheshbonot/add', { headers: this.getHeader(), params: {'misparProyectSagur': misparProject, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
+    public hosefCheshbon(misparProyectSagur: string, misparBank: string, misparSnif: string, misparCheshbon: string){
+        return this.httpClient.request("post", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/' + misparBank + '/' + misparSnif + '/' + misparCheshbon + '/add', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     }
 
     public isShofarAdmin(){
@@ -86,29 +88,29 @@ export class ShofarServices{
     }
 
     public getUserDetails(){
-      return this.httpClient.request("get", this.urlPrefix + '/user/get', { headers: this.getHeader(), params: {} });
+      return this.httpClient.request("get", this.urlPrefix + '/matbea/common/v1/user/details', { headers: this.getHeader(), params: {} });
     }
     public getNatuneyMashkanta(misparProject: string){
-        return this.httpClient.request("get", this.urlPrefix + '/shofar/natuney-mashkanta', { headers: this.getHeader(), params: { misparProject }});
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/project/' + misparProject + '/mashkanta', { headers: this.getHeader(), params: { misparProject }});
     }
     public setNatuneyMashkanta(mashkantaData: saveMskDataType){
-      return this.httpClient.request("post", this.urlPrefix + '/shofar/mashkanta-save', { headers: this.getHeader(), params: { mashkantaData: JSON.stringify(mashkantaData) }});
+      return this.httpClient.request("post", this.urlPrefix + '/matbea/shofar/V1/project/mashkanta/save', { headers: this.getHeader(), params: { mashkantaData: JSON.stringify(mashkantaData) }});
     }
     public getReshimatKablanim(misparProject: string){
-      return this.httpClient.request("get", this.urlPrefix +  '/shofar/kablanim', { headers: this.getHeader(), params: { misparProject }});
+      return this.httpClient.request("get", this.urlPrefix +  '/matbea/shofar/V1/project/' + misparProject + '/kablanim', { headers: this.getHeader(), params: { misparProject }});
     }
     public getNatuneyAmalot(misparProject: string){
-      return this.httpClient.request("get", this.urlPrefix + '/shofar/amalot', {headers: this.getHeader(), params: { misparProject }});
+      return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/project/' + misparProject + '/amalot', {headers: this.getHeader(), params: { misparProject }});
     }
     public saveAmalot(amalotData: AmalotDataType){
-      return this.httpClient.request("post", this.urlPrefix +  '/shofar/amalotsave', {headers: this.getHeader(), params: { amalot: JSON.stringify(amalotData) }});
+      return this.httpClient.request("post", this.urlPrefix +  '/matbea/shofar/V1/project/amalot/save', {headers: this.getHeader(), params: { amalot: JSON.stringify(amalotData) }});
     }
 
     getColumnDefinitions():Observable<any> {
         this.params = new HttpParams().append('taskId', 'SHOFAR').append('subTaskId', 'PROJECTS_LIST');
-       return this.httpService.getRequest( '/common/tables/tableColumnsByUser',this.params).pipe(
+       return this.httpService.getRequest( this.urlPrefix +   '/matbea/common/v1/tables/columns/SHOFAR/PROJECTS_LIST/filter/user',this.params).pipe(
          map(res=>{
-           return (res.data);// as SqlResult).sqlResult;
+           return (res.data ).sqlResult;//as SqlResult home
          })
        )
       }
@@ -118,7 +120,7 @@ export class ShofarServices{
         let params = JSON.stringify({ inputParams });
         this.params= new HttpParams().append('avcmp01m', params)
 
-        return this.httpService.getRequest('/matbea/shofar/projects',this.params).pipe(
+        return this.httpService.getRequest( this.urlPrefix +  '/matbea/shofar/V1/projects/list',this.params).pipe(
           map(res=>{
             let messages=[];
             if(res.messages?.global.errors){
@@ -132,9 +134,8 @@ export class ShofarServices{
 
       }
       getShlavim(misparProyectSagur): Observable<any> {
-    return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/' + misparProyectSagur + '/shlavim');
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/project/' + misparProyectSagur + '/steps');
       }
-
       getGushChelka(){
         return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/v1/shlav/yechida/215/1/0');
       }
@@ -145,7 +146,7 @@ export class ShofarServices{
         params= params.append('sektor', object.sektor?object.sektor:'');
         params= params.append('makal', object.makal?object.makal:'');
         params= params.append('status', object.status?object.status:'4');
-        return this.httpService.getRequest('/matbea/shofar/projects/V1/search/byIherarhia', params).pipe(
+        return this.httpService.getRequest( this.urlPrefix +  '/matbea/shofar/V1/projects/search/byIherarhia', params).pipe(
             map(res=>{
               let messages=[];
               if(res.messages?.global.errors){
@@ -165,7 +166,7 @@ export class ShofarServices{
            params= params.append(k, findObject[k].toString())
         })
 
-        return this.httpService.getRequest('/matbea/shofar/projects/V1/search/byPeilut',params).pipe(
+        return this.httpService.getRequest( this.urlPrefix +  '/matbea/shofar/V1/projects/search/byPeilut',params).pipe(
           map(res=>{
             let messages=[];
             if(res.messages?.global.errors){
@@ -181,17 +182,18 @@ export class ShofarServices{
     updateColumnDefinitions(columnsDefenitions: ColumnDefinition[]):Observable<any>{
       let res:{[name: string]:string}={};
       columnsDefenitions.filter((col:ColumnDefinition)=> col.display=="1").map((col)=>{
-     const colName = col.columnnameenglish.toString();
-     const colOrder=col.ordernumber.toString();
-     res[colName]=colOrder;
-    return ;
-    });
-      return this.httpService.putRequest('/shofar/projects/columns/update',res);
+        const colName = col.columnnameenglish.toString();
+        const colOrder=col.ordernumber.toString();
+        res[colName]=colOrder;
+        return ;
+      });
+     
+      return this.httpService.putRequest( this.urlPrefix +  '/matbea/shofar/v1/tables/columns/update',res);
     }
 
       getProjectByMisparProject(wizardData: CreateProjectWizardData):Observable<any>{
         this.params= new HttpParams().append('wizardData', JSON.stringify(wizardData))
-        return this.httpService.getRequest( '/shofar/createProjectWizard/getByMisparProject',this.params).pipe(
+        return this.httpService.getRequest( this.urlPrefix +   '/matbea/shofar/V1/project/filter/' + wizardData.misparProyectSagur,this.params).pipe(
           map(res=>{
             return res.data;
           })
@@ -202,14 +204,14 @@ export class ShofarServices{
 
       addNewProject(project: Project):Observable<any>{
         this.params= new HttpParams().append('wizardData', JSON.stringify(project))
-        return this.httpService.getRequest('/shofar/createProjectWizard/getByMisparProject',this.params).pipe(
+        return this.httpService.getRequest( this.urlPrefix +  '/matbea/shofar/V1/project/filter/' +  + project.misparProyectSagur,this.params).pipe(
           map(res=>{
             return res.data;
           })
         )
       }
       getComboStatusToProjectsListPage():Observable<any>{
-        return this.httpService.getRequest( '/matbea/shofar/projects/combobox').pipe(
+        return this.httpService.getRequest( this.urlPrefix +   '/matbea/shofar/V1/projects/filters').pipe(
           tap((v)=>{
             console.log("getComboStatusToProjectsListPage",v)
           }),
@@ -281,4 +283,3 @@ let r = {
              "optionsLists": {}
   }, "messages": []
 }
-

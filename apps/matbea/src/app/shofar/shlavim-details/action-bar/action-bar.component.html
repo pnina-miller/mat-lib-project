@@ -1,27 +1,44 @@
+
 <ng-container>
-    <div class="project-details-header" >
-    <div class="project-details-header-nitunim">
-        <div class="project-details-header-setor">
-        <span class="form-field-lable-light">{{selectedRows.length}}  נבחרו </span>
-      </div>
-     <!--  <matbea-divider vertical="true"></matbea-divider>
-      <div class="project-details-header-setor">
-        <span class="form-field-lable-light">חשבון מוביל</span>
-        <span >{{project?.misparSnif}}-{{project?.misparCheshbon}}</span>
-      </div>
-      <matbea-divider vertical="true"></matbea-divider>
-      <div class="project-details-header-setor">
-        <span class="form-field-lable-light">קוד מוטב</span>
-        <span >{{project?.kodMutavBeShovar}}</span>
-      </div>
-      <matbea-divider vertical="true"></matbea-divider>
-      <div class="project-details-header-setor">
-        <span class="form-field-lable-light">הערות מיוחדות</span>
-        <matbea-input [disabled]="change" disabledTransparent="true" [(value)]="shuratMelel800"></matbea-input>
-      </div>-->
+  <div style="display: flex; background-color: #9d9b9b; width: 100%; color:white; justify-content: space-between;">
+   <div     style="display: inherit;">
+    <div style="    display: inline-grid;">
+          <span>{{selectedRows.length}} נבחרו </span>
+          <span> ניתן לבחור עד 47 יחידות בטווח</span>
     </div>
+    <div>
+          <div style="display: inline-flex;">
+          <span style="width: 100px;">
+             <matbea-combo placeholder="יחידה" lable="מ" lablePosition='top' [options]="[{id:1,value:1},{id:2,value:2},{id:3,value:3}]"  (value)="rangeFrom=$event.id" [valueToDefoult]="rangeFrom"></matbea-combo>            
+          </span>  
+          <span style="width: 100px;">
+            <matbea-combo placeholder="יחידה" lable="עד" lablePosition='top' [options]="[{id:1,value:1},{id:2,value:2},{id:3,value:3}]"  (value)="rangeTo=$event.id" [valueToDefoult]="rangeTo"></matbea-combo>
+           </span>
+          </div>
+      </div>
+    </div>
+      <div style="display: inline-flex;" >
+        <div>
+          <span >
+            <matbea-button> הזמנת פנקסי שוברים </matbea-button>
+          </span>
+        </div>
+
+        <div >
+          <span >
+            <matbea-button> טיפול בערבויות </matbea-button>
+          </span>
+        </div>
+
+        <div >
+          <span >
+            <matbea-button> עדכון גוש / חלקה / מגרש</matbea-button>
+          </span>
+        </div>
+
+      </div>
+      <div>
+    <matbea-icon-button color="white" icon="close" (click)="selectedRowsChange.emit([])"></matbea-icon-button>        
+      </div>
   </div>
-  <button (click)="selectedRowsChange.emit([])">X</button>
-  </ng-container>
-  
-<!-- from: project-details-header -->
+</ng-container>

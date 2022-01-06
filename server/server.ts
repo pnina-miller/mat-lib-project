@@ -35,7 +35,7 @@ app.get('/user/get', (req, res) => {
   };
   res.json({ data: { userDataMf: user } });
 });
-app.get('/matbea/shofar/projects', (req, res) => {
+app.get('/matbea/shofar/V1/projects/list', (req, res) => {
   console.log('matbea/shofar/projects');
   res.json({ data: { projectsList: data } });
 });
@@ -131,7 +131,7 @@ app.post('/matbea/shofar/projects/v1/steps/', (req, res) => {
 });
 
 app.get(
-  '/matbea/shofar/projects/v1/steps/appartments/:misparProyectSagur/:misparShalv/1',
+  '/matbea/shofar/v1/projects/steps/appartments/:misparProyectSagur/:misparShalv/1',
   (req, res) => {
     console.log('getyechidot');
     res.json(getyechidot);
@@ -141,7 +141,7 @@ app.get('/shofar/projects', (req, res) => {
   console.log('shofar/projects');
   res.json(data);
 });
-app.get('/shofar/pirteyProject/get', (req, res) => {
+app.get('/matbea/shofar/V1/projects/0/:misparProyectSagur/:kodMutav/details', (req, res) => {
   console.log('shofar/pirteyProject/get');
   res.json({ data: details });
 });
@@ -238,3 +238,57 @@ app.listen(port, () => {
 app.addListener('error', (err) => {
   console.log('error: ', err);
 });
+
+import { useState } from "react";
+import Header from "./Header";
+import Content from "./Content";
+import ItemList from "./ItemList";
+import Footer from "./Footer";
+
+function App() {
+  const [items, setItem] = useState([
+    {
+      id: 1,
+      checked: false,
+      item: "item 1",
+    },
+    {
+      id: 2,
+      checked: false,
+      item: "item 2",
+    },
+    {
+      id: 3,
+      checked: true,
+      item: "item 3",
+    },
+  ]);
+
+  const handleCheck = (id) => {
+    const listItems = items.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    );
+    localStorage.setItem("shoppinglist", JSON.stringify(listItems));
+  }
+    const handlDelete = (id) => {
+      const listItems = items.filter((item) => item.id !== id);
+      localStorage.setItem("shoppinglist", JSON.stringify(listItems));
+    };
+
+    return (
+      <div className="App">
+        <Header title="grocories" />
+        <Content
+          items={items}
+          setItem={setItem}
+          handleCheck={handleCheck}
+          handlDelete={handlDelete}
+        />
+        <Footer length={items.length} />
+        <ItemList />
+      </div>
+    );
+  }
+
+
+export default App;

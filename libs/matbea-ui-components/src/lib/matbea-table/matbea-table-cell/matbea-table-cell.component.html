@@ -8,7 +8,7 @@
   </ng-container>
 
   <ng-container *ngSwitchCase="'checkbox'">
-    <mat-checkbox [formControl]="selectControl" checked="item[column.columnnameenglish]" ></mat-checkbox>
+    <mat-checkbox [formControl]="selectControl" [(ngModel)]="this.item[this.column.columnnameenglish]" ></mat-checkbox>
   </ng-container>
   <ng-container *ngSwitchCase="'status'">
     <span [style]=style class="matbea-table-cell-status" [ngClass]='class'>
@@ -22,7 +22,7 @@
     </span>
   </ng-container>
   <ng-container *ngSwitchCase="'menu'">
-<matbea-menu hasBackdrop="true" (clickedItem)="clickInMenu.emit({event:$event, item:item})" [items]="column.object">
+<matbea-menu (clickedItem)="clickInMenu.emit({event:$event, item:item})" [items]="column.object">
   <matbea-icon icon="more_vert"></matbea-icon>
 </matbea-menu>
   </ng-container>

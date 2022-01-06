@@ -5,7 +5,9 @@ import { ShlavimDetailsRoutingModule } from './shlavim-details-routing.module';
 import { ProjectDetailsHeaderModule } from '../project-details-components/project-details-header/project-details-header.module';
 import {
   MatbeaButtonModule,
+  MatbeaComboModule,
   MatbeaDetailsSteperModule,
+  MatbeaDividerModule,
   MatbeaIconButtonModule,
   MatbeaInputModule,
   MatbeaTableModule,
@@ -36,7 +38,10 @@ import { ActionBarComponent } from './action-bar/action-bar.component';
     MatMenuModule,
     MatbeaButtonModule,
     HosafatYechidaModule,
-    MatbeaInputModule
+    MatbeaInputModule,
+    MatbeaDividerModule,
+    MatbeaComboModule
   ],
 })
 export class ShlavimDetailsModule {}
+
