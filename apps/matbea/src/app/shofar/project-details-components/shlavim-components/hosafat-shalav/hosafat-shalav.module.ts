@@ -12,12 +12,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatbeaButtonModule } from '../../../../../../../../libs/matbea-ui-components/src/lib/matbea-button/matbea-button.module';
 import { HosafatShalavComponent } from './hosafat-shalav.component';
-import { MatbeaIconButtonModule } from '@pdesks/matbea-ui-components';
+import { MatbeaIconButtonModule, RadioButtonTabModule, MatbeaCheckboxModule, MatbeaInputModule } from '@pdesks/matbea-ui-components';
 
 
 
@@ -41,8 +41,12 @@ import { MatbeaIconButtonModule } from '@pdesks/matbea-ui-components';
     TextFieldModule,
     ReactiveFormsModule,
     MatDividerModule,
-    MatCheckboxModule, 
-  MatFormFieldModule ],
-  exports:[HosafatShalavComponent]
+    MatCheckboxModule,
+    MatFormFieldModule,
+    RadioButtonTabModule,
+    MatbeaCheckboxModule,
+    MatbeaInputModule
+  ],
+  exports: [HosafatShalavComponent]
 })
 export class HosafatShalavModule { }

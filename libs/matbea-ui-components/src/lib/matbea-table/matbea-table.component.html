@@ -18,11 +18,11 @@
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>
-        <tr mat-row class="matbea-on-hover-row" (click)="onClick(row)" *matRowDef="let row; columns: columsToDisplay">
+        <tr mat-row class="matbea-on-hover-row" (dblclick)="onClick(row)" *matRowDef="let row; columns: columsToDisplay">
         </tr>
       </table>
     </div>
-    <div *ngIf="!dataSource.data||dataSource.data.length==0"class='matbea-table-not-information' >
+    <div *ngIf="!dataSource?.data||dataSource?.data.length==0"class='matbea-table-not-information' >
       <div>
         <ng-container *ngFor="let message of messages">
           <span>{{message}}</span>

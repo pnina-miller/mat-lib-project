@@ -28,7 +28,7 @@ import { FormControl } from '@angular/forms';
 })
 
 export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
-  dataSource: any;
+  dataSource: any=new MatTableDataSource();
   _dataSource: any;
   columsToDisplay: string[] = [];
   displayedColumns: ColumnDefinition[];
@@ -68,6 +68,9 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("dataSource",this.dataSource$ instanceof MatTableDataSource);
+    console.log("Observable",this.dataSource$ instanceof Observable);
+    
     console.log("SimpleChanges in matbea-table", this);
     this.dataSource$.subscribe((list) => {
       if(this.dataSource) this.dataSource.data = list || [];
@@ -85,7 +88,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
     this.matTableService.init('','',this._dataSource,this.displayedColumns.map((col)=> new FilterColumn(col)));
     this.matTableService.displayDataSource.subscribe(data=>{this.dataSource = data;
       this.changeDetector.detectChanges();
-      this.dataSourceChangeLength.emit(this.dataSource.data?.length);
+      this.dataSourceChangeLength.emit(this.dataSource?.data?.length);
 
     })
     this.ngAfterViewInit();
@@ -94,13 +97,15 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     console.log("OnInit in matbea-table", this);
-    this.selectControl.valueChanges.subscribe((value:boolean) => {Array.from({length:this.dataSource.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value}))  })
+    this.selectControl.valueChanges.subscribe((value:boolean) => {Array.from({length:this.dataSource?.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value}))  })
   }
   onClick(row: any): void {
     console.clear();
     console.log(row);
     let id = row.id;
+    if(this.navTo){
     this.router.navigate([this.navTo + id]);
+    }
     this.row.emit(row);
 
   }

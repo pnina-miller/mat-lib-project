@@ -1,33 +1,4 @@
-
-
 <div class="rowCell" >
-   
-  <!-- <mat-radio-group  > -->
-      <table mat-table  [dataSource]="shlavim" style="overflow: auto; height: 100%; width: 100%;" >
-          <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of displayedColumns">
-            <th mat-header-cell style=" min-width: 40px;" *matHeaderCellDef >
-              {{column.columnTitle}}
-            </th>
-            <td  mat-cell [style]="column.style" *matCellDef="let project;">
-              <matbea-table-cell [item]="project" [column]="column" ></matbea-table-cell>
-              <!-- <ng-template #menu> <matbea-arichat-shalav-menu></matbea-arichat-shalav-menu></ng-template> -->
-            
-             
-            </td>
-          </ng-container>
-          <ng-container [matColumnDef]="'menu'" >
-            <th mat-header-cell style=" min-width: 40px;" *matHeaderCellDef >
-              menu
-            </th>
-            <td  mat-cell [style]="" *matCellDef="let project">
-               <matbea-arichat-shalav-menu></matbea-arichat-shalav-menu>
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>
-          <tr mat-row class="matbea-on-hover-row"  *matRowDef="let row; columns: columsToDisplay">
-              <!-- (dblclick)="onClick(row)" -->
-          </tr>
-        </table>
-
-  <!-- </mat-radio-group> -->
+  <matbea-table  (clickInRow)="clickInRow($event)" [displayedColumns]="displayedColumns"  [loading]='false'
+   [dataSource$]="$shlavim" (row)="onDbClick($event)"  ></matbea-table> 
 </div>  

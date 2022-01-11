@@ -1,12 +1,18 @@
 <div style="height: 100%; width: 100%;">
-    <matbea-slice-data titel="שלבים">
-      <matbea-slice-data-suffix >
-        <matbea-icon-button icon="add_circle" (onClick)="openAddShlavimPopup()" ></matbea-icon-button></matbea-slice-data-suffix>
+  <matbea-slice-data titel="שלבים">
+    <matbea-slice-data-suffix >
+      <matbea-button type='matbea-stroked'  (onClick)="openAddShlavimPopup()" >
+        + הוספת שלב
+     </matbea-button>
+    </matbea-slice-data-suffix>
   
-      <matbea-slice-data-content style="width:100%">
-        <matbea-shlavim [shlavim]="shlavim"></matbea-shlavim>
-      </matbea-slice-data-content>
-    </matbea-slice-data>
+    <matbea-slice-data-content style="width:100%">
+      <matbea-shlavim *ngIf="$shlavim else noData" [misparProyectSagur]="misparProyectSagur" [$shlavim]="$shlavim"></matbea-shlavim>
+    </matbea-slice-data-content>
+  </matbea-slice-data>
   
-  </div>
-  
+  </div> 
+
+  <ng-template #noData>
+<span>טרם הוזנו שלבים</span>
+  </ng-template>
