@@ -96,7 +96,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
     console.log("OnInit in matbea-table", this);
     this.selectControl.valueChanges.subscribe((value:boolean) => {Array.from({length:this.dataSource.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value}))  })
   }
-  onClick(row: any): void {debugger
+  onClick(row: any): void {
     console.clear();
     console.log(row);
     let id = row.id;

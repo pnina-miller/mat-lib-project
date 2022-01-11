@@ -25,7 +25,7 @@ export class SelectFilterComponent implements OnInit {
     this.optionsArr=this.filterColumn.options.map(option=>({id:option,description:option}));
   }
 
-  onChange(value: any){debugger
+  onChange(value: any){
     this.stringFilterValue=value
   }
 
