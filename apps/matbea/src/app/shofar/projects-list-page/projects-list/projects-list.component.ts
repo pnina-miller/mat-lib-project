@@ -64,7 +64,7 @@ export class ProjectsListComponent implements OnInit {
     this.store$.dispatch(ShofarActions.setProjectListLenght({projectListLenght:$event}));
   }
 
-  console($event: any) {
+  console($event: any) {debugger
     console.log('CLICK IN ROW MENU');
   }
 }

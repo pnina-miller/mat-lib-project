@@ -3,14 +3,14 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ShofarServices } from '../../services/shofar-services';
 
-const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:' ',ordernumber:0,columnformatter:'checkbox'},
+const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:'selectRow',ordernumber:0,columnformatter:'checkbox'},
 {columnnamehebrew:"מס' יחידה", columnformatter:' ', display:'1', columnnameenglish:'misparShura'} ,
 {columnnamehebrew:"שמות הרוכשים", columnformatter:' ', display:'1', columnnameenglish:'shemLakoachKolel'} ,
 {columnnamehebrew:"זיהוי יחידה", columnformatter:' ', display:'1', columnnameenglish:'shuratMelel180'} ,
 {columnnamehebrew:"שווי לפי דוח 0", columnformatter:' ', display:'1', columnnameenglish:'erechShoviDoch0'} ,
 {columnnamehebrew:"גוש", columnformatter:' ', display:'1', columnnameenglish:'misparGush'},
 {columnnamehebrew:"חלקה/ות", columnformatter:' ', display:'1', columnnameenglish:'metegPakadGushChelka'},
-{columnnamehebrew:"תאריך חוזה", columnformatter:' ', display:'1', columnnameenglish:'taarich8HaChoze'},
+{columnnamehebrew:"תאריך חוזה", columnformatter:'Int2DateFormatter', display:'1', columnnameenglish:'taarich8HaChoze'},
 {columnnamehebrew:'סכום חוזה ללא מע"מ', columnformatter:' ', display:'1', columnnameenglish:'schumChoze'} ,
 {columnnamehebrew:'סכום חוזה כולל מע"מ', columnformatter:' ', display:'1', columnnameenglish:'schumBeFoal'} ,
 {columnnamehebrew:"תשלומים עד כה – כמות", columnformatter:' ', display:'1', columnnameenglish:'misparTashlumim'}  ,
@@ -58,3 +58,4 @@ export class YechidotComponent implements OnInit {
   }
 
 }
+

@@ -10,7 +10,8 @@ import { HttpService } from "../utils/http.service";
 import { saveMskDataType } from '../project-details-components/mashkanta/natuney-mashkanta/natuney-mashkanta-data';
 import { MatbeaUtils } from "../utils/matbea-utils-components";
 import { AmalotDataType } from "../project-details-components/amalot/amalot/amalot.data";
-import { SqlResult } from "../../../../../../libs/matbea-shared-components/src/lib/beans/general-response";
+// import { SqlResult } from "../../../../../../libs/matbea-shared-components/src/lib/beans/general-response";
+import { shalavDataType } from "../shlavim-details/shalav.data";
 
 @Injectable({
     providedIn: 'root',
@@ -59,6 +60,20 @@ export class ShofarServices{
         return this.httpClient.request("post", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/' + misparBank + '/' + misparSnif + '/' + misparCheshbon + '/update', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     }
 
+    getpirteyShalav(misparProyectSagur: number, misparShalv:number) {//404
+      return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/v1/steps/'+misparProyectSagur+'/'+misparShalv, { headers: this.getHeader() });
+    }
+
+    public saveShalav(shalavData: shalavDataType, misparProject){
+      return this.httpClient.request("post", this.urlPrefix +  '/matbea/shofar/projects/v1/steps', {headers: this.getHeader(), params: { projectShlavData: JSON.stringify(shalavData) }});
+    }
+
+    getyechidot(misparProyectSagur:number, misparShalv:number) {
+      return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/projects/steps/appartments/'+misparProyectSagur+'/'+misparShalv+'/1', { headers: this.getHeader() });
+    }
+   
+    // public getPirteyCheshbon(misparProject: string, misparBank: string, misparSnif: string, misparCheshbon: string){
+    //     return this.httpClient.request("get", this.urlPrefix + '/shofar/cheshbonot/getPirteyCheshbon', { headers: this.getHeader(), params: {'misparProyectSagur': misparProject, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     public getPirteyCheshbon(misparProyectSagur: string, misparBank: string, misparSnif: string, misparCheshbon: string){
         return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/' + misparBank + '/' + misparSnif + '/' + misparCheshbon + '/popup/add', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     }
@@ -94,7 +109,7 @@ export class ShofarServices{
         this.params = new HttpParams().append('taskId', 'SHOFAR').append('subTaskId', 'PROJECTS_LIST');
        return this.httpService.getRequest( this.urlPrefix +   '/matbea/common/v1/tables/columns/SHOFAR/PROJECTS_LIST/filter/user',this.params).pipe(
          map(res=>{
-           return (res.data as SqlResult).sqlResult;
+           return (res.data )//.sqlResult;//as SqlResult home
          })
        )
       }
@@ -118,7 +133,10 @@ export class ShofarServices{
 
       }
       getShlavim(misparProyectSagur): Observable<any> {
-    return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/project/' + misparProyectSagur + '/steps');
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/project/' + misparProyectSagur + '/steps');
+      }
+      getGushChelka(){
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/v1/shlav/yechida/215/1/0');
       }
       getProjectsListWithHierarhia(object){
         let params= new HttpParams();
@@ -168,7 +186,7 @@ export class ShofarServices{
         res[colName]=colOrder;
         return ;
       });
-      
+     
       return this.httpService.putRequest( this.urlPrefix +  '/matbea/shofar/v1/tables/columns/update',res);
     }
 
@@ -264,4 +282,3 @@ let r = {
              "optionsLists": {}
   }, "messages": []
 }
-

@@ -1,3 +1,4 @@
+
 import {PipeTransform, Pipe} from '@angular/core'
 
 @Pipe({
@@ -8,6 +9,7 @@ export class PipePipe implements PipeTransform {
   transform(value: any, formater: any): any {
     if (formater&&formater.toLowerCase() == "int2dateformatter") {
       if (value) {
+        value=String(value)
         if (value.length == 8) {
 
           let year = value.substr(0, 4);

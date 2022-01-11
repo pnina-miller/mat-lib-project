@@ -18,6 +18,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatTableService} from "./services/mat-table.service";
 import {FilterColumn} from "./models/filterColumns";
 import {MatTableDataSource} from "@angular/material/table";
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'matbea-table',
@@ -49,10 +50,14 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() paginatorOn: boolean = false;
   @Input() loading = true;
   @Input() messages:[];
+  @Input() selectedRows:number[];
+  @Output() selectedRowsChange = new EventEmitter<number[]>();
   @Output() row= new EventEmitter();
   @Output() dataSourceChangeLength = new EventEmitter<number>();
   updateFilters: any;
   @Output()clickInRow= new EventEmitter();
+
+  selectControl:FormControl = new FormControl();
 
   constructor(private route: ActivatedRoute, private router: Router,private _liveAnnouncer: LiveAnnouncer,
   public dialog: MatDialog,
@@ -65,12 +70,14 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log("SimpleChanges in matbea-table", this);
     this.dataSource$.subscribe((list) => {
-      if(this.dataSource) this.dataSource.data = list;
+      if(this.dataSource) this.dataSource.data = list || [];
       this._dataSource=list;
     });
-    this.columsToDisplay = this.displayedColumnsTemp.filter(e => {
-      return e.display == '1';
-    }).sort((a, b) => {
+    this.columsToDisplay = this.displayedColumnsTemp
+    .filter(e => {
+      return true;// e.display == '1';
+    })
+    .sort((a, b) => {
       return Number(a.ordernumber) - Number(b.ordernumber)
     }).map((e) => e.columnnameenglish);
     this.displayedColumns = this.displayedColumnsTemp;
@@ -87,16 +94,31 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     console.log("OnInit in matbea-table", this);
-
+    this.selectControl.valueChanges.subscribe((value:boolean) => {Array.from({length:this.dataSource.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value}))  })
   }
-
-  onClick(row: any): void {
+  onClick(row: any): void {debugger
     console.clear();
     console.log(row);
     let id = row.id;
     this.router.navigate([this.navTo + id]);
     this.row.emit(row);
 
+  }
+
+  onRowSelected(event: any): void {
+    let tempData=this.dataSource.filteredData//temp
+    tempData[event.target].selectRow=event.value
+    this.dataSource=new MatTableDataSource(tempData);
+        if (event.value){
+      this.selectedRows.push(event.target);
+    }else{
+      this.selectedRows.forEach((row,i) => { if(row===event.target) this.selectedRows.splice(i,1); } );
+      }
+      this.selectedRowsChange.emit(this.selectedRows)
+  }
+
+  selectMethod(event:any){
+    Array.from({length:this.dataSource.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value:true}))
   }
 
   announceSortChange(sortState: Sort) {

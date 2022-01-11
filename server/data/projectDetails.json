@@ -10,8 +10,8 @@
     "misparSnif": "cfewfew",
     "misparCheshbon": "cfewfew"
   },
-  "citiesComboBox": "dd",
-  "divurMichtavShichrurCombo": "dsfds",
+  "citiesComboBox": [{"value":"dd"}],
+  "divurMichtavShichrurCombo": [{"value": "d.value","shortDesc":"fergrg"}],
   "ezorCombo": [{ "id": "ezorC1ombo",
     "value": "ezorCo2mbo",
     "shortDesc": "ez3orCombo",

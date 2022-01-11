@@ -1,30 +1,35 @@
+
 <ng-container >
-<div class="matbea-table-cotainer">
-  <div class="matbea-table">
-    <table mat-table matSort [dataSource]="dataSource" style="width: 100%; height: 100%;" >
-      <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of displayedColumns">
-        <th mat-header-cell mat-sort-header style=" min-width: 40px;" *matHeaderCellDef sortActionDescription="Sort by {{column.columnnameenglish}}">
-          {{column.columnnamehebrew?column.columnnamehebrew:column.columnnameenglish}}
-        </th>
-        <td mat-cell [style]="column.style" *matCellDef="let project;">
-          <matbea-table-cell [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>
-      <tr mat-row class="matbea-on-hover-row" (dblclick)="onClick(row)" *matRowDef="let row; columns: columsToDisplay">
-      </tr>
-    </table>
-  </div>
-  <div *ngIf="!dataSource.data||dataSource.data.length==0"class='matbea-table-not-information' >
-    <div>
-      <ng-container *ngFor="let message of messages">
-        <span>{{message}}</span>
-      </ng-container>
-      <span *ngIf="messages==null|| messages.length==0">אין מידע</span>
+  <div class="matbea-table-cotainer">
+    <div class="matbea-table">
+      <table mat-table matSort [dataSource]="dataSource" style="width: 100%; height: 100%;" >
+        <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of displayedColumns">
+          <th mat-header-cell mat-sort-header style=" min-width: 40px;" *matHeaderCellDef sortActionDescription="Sort by {{column.columnnameenglish}}">
+            {{column.columnnamehebrew?column.columnnamehebrew:column.columnnameenglish}}
+            <div *ngIf="column.columnformatter==='checkbox'" style="display: contents;">
+              <mat-checkbox [formControl]="selectControl" checked="" ></mat-checkbox>
+              <matbea-menu (clickedItem)="selectMethod($event)" [items]="[{ id: 0, name: 'הכל', disabled: false, role: 'menuitem'},{ id: 1, name: 'בטווח', disabled: false, role: 'menuitem'}]">
+                <matbea-icon icon="keyboard_arrow_down"></matbea-icon>
+              </matbea-menu>          
+            </div>
+          </th>
+          <td mat-cell [style]="column.style" *matCellDef="let project;">
+            <matbea-table-cell (onRowSelected)="onRowSelected($event)" [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>
+        <tr mat-row class="matbea-on-hover-row" (click)="onClick(row)" *matRowDef="let row; columns: columsToDisplay">
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="!dataSource.data||dataSource.data.length==0"class='matbea-table-not-information' >
+      <div>
+        <ng-container *ngFor="let message of messages">
+          <span>{{message}}</span>
+        </ng-container>
+        <span *ngIf="messages==null|| messages.length==0">אין מידע</span>
+      </div>
     </div>
   </div>
-  <div *ngIf=loading class="matbea-table-loading"></div>
-  <mat-paginator *ngIf="paginatorOn" class="matbea-table-paginator" [pageSizeOptions]="[5, 10, 20,50,100]"
-    showFirstLastButtons></mat-paginator>
-</div>
-</ng-container>
+  </ng-container>
+  

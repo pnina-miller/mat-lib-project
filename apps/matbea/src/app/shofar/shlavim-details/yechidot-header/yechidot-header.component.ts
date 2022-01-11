@@ -1,3 +1,4 @@
+
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HosafatYechidaComponent } from '../hosafat-yechida/hosafat-yechida.component';
@@ -14,14 +15,14 @@ export class YechidotHeaderComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.addUnitsAction();//temp
+    // this.addUnitsAction();//temp
   }
 
   addUnitsAction(){
     const dialogRef = this.dialog.open(HosafatYechidaComponent, {
       width: '50%',
-      height: '100%', 
-      panelClass:'hosafat-shalav-container',
+      height: '80%',
+      panelClass:'hosafat-yechida-container',
       data: {},    
     });
   }

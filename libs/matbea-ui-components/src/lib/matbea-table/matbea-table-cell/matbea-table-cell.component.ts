@@ -1,3 +1,4 @@
+
 import {
   Component,
   OnInit,
@@ -12,6 +13,7 @@ import {
 } from '@angular/core';
 import { PipePipe } from '../../pipes/pipe.pipe';
 import { ColumnDefinition } from '../../models/column-definition.model';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -29,17 +31,22 @@ export class MatbeaTableCellComponent implements OnInit, OnChanges{
   action;
   class: any;
   @Output()clickInMenu= new EventEmitter();
+  @Output()onRowSelected= new EventEmitter();
 
-
+  selectControl:FormControl = new FormControl(true);
+value=true;
   constructor() {
 
   }
 
   ngOnInit(): void {
-
+    this.selectControl.valueChanges.subscribe((value:any) => { this.onRowSelected.emit({target:this.item.misparShura, value})})
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if(this.column.columnformatter==='checkbox'){
+      this.selectControl.setValue(this.item[this.column.columnnameenglish]);
+    }
 if(this.item[this.column.columnnameenglish]=='פעיל'){
   this.class='matbea-table-cell-status-pail';
 }

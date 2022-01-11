@@ -35,28 +35,31 @@ app.get('/user/get', (req, res) => {
   };
   res.json({ data: { userDataMf: user } });
 });
-app.get('/matbea/shofar/projects', (req, res) => {
+
+app.get('/matbea/shofar/V1/projects/list', (req, res) => {
   console.log('matbea/shofar/projects');
   res.json({ data: { projectsList: data } });
 });
-app.get('/matbea/shofar/projects/combobox', (req, res) => {
-  console.log('matbea/shofar/projects/combobox');
+
+app.get('/matbea/shofar/V1/projects/filters', (req, res) => {
+  console.log('getComboStatusToProjectsListPage');
   res.json({ data: { projectStatusCombo: data } });
 });
-app.get('/matbea/shofar/projects/:id/shlavim', (req, res) => {
-  console.log('shofar/shlavim');
+app.get('/matbea/shofar/V1/project/:id/steps', (req, res) => {
+  console.log('getShlavim');
   res.json({
     metadata: { validations: {} },
     data: { reshimatShlavimList: reshimatShlavim },
   });
 });
-app.get('/shofar/chshbonotproject/get', (req, res) => {
-  console.log('shofar/shlavim');
+app.get('/matbea/shofar/V1/cheshbonot/:project/list', (req, res) => {
+  console.log('shofar/cheshbonot');
   res.json({
     metadata: { validations: {} },
     data: { cheshbonotList: reshimatShlavim },
   });
 });
+
 app.get(
   '/matbea/shofar/projects/v1/steps/:misparProject/:misparShalav',
   (req, res) => {
@@ -130,9 +133,7 @@ app.post('/matbea/shofar/projects/v1/steps/', (req, res) => {
   });
 });
 
-app.get(
-  '/matbea/shofar/projects/v1/steps/appartments/:misparProyectSagur/:misparShalv/1',
-  (req, res) => {
+app.get( '/matbea/shofar/v1/projects/steps/appartments/:misparProyectSagur/:misparShalv/1', (req, res) => {
     console.log('getyechidot');
     res.json(getyechidot);
   }
@@ -141,8 +142,8 @@ app.get('/shofar/projects', (req, res) => {
   console.log('shofar/projects');
   res.json(data);
 });
-app.get('/shofar/pirteyProject/get', (req, res) => {
-  console.log('shofar/pirteyProject/get');
+app.get('/matbea/shofar/V1/projects/:misparProyectSagur/:kodMutav/details', (req, res) => {
+  console.log('getPirteyProject');
   res.json({ data: details });
 });
 app.get('/common/sectors', (req, res) => {
@@ -152,8 +153,8 @@ app.get('/common/sectors', (req, res) => {
 app.get('/common/makals', (req, res) => {
   console.log('makals');
   res.json({ data: 'jj' });
-});
-app.get('/common/tables/tableColumnsByUser', (req, res) => {
+});//try
+app.get('/matbea/common/v1/tables/columns/SHOFAR/PROJECTS_LIST/filter/user', (req, res) => {
   console.log('tableColumnsByUser');
   res.json({ data: col });
 });
@@ -165,7 +166,7 @@ app.get('/common/*', (req, res) => {
   console.log('common all');
   res.json({ data: 'common all' });
 });
-app.get('/shofar/amalot', (req, res) => {
+app.get('/matbea/shofar/V1/project/:project/amalot', (req, res) => {
   console.log('amalot');
   res.json({
     data: {
@@ -181,7 +182,7 @@ app.get('/shofar/amalot', (req, res) => {
     },
   });
 });
-app.get('/shofar/natuney-mashkanta', (req, res) => {
+app.get('/matbea/shofar/V1/project/:project/mashkanta', (req, res) => {
   console.log('shofar all');
 
   res.json({
@@ -229,7 +230,7 @@ app.get('/shofar/*', (req, res) => {
 });
 app.get('/*', (req, res) => {
   console.log('all');
-  res.status(404).json({ data: 'all' });
+  res.status(200).json({ data: 'all' });
 });
 
 app.listen(port, () => {

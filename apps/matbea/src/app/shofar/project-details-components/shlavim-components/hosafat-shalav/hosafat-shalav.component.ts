@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogTitle } from '@angular/material/dialog';
 import { ShofarServices } from '../../../services/shofar-services';
+import { shalavDataType } from '../../../shlavim-details/shalav.data';
 
 
 @Component({
