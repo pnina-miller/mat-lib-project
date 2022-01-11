@@ -51,11 +51,16 @@ export class YechidotComponent implements OnInit {
   ngOnInit() {
       this.displayedColumns =COLUMNS;
     //TODO: check duplicate call
-    this.shofarServices.getyechidot(this.misparProyectSagur,this.misparShalav).subscribe((res: any) => {
-      this.dataSource=res.data.avctl071List.fullList
-     
+    this.dataSource$.subscribe((res: any) => {
+      this.dataSource=res;     
     });
   }
-
+  selectedRowsChange(e){
+   console.log('new selectedRows',e)
+    this.selectedRows=e
+    this.dataSource=this.dataSource?.map((row,i)=>({...row, selectRow:this.selectedRows.includes(i)}))
+    console.log('new DS ',this.dataSource,' selectedRows ',this.selectedRows);
+    
+  }
 }
 

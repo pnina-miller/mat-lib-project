@@ -1,5 +1,6 @@
 <span> סה"כ {{dataSource?.length}} יחידות בשלב</span>
 <div><matbea-input class="units-input-filter" type="number" ></matbea-input></div>
 
-<matbea-action-bar *ngIf="selectedRows?.length>0"  [(selectedRows)]="selectedRows" [selectedRows]="selectedRows"></matbea-action-bar>
-<matbea-table [(selectedRows)]="selectedRows" [displayedColumns]="displayedColumns" [dataSource$]="dataSource$" [loading]='loadingTable' ></matbea-table>
+array:<span *ngFor="let i of selectedRows">{{i}},</span> *ngIf="selectedRows?.length>0"
+<matbea-action-bar [arrayLength]="dataSource?.length" (selectedRowsChange)="selectedRowsChange($event)" [selectedRows]="selectedRows"></matbea-action-bar>
+<matbea-table (selectedRowsChange)="selectedRowsChange($event)" [selectedRows]="selectedRows" [displayedColumns]="displayedColumns" [dataSource$]="dataSource" [loading]='loadingTable' ></matbea-table>

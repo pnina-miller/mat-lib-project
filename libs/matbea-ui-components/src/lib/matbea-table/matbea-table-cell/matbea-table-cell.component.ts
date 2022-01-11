@@ -40,7 +40,7 @@ value=true;
   }
 
   ngOnInit(): void {
-    this.selectControl.valueChanges.subscribe((value:any) => { this.onRowSelected.emit({target:this.item.misparShura, value})})
+    this.selectControl.valueChanges.subscribe((value:any) => {if(value!==this.item.selectRow){this.onRowSelected.emit({target:this.item.misparShura, value})}})
   }
 
   ngOnChanges(changes: SimpleChanges): void {

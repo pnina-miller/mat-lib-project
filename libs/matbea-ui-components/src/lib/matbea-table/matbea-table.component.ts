@@ -69,20 +69,19 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log("dataSource",this.dataSource$ instanceof MatTableDataSource);
-    console.log("Observable",this.dataSource$ instanceof Observable);
+    console.log("Observable",);
     
     console.log("SimpleChanges in matbea-table", this);
+    if(this.dataSource$ instanceof Observable){
     this.dataSource$.subscribe((list) => {
       if(this.dataSource) this.dataSource.data = list || [];
       this._dataSource=list;
     });
-    this.columsToDisplay = this.displayedColumnsTemp
-    .filter(e => {
-      return true;// e.display == '1';
-    })
-    .sort((a, b) => {
-      return Number(a.ordernumber) - Number(b.ordernumber)
-    }).map((e) => e.columnnameenglish);
+  } else{
+    this._dataSource=this.dataSource$
+  }
+    this.columsToDisplay = this.displayedColumnsTemp.filter(e =>  true)// e.display == '1';
+    .sort((a, b) =>  Number(a.ordernumber) - Number(b.ordernumber)).map((e) => e.columnnameenglish);
     this.displayedColumns = this.displayedColumnsTemp;
 
     this.matTableService.init('','',this._dataSource,this.displayedColumns.map((col)=> new FilterColumn(col)));
@@ -97,7 +96,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     console.log("OnInit in matbea-table", this);
-    this.selectControl.valueChanges.subscribe((value:boolean) => {Array.from({length:this.dataSource?.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value}))  })
+    this.selectControl.valueChanges.subscribe((value:boolean) => {Array.from({length:this.dataSource?.filteredData.length}).forEach((el,i)=>{this.onRowSelected({target:i,value})})  })
   }
   onClick(row: any): void {
     console.clear();
@@ -114,12 +113,12 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
     let tempData=this.dataSource.filteredData//temp
     tempData[event.target].selectRow=event.value
     this.dataSource=new MatTableDataSource(tempData);
-        if (event.value){
+    if (event.value){
       this.selectedRows.push(event.target);
-    }else{
-      this.selectedRows.forEach((row,i) => { if(row===event.target) this.selectedRows.splice(i,1); } );
-      }
-      this.selectedRowsChange.emit(this.selectedRows)
+    } else{
+        this.selectedRows.forEach((row,i) => { if(row===event.target) this.selectedRows.splice(i,1); } );
+    }
+    this.selectedRowsChange.emit(this.selectedRows)
   }
 
   selectMethod(event:any){

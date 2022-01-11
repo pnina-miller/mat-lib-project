@@ -1,44 +1,68 @@
-
 <ng-container>
-  <div style="display: flex; background-color: #9d9b9b; width: 100%; color:white; justify-content: space-between;">
-   <div     style="display: inherit;">
-    <div style="    display: inline-grid;">
-          <span>{{selectedRows.length}} נבחרו </span>
-          <span> ניתן לבחור עד 47 יחידות בטווח</span>
-    </div>
-    <div>
-          <div style="display: inline-flex;">
-          <span style="width: 100px;">
-             <matbea-combo placeholder="יחידה" lable="מ" lablePosition='top' [options]="[{id:1,value:1},{id:2,value:2},{id:3,value:3}]"  (value)="rangeFrom=$event.id" [valueToDefoult]="rangeFrom"></matbea-combo>            
-          </span>  
-          <span style="width: 100px;">
-            <matbea-combo placeholder="יחידה" lable="עד" lablePosition='top' [options]="[{id:1,value:1},{id:2,value:2},{id:3,value:3}]"  (value)="rangeTo=$event.id" [valueToDefoult]="rangeTo"></matbea-combo>
-           </span>
-          </div>
-      </div>
-    </div>
-      <div style="display: inline-flex;" >
-        <div>
-          <span >
-            <matbea-button> הזמנת פנקסי שוברים </matbea-button>
-          </span>
-        </div>
-
-        <div >
-          <span >
-            <matbea-button> טיפול בערבויות </matbea-button>
-          </span>
-        </div>
-
-        <div >
-          <span >
-            <matbea-button> עדכון גוש / חלקה / מגרש</matbea-button>
-          </span>
-        </div>
-
+  <div
+    style="
+      display: flex;
+      background-color: #9d9b9b;
+      width: 100%;
+      color: white;
+      justify-content: space-between;
+    "
+  >
+    <div style="display: inherit">
+      <div style="display: inline-grid">
+        <!-- <span>{{selectedRows.length}} נבחרו </span> -->
+        <span> ניתן לבחור עד 47 יחידות בטווח</span>
       </div>
       <div>
-    <matbea-icon-button color="white" icon="close" (click)="selectedRowsChange.emit([])"></matbea-icon-button>        
+        <div style="display: inline-flex">
+          <span style="width: 100px">
+            <matbea-combo
+              placeholder="יחידה"
+              lable="מ"
+              lablePosition="top"
+              [options]="toOptions"
+              (value)="fromChanged($event.id, rangeTo)"
+              [valueToDefoult]="rangeFrom"
+            ></matbea-combo>
+          </span>
+          <span style="width: 100px">
+            <matbea-combo
+              placeholder="יחידה"
+              lable="עד"
+              lablePosition="top"
+              [options]="fromOptions"
+              (value)="fromChanged(rangeFrom, $event.id)"
+              [valueToDefoult]="rangeTo"
+            ></matbea-combo>
+          </span>
+        </div>
       </div>
+    </div>
+    <div style="display: inline-flex">
+      <div>
+        <span>
+          <matbea-button> הזמנת פנקסי שוברים </matbea-button>
+        </span>
+      </div>
+
+      <div>
+        <span>
+          <matbea-button> טיפול בערבויות </matbea-button>
+        </span>
+      </div>
+
+      <div>
+        <span>
+          <matbea-button> עדכון גוש / חלקה / מגרש</matbea-button>
+        </span>
+      </div>
+    </div>
+    <div>
+      <matbea-icon-button
+        color="white"
+        icon="close"
+        (click)="selectedRowsChange.emit([])"
+      ></matbea-icon-button>
+    </div>
   </div>
 </ng-container>
