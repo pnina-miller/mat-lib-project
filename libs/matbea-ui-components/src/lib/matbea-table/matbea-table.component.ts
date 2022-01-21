@@ -111,7 +111,8 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   onRowSelected(event: any): void {
     let tempData=this.dataSource.filteredData//temp
-    tempData[event.target].selectRow=event.value
+    if(tempData[event.target])
+      tempData[event.target].selectRow=event.value
     this.dataSource=new MatTableDataSource(tempData);
     if (event.value){
       this.selectedRows.push(event.target);
@@ -122,7 +123,11 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   selectMethod(event:any){
-    Array.from({length:this.dataSource.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value:true}))
+    if(event.id===1){
+      this.onRowSelected({target:-1,value:true})
+    } else{
+      Array.from({length:this.dataSource.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value:true}))
+    }
   }
 
   announceSortChange(sortState: Sort) {

@@ -38,7 +38,7 @@ export class YechidotComponent implements OnInit {
   displayedColumns: any[] = [];
   loadingTable = true;
   selectedRows:number[]=[];
-
+  showActionBar: boolean =false;
   dataSource;
   dataSource$ = Observable.create(observer => {
     this.shofarServices.getyechidot(this.misparProyectSagur,this.misparShalav).subscribe((res:any) => {
@@ -49,6 +49,7 @@ export class YechidotComponent implements OnInit {
 
   constructor(private shofarServices: ShofarServices) {}
   ngOnInit() {
+    this.showActionBar=false;
       this.displayedColumns =COLUMNS;
     //TODO: check duplicate call
     this.dataSource$.subscribe((res: any) => {
@@ -58,8 +59,8 @@ export class YechidotComponent implements OnInit {
   selectedRowsChange(e){
    console.log('new selectedRows',e)
     this.selectedRows=e
+    this.showActionBar = e.length>0;
     this.dataSource=this.dataSource?.map((row,i)=>({...row, selectRow:this.selectedRows.includes(i)}))
-    console.log('new DS ',this.dataSource,' selectedRows ',this.selectedRows);
     
   }
 }

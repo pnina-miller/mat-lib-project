@@ -15,6 +15,7 @@ export class ActionBarComponent implements OnChanges {
   fromOptions=[];
   rangeTo:number=0;
   toOptions=[];
+  firstChange=0;
   constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnChanges(): void {
@@ -25,9 +26,17 @@ export class ActionBarComponent implements OnChanges {
 }
 
   fromChanged(rangeFrom,rangeTo): void {
+    if(this.firstChange<2){//TODO: remove
+      this.firstChange++;
+      return
+    }
     this.rangeFrom=rangeFrom;
     this.rangeTo=rangeTo;
-    let length=rangeTo-this.rangeFrom
+    let length=rangeTo-this.rangeFrom;
+    if(length>47){
+      this.rangeTo=this.rangeTo=this.rangeFrom+47;
+      length=47;
+    }
     this.selectedRowsChange.emit(Array.from({length}).map((el,i)=>i+this.rangeFrom));
 
   }
