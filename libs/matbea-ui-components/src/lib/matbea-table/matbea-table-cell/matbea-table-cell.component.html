@@ -6,7 +6,7 @@
       {{item[column.columnnameenglish][0]}}</span>
   </ng-container>
 
-  <ng-container *ngSwitchCase="'checkbox'">{{this.item[this.column.columnnameenglish]}}
+  <ng-container *ngSwitchCase="'checkbox'">
     <mat-checkbox [formControl]="selectControl" [(ngModel)]="this.item[this.column.columnnameenglish]" ></mat-checkbox>
   </ng-container>
   <ng-container *ngSwitchCase="'status'">

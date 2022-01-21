@@ -1,21 +1,9 @@
 <ng-container>
-  <div
-    style="
-      display: flex;
-      background-color: #9d9b9b;
-      width: 100%;
-      color: white;
-      justify-content: space-between;
-    "
-  >
-    <div style="display: inherit">
-      <div style="display: inline-grid">
-        <!-- <span>{{selectedRows.length}} נבחרו </span> -->
-        <span> ניתן לבחור עד 47 יחידות בטווח</span>
-      </div>
+  <div class="action-bar-container">
+    <div class="select-wrapper action-section" >
       <div>
-        <div style="display: inline-flex">
-          <span style="width: 100px">
+        <div class="select-range flex-container">
+          <span class="combo">
             <matbea-combo
               placeholder="יחידה"
               lable="מ"
@@ -25,7 +13,7 @@
               [valueToDefoult]="rangeFrom"
             ></matbea-combo>
           </span>
-          <span style="width: 100px">
+          <span class="combo">
             <matbea-combo
               placeholder="יחידה"
               lable="עד"
@@ -37,14 +25,21 @@
           </span>
         </div>
       </div>
+      
+      <div class="grid-container">
+        <span class="font-l">{{arrayLength}} נבחרו </span>
+        <span> ניתן לבחור עד 47 יחידות בטווח</span>
+      </div>
+
     </div>
-    <div style="display: inline-flex">
+    <matbea-divider vertical="true"></matbea-divider>
+    <div class="actions-wrapper action-section flex-container" >
       <div>
         <span>
           <matbea-button> הזמנת פנקסי שוברים </matbea-button>
         </span>
       </div>
-
+      <matbea-divider vertical="true"></matbea-divider>
       <div>
         <span>
           <matbea-button> טיפול בערבויות </matbea-button>
@@ -57,7 +52,7 @@
         </span>
       </div>
     </div>
-    <div>
+    <div class="x-wrapper action-section">
       <matbea-icon-button
         color="white"
         icon="close"

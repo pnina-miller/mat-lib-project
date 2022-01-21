@@ -1,0 +1,20 @@
+.select-wrapper>div{
+    margin: 0px 10px;
+    .combo{ width: 100px }
+}
+
+.action-bar-container {
+    padding: 15px;
+    display: flex;
+    background-color: #9d9b9b;
+    width: 100%;
+    color: white;
+    justify-content: space-between;
+    }
+
+    .select-wrapper{
+        display: inherit;
+    }
+.flex-container{ display: inline-flex }
+.grid-container{ display: inline-grid }
+.font-l{ font-size: large; }
