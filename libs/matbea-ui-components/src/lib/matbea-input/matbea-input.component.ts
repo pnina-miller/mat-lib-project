@@ -58,7 +58,7 @@ export class MatbeaInputComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.inputFormControl=this.inputFormControl?this.inputFormControl: new FormControl();
-    console.log("changes: ", changes);
+    console.log("changes: ", changes,this.inputFormControl.value);
     this.limitNumber = (10 ^ this.limit);
     if (changes.value) {
       this.valueChange.emit(this.value);

@@ -5,7 +5,7 @@
 <div class="dialog-content">
 
      <div class="yechida-input input-unitId">
-        <matbea-input type="string" [error-messages]="{required:'שדה זה הוא חובה'}" lable="זיהוי יחידה" lablePosition="top" [inputFormControl]="YechidaForm.controls.YachidaIdControl" required ></matbea-input>
+        <matbea-input type="string" hint="חשוב להזין זיהוי מדויק" [error-messages]="{required:'שדה זה הוא חובה'}" lable="זיהוי יחידה" lablePosition="top" [inputFormControl]="YechidaForm.controls.YachidaIdControl" required ></matbea-input>
     </div>
 
 <div class="yechida-input input-shovi">
@@ -29,18 +29,21 @@
 
 <div class="yechida-input input-hearot">
     <span>הערות</span>
-    <matbea-form-field type="textarea" ([value])="hearot" ></matbea-form-field>
+    <matbea-form-field [leftMessage]="800" type="textarea" ([value])="hearot" ></matbea-form-field>
 </div>
  
 <div class="yechida-input gush-chelka">
-    <span>פרטי גוש וחלקה</span>
-    <matbea-icon-button icon="plus" (onClick)="addLine()"></matbea-icon-button>
-    <div>
-        <div *ngFor="let row of gushChelkaList">
+    <span>פרטי גוש וחלקה <matbea-icon-button icon="add_circle" (onClick)="addLine()"></matbea-icon-button></span>
+    <div style="width: 100%; height: 100%;">
+    
+    <matbea-table [displayedColumns]="displayedColumns" [dataSource$]="gushChelkaList" ></matbea-table> 
+    </div>
+    <!--  <div>
+       <div *ngFor="let row of gushChelkaList">
 <span>{{row.misparGush}}</span>:
 <span>{{row.teurChelka}}</span>
-        </div>
-    </div>
+        </div> 
+    </div>-->
 </div>
  
 </div>

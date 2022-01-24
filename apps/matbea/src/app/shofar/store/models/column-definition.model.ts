@@ -15,5 +15,7 @@ export interface ColumnDefinition {
   columnvalidationtype?: string,
   savedbyuser?: string,
   columnformatter?: string,
+  object?:any,
+  action?:Function
 }
 

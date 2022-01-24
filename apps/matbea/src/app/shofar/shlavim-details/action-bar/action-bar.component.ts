@@ -10,6 +10,7 @@ export class ActionBarComponent implements OnChanges {
   @Input() arrayLength:number
   @Input()  selectedRows!: number[];
   @Output() selectedRowsChange = new EventEmitter<number[]>();
+  @Input() selectedLength=0;
  
   rangeFrom:number=0;
   fromOptions=[];

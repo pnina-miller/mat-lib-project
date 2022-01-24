@@ -49,13 +49,11 @@ export class ProjectDetailsComponent implements OnInit {
       this.projectsList$.subscribe(
         (projectsList) => {
 
-          let selectedProject = projectsList?.filter((project) => {
-            if (project.misparProyectSagur == this.misparProyectSagur)
-              return true;
-          })
+          let selectedProject = projectsList?.filter((project) => project.misparProyectSagur == this.misparProyectSagur)
 
           if (selectedProject?.length > 0) {
             this.kodMutavBeShovar = selectedProject[0].kodMutavBeShovar;
+            this.steps[1].name=selectedProject[0].shemProyectSagur;
           }
 
 
