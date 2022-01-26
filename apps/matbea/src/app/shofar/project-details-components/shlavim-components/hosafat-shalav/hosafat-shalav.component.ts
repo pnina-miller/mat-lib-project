@@ -39,16 +39,20 @@ export class HosafatShalavComponent implements OnInit {
   ngOnInit(): void {
     //TODO: set value in matbea input
     this.shalavForm = new FormGroup({
-      teurHaShlavControl: new FormControl(
+      teurHaShlav: new FormControl(
         this.data.item?.teurHaShlav,
         Validators.required
       ),
-      taarich8SiyumTzafuiControl: new FormControl(
+      taarich8SiyumTzafui: new FormControl(
         this.data.item?.taarich8SiyumTzafui,
+        [Validators.required,Validators.pattern('^((?!-01-01).)*$')]
+      ),
+      taarich8HeterBniya: new FormControl(
+        this.data.item?.taarich8HeterBniya,
         Validators.required
       ),
-      taarich8HeterBniyaControl: new FormControl(
-        this.data.item?.taarich8HeterBniya,
+      teurTochnitBinyanIr: new FormControl(
+        this.data.item?.teurTochnitBinyanIr,
         Validators.required
       ),
     });
@@ -76,15 +80,10 @@ export class HosafatShalavComponent implements OnInit {
     const data = {
       ...this.data.item,
       misparProyectSagur: this.misparProject,
+      ...this.shalavForm.value,
       metegHeterBniya: this.heterBniya == 'true' ? 1 : 0,
-      taarich8HeterBniya: Number(
-        this.shalavForm.value.taarich8HeterBniyaControl.replace(/\-/gi, '')
-      ),
-      taarich8SiyumTzafui: Number(
-        this.shalavForm.value.taarich8SiyumTzafuiControl.replace(/\-/gi, '')
-      ),
-      teurHaShlav: this.shalavForm.value.teurHaShlavControl,
-      teurTochnitBinyanIr: 'gergg',
+      taarich8HeterBniya: Number(this.shalavForm.value.taarich8HeterBniya.replace(/\-/gi, '')),
+      taarich8SiyumTzafui: Number(this.shalavForm.value.taarich8SiyumTzafui.replace(/\-/gi, '')),
       ...this.yeud,
     } as shalavDataType;
     this.shofarServices.saveShalav(data, this.misparProject).subscribe(

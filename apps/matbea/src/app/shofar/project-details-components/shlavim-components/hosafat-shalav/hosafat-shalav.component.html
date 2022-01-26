@@ -5,15 +5,15 @@
 
         <form class="dialog-content" *ngIf="shalavForm" [formGroup]="shalavForm">
         <div class="shalav-input input-teurHaShlav">
-            <matbea-input type="string" [error-messages]="{required:'שדה זה הוא חובה'}" lable="זיהוי שלב" lablePosition="top" [inputFormControl]="shalavForm.controls.teurHaShlavControl" required ></matbea-input>
+            <matbea-input type="string" [error-messages]="{required:'שדה זה הוא חובה'}" lable="זיהוי שלב" lablePosition="top" [inputFormControl]="shalavForm.controls.teurHaShlav" required ></matbea-input>
         </div>
 
         <div class="shalav-input input-taarich8SiyumTzafui">
-            <matbea-input type="date" lable='מועד סיום צפוי ע"פ דוח מפקח'  [error-messages]="{required:'שדה זה הוא חובה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8SiyumTzafuiControl" required ></matbea-input>
+            <matbea-input type="date" lable='מועד סיום צפוי ע"פ דוח מפקח'  [error-messages]="{required:'שדה זה הוא חובה', pattern:'1 ינואר שגיאה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8SiyumTzafui" required ></matbea-input>
         </div>
 
         <div class="shalav-input input-taarich8HeterBniya">
-            <matbea-input type="date" lable="מועד אחרון למתן היתר בניה"  [error-messages]="{required:'שדה זה הוא חובה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8HeterBniyaControl" required ></matbea-input>
+            <matbea-input type="date" lable="מועד מתן היתר בניה"  [error-messages]="{required:'שדה זה הוא חובה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8HeterBniya" required ></matbea-input>
         </div>
 
         <div class="shalav-input input-heterBniya">
@@ -38,6 +38,10 @@
                     <matbea-checkbox lable="אחר" (valueChange)="yeudChanged(MetegYeudAcher)"></matbea-checkbox>
                 </div>
             </div>
+        </div>
+        
+        <div class="shalav-input input-teurTochnitBinyanIr">
+            <matbea-input type="string" lable="תכנית בניין ערים"  [error-messages]="{required:'שדה זה הוא חובה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.teurTochnitBinyanIr" required ></matbea-input>
         </div>
         </form>
 

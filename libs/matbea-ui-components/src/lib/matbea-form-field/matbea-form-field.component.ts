@@ -20,6 +20,7 @@ export class MatbeaFormFieldComponent implements OnInit, OnChanges {
   @Input() label: string;
   @Input() defaultInSelector: number;
   @Input() prefix: string;
+  @Input() leftMessage: number;
   // @Input() doNotChose: boolean = false;
   // dataSourse = this.doNotChose ? [{id:-1, value:leLoBhira}]:[];
 

@@ -16,5 +16,6 @@ export interface ColumnDefinition {
   savedbyuser?: string,
   columnformatter?: string,
   object?:any
+
 }
 

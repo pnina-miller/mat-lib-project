@@ -183,6 +183,7 @@ app.get('/matbea/shofar/V1/project/:project/amalot', (req, res) => {
     },
   });
 });
+app.post('/matbea/shofar/V1/cheshbonot/54/:a/:b/:c/update',(req,res)=>res.json({messages:{global:{errors:[]}}}))
 app.get('/matbea/shofar/V1/project/:project/mashkanta', (req, res) => {
   console.log('shofar all');
 

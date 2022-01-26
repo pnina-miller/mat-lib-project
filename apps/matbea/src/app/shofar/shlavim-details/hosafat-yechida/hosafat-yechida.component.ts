@@ -2,7 +2,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { object } from '@storybook/addon-knobs';
 import { ShofarServices } from '../../services/shofar-services';
+import { ColumnDefinition } from '../../store/models/column-definition.model';
 
 @Component({
   selector: 'matbea-hosafat-yechida',
@@ -12,6 +14,7 @@ import { ShofarServices } from '../../services/shofar-services';
 export class HosafatYechidaComponent implements OnInit {
   yeud: string='';
   hearot:string='';
+
   YechidaForm = new FormGroup({
     YachidaIdControl:new FormControl(),
     teurYachidaControl:new FormControl(),
@@ -24,7 +27,11 @@ export class HosafatYechidaComponent implements OnInit {
     { id: 'misradim', description: 'משרדים' },
     { id: 'acher', description: 'אחר' },
   ];
-  gushChelkaList:any[]
+  gushChelkaList:any[]=[{misparGush:'123',teurChelka:'456'}]
+  displayedColumns:ColumnDefinition[]=[{columnnameenglish: 'misparGush', columnnamehebrew: 'גוש', display: '1', ordernumber: '1', columnformatter:'input', removable:'true', object:{}},
+  {columnnameenglish: 'teurChelka', columnnamehebrew: 'חלקה', display: '1', ordernumber: '2', removable:'true'},
+  {columnnameenglish: ' ', columnnamehebrew: ' ', display: '0', ordernumber: '3', removable:'true', columnformatter:'icon', object:{icon:'delete', action:(e)=>{debugger} }}]//TODO: action
+  
   constructor(
     private shofarServices: ShofarServices,
     public dialogRef: MatDialogRef<any>,
@@ -56,6 +63,6 @@ export class HosafatYechidaComponent implements OnInit {
   }
 
   addLine(){
-    
+   this.gushChelkaList= [...this.gushChelkaList, {misparGush:'',teurChelka:''}]
   }
 }

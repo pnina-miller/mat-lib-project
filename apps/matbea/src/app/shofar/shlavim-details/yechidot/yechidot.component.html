@@ -2,5 +2,5 @@
 <div><matbea-input class="units-input-filter" type="number" ></matbea-input></div>
 
 <!-- array:<span *ngFor="let i of selectedRows">{{i}},</span> -->
-<matbea-action-bar *ngIf="showActionBar" [arrayLength]="dataSource?.length" (selectedRowsChange)="selectedRowsChange($event)" [selectedRows]="selectedRows"></matbea-action-bar>
+<matbea-action-bar *ngIf="showActionBar" [selectedLength]="selectedRows?.length" [arrayLength]="dataSource?.length" (selectedRowsChange)="selectedRowsChange($event)" [selectedRows]="selectedRows"></matbea-action-bar>
 <matbea-table (selectedRowsChange)="selectedRowsChange($event)" [selectedRows]="selectedRows" [displayedColumns]="displayedColumns" [dataSource$]="dataSource" [loading]='loadingTable' ></matbea-table>
