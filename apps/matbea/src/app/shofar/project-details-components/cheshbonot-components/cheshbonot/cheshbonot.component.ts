@@ -23,14 +23,19 @@ export class CheshbonotComponent implements OnInit {
   @Input('misparBank') misparBank: string;
   cheshbonotList: CheshbonLeProject[] = [];
   cheshbonotListObservable$: Observable<CheshbonLeProject[]> = null;
-  displayedColumns: string[] = ['misparBank', 'misparSnif', 'misparCheshbon', 'shemCheshbon', 'metegHanpakatArvuyot', 'metegHanpakatArvuyotLink', 'metegHanpakatArvuyotRemove'];
+  // displayedColumns: string[] = ['misparBank', 'misparSnif', 'misparCheshbon', 'shemCheshbon', 'metegHanpakatArvuyot', 'metegHanpakatArvuyotLink', 'metegHanpakatArvuyotRemove'];
   cheshbonArtut: string = "445783";
  
   cheshbonFormGroup: FormGroup;
   errorMsg: string = "";
   isHover: boolean =false;
 
-
+  displayedColumns:ColumnDefinition[] = [{ columnnameenglish: 'misparBank', columnnamehebrew: 'מספר בנק', columnformatter: 'string', display: '1', ordernumber:'0', removable:'false' },
+  { columnnameenglish: 'misparSnif', columnnamehebrew: 'מספר סניף', columnformatter: 'string', display: '1', ordernumber:'1', removable:'false'  },
+  { columnnameenglish: 'misparCheshbon', columnnamehebrew: "מספר חשבון", columnformatter: 'string', display: '1', ordernumber:'2', removable:'false'  },
+  { columnnameenglish: 'shemCheshbon', columnnamehebrew: 'מספר חשבון', columnformatter: 'string', display: '1', ordernumber:'3', removable:'false'  },
+  { columnnameenglish: 'metegHanpakatArvuyot', columnnamehebrew: 'הנפקת ערבויות', columnformatter: 'YESNO', display: '1', ordernumber:'4', removable:'false'  },
+  { columnnameenglish: 'checked', columnnamehebrew: 'צק בוקס', columnformatter: 'radio', display: '1', ordernumber:'5', removable:'false'  }]
   constructor(private http: HttpClient, private shofarServices: ShofarServices, public dialog: MatDialog, public cheshbonotService: CheshbonotService) { 
 
   }

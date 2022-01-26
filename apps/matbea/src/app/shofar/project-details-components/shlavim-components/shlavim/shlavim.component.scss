@@ -6,7 +6,7 @@
     white-space: nowrap;
 }
 
-.rowCell {
+.shlavim-table {
     box-sizing: border-box;
     width:100%;
     float: left;
@@ -29,7 +29,9 @@
         margin : 5px;
 }
 
-
+.shlavim-table ::ng-deep .matbea-table {
+    height: 200px;
+}
 
 .rowCell90 {  
     width:90%;    

@@ -6,7 +6,7 @@ import {
   OnInit,
   SimpleChanges,
   ViewChild,
-  OnChanges, Output, EventEmitter, ChangeDetectorRef
+  OnChanges, Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation
 } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
@@ -24,7 +24,10 @@ import { FormControl } from '@angular/forms';
   selector: 'matbea-table',
   templateUrl: './matbea-table.component.html',
   styleUrls: ['./matbea-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  providers: [ MatTableService ]
+
 })
 
 export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
@@ -43,7 +46,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.dataSource.filter
     }
   }
-
+@Input() name
   @Input('displayedColumns') displayedColumnsTemp: ColumnDefinition[];
   @Input() dataSource$: Observable<any>;
   @Input() navTo: string = null;
@@ -68,8 +71,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("dataSource",this.dataSource$ instanceof MatTableDataSource);
-    console.log("Observable",);
+    console.log("ngOnChanges dataSource",this.name,this.dataSource$);
     
     console.log("SimpleChanges in matbea-table", this);
     if(this.dataSource$ instanceof Observable){
@@ -95,7 +97,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log("OnInit in matbea-table", this);
+    console.log("OnInit in matbea-table", this.name, this.dataSource$);
     this.selectControl.valueChanges.subscribe((value:boolean) => {Array.from({length:this.dataSource?.filteredData.length}).forEach((el,i)=>{this.onRowSelected({target:i,value})})  })
   }
   onClick(row: any): void {
