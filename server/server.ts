@@ -7,6 +7,7 @@ const col = require('./data/tableColumns.json');
 const data = require('./data/dataSource.json');
 const details = require('./data/projectDetails.json');
 const reshimatShlavim = require('./data/shlavim.json');
+const reshimatcheshbonot = require('./data/cheshbonot.json');
 const getpirteyShalav = require('./data/getpirteyShalav.json');
 const getyechidot = require('./data/getyechidot.json');
 const gushChelka = require('./data/gushChelka.json');
@@ -56,7 +57,7 @@ app.get('/matbea/shofar/V1/cheshbonot/:project/list', (req, res) => {
   console.log('shofar/cheshbonot');
   res.json({
     metadata: { validations: {} },
-    data: { cheshbonotList: reshimatShlavim },
+    data: { cheshbonotList: reshimatcheshbonot },
   });
 });
 
