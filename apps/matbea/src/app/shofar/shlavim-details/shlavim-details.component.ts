@@ -40,9 +40,9 @@ export class ShlavimDetailsComponent implements OnInit {
       this.id = params.get('id');
       this.misparProyectSagur = Number(this.id.split('&')[0]);
       this.kodMutavBeShovar = Number(this.id.split('&')[1]);
-      this.shofarServices.getpirteyShalav(this.misparProyectSagur,1).subscribe((resp: any) => {
-          this.shalav = resp.data.avcmp06m;
-          this.steps=[...this.steps,{ name:  resp.data.avcmp06m.teurHaShlav, routTo: '' }];
+      this.shofarServices.getpirteyShalav(this.misparProyectSagur,1).subscribe((resp: any) => {debugger
+          this.shalav = resp;
+          this.steps=[...this.steps,{ name:  resp.teurHaShlav, routTo: '' }];
         });
 
       this.project$.subscribe(

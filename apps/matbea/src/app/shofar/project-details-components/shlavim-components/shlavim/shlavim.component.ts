@@ -38,7 +38,7 @@ export class ShlavimComponent implements OnInit, OnChanges {
   {
     columnnameenglish: ' ', columnnamehebrew: '', columnformatter: 'menu', display: '1', object: [
       { "id": 0, "name": "עריכת השלב", "disabled": false, "role": "menuitem", action:(item)=>{ this.shlavimService.openHosafatShalavPopup(this.misparProyectSagur,()=>{} ,item)} },
-      { "id": 1, "name": "הוספת יחידות", "disabled": false, "role": "menuitem", action:(item)=>{ this.router.navigate([this.router.url,item.misparShlav,'units']);} }, {
+      { "id": 1, "name": "הוספת יחידות", "disabled": false, "role": "menuitem", action:(item)=>{this.router.navigate([this.router.url, 'units', item.misparShlav]);} }, {
         "id": 2, "name": "הוספת יחידות כקובץ", "disabled": false, "role": "menuitem", action:()=>{ alert(' הוספת יחידות כקובץ לא זמינה כרגע')}}
       ]
   }]

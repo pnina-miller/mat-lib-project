@@ -7,7 +7,7 @@ height: 200px;">
     <mat-radio-group  >
         <div class="cheshbonot-table" >
             <matbea-table name="cheshbon" #cheshbonotTable [displayedColumns]="displayedColumns"  [loading]='false'
-             [dataSource$]="cheshbonotList" ></matbea-table> 
+             [dataSource$]="cheshbonotListObservable$" ></matbea-table> 
           </div>  
 
   <!--  <table mat-table [dataSource]="cheshbonotList" style="overflow: auto; height: 100%; width: 100%;" >

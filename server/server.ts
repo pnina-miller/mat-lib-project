@@ -172,13 +172,13 @@ app.get('/matbea/shofar/V1/project/:project/amalot', (req, res) => {
   res.json({
     data: {
       amalot: {
-        misparProyectSagur: 'ssssstring',
-        kodAmala: 'ssssssstring',
-        shiurHncaAmalatTipul: 'asssstring',
-        shiurAmlatArvutSna: 'ssssstring',
-        shiurAmlArvLloHeter: 'ssssstring',
-        shiurAmlArvDiraOcls: 'ssssstring',
-        sachHakolAmalaNeto: 'ssssstring',
+        misparProyectSagur: '0.1',
+        kodAmala: '0.2',
+        shiurHncaAmalatTipul: '0.3',
+        shiurAmlatArvutSna: '0.4',
+        shiurAmlArvLloHeter: '0.5',
+        shiurAmlArvDiraOcls: '0.6',
+        sachHakolAmalaNeto: '0.7',
       },
     },
   });

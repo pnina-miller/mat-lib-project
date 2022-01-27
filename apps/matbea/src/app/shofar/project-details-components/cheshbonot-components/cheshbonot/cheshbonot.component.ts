@@ -47,13 +47,14 @@ export class CheshbonotComponent implements OnInit {
   }
 
   getCheshbonotProject(): void{
-    this.shofarServices.getCheshbonotProject(this.misparProyectSagur).subscribe(resp => {      
+    this.cheshbonotListObservable$=this.shofarServices.getCheshbonotProject(this.misparProyectSagur);
+   /* this.shofarServices.getCheshbonotProject(this.misparProyectSagur).subscribe(resp => {      
       console.log("---> Data of getCheshbonotProject"); 
       let generalResponse = resp as GeneralResponse;
       
       this.cheshbonotList = (generalResponse.data as CheshbonotLeProjectResponse).cheshbonotList;
       this.cheshbonotListObservable$ = of(this.cheshbonotList);
-    });     
+    });     */
     
   }
 
