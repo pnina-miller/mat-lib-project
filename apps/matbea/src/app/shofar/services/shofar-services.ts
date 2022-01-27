@@ -49,7 +49,9 @@ export class ShofarServices{
     }
 
     public getCheshbonotProject(misparProyectSagur: string){
-        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/list', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur} });
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/list', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur} }).pipe( map((res:{data:any})=>{
+          return res.data.cheshbonotList;
+        }));
     }
 
     public removeCheshbon(misparProyectSagur: string, misparBank: string, misparSnif: string, misparCheshbon: string){
@@ -61,7 +63,10 @@ export class ShofarServices{
     }
 
     getpirteyShalav(misparProyectSagur: number, misparShalv:number) {//404
-      return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/v1/steps/'+misparProyectSagur+'/'+misparShalv, { headers: this.getHeader() });
+      return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/v1/steps/'+misparProyectSagur+'/'+misparShalv, { headers: this.getHeader() }).pipe(
+        map((res:any)=>{
+          return (res.data.avcmp06m )
+        }))
     }
 
     public saveShalav(shalavData: shalavDataType, misparProject){
@@ -69,7 +74,9 @@ export class ShofarServices{
     }
 
     getyechidot(misparProyectSagur:number, misparShalv:number) {
-      return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/projects/steps/appartments/'+misparProyectSagur+'/'+misparShalv+'/1', { headers: this.getHeader() });
+      return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/projects/steps/appartments/'+misparProyectSagur+'/'+misparShalv+'/1', { headers: this.getHeader() }).pipe(map((res:{data:any})=>{
+        return res.data.avctl071List.fullList;
+      }))
     }
    
     // public getPirteyCheshbon(misparProject: string, misparBank: string, misparSnif: string, misparCheshbon: string){
@@ -133,7 +140,9 @@ export class ShofarServices{
 
       }
       getShlavim(misparProyectSagur): Observable<any> {
-        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/project/' + misparProyectSagur + '/steps');
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/project/' + misparProyectSagur + '/steps').pipe( map((res:{data:any})=>{
+          return res.data.reshimatShlavimList;
+        }))
       }
       getGushChelka(){
         return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/projects/v1/shlav/yechida/215/1/0');

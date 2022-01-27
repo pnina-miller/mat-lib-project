@@ -11,7 +11,7 @@ export class PipePipe implements PipeTransform {
       if (value) {
         value=String(value)
         if (value.length == 8) {
-
+          
           let year = value.substr(0, 4);
           let mounth = value.substr(4, 2);
           let day = value.substr(6, 2);

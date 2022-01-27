@@ -31,7 +31,7 @@ import { FormControl } from '@angular/forms';
 })
 
 export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
-  dataSource: any=new MatTableDataSource();
+  dataSource: any=new MatTableDataSource([]);
   _dataSource: any;
   columsToDisplay: string[] = [];
   displayedColumns: ColumnDefinition[];

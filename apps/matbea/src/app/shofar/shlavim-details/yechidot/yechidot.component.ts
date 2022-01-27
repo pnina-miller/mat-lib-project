@@ -30,7 +30,6 @@ const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:'selectRow',
   styleUrls: ['./yechidot.component.scss'],
 })
 export class YechidotComponent implements OnInit {
-  // dataSource:MatTableDataSource<any>=new MatTableDataSource<any>();
 
 @Input() misparProyectSagur:number;
 @Input() misparShalav:number;
@@ -40,21 +39,17 @@ export class YechidotComponent implements OnInit {
   selectedRows:number[]=[];
   showActionBar: boolean =false;
   dataSource;
-  dataSource$ = Observable.create(observer => {
-    this.shofarServices.getyechidot(this.misparProyectSagur,this.misparShalav).subscribe((res:any) => {
-      this.loadingTable=false;
-      observer.next(res.data.avctl071List.fullList)
-    })
-  })
+  dataSource$:Observable<any>;
 
+  refreshData(){
+  this.dataSource$ = this.shofarServices.getyechidot(this.misparProyectSagur,this.misparShalav);
+  }
   constructor(private shofarServices: ShofarServices) {}
   ngOnInit() {
     this.showActionBar=false;
-      this.displayedColumns =COLUMNS;
-    //TODO: check duplicate call
-    this.dataSource$.subscribe((res: any) => {
-      this.dataSource=res;     
-    });
+    this.displayedColumns =COLUMNS;
+    this.refreshData();
+    this.dataSource$.subscribe(data =>{debugger;this.dataSource=data});
   }
   selectedRowsChange(e){
    console.log('new selectedRows',e)

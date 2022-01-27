@@ -11,21 +11,15 @@ import { ShlavimService } from '../shlavim/shlavim.service';
 export class ShlavimContainerComponent implements OnInit {
   @Input('misparProyectSagur') misparProyectSagur: number;
 
+  shlavim: Observable<any>
+  
   constructor(
     public shlavimService: ShlavimService,
     private shofarServices: ShofarServices
   ) {}
 
-  shlavim; //= Observable.create(observer => {
-  //   this.shofarServices.getShlavim(this.misparProyectSagur).subscribe(res => {
-  //     observer.next(res.data.reshimatShlavimList)
-  //   })
-  // })
-
   loadData(): void {
-    this.shofarServices.getShlavim(this.misparProyectSagur).subscribe((res) => {
-      this.shlavim = res.data.reshimatShlavimList;
-    });
+  this.shlavim = this.shofarServices.getShlavim(this.misparProyectSagur)
   }
 
   ngOnInit(): void {
