@@ -6,6 +6,13 @@
 [overlapTrigger]="overlapTrigger" [class]="panelClass" [xPosition]="xPosition"
           [yPosition]="yPosition">
   <ng-container *ngFor="let item of items">
+    <div class="tripple" style="position: absolute;
+    top: 114px;
+    width: 0px;
+    height: 0px;
+    border: 25px transparent solid;
+    border-bottom: 25px blue solid;
+    left: 62px;"></div>
     <button mat-menu-item [role]="item?.role" [ngClass]="item?.class" [disabled]="item?.disabled" (click)="clickedItem.emit(item)">{{item?.name}}</button>
   </ng-container>
 </mat-menu>
