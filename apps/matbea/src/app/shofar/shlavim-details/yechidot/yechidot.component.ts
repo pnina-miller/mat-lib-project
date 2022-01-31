@@ -35,6 +35,7 @@ export class YechidotComponent implements OnInit {
 @Input() misparShalav:number;
 
   displayedColumns: any[] = [];
+  loadingTab
   loadingTable = true;
   selectedRows:number[]=[];
   showActionBar: boolean =false;
