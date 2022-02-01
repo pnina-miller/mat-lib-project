@@ -36,6 +36,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(MatSort) sort: MatSort;
   mainColumnDisplay: any[]=[];
   mainColumn: any[]=[];
+  isMainColumn: boolean=false;
 
   ngAfterViewInit() {
     if (this.dataSource.data) {
@@ -80,6 +81,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   } else{
     this._dataSource=this.dataSource$
   }
+  this.isMainColumn=!!this.displayedColumnsTemp.find(col=>!!col.subColumns)
   this.mainColumn=this.displayedColumnsTemp.map(column => column.subColumns?column:{columnnameenglish:column.columnnameenglish+column.ordernumber})
   this.mainColumnDisplay= this.mainColumn.map(c=>c.columnnameenglish)
   let filtereCols=this.displayedColumnsTemp.reduce((arr,col)=>{

@@ -26,7 +26,9 @@
          </ng-container>
  
         <!-- try -->
+        <ng-container *ngIf="isMainColumn">
            <tr mat-header-row *matHeaderRowDef="mainColumnDisplay"></tr>
+        </ng-container>
         <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>
         <tr mat-row class="matbea-on-hover-row" (dblclick)="onClick(row)" *matRowDef="let row; columns: columsToDisplay">
         </tr>
