@@ -37,7 +37,7 @@ export class MatbeaInputComponent implements OnInit, OnChanges {
   classs: any;
   @Input() inputFormControl= new FormControl();
   @Input('error-messages') errorMessage: { [k: string]: string };
-  filteredOptions: Observable<string[]>;
+  filteredOptions: string[];
 
 
 
@@ -50,9 +50,17 @@ export class MatbeaInputComponent implements OnInit, OnChanges {
 
   getValueChange($event: any) {
     console.log("getValueChange", this.value);
+    this.value=$event
     this.valueChange.emit(this.value);
     if (this.limit) {
       this.value = this.value.toString().slice(0, this.limit - 1);
+    }
+    if(this.autocomplete){
+      this.value=$event
+      this.filteredOptions=this.autocomplete.filter((option)=>{
+        let res=option.toLowerCase().includes($event.toString().toLowerCase());
+        return res;
+      })
     }
   }
 
@@ -88,20 +96,8 @@ export class MatbeaInputComponent implements OnInit, OnChanges {
         this.classs = this.classs+' matbea-form-field-disabled-transparent'
       }
     }
-    if(this.autocomplete){
-      this.filteredOptions = this.inputFormControl.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      )
-    }
-  
-
   }
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
 
-    return this.autocomplete.filter(option => option.toLowerCase().includes(filterValue));
-  }
   getErrorMessage() {
     if(this.inputFormControl){
       let keys = Object.keys(this.inputFormControl.errors);

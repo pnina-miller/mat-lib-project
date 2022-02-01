@@ -25,6 +25,7 @@ import { FormControl } from '@angular/forms';
 export class MatbeaTableCellComponent implements OnInit, OnChanges{
   @Input() column: ColumnDefinition;
   @Input() item: any;
+  @Input() index: number;
   @Input() style;
 
   formater;
@@ -40,7 +41,7 @@ value=true;
   }
 
   ngOnInit(): void {
-    this.selectControl.valueChanges.subscribe((value:any) => {if(value!==this.item.selectRow){this.onRowSelected.emit({target:this.item.misparShura, value})}})
+    this.selectControl.valueChanges.subscribe((value:any) => {if(value!==this.item.selectRow){this.onRowSelected.emit({target:this.item.selectIndex || this.index, value})}})
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -24,10 +24,6 @@ import { FormControl } from '@angular/forms';
   selector: 'matbea-table',
   templateUrl: './matbea-table.component.html',
   styleUrls: ['./matbea-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  providers: [ MatTableService ]
-
 })
 
 export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
@@ -38,6 +34,8 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   sub: Subscription;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  mainColumnDisplay: any[]=[];
+  mainColumn: any[]=[];
 
   ngAfterViewInit() {
     if (this.dataSource.data) {
@@ -46,20 +44,20 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.dataSource.filter
     }
   }
-@Input() name
+
+  @Input() name
   @Input('displayedColumns') displayedColumnsTemp: ColumnDefinition[];
   @Input() dataSource$: Observable<any>;
   @Input() navTo: string = null;
   @Input() paginatorOn: boolean = false;
   @Input() loading = true;
   @Input() messages:[];
-  @Input() selectedRows:number[];
+  @Input() selectedRows:number[]=[];
   @Output() selectedRowsChange = new EventEmitter<number[]>();
   @Output() row= new EventEmitter();
   @Output() dataSourceChangeLength = new EventEmitter<number>();
   updateFilters: any;
   @Output()clickInRow= new EventEmitter();
-
   selectControl:FormControl = new FormControl();
 
   constructor(private route: ActivatedRoute, private router: Router,private _liveAnnouncer: LiveAnnouncer,
@@ -82,11 +80,18 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   } else{
     this._dataSource=this.dataSource$
   }
-    this.columsToDisplay = this.displayedColumnsTemp.filter(e =>  true)// e.display == '1';
+  this.mainColumn=this.displayedColumnsTemp.map(column => column.subColumns?column:{columnnameenglish:column.columnnameenglish+column.ordernumber})
+  this.mainColumnDisplay= this.mainColumn.map(c=>c.columnnameenglish)
+  let filtereCols=this.displayedColumnsTemp.reduce((arr,col)=>{
+   let cols=col.subColumns || [col]
+    return [...arr, ...cols]
+  },[]);
+    
+    this.columsToDisplay =filtereCols/*this.displayedColumnsTemp*/.filter(e =>  true)// e.display == '1';
     .sort((a, b) =>  Number(a.ordernumber) - Number(b.ordernumber)).map((e) => e.columnnameenglish);
-    this.displayedColumns = this.displayedColumnsTemp;
+    this.displayedColumns = filtereCols//this.displayedColumnsTemp;
 
-    this.matTableService.init('','',this._dataSource,this.displayedColumns.map((col)=> new FilterColumn(col)));
+    this.matTableService.init('','',this._dataSource,this./*displayedColumns*/columsToDisplay.map((col)=> new FilterColumn(col)));
     this.matTableService.displayDataSource.subscribe(data=>{this.dataSource = data;
       this.changeDetector.detectChanges();
       this.dataSourceChangeLength.emit(this.dataSource?.data?.length);
@@ -97,7 +102,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log("OnInit in matbea-table", this.name, this.dataSource$);
+    console.log("OnInit in matbea-table", this);
     this.selectControl.valueChanges.subscribe((value:boolean) => {Array.from({length:this.dataSource?.filteredData.length}).forEach((el,i)=>{this.onRowSelected({target:i,value})})  })
   }
   onClick(row: any): void {
@@ -111,12 +116,11 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   }
 
-  onRowSelected(event: any): void {
-    let tempData=this.dataSource.filteredData//temp
-    if(tempData[event.target])
-      tempData[event.target].selectRow=event.value
-    this.dataSource=new MatTableDataSource(tempData);
-    if (event.value){
+    onRowSelected(event: any): void {
+      // let tempData=this.dataSource.filteredData//temp
+      this.dataSource.filteredData[event.target].selectRow=event.value
+    // this.dataSource=new MatTableDataSource(tempData);
+    if (event.value && !this.selectedRows.includes(event.target)){
       this.selectedRows.push(event.target);
     } else{
         this.selectedRows.forEach((row,i) => { if(row===event.target) this.selectedRows.splice(i,1); } );
@@ -125,11 +129,13 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   selectMethod(event:any){
+    /* home 
     if(event.id===1){
       this.onRowSelected({target:-1,value:true})
     } else{
+      */
       Array.from({length:this.dataSource.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value:true}))
-    }
+    
   }
 
   announceSortChange(sortState: Sort) {

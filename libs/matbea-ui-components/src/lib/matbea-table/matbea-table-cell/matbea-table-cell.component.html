@@ -31,6 +31,13 @@
   <matbea-icon icon="more_vert"></matbea-icon>
 </matbea-menu>
   </ng-container>
+  <ng-container *ngSwitchCase="'radiobutton'">
+    <matbea-radio-button (checkedChange)="clickInMenu.emit({event:$event, item:item})"></matbea-radio-button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'onHoverDelete'">
+    <matbea-icon icon='delete' *ngIf="item['metegHanpakatArvuyot']==1? false : true"
+                 (click)='clickInMenu.emit({event:$event, item:item})' class="table-cell-onHover"></matbea-icon>
+  </ng-container>
   <ng-container *ngSwitchDefault>
     <span>
       {{item[column.columnnameenglish]|pipeName:column.columnformatter}}

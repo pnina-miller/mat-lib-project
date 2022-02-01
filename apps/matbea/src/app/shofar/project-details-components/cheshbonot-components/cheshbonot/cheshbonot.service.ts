@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CheshbonotComponent } from './cheshbonot.component';
@@ -16,5 +17,5 @@ export class CheshbonotService {
     openHosafatCheshbonPopup(): void{
         this.cheshbonotComponent.openHosafatCheshbonPopup()
     }
-  
+ 
 }

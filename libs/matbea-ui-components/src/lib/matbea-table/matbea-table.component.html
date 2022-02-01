@@ -13,10 +13,20 @@
               </matbea-menu>          
             </div>
           </th>
-          <td mat-cell [style]="column.style" *matCellDef="let project;">
-            <matbea-table-cell (onRowSelected)="onRowSelected($event)" [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
+          <td mat-cell [style]="column.style" *matCellDef="let project; let i=index">
+            <matbea-table-cell (onRowSelected)="onRowSelected($event)" [index]="i" [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
           </td>
         </ng-container>
+                <!-- try -->
+          <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of mainColumn">
+           <th mat-header-cell [attr.colspan]="column.colspan || 1" style="height: 12px; min-width: 40px;" *matHeaderCellDef>
+            {{column.columnnamehebrew}}
+          </th>
+
+         </ng-container>
+ 
+        <!-- try -->
+           <tr mat-header-row *matHeaderRowDef="mainColumnDisplay"></tr>
         <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>
         <tr mat-row class="matbea-on-hover-row" (dblclick)="onClick(row)" *matRowDef="let row; columns: columsToDisplay">
         </tr>
@@ -30,6 +40,9 @@
         <span *ngIf="messages==null|| messages.length==0">אין מידע</span>
       </div>
     </div>
+     <div *ngIf="''+loading=='true'" class="matbea-table-loading"></div>
+    <mat-paginator *ngIf="paginatorOn" class="matbea-table-paginator" [pageSizeOptions]="[5, 10, 20,50,100]"
+      showFirstLastButtons></mat-paginator>
   </div>
   </ng-container>
   
