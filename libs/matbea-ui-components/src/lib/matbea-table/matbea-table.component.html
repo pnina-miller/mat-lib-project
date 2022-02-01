@@ -17,6 +17,16 @@
             <matbea-table-cell (onRowSelected)="onRowSelected($event)" [index]="i" [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
           </td>
         </ng-container>
+                <!-- try -->
+          <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of mainColumn">
+           <th mat-header-cell [attr.colspan]="column.colspan || 1" style="height: 12px; min-width: 40px;" *matHeaderCellDef>
+            {{column.columnnamehebrew}}
+          </th>
+
+         </ng-container>
+ 
+        <!-- try -->
+           <tr mat-header-row *matHeaderRowDef="mainColumnDisplay"></tr>
         <tr mat-header-row *matHeaderRowDef="columsToDisplay sticky: true;"></tr>
         <tr mat-row class="matbea-on-hover-row" (dblclick)="onClick(row)" *matRowDef="let row; columns: columsToDisplay">
         </tr>

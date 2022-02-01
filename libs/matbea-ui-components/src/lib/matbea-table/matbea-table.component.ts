@@ -34,6 +34,8 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   sub: Subscription;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  mainColumnDisplay: any[]=[];
+  mainColumn: any[]=[];
 
   ngAfterViewInit() {
     if (this.dataSource.data) {
@@ -56,7 +58,6 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() dataSourceChangeLength = new EventEmitter<number>();
   updateFilters: any;
   @Output()clickInRow= new EventEmitter();
-
   selectControl:FormControl = new FormControl();
 
   constructor(private route: ActivatedRoute, private router: Router,private _liveAnnouncer: LiveAnnouncer,
@@ -79,11 +80,18 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   } else{
     this._dataSource=this.dataSource$
   }
-    this.columsToDisplay = this.displayedColumnsTemp.filter(e =>  true)// e.display == '1';
+  this.mainColumn=this.displayedColumnsTemp.map(column => column.subColumns?column:{columnnameenglish:column.columnnameenglish+column.ordernumber})
+  this.mainColumnDisplay= this.mainColumn.map(c=>c.columnnameenglish)
+  let filtereCols=this.displayedColumnsTemp.reduce((arr,col)=>{
+   let cols=col.subColumns || [col]
+    return [...arr, ...cols]
+  },[]);
+    
+    this.columsToDisplay =filtereCols/*this.displayedColumnsTemp*/.filter(e =>  true)// e.display == '1';
     .sort((a, b) =>  Number(a.ordernumber) - Number(b.ordernumber)).map((e) => e.columnnameenglish);
-    this.displayedColumns = this.displayedColumnsTemp;
+    this.displayedColumns = filtereCols//this.displayedColumnsTemp;
 
-    this.matTableService.init('','',this._dataSource,this.displayedColumns.map((col)=> new FilterColumn(col)));
+    this.matTableService.init('','',this._dataSource,this./*displayedColumns*/columsToDisplay.map((col)=> new FilterColumn(col)));
     this.matTableService.displayDataSource.subscribe(data=>{this.dataSource = data;
       this.changeDetector.detectChanges();
       this.dataSourceChangeLength.emit(this.dataSource?.data?.length);

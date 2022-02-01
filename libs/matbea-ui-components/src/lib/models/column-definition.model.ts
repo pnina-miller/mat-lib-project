@@ -1,4 +1,5 @@
 export interface ColumnDefinition {
+  subColumns: any[];
   columnnameenglish: string,
   columnnamehebrew: string,
   display: string,
