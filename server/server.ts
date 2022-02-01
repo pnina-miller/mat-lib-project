@@ -26,6 +26,17 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get('/matbea/common/v1/user/details',(req, res)=>{
+  console.log('user details');
+  const user = {
+    misparChativa: '22',
+    misparAgaf: '99',
+    kodSector: '99',
+    misparMakal: '88',
+    misparMamal:'87'
+  };
+  res.json({ data: { userDataMf: user } });
+})
 app.get('/user/get', (req, res) => {
   console.log('user');
   const user = {

@@ -43,7 +43,7 @@
       z-index: 2;
       display: flex;
       align-items: center;
-      
+
       .filter-search-wrapper {
         display: flex;
         align-content: flex-start;
@@ -53,12 +53,21 @@
         flex-wrap: nowrap;
         flex-direction: row;
         padding: 0px;
-width: 100%;
+        width: 100%;
         .filter-search-input {
           width: 90%;
           color: black;
+          .placeholder {
+            transition: color 0.1s;
+            color: rgba(0, 0, 0, 0.54);
+          }
+
+          .mat-form-field-should-float .placeholder {
+            transition: color 0.1s;
+            color: transparent;
+          }
           .matbea-input .mat-form-field {
-            .mat-form-field-wrapper{
+            .mat-form-field-wrapper {
               padding-bottom: 0px;
             }
             text-align: right;
