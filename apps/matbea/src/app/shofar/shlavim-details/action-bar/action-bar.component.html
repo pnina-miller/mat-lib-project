@@ -1,5 +1,6 @@
 
 <ng-container>
+  <!-- <span *ngFor="let i of selectedRows">{{i}},</span> -->
   <div
     style="
       display: flex;
@@ -48,13 +49,17 @@
 
       <div>
         <span>
-          <matbea-button> טיפול בערבויות </matbea-button>
+          <matbea-button> עדכון גוש / חלקה / מגרש</matbea-button>
         </span>
       </div>
 
       <div>
         <span>
-          <matbea-button> עדכון גוש / חלקה / מגרש</matbea-button>
+          <matbea-menu panelClass="mymy" [items]="items" (clickedItem)="arvuiotAction($event)">
+          <matbea-button> טיפול בערבויות </matbea-button>
+          </matbea-menu>
+          <span class="triangular"></span>
+
         </span>
       </div>
     </div>

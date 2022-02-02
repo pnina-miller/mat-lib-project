@@ -4,7 +4,7 @@
     <div class="matbea-table">
       <table mat-table matSort [dataSource]="dataSource" style="width: 100%; height: 100%;" >
         <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of displayedColumns">
-          <th mat-header-cell mat-sort-header style=" min-width: 40px;" *matHeaderCellDef sortActionDescription="Sort by {{column.columnnameenglish}}">
+          <th mat-header-cell mat-sort-header [disabled]="column.notSortable" style=" min-width: 40px;" *matHeaderCellDef sortActionDescription="Sort by {{column.columnnameenglish}}">
             {{column.columnnamehebrew?column.columnnamehebrew:column.columnnameenglish}}
             <div *ngIf="column.columnformatter==='checkbox'" style="display: contents;">
               <mat-checkbox [formControl]="selectControl" checked="" ></mat-checkbox>

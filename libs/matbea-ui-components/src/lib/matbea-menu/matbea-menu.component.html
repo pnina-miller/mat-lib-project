@@ -1,12 +1,12 @@
-<div [matMenuTriggerFor]="tap" (menuOpened)="menuOpened.emit($event)" (menuClosed)="menuClosed.emit($event)" [matMenuTriggerRestoreFocus]="restoreFocus">
+<div [matMenuTriggerFor]="tap" (menuOpened)="menuOpened.emit($event)" (menuClosed)="menuClosed.emit($event)"
+  [matMenuTriggerRestoreFocus]="restoreFocus">
   <ng-content></ng-content>
 </div>
-<mat-menu #tap (closed)="_close.emit($event)"
-          [backdropClass]="backdropClass" [hasBackdrop]="hasBackdrop"
-[overlapTrigger]="overlapTrigger" [class]="panelClass" [xPosition]="xPosition"
-          [yPosition]="yPosition">
+<mat-menu #tap (closed)="_close.emit($event)" [backdropClass]="backdropClass" [hasBackdrop]="hasBackdrop"
+  [overlapTrigger]="overlapTrigger" [class]="panelClass" [xPosition]="xPosition" [yPosition]="yPosition">
+
   <ng-container *ngFor="let item of items">
-    <button mat-menu-item [role]="item?.role" [ngClass]="item?.class" [disabled]="item?.disabled" (click)="clickedItem.emit(item)">{{item?.name}}</button>
+    <button mat-menu-item [role]="item?.role" [ngClass]="item?.class" [disabled]="item?.disabled"
+      (click)="clickedItem.emit(item)">{{item?.name}}</button>
   </ng-container>
 </mat-menu>
-

@@ -10,6 +10,7 @@ import {
   MatbeaDividerModule,
   MatbeaIconButtonModule,
   MatbeaInputModule,
+  MatbeaMenuModule,
   MatbeaTableModule,
   PipesModule,
 } from '@pdesks/matbea-ui-components';
@@ -40,7 +41,8 @@ import { ActionBarComponent } from './action-bar/action-bar.component';
     HosafatYechidaModule,
     MatbeaInputModule,
     MatbeaDividerModule,
-    MatbeaComboModule
+    MatbeaComboModule,
+    MatbeaMenuModule,
   ],
 })
 export class ShlavimDetailsModule {}

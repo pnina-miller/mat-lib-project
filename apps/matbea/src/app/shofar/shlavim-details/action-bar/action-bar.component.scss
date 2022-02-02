@@ -18,3 +18,18 @@
 .flex-container{ display: inline-flex }
 .grid-container{ display: inline-grid }
 .font-l{ font-size: large; }
+
+::ng-deep .cdk-overlay-connected-position-bounding-box{
+    top: 212px;
+}
+
+.triangular{
+    width: 0;
+    height: 0;
+    border: 13px solid transparent;
+    border-top: 0;
+    border-bottom: 13px solid white;
+    position: relative;
+    top: -12px;
+
+}

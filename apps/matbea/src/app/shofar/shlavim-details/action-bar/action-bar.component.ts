@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { MatbeaMenuItem } from 'libs/matbea-ui-components/src/lib/matbea-menu/matbea-menu.component';
 
 @Component({
   selector: 'matbea-action-bar',
@@ -17,7 +18,10 @@ export class ActionBarComponent implements OnChanges {
   rangeTo:number=0;
   toOptions=[];
   firstChange=0;
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor() { }
+
+  items: MatbeaMenuItem [] = [{id: 0, name: 'קבלת פרוטוקול מסירה', disabled: false, role: 'menuitemradio'}, {id: 1, name: 'קבלת מסמכי רישום זכויות', disabled: false, role: 'menuitemcheckbox'},
+  {id: 0, name: 'קבלת פרוטוקול מסירה + מסמכי רישום זכויות', disabled: false, role: 'menuitem'}]
 
   ngOnChanges(): void {
     if(!this.fromOptions[0]){
@@ -33,13 +37,17 @@ export class ActionBarComponent implements OnChanges {
     }
     this.rangeFrom=rangeFrom;
     this.rangeTo=rangeTo;
-    let length=rangeTo-this.rangeFrom;
+    let length=rangeTo-this.rangeFrom+1;
     if(length>47){
       this.rangeTo=this.rangeTo=this.rangeFrom+47;
       length=47;
     }
     this.selectedRowsChange.emit(Array.from({length}).map((el,i)=>i+this.rangeFrom));
 
+  }
+
+  arvuiotAction(event):void {
+    alert(event.name)
   }
 
 }

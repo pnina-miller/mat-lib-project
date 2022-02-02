@@ -1,23 +1,22 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
   SimpleChanges,
   ViewChild,
-  OnChanges, Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation
+  OnChanges, Output, EventEmitter, ChangeDetectorRef
 } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort, Sort} from '@angular/material/sort';
-import {Observable, Subscription} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ColumnDefinition} from '../models/column-definition.model';
-import {LiveAnnouncer} from "@angular/cdk/a11y";
-import {MatDialog} from "@angular/material/dialog";
-import {MatTableService} from "./services/mat-table.service";
-import {FilterColumn} from "./models/filterColumns";
-import {MatTableDataSource} from "@angular/material/table";
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ColumnDefinition } from '../models/column-definition.model';
+import { LiveAnnouncer } from "@angular/cdk/a11y";
+import { MatDialog } from "@angular/material/dialog";
+import { MatTableService } from "./services/mat-table.service";
+import { FilterColumn } from "./models/filterColumns";
+import { MatTableDataSource } from "@angular/material/table";
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -27,16 +26,16 @@ import { FormControl } from '@angular/forms';
 })
 
 export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
-  dataSource: any=new MatTableDataSource([]);
+  dataSource: any = new MatTableDataSource([]);
   _dataSource: any;
   columsToDisplay: string[] = [];
   displayedColumns: ColumnDefinition[];
   sub: Subscription;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  mainColumnDisplay: any[]=[];
-  mainColumn: any[]=[];
-  isMainColumn: boolean=false;
+  mainColumnDisplay: any[] = [];
+  mainColumn: any[] = [];
+  isMainColumn: boolean = false;
 
   ngAfterViewInit() {
     if (this.dataSource.data) {
@@ -52,49 +51,51 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() navTo: string = null;
   @Input() paginatorOn: boolean = false;
   @Input() loading = true;
-  @Input() messages:[];
-  @Input() selectedRows:number[]=[];
+  @Input() messages: [];
+  @Input() selectedRows: number[] = [];
   @Output() selectedRowsChange = new EventEmitter<number[]>();
-  @Output() row= new EventEmitter();
+  @Output() row = new EventEmitter();
   @Output() dataSourceChangeLength = new EventEmitter<number>();
   updateFilters: any;
-  @Output()clickInRow= new EventEmitter();
-  selectControl:FormControl = new FormControl();
+  @Output() clickInRow = new EventEmitter();
+  selectControl: FormControl = new FormControl();
 
-  constructor(private route: ActivatedRoute, private router: Router,private _liveAnnouncer: LiveAnnouncer,
-  public dialog: MatDialog,
-  private changeDetector: ChangeDetectorRef,
-  public matTableService: MatTableService) {
+  constructor(private route: ActivatedRoute, private router: Router, private _liveAnnouncer: LiveAnnouncer,
+    public dialog: MatDialog,
+    private changeDetector: ChangeDetectorRef,
+    public matTableService: MatTableService) {
     // this.dataSource = new MatTableDataSource([]);
   }
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("ngOnChanges dataSource",this.name,this.dataSource$);
-    
+    console.log("ngOnChanges dataSource", this.name, this.dataSource$);
+
     console.log("SimpleChanges in matbea-table", this);
-    if(this.dataSource$ instanceof Observable){
-    this.dataSource$.subscribe((list) => {
-      if(this.dataSource) this.dataSource.data = list || [];
-      this._dataSource=list;
-    });
-  } else{
-    this._dataSource=this.dataSource$
-  }
-  this.isMainColumn=!!this.displayedColumnsTemp.find(col=>!!col.subColumns)
-  this.mainColumn=this.displayedColumnsTemp.map(column => column.subColumns?column:{columnnameenglish:column.columnnameenglish+column.ordernumber})
-  this.mainColumnDisplay= this.mainColumn.map(c=>c.columnnameenglish)
-  let filtereCols=this.displayedColumnsTemp.reduce((arr,col)=>{
-   let cols=col.subColumns || [col]
-    return [...arr, ...cols]
-  },[]);
-    
-    this.columsToDisplay =filtereCols/*this.displayedColumnsTemp*/.filter(e =>  true)// e.display == '1';
-    .sort((a, b) =>  Number(a.ordernumber) - Number(b.ordernumber)).map((e) => e.columnnameenglish);
+    if (this.dataSource$ instanceof Observable) {
+      this.dataSource$.subscribe((list) => {
+        if (this.dataSource) this.dataSource.data = list || [];
+        this._dataSource = list
+        this.selectedRows.forEach(i => this.dataSource.filteredData[i].selectRow = true)
+      });
+    } else {
+      this._dataSource = this.dataSource$
+    }
+    this.isMainColumn = !!this.displayedColumnsTemp.find(col => !!col.subColumns)
+    this.mainColumn = this.displayedColumnsTemp.map(column => column.subColumns ? column : { columnnameenglish: column.columnnameenglish + column.ordernumber })
+    this.mainColumnDisplay = this.mainColumn.map(c => c.columnnameenglish)
+    let filtereCols = this.displayedColumnsTemp.reduce((arr, col) => {
+      let cols = col.subColumns || [col]
+      return [...arr, ...cols]
+    }, []);
+
+    this.columsToDisplay = filtereCols/*this.displayedColumnsTemp*/.filter(e => true)// e.display == '1';
+      .sort((a, b) => Number(a.ordernumber) - Number(b.ordernumber)).map((e) => e.columnnameenglish);
     this.displayedColumns = filtereCols//this.displayedColumnsTemp;
 
-    this.matTableService.init('','',this._dataSource,this./*displayedColumns*/columsToDisplay.map((col)=> new FilterColumn(col)));
-    this.matTableService.displayDataSource.subscribe(data=>{this.dataSource = data;
+    this.matTableService.init('', '', this._dataSource, this./*displayedColumns*/columsToDisplay.map((col) => new FilterColumn(col)));
+    this.matTableService.displayDataSource.subscribe(data => {
+      this.dataSource = data;
       this.changeDetector.detectChanges();
       this.dataSourceChangeLength.emit(this.dataSource?.data?.length);
 
@@ -105,39 +106,37 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     console.log("OnInit in matbea-table", this);
-    this.selectControl.valueChanges.subscribe((value:boolean) => {Array.from({length:this.dataSource?.filteredData.length}).forEach((el,i)=>{this.onRowSelected({target:i,value})})  })
+    this.selectControl.valueChanges.subscribe((value: boolean) => { Array.from({ length: this.dataSource?.filteredData.length }).forEach((el, i) => { this.onRowSelected({ target: i, value }) }) })
   }
   onClick(row: any): void {
     console.clear();
     console.log(row);
     let id = row.id;
-    if(this.navTo){
-    this.router.navigate([this.navTo + id]);
+    if (this.navTo) {
+      this.router.navigate([this.navTo + id]);
     }
     this.row.emit(row);
 
   }
 
-    onRowSelected(event: any): void {
-      // let tempData=this.dataSource.filteredData//temp
-      this.dataSource.filteredData[event.target].selectRow=event.value
-    // this.dataSource=new MatTableDataSource(tempData);
-    if (event.value && !this.selectedRows.includes(event.target)){
+  onRowSelected(event: any): void {
+    if(this.dataSource.filteredData[event.target]){
+      this.dataSource.filteredData[event.target].selectRow = event.value
+    }
+    if (event.value && !this.selectedRows.includes(event.target)) {
       this.selectedRows.push(event.target);
-    } else{
-        this.selectedRows.forEach((row,i) => { if(row===event.target) this.selectedRows.splice(i,1); } );
+    } else {
+      this.selectedRows.forEach((row, i) => { if (row === event.target) this.selectedRows.splice(i, 1); });
     }
     this.selectedRowsChange.emit(this.selectedRows)
   }
 
-  selectMethod(event:any){
-    /* home 
+  selectMethod(event: any) {
     if(event.id===1){
       this.onRowSelected({target:-1,value:true})
     } else{
-      */
-      Array.from({length:this.dataSource.filteredData.length}).forEach((el,i)=>this.onRowSelected({target:i,value:true}))
-    
+    Array.from({ length: this.dataSource.filteredData.length }).forEach((el, i) => this.onRowSelected({ target: i, value: true }))
+    }
   }
 
   announceSortChange(sortState: Sort) {
