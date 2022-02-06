@@ -31,10 +31,10 @@
     <span>הערות</span>
     <matbea-form-field [leftMessage]="800" type="textarea" ([value])="hearot" ></matbea-form-field>
 </div>
- 
+
 <div class="yechida-input gush-chelka">
     <span>פרטי גוש וחלקה <matbea-icon-button icon="add_circle" (onClick)="addLine()"></matbea-icon-button></span>
-    <div style="width: 100%; height: 100%;">
+    <div style="width: 70%; height: 100%;">
     
     <matbea-table [displayedColumns]="displayedColumns" [dataSource$]="gushChelkaList" ></matbea-table> 
     </div>

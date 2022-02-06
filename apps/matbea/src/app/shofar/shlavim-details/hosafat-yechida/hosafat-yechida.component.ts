@@ -30,7 +30,7 @@ export class HosafatYechidaComponent implements OnInit {
   gushChelkaList:any[]=[{misparGush:'123',teurChelka:'456'}]
   displayedColumns:ColumnDefinition[]=[{columnnameenglish: 'misparGush', columnnamehebrew: 'גוש', display: '1', ordernumber: '1', columnformatter:'input', removable:'true', object:{}},
   {columnnameenglish: 'teurChelka', columnnamehebrew: 'חלקה', display: '1', ordernumber: '2', removable:'true'},
-  {columnnameenglish: ' ', columnnamehebrew: ' ', display: '0', ordernumber: '3', removable:'true', columnformatter:'icon', object:{icon:'delete', action:(e)=>{} }}]//TODO: action
+  {columnnameenglish: ' ', columnnamehebrew: ' ', display: '0', ordernumber: '3', removable:'true', columnformatter:'icon', object:{icon:'delete', action:line=>this.removeLine(line) }}]//TODO: action
   
   constructor(
     private shofarServices: ShofarServices,
@@ -64,5 +64,10 @@ export class HosafatYechidaComponent implements OnInit {
 
   addLine(){
    this.gushChelkaList= [...this.gushChelkaList, {misparGush:'',teurChelka:''}]
+  }
+  removeLine(line){
+    let temp=[...this.gushChelkaList];
+    temp.splice(line,1)
+   this.gushChelkaList= temp
   }
 }

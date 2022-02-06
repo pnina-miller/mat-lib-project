@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HosafatYechidaComponent } from './hosafat-yechida.component';
-import { MatbeaButtonModule, MatbeaFormFieldModule, MatbeaIconButtonModule, MatbeaIconModule, MatbeaInputModule, MatbeaTableModule, RadioButtonTabModule } from '@pdesks/matbea-ui-components';
+import { MatbeaButtonModule, MatbeaDividerModule, MatbeaFormFieldModule, MatbeaIconButtonModule, MatbeaIconModule, MatbeaInputModule, MatbeaTableModule, RadioButtonTabModule } from '@pdesks/matbea-ui-components';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,7 +21,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatbeaIconButtonModule,
     MatbeaTableModule,
     MatbeaIconModule,
-    MatIconModule
+    MatIconModule,
+    MatbeaDividerModule
   ]
 })
 export class HosafatYechidaModule { }

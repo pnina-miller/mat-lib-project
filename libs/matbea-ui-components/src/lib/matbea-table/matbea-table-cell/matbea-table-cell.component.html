@@ -21,7 +21,7 @@
     </span>
   </ng-container>
   <ng-container *ngSwitchCase="'icon'">
-    <matbea-icon-button [disabled]="column.object.disabled" [icon]="column.object.icon" (onClick)="column.object.action(item)"></matbea-icon-button>
+    <matbea-icon-button [disabled]="column.object.disabled" [icon]="column.object.icon" (onClick)="column.object.action(index)"></matbea-icon-button>
   </ng-container>
   <ng-container *ngSwitchCase="'input'">
     <matbea-input [disabled]="column.object.disabled" [icon]="column.object.icon" (click)="column.object.action()"></matbea-input>

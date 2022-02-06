@@ -1,17 +1,11 @@
-
 import {
   Component,
   OnInit,
   Input,
   OnChanges,
   SimpleChanges,
-  ViewChild,
-  TemplateRef,
-  ElementRef,
-  AfterViewInit,
   EventEmitter, Output
 } from '@angular/core';
-import { PipePipe } from '../../pipes/pipe.pipe';
 import { ColumnDefinition } from '../../models/column-definition.model';
 import { FormControl } from '@angular/forms';
 

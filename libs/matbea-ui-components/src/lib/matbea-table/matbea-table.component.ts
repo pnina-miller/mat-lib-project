@@ -10,7 +10,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Observable, Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ColumnDefinition } from '../models/column-definition.model';
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { MatDialog } from "@angular/material/dialog";
@@ -23,6 +23,7 @@ import { FormControl } from '@angular/forms';
   selector: 'matbea-table',
   templateUrl: './matbea-table.component.html',
   styleUrls: ['./matbea-table.component.scss'],
+  providers:[MatTableService]
 })
 
 export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
@@ -60,12 +61,8 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() clickInRow = new EventEmitter();
   selectControl: FormControl = new FormControl();
 
-  constructor(private route: ActivatedRoute, private router: Router, private _liveAnnouncer: LiveAnnouncer,
-    public dialog: MatDialog,
-    private changeDetector: ChangeDetectorRef,
-    public matTableService: MatTableService) {
-    // this.dataSource = new MatTableDataSource([]);
-  }
+  constructor(private router: Router, private _liveAnnouncer: LiveAnnouncer, public dialog: MatDialog,
+    private matTableService: MatTableService, private changeDetector: ChangeDetectorRef) { }
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -76,6 +73,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.dataSource$.subscribe((list) => {
         if (this.dataSource) this.dataSource.data = list || [];
         this._dataSource = list
+        this.loading=false;
         this.selectedRows.forEach(i => this.dataSource.filteredData[i].selectRow = true)
       });
     } else {
@@ -92,8 +90,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
     this.columsToDisplay = filtereCols/*this.displayedColumnsTemp*/.filter(e => true)// e.display == '1';
       .sort((a, b) => Number(a.ordernumber) - Number(b.ordernumber)).map((e) => e.columnnameenglish);
     this.displayedColumns = filtereCols//this.displayedColumnsTemp;
-
-    this.matTableService.init('', '', this._dataSource, this./*displayedColumns*/columsToDisplay.map((col) => new FilterColumn(col)));
+   this.matTableService.init('', '', this._dataSource, this.displayedColumns.map((col) => new FilterColumn(col)));
     this.matTableService.displayDataSource.subscribe(data => {
       this.dataSource = data;
       this.changeDetector.detectChanges();
