@@ -7,15 +7,41 @@
 
 .action-bar-container {
   padding: 15px;
-  display: flex;
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 26% 66% 4%;
   background-color: #9d9b9b;
   width: 100%;
   color: white;
-
-  .select-section{
-    .selected-length{
-        font-size: x-small;
+  justify-content: start;
+  grid-template-areas:
+  "select action close";
+  .select-section {
+    grid-area: select;
+    display: inline-flex;
+    align-content: stretch;
+    justify-content: space-between;
+    border-left: 0.5px white solid;
+    padding-left:20px;
+    .selected-number{
+      font-size: large;
     }
+    .selected-length {
+      font-size: x-small;
+    }
+  }
+  .action-section{
+    grid-area: action;
+    display: inline-flex;
+    padding-right: 140px;
+    ::ng-deep span{
+      font-size: large;
+      font-weight: normal;
+    }
+    
+  }
+  .close-button {
+    grid-area: close;
   }
 }
 
@@ -38,7 +64,7 @@
 
 
 matbea-icon-button ::ng-deep mat-icon {
-    color: white !important;
+  color: white !important;
 }
 .triangular {
   display: none;

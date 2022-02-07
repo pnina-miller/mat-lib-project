@@ -1,65 +1,72 @@
-
-.shlavim-details{
+.shlavim-details {
   // overflow-x: hidden;
-    height: 100%;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-content: flex-start;
-      justify-content: space-between;
-      align-items: stretch;
-    }
-    .shlavim-details-header-top{
-      display: flex;
-      flex-direction: row-reverse;
-      flex-wrap: nowrap;
-      align-content: center;
-      justify-content: flex-end;
-      align-items: center;
-      height: 4%;
-      width: 100%;
-    }
-    matbea-project-details-header{
-      min-height: 90px;
-      min-width: fit-content;
-      width: 100%;
-      margin-bottom: 2%;
-    }
-    matbea-yechidot-component{
-      grid-area: units-details;
-    
-    }
-    
-    matbea-yechidot-header-component{
-      grid-area: units-header;
-    
-    }
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.shlavim-details-header-top {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-end;
+  align-items: center;
+  height: 4%;
+  width: 100%;
+}
+matbea-project-details-header {
+  min-height: 90px;
+  min-width: fit-content;
+  width: 100%;
+  margin-bottom: 2%;
+}
+matbea-yechidot-component {
+  grid-area: units-details;
+}
 
+matbea-yechidot-header-component {
+  grid-area: units-header;
+}
 
+.shlavim-details-content {
+  border: 0.1px #333333 solid;
+  border-radius: 10px;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: 12% 60%;
+  grid-template-columns: [first] 100% [end];
+  justify-content: space-between;
+  justify-items: stretch;
+  grid-template-areas:
+    "units-header"
+    "units-details";
 
-    .shlavim-details-content{
-      width: 100%;
-      height: 100%;
-      display: grid;
-      grid-gap: 20px;
-      grid-template-rows: 20% 60%;
-      justify-content: space-between;
-      justify-items: stretch;
-      grid-template-areas:
-            "units-header"
-            "units-details"    }
-    @media (max-width: 1200px) {
-      .shlavim-details-content{
-        overflow: auto;
-        grid-template: auto;
-        grid-template-columns: [first] 100% [end];
-    
-        grid-template-areas:
-        "units-header"
-        "units-details"
-        "units-details";
+    ::ng-deep .project-details-header{
+      // width: 100%;
+      .project-details-header-nitunim{
+        div:last-child{
+        margin-left:0px;
       }
-    
     }
-    
+    }
+}
+@media (max-width: 1200px) {
+  .shlavim-details-content {
+    overflow: auto;
+    grid-template: auto;
+    grid-template-columns: [first] 100% [end];
+
+    grid-template-areas:
+      "units-header"
+      "units-details"
+      "units-details";
+  }
+}
