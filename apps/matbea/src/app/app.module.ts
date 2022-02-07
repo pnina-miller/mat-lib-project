@@ -11,7 +11,6 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ProjectsListEffects } from './shofar/store/effects/project-list.effects';
 import { ColumnDefinitionsEffects } from './shofar/store/effects/columnDefinition.effects';
-import { AuthGuardService } from './shofar/utils/auth-guatd.service';
 import { DuduTest2Module } from './shofar/dudu-test2/dudu-test2.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppComponent } from './app.component';
@@ -28,7 +27,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import * as fromProjectDetails from './shofar/store/reducers/project-details.reducer';
 import { ProjectDetailsEffects } from './shofar/store/effects/project-details.effects';
-import {MAT_DATE_LOCALE} from "@angular/material/core";
 
 const effectsShofar = [
   ProjectsListEffects,

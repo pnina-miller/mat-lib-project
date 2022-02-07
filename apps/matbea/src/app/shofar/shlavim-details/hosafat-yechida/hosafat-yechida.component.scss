@@ -30,7 +30,8 @@
     grid-area: hearot;
 }
 .gush-chelka{
-    height: 60%;
+    border-top: 0.5px solid gray;
+    height: 100%;
     grid-area: gush-chelka;
     matbea-table{
         height: 100%;
@@ -74,9 +75,10 @@
     .dialog-content {
         display: grid;
         height: 75%;//440px;
+        overflow-x: auto;
         grid-gap: 20px;
         grid-template-rows: 20% 20% 20% 40%;
-        grid-template-columns: 40% 40% 10%;
+        grid-template-columns: 48% 48%;
 
         grid-template-areas:
             "unitId shovi"

@@ -1,5 +1,4 @@
 export interface ColumnDefinition {
-  subColumns: any[];
   columnnameenglish: string,
   columnnamehebrew: string,
   display: string,
@@ -9,7 +8,7 @@ export interface ColumnDefinition {
   // formater?:(v)=> string, //class name for pipe
   // formater?: string,
   style?: string, //class for style
-  // action?(v):void, //name function
+  action?(v):void, //name function
   associatedcolumnname?: string,
   columnfiltertype?: string,
   columnvalidationmessage?: string,
@@ -17,5 +16,6 @@ export interface ColumnDefinition {
   savedbyuser?: string,
   columnformatter?: string,
   object?:any,
+  subColumns?: any[];
 }
 

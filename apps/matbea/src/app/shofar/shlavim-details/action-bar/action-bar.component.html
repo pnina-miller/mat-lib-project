@@ -7,21 +7,17 @@
       background-color: #9d9b9b;
       width: 100%;
       color: white;
-      justify-content: space-between;
     "
   >
-    <div style="display: inherit">
-      <div style="display: inline-grid">
-        <!-- <span>{{selectedRows.length}} נבחרו </span> -->
-        <span> ניתן לבחור עד 47 יחידות בטווח</span>
-      </div>
+    <div class="select-section" style="display: inherit">
+
       <div>
         <div style="display: inline-flex">
           <span style="width: 100px">
             <matbea-combo
-              placeholder="יחידה"
+              placeholder=""
               lable="מ"
-              lablePosition="top"
+              lablePosition="start"
               [options]="toOptions"
               (value)="fromChanged($event.id, rangeTo)"
               [valueToDefoult]="rangeFrom"
@@ -29,21 +25,27 @@
           </span>
           <span style="width: 100px">
             <matbea-combo
-              placeholder="יחידה"
+              placeholder=""
               lable="עד"
-              lablePosition="top"
+              lablePosition="start"
               [options]="fromOptions"
               (value)="fromChanged(rangeFrom, $event.id)"
               [valueToDefoult]="rangeTo"
             ></matbea-combo>
           </span>
         </div>
+        
+      <div class="selected-length" style="display: inline-grid">
+        <span>{{selectedRows.length}} נבחרו </span>
+        <span> ניתן לבחור עד 47 יחידות בטווח</span>
+      </div>
+
       </div>
     </div>
     <div style="display: inline-flex">
       <div>
         <span>
-          <matbea-button> הזמנת פנקסי שוברים </matbea-button>
+          <matbea-button (click)="openHazmanatPinkasim()"> הזמנת פנקסי שוברים </matbea-button>
         </span>
       </div>
 

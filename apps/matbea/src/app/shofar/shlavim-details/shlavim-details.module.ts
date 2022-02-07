@@ -20,6 +20,7 @@ import { YechidotHeaderComponent } from './yechidot-header/yechidot-header.compo
 import { MatMenuModule } from '@angular/material/menu';
 import { HosafatYechidaModule } from './hosafat-yechida/hosafat-yechida.module';
 import { ActionBarComponent } from './action-bar/action-bar.component';
+import { HazmanatPinkasimModule } from './hazmanat-pinkasim/hazmanat-pinkasim.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ActionBarComponent } from './action-bar/action-bar.component';
     MatMenuModule,
     MatbeaButtonModule,
     HosafatYechidaModule,
+    HazmanatPinkasimModule,
     MatbeaInputModule,
     MatbeaDividerModule,
     MatbeaComboModule,

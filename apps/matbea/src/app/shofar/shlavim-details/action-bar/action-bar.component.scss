@@ -1,39 +1,52 @@
-.select-wrapper>div{
-    margin: 0px 10px;
-    .combo{ width: 100px }
+.select-wrapper > div {
+  margin: 0px 10px;
+  .combo {
+    width: 100px;
+  }
 }
 
 .action-bar-container {
-    padding: 15px;
-    display: flex;
-    background-color: #9d9b9b;
-    width: 100%;
-    color: white;
-    justify-content: space-between;
-    }
+  padding: 15px;
+  display: flex;
+  background-color: #9d9b9b;
+  width: 100%;
+  color: white;
 
-    .select-wrapper{
-        display: inherit;
+  .select-section{
+    .selected-length{
+        font-size: x-small;
     }
-.flex-container{ display: inline-flex }
-.grid-container{ display: inline-grid }
-.font-l{ font-size: large; }
-
-::ng-deep .cdk-overlay-connected-position-bounding-box{
-    top: 212px;
+  }
 }
 
-.triangular{
-    width: 0;
-    height: 0;
-    border: 13px solid transparent;
-    border-top: 0;
-    border-bottom: 13px solid white;
-    position: relative;
-    top: -12px;
-
+.select-wrapper {
+  display: inherit;
 }
+.flex-container {
+  display: inline-flex;
+}
+.grid-container {
+  display: inline-grid;
+}
+.font-l {
+  font-size: large;
+}
+
+::ng-deep .cdk-overlay-connected-position-bounding-box {
+  top: 212px;
+}
+
 
 matbea-icon-button ::ng-deep mat-icon {
     color: white !important;
+}
+.triangular {
+  display: none;
+  width: 0;
+  height: 0;
+  border: 13px solid transparent;
+  border-top: 0;
+  border-bottom: 13px solid white;
+  position: relative;
+  top: -12px;
 }

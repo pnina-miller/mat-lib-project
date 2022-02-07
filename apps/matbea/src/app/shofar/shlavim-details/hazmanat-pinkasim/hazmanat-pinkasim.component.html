@@ -1,0 +1,74 @@
+<div class="matbea-hazmanat-pinkasim-container">
+<div class="dialog-title">
+  <h4 class="mat-dialog-title">הזמנת פנקסי שוברים</h4>
+</div>
+<div class="dialog-content">
+
+  <div class="pinkasim-section project-details">
+    <ng-container *ngIf="project">
+      <div class="project-details-header">
+        <div class="project-details-header-lable">
+          <span class="form-field-lable-light">פרטי הפרויקט </span>
+        </div>
+
+        <div class="project-details-header-nitunim">
+          <div class="project-details-header-setor">
+            <span class="form-field-lable-light">קוד מוטב</span>
+            <span>{{ project.kodMutavBeShovar }}</span>
+          </div>
+
+          <div class="project-details-header-setor">
+            <span class="form-field-lable-light">שם הפרויקט</span>
+            <span>{{ project.shemProyectSagur }}</span>
+          </div>
+
+          <div class="project-details-header-setor">
+            <span class="form-field-lable-light">יישוב</span>
+            <span>{{ project.yeshuv }}</span>
+          </div>
+
+          <div class="project-details-header-setor">
+            <span class="form-field-lable-light">חשבון</span>
+            <span>{{ project.misparCheshbon }}-{{ project.misparSnif }}</span>
+          </div>
+
+          <div class="project-details-header-setor">
+            <span class="form-field-lable-light">קבלנים</span>
+            <span>{{ project.shmKablanimMeshurshar }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+<div class="pinkasim-section units-table">
+    <div class="section-lable">
+        <span class="form-field-lable-light">מס' היחידות שנבחרו </span>
+      </div>
+    <matbea-table  [displayedColumns]="displayedColumns" [dataSource$]="units"></matbea-table>
+</div>
+</div>
+<div class="sendind-select">
+
+    <div class="section-lable">
+        <span class="form-field-lable-light">למי לשלוח את פקסי השוברים? </span>
+        <matbea-radio-button-tab [dataList]="sendDataList"
+        (selectedButtonChanged)="send=$event"></matbea-radio-button-tab>
+      </div>
+</div>
+<div class="dialog-footer">
+  <matbea-button
+    size="m"
+    type="matbea-stroked"
+    (onClick)="cancel()"
+    textLable="ביטול"
+    >ביטול</matbea-button
+  >
+  <matbea-button
+    size="m"
+    type="matbea-raised"
+    (onClick)="save()"
+    textLable="שמירה"
+    >שמירה</matbea-button
+  >
+</div>
+</div>
