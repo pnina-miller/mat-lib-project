@@ -7,7 +7,7 @@
       </mat-option>
     </mat-select>
   <input matInput *ngIf="type=='input'" (input)="getValue($event)" [disabled]="isDisable" [placeholder]="placeholder" [(ngModel)]="value">
-  <mat-hint>{{hint}}</mat-hint>
+  <mat-hint *ngIf="!leftMessage">{{hint}}</mat-hint>
   <mat-hint *ngIf="leftMessage"> נותרו {{leftMessage-value?.length}} תווים </mat-hint>
   <textarea matInput *ngIf="type=='textarea'" (change)="getValue($event)" [disabled]="isDisable" [placeholder]="placeholder" [(ngModel)]="value"></textarea>
   <mat-error *ngIf="error">{{errorValue}}</mat-error>

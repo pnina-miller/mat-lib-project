@@ -20,7 +20,7 @@ export class YechidotHeaderComponent implements OnInit {
 
   addUnitsAction(){
     const dialogRef = this.dialog.open(HosafatYechidaComponent, {
-      width: '90%',
+      width: '50%',
       height: '90%',
       panelClass:'hosafat-yechida-container',
       data: {},    

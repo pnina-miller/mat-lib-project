@@ -31,9 +31,13 @@ export class HosafatYechidaComponent implements OnInit {
   gushChelkaList:any[]=[{misparGush:'123',teurChelka:'456'}]
   gushchelkaDataSource: BehaviorSubject<any>=new BehaviorSubject<any>(this.gushChelkaList)
 
-  displayedColumns:ColumnDefinition[]=[{columnnameenglish: 'misparGush', columnnamehebrew: 'גוש', display: '1', ordernumber: '1', columnformatter:'input', removable:'true', object:{}},
-  {columnnameenglish: 'teurChelka', columnnamehebrew: 'חלקה', display: '1', ordernumber: '2', removable:'true'},
-  {columnnameenglish: ' ', columnnamehebrew: ' ', display: '0', ordernumber: '3', removable:'true', columnformatter:'icon', object:{icon:'delete', action:line=>this.removeLine(line) }}]//TODO: action
+  gushChelkachanged=(event)=>{
+    this.gushChelkaList[event.target][event.key]=event.value;
+    this.gushchelkaDataSource.next(this.gushChelkaList);
+  }
+  displayedColumns:ColumnDefinition[]=[{columnnameenglish: 'misparGush', columnnamehebrew: 'גוש', display: '1', ordernumber: '1', columnformatter:'input', removable:'true', action:this.gushChelkachanged, object:{}},
+  {columnnameenglish: 'teurChelka', columnnamehebrew: 'חלקה', display: '1', ordernumber: '2', removable:'true', columnformatter:'input', action:this.gushChelkachanged, object:{}},
+  {columnnameenglish: ' ', columnnamehebrew: ' ', display: '0', ordernumber: '3', removable:'true', columnformatter:'icon', object:{icon:'delete'}, action:line=>this.removeLine(line) }]//TODO: action
   
   constructor(
     private shofarServices: ShofarServices,
@@ -49,7 +53,6 @@ export class HosafatYechidaComponent implements OnInit {
     })
   }
 
-  targetChanged(num: number) {}
 
   cancel() {
     this.dialogRef.close();
@@ -59,7 +62,8 @@ export class HosafatYechidaComponent implements OnInit {
     const data={
       ...this.YechidaForm.value,
       yeud:this.yeud,
-      hearot:this.hearot
+      hearot:this.hearot,
+      gushChelka:this.gushChelkaList
     }
     console.log(data);
     this.dialogRef.close();

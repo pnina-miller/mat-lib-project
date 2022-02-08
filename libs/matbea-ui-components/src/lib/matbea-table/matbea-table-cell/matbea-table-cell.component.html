@@ -8,6 +8,7 @@
 
   <ng-container *ngSwitchCase="'checkbox'">
     <mat-checkbox [formControl]="selectControl" [(ngModel)]="this.item[this.column.columnnameenglish]" ></mat-checkbox>
+    <!--not work <matbea-checkbox [checked]="this.item[this.column.columnnameenglish]" (valueChange)="selectControl.setValue($event)" ></matbea-checkbox>                -->
   </ng-container>
   <ng-container *ngSwitchCase="'status'">
     <span [style]=style class="matbea-table-cell-status" [ngClass]='class'>
@@ -21,10 +22,10 @@
     </span>
   </ng-container>
   <ng-container *ngSwitchCase="'icon'">
-    <matbea-icon-button [disabled]="column.object.disabled" [icon]="column.object.icon" (onClick)="column.object.action(index)"></matbea-icon-button>
+    <matbea-icon-button [disabled]="column.object.disabled" [icon]="column.object.icon" (onClick)="column.action(index)"></matbea-icon-button>
   </ng-container>
   <ng-container *ngSwitchCase="'input'">
-    <matbea-input [disabled]="column.object.disabled" [icon]="column.object.icon" (click)="column.object.action()"></matbea-input>
+    <matbea-input [disabled]="column.object.disabled" [inputFormControl]="inputControl" [icon]="column.object.icon" ></matbea-input>
   </ng-container>
   <ng-container *ngSwitchCase="'menu'">
 <matbea-menu (clickedItem)="clickInMenu.emit({event:$event, item:item})" [items]="column.object">

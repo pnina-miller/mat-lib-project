@@ -53,7 +53,7 @@ export class MatbeaInputComponent implements OnInit, OnChanges {
     // this.value=$event.data
     this.valueChange.emit(this.value);
     if (this.limit) {
-      this.value = this.value.toString().slice(0, this.limit - 1);
+      this.value = this.value?.toString().slice(0, this.limit - 1);
     }
     if(this.autocomplete){
       this.value=$event

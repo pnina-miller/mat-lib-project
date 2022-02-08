@@ -1,18 +1,9 @@
 
 <ng-container>
   <!-- <span *ngFor="let i of selectedRows">{{i}},</span> -->
-  <div
-    style="
-      display: flex;
-      background-color: #9d9b9b;
-      width: 100%;
-      color: white;
-    "
-  >
-    <div class="select-section" style="display: inherit">
+  <div class="action-bar-container">
+    <div class="select-section" >
 
-      <div>
-        <div style="display: inline-flex">
           <span style="width: 100px">
             <matbea-combo
               placeholder=""
@@ -33,16 +24,14 @@
               [valueToDefoult]="rangeTo"
             ></matbea-combo>
           </span>
-        </div>
         
-      <div class="selected-length" style="display: inline-grid">
-        <span>{{selectedRows.length}} נבחרו </span>
-        <span> ניתן לבחור עד 47 יחידות בטווח</span>
+      <div  style="display: inline-grid">
+        <span class="selected-number">{{selectedRows.length}} נבחרו </span>
+        <span class="selected-length"> ניתן לבחור עד 47 יחידות בטווח</span>
       </div>
 
-      </div>
     </div>
-    <div style="display: inline-flex">
+    <div class="action-section" >
       <div>
         <span>
           <matbea-button (click)="openHazmanatPinkasim()"> הזמנת פנקסי שוברים </matbea-button>
@@ -65,7 +54,7 @@
         </span>
       </div>
     </div>
-    <div>
+    <div class="close-button">
       <matbea-icon-button
         color="white"
         icon="close"

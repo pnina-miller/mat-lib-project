@@ -29,18 +29,23 @@ export class MatbeaTableCellComponent implements OnInit, OnChanges{
   @Output()onRowSelected= new EventEmitter();
 
   selectControl:FormControl = new FormControl(true);
-value=true;
+  inputControl:FormControl = new FormControl();
+  value=true;
   constructor() {
 
   }
 
   ngOnInit(): void {
+    this.inputControl.valueChanges.subscribe((value: any) => { this.column.action({value:value, target:this.index, key: this.column.columnnameenglish})})
     this.selectControl.valueChanges.subscribe((value:any) => {if(value!==this.item.selectRow){this.onRowSelected.emit({target:this.item.selectIndex || this.index, value})}})
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(this.column.columnformatter==='checkbox'){
       this.selectControl.setValue(this.item[this.column.columnnameenglish]);
+    }
+    if(this.column.columnformatter==='input'){
+      this.inputControl.setValue(this.item[this.column.columnnameenglish]);
     }
 if(this.item[this.column.columnnameenglish]=='פעיל'){
   this.class='matbea-table-cell-status-pail';

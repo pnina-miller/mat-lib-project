@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ShofarServices } from '../../services/shofar-services';
 import { ColumnDefinition } from '../../store/models/column-definition.model';
 
-const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:'selectRow',ordernumber:'0',columnformatter:'checkbox', removable: 'false', notSortable:true},
+const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:'selectRow',ordernumber:'0',columnformatter:'checkbox', removable: 'false', notSortable:true, style:{'padding-right':'7px'}},
 {ordernumber:'1', columnnamehebrew:"מס' יחידה", columnformatter:' ', display:'1', columnnameenglish:'misparShura', removable: 'false'} ,
 {ordernumber:'2', columnnamehebrew:"שמות הרוכשים", columnformatter:' ', display:'1', columnnameenglish:'shemLakoachKolel', removable: 'false'} ,
 {ordernumber:'3', columnnamehebrew:"זיהוי יחידה", columnformatter:' ', display:'1', columnnameenglish:'teurYechidaMeforat', removable: 'false'} ,
