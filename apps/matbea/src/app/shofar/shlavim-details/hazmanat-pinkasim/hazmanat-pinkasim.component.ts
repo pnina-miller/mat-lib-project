@@ -3,14 +3,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { ColumnDefinition } from 'libs/matbea-ui-components/src/lib/models/column-definition.model';
 import { RadioButtonTabEntry } from 'libs/matbea-ui-components/src/lib/radio-button-tab/radio-button-tab.component';
+import { Observable } from 'rxjs';
 import * as ProjectDetailsSelectors from '../../store/selectors/project-details.selectors';
 import {StateProjectDetails} from "../../store/state/project-details.state";
 
 const UNIT_COLUMNS =[{ordernumber:'1', columnnamehebrew:"מס' יחידה", columnformatter:' ', display:'1', columnnameenglish:'misparShura', removable: 'false'} ,
-{ordernumber:'2', columnnamehebrew:"שמות הרוכשים", columnformatter:' ', display:'1', columnnameenglish:'shemLakoachKolel', removable: 'false'} ,
-{ordernumber:'3', columnnamehebrew:"זיהוי יחידה", columnformatter:' ', display:'1', columnnameenglish:'shuratMelel180', removable: 'false'} ,
+{ordernumber:'3', columnnamehebrew:"זיהוי יחידה", columnformatter:' ', display:'1', columnnameenglish:'teurYechidaMeforat', removable: 'false'} ,
 {ordernumber:'5', columnnamehebrew:"גוש", columnformatter:' ', display:'1', columnnameenglish:'misparGush', removable: 'false'},
-{ordernumber:'6', columnnamehebrew:"חלקה/ות", columnformatter:' ', display:'1', columnnameenglish:'metegPakadGushChelka', removable: 'false'},]
+{ordernumber:'6', columnnamehebrew:"חלקה/ות", columnformatter:' ', display:'1', columnnameenglish:'metegPakadGushChelka', removable: 'false'},
+{ordernumber:'7', columnnamehebrew:"שמות הרוכשים", columnformatter:' ', display:'1', columnnameenglish:'shemLakoachKolel', removable: 'false'} ,]
 
 @Component({
   selector: 'matbea-hazmanat-pinkasim',
@@ -19,16 +20,21 @@ const UNIT_COLUMNS =[{ordernumber:'1', columnnamehebrew:"מס' יחידה", colu
 })
 export class HazmanatPinkasimComponent implements OnInit {
 
+  dataSource$
   project: any;
   project$ = this.store$.select(ProjectDetailsSelectors.getProject);
   selectedRows:number[];
   units: any;
   displayedColumns:ColumnDefinition[]=UNIT_COLUMNS as ColumnDefinition[];
-  sendDataList:RadioButtonTabEntry[]=[{id:'1',description:'סניף מנהל'},{id:'1',description:'מק"ל'},{id:'1',description:'נא"ש'}];
+  sendDataList:RadioButtonTabEntry[]=[{id:'1',description:'סניף מנהל'},{id:'2',description:'מק"ל'},{id:'3',description:'נא"ש'}];
   send=''
+
   constructor( public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: {selectedRows:number[]}, private store$: Store<StateProjectDetails>) { 
+    @Inject(MAT_DIALOG_DATA) public data: {selectedRows:number[], dataSource$:Observable<any>}, private store$: Store<StateProjectDetails>) { 
       this.selectedRows=data.selectedRows;
+      this.dataSource$= new Observable(subscribe=>{
+      data.dataSource$.subscribe(res=>{subscribe.next( res.filter((value, i) => data.selectedRows.includes(i) ) )}) 
+      })
     }
 
   ngOnInit(): void {

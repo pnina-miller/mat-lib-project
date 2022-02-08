@@ -9,7 +9,7 @@
         </div>
 
         <div class="shalav-input input-taarich8SiyumTzafui">
-            <matbea-input type="date" lable='מועד סיום צפוי ע"פ דוח מפקח'  [error-messages]="{required:'שדה זה הוא חובה', pattern:'1 ינואר שגיאה'}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8SiyumTzafui" required ></matbea-input>
+            <matbea-input type="date" lable='מועד סיום צפוי ע"פ דוח מפקח'  [error-messages]="{required:'שדה זה הוא חובה', pattern:taarich8SiyumTzafuiErrorMsg}"  lablePosition="top" [inputFormControl]="shalavForm.controls.taarich8SiyumTzafui" required ></matbea-input>
         </div>
 
         <div class="shalav-input input-taarich8HeterBniya">
@@ -25,17 +25,8 @@
         <div class="shalav-input input-yeud">
             <span> ייעוד השלב</span>
             <div class=checkbox-wrapper>
-                <div>
-                    <matbea-checkbox lable="מגורים" (valueChange)="yeudChanged('MetegYeudMegurim')"></matbea-checkbox>
-                </div>
-                <div>
-                    <matbea-checkbox lable="מסחר" (valueChange)="yeudChanged('MetegYeudMischar')"></matbea-checkbox>
-                </div>
-               <div>
-                <matbea-checkbox lable="משרדים" (valueChange)="yeudChanged('MetegYeudMisradim')"></matbea-checkbox>
-                </div>
-                <div>
-                    <matbea-checkbox lable="אחר" (valueChange)="yeudChanged(MetegYeudAcher)"></matbea-checkbox>
+                <div  *ngFor="let item of yeudOptions | keyvalue: unSorted" >
+                    <matbea-checkbox [checked]="item.key==yeudValue" [lable]="item.value" (valueChange)="yeudChanged(item.key)"></matbea-checkbox>
                 </div>
             </div>
         </div>

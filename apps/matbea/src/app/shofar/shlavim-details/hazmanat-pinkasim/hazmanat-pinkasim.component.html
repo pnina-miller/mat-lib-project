@@ -33,7 +33,7 @@
           </div>
 
           <div class="project-details-header-setor">
-            <span class="form-field-lable-light">קבלנים</span>
+            <span class="form-field-lable-light">קבלן/נים</span>
             <span>{{ project.shmKablanimMeshurshar }}</span>
           </div>
         </div>
@@ -44,7 +44,9 @@
     <div class="section-lable">
         <span class="form-field-lable-light">מס' היחידות שנבחרו </span>
       </div>
-    <matbea-table  [displayedColumns]="displayedColumns" [dataSource$]="units"></matbea-table>
+      <div class="table-wrapper">
+    <matbea-table  [displayedColumns]="displayedColumns" [dataSource$]="dataSource$"></matbea-table>
+  </div>
 </div>
 </div>
 <div class="sendind-select">

@@ -48,7 +48,8 @@
       justify-items: stretch;
       grid-template-areas:
             "units-header"
-            "units-details"    }
+            "units-details"    
+          }
     @media (max-width: 1200px) {
       .shlavim-details-content{
         overflow: auto;

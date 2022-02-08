@@ -66,19 +66,13 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("ngOnChanges dataSource", this.name, this.dataSource$);
-
     console.log("SimpleChanges in matbea-table", this);
-    if (this.dataSource$ instanceof Observable) {
       this.dataSource$.subscribe((list) => {
         if (this.dataSource) this.dataSource.data = list || [];
         this._dataSource = list
         this.loading=false;
         this.selectedRows.forEach(i => this.dataSource.filteredData[i].selectRow = true)
       });
-    } else {
-      this._dataSource = this.dataSource$
-    }
     this.isMainColumn = !!this.displayedColumnsTemp.find(col => !!col.subColumns)
     this.mainColumn = this.displayedColumnsTemp.map(column => column.subColumns ? column : { columnnameenglish: column.columnnameenglish + column.ordernumber })
     this.mainColumnDisplay = this.mainColumn.map(c => c.columnnameenglish)

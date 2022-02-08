@@ -15,11 +15,12 @@ export class HosafatShalavComponent implements OnInit {
   shalavForm: FormGroup;
 
   heterBniya;
-  yeud = {
-    metegYeudMegurim: 0,
-    metegYeudMischar: 0,
-    metegYeudMisradim: 0,
-    metegYeudAcher: 0,
+  yeudValue=''
+  yeudOptions = {
+    MetegYeudMegurim:'מגורים',
+    MetegYeudMischar:'מסחר',
+    MetegYeudMisradim:'משרדים',
+    MetegYeudAcher:'אחר'
   };
 
   misparProject: number;
@@ -27,6 +28,7 @@ export class HosafatShalavComponent implements OnInit {
   // errorMsg: string;
   showSuccess = false;
   errorMsg: string;
+  taarich8SiyumTzafuiErrorMsg="למניעת שיבושים בגביית עמלת ערבות, אין להקליד תאריך שהוא ב-1 לינואר  ";
 
   constructor(
     private shofarServices: ShofarServices,
@@ -37,18 +39,19 @@ export class HosafatShalavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //TODO: set value in matbea input
+   let yeudSelected=  this.data.item && Object.entries(this.data.item)?.find((entry)=>entry[1]=='1' && entry[0].includes('MetegYeud'));
+   this.yeudValue = yeudSelected?yeudSelected[0]:'';
     this.shalavForm = new FormGroup({
       teurHaShlav: new FormControl(
         this.data.item?.teurHaShlav,
         Validators.required
       ),
       taarich8SiyumTzafui: new FormControl(
-        this.data.item?.taarich8SiyumTzafui,
+        this.data.item?.taarich8SiyumTzafui.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'),
         [Validators.required,Validators.pattern('^((?!-01-01).)*$')]
       ),
       taarich8HeterBniya: new FormControl(
-        this.data.item?.taarich8HeterBniya,
+        this.data.item?.taarich8HeterBniya.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'),
         Validators.required
       ),
       teurTochnitBinyanIr: new FormControl(
@@ -58,9 +61,10 @@ export class HosafatShalavComponent implements OnInit {
     });
   }
 
-  yeudChanged(num: number) {
-    this.yeud[num] = '1';
+  yeudChanged(value: string) {
+    this.yeudValue = value;
   }
+  unSorted(){}
 
   cancel() {
     this.dialogRef.close();
@@ -84,7 +88,7 @@ export class HosafatShalavComponent implements OnInit {
       metegHeterBniya: this.heterBniya == 'true' ? 1 : 0,
       taarich8HeterBniya: Number(this.shalavForm.value.taarich8HeterBniya.replace(/\-/gi, '')),
       taarich8SiyumTzafui: Number(this.shalavForm.value.taarich8SiyumTzafui.replace(/\-/gi, '')),
-      ...this.yeud,
+      [this.yeudValue]:'1',
     } as shalavDataType;
     this.shofarServices.saveShalav(data, this.misparProject).subscribe(
       (resp) => {

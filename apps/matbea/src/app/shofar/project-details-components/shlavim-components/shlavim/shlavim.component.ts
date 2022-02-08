@@ -1,6 +1,6 @@
 
 
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HosafatShalavComponent } from '../hosafat-shalav/hosafat-shalav.component';
@@ -12,22 +12,10 @@ import { ShlavimService } from './shlavim.service';
   styleUrls: ['./shlavim.component.scss']
 })
 export class ShlavimComponent implements OnInit, OnChanges {
- /* openHosafatShalavPopup(misparProyectSagur, item=null) {
-    this.dialog.closeAll()
-    const dialogRef = this.dialog.open(HosafatShalavComponent, {
-      width: '50%',
-      panelClass: 'hosafat-shalav-container',
-      data: {misparProyectSagur:misparProyectSagur,item:item, onSuccess:this.loadData},
-    });
-
-    dialogRef.afterClosed().subscribe(newProject => {
-      // this.getCheshbonotProject();    
-    });
-  }*/
 
   @Input('shlavim') shlavim;
   @Input('misparProyectSagur') misparProyectSagur: string;
-
+  @Output() loadData: EventEmitter<any> = new EventEmitter();
   displayedColumns = [{ columnnameenglish: 'teurHaShlav', columnnamehebrew: 'זיהוי שלב', columnformatter: 'link', display: '1' },
   { columnnameenglish: 'teurYeudShlav', columnnamehebrew: 'ייעוד', columnformatter: '', display: '1' },
   { columnnameenglish: 'misparYechidotBeSlv', columnnamehebrew: "מס' יחידות", columnformatter: '', display: '1' },
@@ -37,7 +25,7 @@ export class ShlavimComponent implements OnInit, OnChanges {
   { columnnameenglish: 'shemGoremMemamen', columnnamehebrew: 'שותף מממן', columnformatter: '', display: '1' },
   {
     columnnameenglish: ' ', columnnamehebrew: '', columnformatter: 'menu', display: '1', object: [
-      { "id": 0, "name": "עריכת השלב", "disabled": false, "role": "menuitem", action:(item)=>{ this.shlavimService.openHosafatShalavPopup(this.misparProyectSagur,()=>{} ,item)} },
+      { "id": 0, "name": "עריכת השלב", "disabled": false, "role": "menuitem", action:(item)=>{ this.shlavimService.openHosafatShalavPopup(this.misparProyectSagur,()=>{this.loadData.emit();} ,item)} },
       { "id": 1, "name": "הוספת יחידות", "disabled": false, "role": "menuitem", action:(item)=>{this.router.navigate([this.router.url, 'units', item.misparShlav]);} }, {
         "id": 2, "name": "הוספת יחידות כקובץ", "disabled": false, "role": "menuitem", action:()=>{ alert(' הוספת יחידות כקובץ לא זמינה כרגע')}}
       ]
@@ -49,11 +37,9 @@ export class ShlavimComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.shlavimService.init(this)
+    this.shlavimService.init(this);
   }
-loadData(): void {
-
-}
+ 
   onDbClick(row: any) {
     console.log('row', row);
     if (row.misparYechidotBeSlv > 0)

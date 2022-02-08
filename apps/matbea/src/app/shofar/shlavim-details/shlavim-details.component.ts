@@ -26,6 +26,7 @@ export class ShlavimDetailsComponent implements OnInit {
   );
   steps: { name: string; routTo: string }[] = [];
   misparShalav: string;
+  project: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,12 +46,8 @@ export class ShlavimDetailsComponent implements OnInit {
           this.steps=[...this.steps,{ name:  resp.teurHaShlav, routTo: '' }];
         });
 
-      this.project$.subscribe(
-        (project) => {
-          if (project) {
-            this.steps=[ { name: 'רשימת פרויקטים', routTo: 'table' }, { name: project.shemProyectSagur, routTo: 'table/details/'+this.id }, ...this.steps ];
-            this.shalav = project;
-          } else {
+      this.project$.subscribe((project) => {
+          if (!project) {
             this.storeProjectDetails$.dispatch(
               ProjectDetailsActions.init({
                 id: this.id,

@@ -9,6 +9,7 @@ import {
   MatbeaDetailsSteperModule,
   MatbeaDividerModule,
   MatbeaIconButtonModule,
+  MatbeaIconModule,
   MatbeaInputModule,
   MatbeaMenuModule,
   MatbeaTableModule,
@@ -45,6 +46,7 @@ import { HazmanatPinkasimModule } from './hazmanat-pinkasim/hazmanat-pinkasim.mo
     MatbeaDividerModule,
     MatbeaComboModule,
     MatbeaMenuModule,
+    MatbeaIconModule
   ],
 })
 export class ShlavimDetailsModule {}

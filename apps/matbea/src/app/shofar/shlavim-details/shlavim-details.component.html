@@ -6,7 +6,7 @@
   </div>
   <matbea-project-details-header></matbea-project-details-header>
 <div class ='shlavim-details-content'>
-  <matbea-yechidot-header [shalav]="shalav"></matbea-yechidot-header>
+  <matbea-yechidot-header  *ngIf='shalav' [shalav]="shalav"></matbea-yechidot-header>
   <matbea-yechidot [misparShalav]="misparShalav" [misparProyectSagur]="misparProyectSagur"></matbea-yechidot>
 <!--  
   <matbea-project-basic-details-container [kodMutav]="project.kodMutavBeShovar"

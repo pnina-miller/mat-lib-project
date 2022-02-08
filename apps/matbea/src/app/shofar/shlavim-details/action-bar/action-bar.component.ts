@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatbeaMenuItem } from 'libs/matbea-ui-components/src/lib/matbea-menu/matbea-menu.component';
+import { Observable } from 'rxjs';
 import { HazmanatPinkasimComponent } from '../hazmanat-pinkasim/hazmanat-pinkasim.component';
 
 @Component({
@@ -20,6 +21,7 @@ export class ActionBarComponent implements OnInit, OnChanges {
   @Input() selectedRows!: number[];
   @Output() selectedRowsChange = new EventEmitter<number[]>();
   @Input() selectedLength = 0;
+  @Input() dataSource$: Observable<any>
 
   rangeFrom: number = 0;
   fromOptions = [];
@@ -93,8 +95,8 @@ export class ActionBarComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(HazmanatPinkasimComponent, {
       width: '50%',
       height: '90%',
-      panelClass: 'hosafat-yechida-container',
-      data: {selectedRows:this.selectedRows},
+      panelClass: 'hazmanat-pinkasim-container',
+      data: {selectedRows:this.selectedRows, dataSource$: this.dataSource$},
     });
   }
 }

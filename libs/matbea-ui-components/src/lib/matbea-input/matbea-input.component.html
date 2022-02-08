@@ -1,11 +1,17 @@
 <div class="matbea-input" [ngClass]="lableClass">
+  <!--//TODO -->
   <ng-container *ngIf='lable'>
     <div class="form-field-lable">{{lable}}</div>
   </ng-container>
   <mat-form-field [ngClass]="ngclass" [class]="classs">
-    <input matInput [readonly]="disabled" [(ngModel)]="value"
+
+    <input *ngIf='value' matInput [readonly]="disabled"  [(ngModel)]="value"
       [formControl]='inputFormControl' (keypress)="keypress" [maxLength]="limit" (input)="getValueChange($event)"
       [matAutocomplete]="auto" [type]="type" (click)="click" [id]="id">
+    <input *ngIf='!value' matInput [readonly]="disabled"
+      [formControl]='inputFormControl' (keypress)="keypress" [maxLength]="limit" (input)="getValueChange($event)"
+      [matAutocomplete]="auto" [type]="type" (click)="click" [id]="id">
+     
       <mat-placeholder class="placeholder">{{placeholder}}</mat-placeholder>
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of filteredOptions|async" [value]="option">

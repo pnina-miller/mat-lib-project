@@ -10,6 +10,7 @@
 
 .input-yeud {
     .checkbox-wrapper {
+        justify-content: space-between;
         display: flex;
     }
     span{
@@ -75,8 +76,8 @@
         display: grid;
         height: 330px;
         grid-gap: 20px;
-        grid-template-rows: 30% 30% 30%;
-        grid-template-columns: 40% 40% 10%;
+        grid-template-rows: 30% 30% 25%;
+        grid-template-columns: 45% 45% 10%;
 
         grid-template-areas:
             "teurHaShlav taarich8SiyumTzafui "
@@ -95,4 +96,8 @@
     .success-footer{
         justify-content: flex-end;
     }
+}
+
+matbea-input{
+max-width:200px
 }

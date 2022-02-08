@@ -1,50 +1,48 @@
 <ng-container *ngIf="shalav">
-    <div class="project-details-header">
-    <div class="project-details-header-lable">
-      <span class="form-field-lable-light"> {{shalav.misparProyectSagur}}</span>
-    </div>
-    <div class="project-details-header-nitunim">
+    <div class="yechidot-details-header">
+    <div class="yechidot-details-header-nitunim">
 
-        <div class="project-details-header-setor">
+        <div class="yechidot-details-header-setor">
         <span class="form-field-lable-light">שלב</span>
         <span >{{shalav.teurHaShlav}}</span>
       </div>
 
-      <div class="project-details-header-setor">
+      <div class="yechidot-details-header-setor">
         <span class="form-field-lable-light">מספר יחידות</span>
         <span >{{shalav.misparYechidotBeSlv}}</span>
       </div>
 
-      <div class="project-details-header-setor">
+      <div class="yechidot-details-header-setor">
         <span class="form-field-lable-light">ייעוד השלב</span>
         <span >{{shalav.teurYeudShlav}}</span>
       </div>
 
-      <div class="project-details-header-setor">
+      <div class="yechidot-details-header-setor">
         <span class="form-field-lable-light">היתר בנייה</span>
         <span >{{shalav.metegHeterBniya?'קיים':'לא קיים'}}</span>
       </div>
 
-      <div class="project-details-header-setor">
+      <div class="yechidot-details-header-setor">
         <span class="form-field-lable-light">מועד מתן היתר בניה</span>
         <span >{{shalav.taarich8HeterBniya|pipeName:"int2dateformatter"}}</span>
       </div>
 
-      <div class="project-details-header-setor">
+      <div class="yechidot-details-header-setor">
         <span class="form-field-lable-light">מועד סיום צפוי</span>
         <span >{{shalav.taarich8SiyumTzafui|pipeName:"int2dateformatter"}}</span>
       </div>
 
-      <div class="project-details-header-setor">
+      <div class="yechidot-details-header-setor">
         <span class="form-field-lable-light">תוכנית בנין ערים</span>
-        <span >{{shalav.kodMutavBeShovar}}</span>
+        <span >{{shalav.teurTochnitBinyanIr}}</span>
       </div>
-      <div class="project-details-header-setor">
-        <span>
-                      
+  </div>
+      <div class="yechidot-details-header-setor menu">
+        <span>            
           <matbea-button  [matMenuTriggerFor]="menu" >
-            + הוספת יחידות
-         </matbea-button>
+            <matbea-icon icon="add_circle"></matbea-icon>
+            הוספת יחידות
+          </matbea-button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="addUnitsAction()">
               <span>באופן ידני</span>
@@ -55,8 +53,6 @@
           </mat-menu>
         </span>
       </div>
-</div>
-      <!-- <matbea-shmor-shinui-button shkifut="true" (shinui)="onShinui($event)"></matbea-shmor-shinui-button> -->
   </div>
   </ng-container>
   

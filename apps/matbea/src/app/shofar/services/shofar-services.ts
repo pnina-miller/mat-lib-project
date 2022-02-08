@@ -49,9 +49,7 @@ export class ShofarServices{
     }
 
     public getCheshbonotProject(misparProyectSagur: string){
-        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/list', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur} }).pipe( map((res:{data:any})=>{
-          return res.data.cheshbonotList;
-        }));
+        return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/cheshbonot/' + misparProyectSagur + '/list', { headers: this.getHeader(), params: {'misparProyectSagur': misparProyectSagur} });
     }
 
     public removeCheshbon(misparProyectSagur: string, misparBank: string, misparSnif: string, misparCheshbon: string){
