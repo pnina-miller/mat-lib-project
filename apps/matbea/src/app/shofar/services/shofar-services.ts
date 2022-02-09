@@ -76,7 +76,10 @@ export class ShofarServices{
         return res.data.avctl071List.fullList;
       }))
     }
-   
+    savePinkasShovarim(misparProyectSagur:string, misparShalv:string, sendTo){
+      return this.httpClient.request("get", this.urlPrefix + `/matbea/shofar/projects/v1/${misparProyectSagur}/shlavim/${misparShalv}/pinkasShovarim/sendTo/${sendTo}`, { headers: this.getHeader() })
+
+    }
     // public getPirteyCheshbon(misparProject: string, misparBank: string, misparSnif: string, misparCheshbon: string){
     //     return this.httpClient.request("get", this.urlPrefix + '/shofar/cheshbonot/getPirteyCheshbon', { headers: this.getHeader(), params: {'misparProyectSagur': misparProject, 'misparBank': misparBank, 'misparSnif': misparSnif, 'misparCheshbon': misparCheshbon} });
     public getPirteyCheshbon(misparProyectSagur: string, misparBank: string, misparSnif: string, misparCheshbon: string){

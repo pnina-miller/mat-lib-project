@@ -1,4 +1,4 @@
-<div class="matbea-hazmanat-pinkasim-container">
+<div *ngIf="!successMassage else successMassege" class="matbea-hazmanat-pinkasim-container">
 <div class="dialog-title">
   <h4 class="mat-dialog-title">הזמנת פנקסי שוברים</h4>
 </div>
@@ -56,6 +56,7 @@
         <matbea-radio-button-tab [dataList]="sendDataList"
         (selectedButtonChanged)="send=$event"></matbea-radio-button-tab>
       </div>
+      <mat-error *ngIf="errorMsg!=''">{{ errorMsg }}</mat-error>
 </div>
 <div class="dialog-footer">
   <matbea-button
@@ -74,3 +75,19 @@
   >
 </div>
 </div>
+
+<ng-template #successMassege>
+  <div class="dialog-title success-title">
+    <h4 class="mat-dialog-title">הזמנת פנקסי שוברים</h4>
+  </div>
+  <div class="success-content">
+      <span class="success-title"></span>
+      <span class="success-text">{{successMassage}}</span>
+  </div>
+  <div class="dialog-footer success-footer">
+      <matbea-button size='l'  type="matbea-raised" (click)="cancel()" textLable="כן" >
+          אישור
+      </matbea-button>
+
+  </div>
+</ng-template>

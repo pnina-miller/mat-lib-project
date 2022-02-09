@@ -21,8 +21,8 @@ export class ActionBarComponent implements OnInit, OnChanges {
   @Input() selectedRows!: number[];
   @Output() selectedRowsChange = new EventEmitter<number[]>();
   @Input() selectedLength = 0;
-  @Input() dataSource$: Observable<any>
 
+  @Output() openHazmanatPinkasim = new EventEmitter<any>();
   rangeFrom: number = 0;
   fromOptions = [];
   rangeTo: number = 0;
@@ -91,12 +91,4 @@ export class ActionBarComponent implements OnInit, OnChanges {
     alert(event.name);
   }
 
-  openHazmanatPinkasim() {
-    const dialogRef = this.dialog.open(HazmanatPinkasimComponent, {
-      width: '50%',
-      height: '90%',
-      panelClass: 'hazmanat-pinkasim-container',
-      data: {selectedRows:this.selectedRows, dataSource$: this.dataSource$},
-    });
-  }
 }

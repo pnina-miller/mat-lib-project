@@ -1,8 +1,10 @@
 
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { ShofarServices } from '../../services/shofar-services';
 import { ColumnDefinition } from '../../store/models/column-definition.model';
+import { HazmanatPinkasimComponent } from '../hazmanat-pinkasim/hazmanat-pinkasim.component';
 
 const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:'selectRow',ordernumber:'0',columnformatter:'checkbox', removable: 'false', notSortable:true, style:{'padding-right':'7px'}},
 {ordernumber:'1', columnnamehebrew:"מס' יחידה", columnformatter:' ', display:'1', columnnameenglish:'misparShura', removable: 'false'} ,
@@ -54,7 +56,7 @@ export class YechidotComponent implements OnInit {
   refreshData(){
   this.dataSource$ = this.shofarServices.getyechidot(this.misparProyectSagur,this.misparShalav);
   }
-  constructor(private shofarServices: ShofarServices) {}
+  constructor(private shofarServices: ShofarServices, public dialog: MatDialog) {}
   ngOnInit() {
     this.showActionBar=false;
     this.displayedColumns =COLUMNS as ColumnDefinition[];
@@ -67,5 +69,15 @@ export class YechidotComponent implements OnInit {
     this.showActionBar = e.length>0;
     
   }
+
+  openHazmanatPinkasim() {
+    const dialogRef = this.dialog.open(HazmanatPinkasimComponent, {
+      width: '40%',
+      height: '70%',
+      panelClass: 'hazmanat-pinkasim-container',//TODO: move to yechidot component
+      data: {selectedRows:this.selectedRows, dataSource$: this.dataSource$, misparProyect: this.misparProyectSagur, misparShalav:this.misparShalav},
+    });
+  }
+
 }
 

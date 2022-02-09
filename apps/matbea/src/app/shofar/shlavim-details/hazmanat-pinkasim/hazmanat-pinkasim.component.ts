@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { GeneralResponse } from 'libs/matbea-shared-components/src/lib/beans/general-response';
 import { ColumnDefinition } from 'libs/matbea-ui-components/src/lib/models/column-definition.model';
 import { RadioButtonTabEntry } from 'libs/matbea-ui-components/src/lib/radio-button-tab/radio-button-tab.component';
 import { Observable } from 'rxjs';
+import { ShofarServices } from '../../services/shofar-services';
 import * as ProjectDetailsSelectors from '../../store/selectors/project-details.selectors';
 import {StateProjectDetails} from "../../store/state/project-details.state";
 
@@ -28,9 +30,11 @@ export class HazmanatPinkasimComponent implements OnInit {
   displayedColumns:ColumnDefinition[]=UNIT_COLUMNS as ColumnDefinition[];
   sendDataList:RadioButtonTabEntry[]=[{id:'1',description:'סניף מנהל'},{id:'2',description:'מק"ל'},{id:'3',description:'נא"ש'}];
   send=''
+  successMassage: any;
+  errorMsg: string;
 
-  constructor( public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data: {selectedRows:number[], dataSource$:Observable<any>}, private store$: Store<StateProjectDetails>) { 
+  constructor( public dialogRef: MatDialogRef<any>, private shofarServices: ShofarServices,
+    @Inject(MAT_DIALOG_DATA) public data: {selectedRows:number[], dataSource$:Observable<any>, misparProyect:string, misparShalav:string}, private store$: Store<StateProjectDetails>) { 
       this.selectedRows=data.selectedRows;
       this.dataSource$= new Observable(subscribe=>{
       data.dataSource$.subscribe(res=>{subscribe.next( res.filter((value, i) => data.selectedRows.includes(i) ) )}) 
@@ -60,7 +64,24 @@ export class HazmanatPinkasimComponent implements OnInit {
 
   }
   save(){
-    this.dialogRef.close();
+    if(!this.send){
+      this.errorMsg='שדה זה הוא חובה'
+      return;
+    }
+    this.shofarServices.savePinkasShovarim(this.data.misparProyect,this.data.misparShalav,this.send).subscribe(
+      (resp) => {
+        let generalResponse = resp as GeneralResponse;
+        if (generalResponse.data.applicationMessage) {
+          this.successMassage=generalResponse.data.applicationMessage;
+          this.dialogRef.updateSize('50%','30%');
+        } else {
+this.errorMsg='err'
+        }
+      },
+      (error) => {
+        console.error('error caught in component' + error);
+      }
+    );
 
   }
 }

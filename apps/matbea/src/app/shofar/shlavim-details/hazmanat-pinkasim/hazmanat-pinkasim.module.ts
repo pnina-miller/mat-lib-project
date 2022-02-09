@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HazmanatPinkasimComponent } from './hazmanat-pinkasim.component';
 import { MatbeaButtonModule, MatbeaDividerModule, MatbeaIconButtonModule, MatbeaTableModule, PipesModule, RadioButtonTabModule } from '@pdesks/matbea-ui-components';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -14,7 +15,8 @@ import { MatbeaButtonModule, MatbeaDividerModule, MatbeaIconButtonModule, Matbea
     MatbeaIconButtonModule,
     PipesModule,
     RadioButtonTabModule,
-    MatbeaDividerModule
+    MatbeaDividerModule,
+    MatFormFieldModule
   ]
 })
 export class HazmanatPinkasimModule { }

@@ -1,6 +1,7 @@
 
 <div class="dialog-title">
-    <h1 mat-dialog-title>הוספת יחידה</h1>
+    <h2 mat-dialog-title>הוספת יחידה/ות</h2>
+    <span>פרטים מהנספח להסכם הליווי</span>
 </div>
 <div class="dialog-content">
 
@@ -33,7 +34,7 @@
 </div>
 
 <div class="yechida-input gush-chelka">
-    <span>פרטי גוש וחלקה <matbea-icon-button icon="add_circle" (onClick)="addLine()"></matbea-icon-button></span>
+    <span class="gush-chelka-tilte">פרטי גוש וחלקה <matbea-icon-button icon="add_circle" (onClick)="addLine()"></matbea-icon-button></span>
     <div style="width: 70%; height: 100%;">
     
     <matbea-table [displayedColumns]="displayedColumns" [dataSource$]="gushchelkaDataSource" ></matbea-table> 

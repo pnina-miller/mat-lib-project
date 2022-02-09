@@ -146,8 +146,14 @@ app.post('/matbea/shofar/projects/v1/steps/', (req, res) => {
 });
 
 app.get( '/matbea/shofar/v1/projects/steps/appartments/:misparProyectSagur/:misparShalv/1', (req, res) => {
+  console.log('getyechidot');
+  res.json(getyechidot);
+}
+);
+
+app.get( '/matbea/shofar/projects/v1/:misparProyectSagur/shlavim/:misparShalv/pinkasShovarim/sendTo/:sendTo', (req, res) => {
     console.log('getyechidot');
-    res.json(getyechidot);
+    res.json({"data":{"applicationMessage":"הזמנה מספר 5862200200010 נשלחה למערכת הזמנת פנקסי שוברים."},"messages":{"global":{"warnings":[],"errors":[],"info":[]}},"errors":{"global":[]}});
   }
 );
 app.get('/shofar/projects', (req, res) => {

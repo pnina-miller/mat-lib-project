@@ -28,7 +28,7 @@ export class HosafatYechidaComponent implements OnInit {
     { id: 'misradim', description: 'משרדים' },
     { id: 'acher', description: 'אחר' },
   ];
-  gushChelkaList:any[]=[{misparGush:'123',teurChelka:'456'}]
+  gushChelkaList:GushChelka[]=[]
   gushchelkaDataSource: BehaviorSubject<any>=new BehaviorSubject<any>(this.gushChelkaList)
 
   gushChelkachanged=(event)=>{
@@ -50,6 +50,7 @@ export class HosafatYechidaComponent implements OnInit {
   ngOnInit(): void {
     this.shofarServices.getGushChelka().subscribe((data:any)=>{
       this.gushChelkaList=data.data.gushChelka.fullList;
+      this.gushchelkaDataSource.next(this.gushChelkaList)
     })
   }
 
@@ -70,7 +71,7 @@ export class HosafatYechidaComponent implements OnInit {
   }
 
   addLine(){
-   this.gushChelkaList= [...this.gushChelkaList, {misparGush:'',teurChelka:''}]
+   this.gushChelkaList= [...this.gushChelkaList, {misparGush:0,teurChelka:'',misparTavla:0, misparShura:this.gushChelkaList.length}]
    this.gushchelkaDataSource.next(this.gushChelkaList)
   }
   removeLine(line){
@@ -79,4 +80,11 @@ export class HosafatYechidaComponent implements OnInit {
    this.gushChelkaList= temp
    this.gushchelkaDataSource.next(this.gushChelkaList)
   }
+}
+
+interface GushChelka{ 
+  teurChelka: string;
+   misparTavla: number;
+    misparGush: number;
+     misparShura: number
 }
