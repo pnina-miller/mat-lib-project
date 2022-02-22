@@ -9,6 +9,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatbeaMenuItem } from 'libs/matbea-ui-components/src/lib/matbea-menu/matbea-menu.component';
 import { Observable } from 'rxjs';
+import { ShlavimService } from '../../project-details-components/shlavim-components/shlavim/shlavim.service';
 import { HazmanatPinkasimComponent } from '../hazmanat-pinkasim/hazmanat-pinkasim.component';
 
 @Component({
@@ -28,11 +29,10 @@ export class ActionBarComponent implements OnInit, OnChanges {
   rangeTo: number = 0;
   toOptions = [];
   firstChange = 0;
-  constructor(public dialog: MatDialog) {}
+
+  constructor(public dialog: MatDialog, private shlavimService:ShlavimService) {}
   
-  ngOnInit(): void {
-// this.openHazmanatPinkasim();
-  }
+  ngOnInit(): void {  }
 
   items: MatbeaMenuItem[] = [
     {
@@ -48,7 +48,7 @@ export class ActionBarComponent implements OnInit, OnChanges {
       role: 'menuitemcheckbox',
     },
     {
-      id: 0,
+      id: 2,
       name: 'קבלת פרוטוקול מסירה + מסמכי רישום זכויות',
       disabled: false,
       role: 'menuitem',
@@ -88,7 +88,7 @@ export class ActionBarComponent implements OnInit, OnChanges {
   }
 
   arvuiotAction(event): void {
-    alert(event.name);
+    this.shlavimService.openTipulBearvuyot(this.selectedRows, 17,2, event.id);
   }
 
 }

@@ -1,0 +1,33 @@
+<div class="tipul-bearvuyiot-container">
+  <div class="dialog-title"> <h1>טיפול בערבויות-  {{titles[actionType]}}</h1></div>
+  
+  <div class="dialog-content">
+    <div>
+        <div class="yechidot-table">
+            <span>להלן רשימת היחידות שנבחרו. יש לסמן שנית את היחידות עבורן מבוקש לפעול</span>
+            <matbea-table (selectedRowsChange)="selectedRowsChange($event)" [selectedRows]="selectedRows" [displayedColumns]="displayedColumns" [dataSource$]="dataSource$" ></matbea-table>
+            <span>לתשומת לב, בפרויקט זה מופקות ערבויות חוק מכר ללא מע"מ</span>
+        </div>
+    </div>
+    <span><h3>אישור תנאים</h3></span>
+    <div class='approve-conditions' *ngIf="showApproval" >
+        <matbea-checkbox *ngFor="let item of approveOptions" [lable]="item.lable" (valueChange)="checked($event, item.id)"></matbea-checkbox>
+    </div>
+    <span class=""><h3>ביצוע פעולות</h3></span>
+    <div class="actions" *ngIf="showActions">
+            <matbea-input class="taarich-protokol" type="date" [error-messages]="{required:'שדה זה הוא חובה'}" lable="תאריך קבלת פרוטוקול מסירה" lablePosition="top" [inputFormControl]="taarichProtokolControl" required ></matbea-input>
+            <matbea-input class="taarich-bizua" type="date" [error-messages]="{required:'שדה זה הוא חובה'}" lable="תאריך ערך לביצוע הפעולות" lablePosition="top" [inputFormControl]="taarichBuzuaControl" required ></matbea-input>
+            <span class="notice">לתשומת ליבך, לאחר אישור הפעולה יבוצעו עבור היחידות שסומנו הפעולות הבאות:</span>
+           <span class="type-arvuyot"> <matbea-icon icon="done"></matbea-icon>שינוי סוג ערבויות למאוכלסות</span>
+           <span class="shiur-amla"> <matbea-icon icon="done"></matbea-icon> עדכון שיעור העמלה</span>
+            
+    </div>
+  </div>
+  
+  <div class="dialog-footer">
+   <div>
+        <matbea-button>ביטול</matbea-button>
+        <matbea-button>אישור</matbea-button>
+    </div>
+</div>
+</div>

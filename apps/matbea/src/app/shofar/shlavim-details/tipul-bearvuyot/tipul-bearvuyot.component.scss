@@ -1,0 +1,36 @@
+.approve-conditions{
+    display: grid;
+}
+::ng-deep mat-dialog-container{
+    overflow: auto !important;
+}
+.actions{
+
+.taarich-protokol{
+    grid-area: taarich-protokol
+}
+.taarich-bizua{
+    grid-area: taarich-bizua
+}
+.notice{
+    grid-area: notice
+}
+.type-arvuyot{
+    grid-area: type-arvuyot
+}
+.shiur-amla{
+    grid-area: shiur-amla
+}
+        display: grid;
+        // height: 83%;//440px;
+        // overflow-x: auto;
+        grid-gap: 20px;
+        grid-template-rows: 40% 30% 30%;
+        grid-template-columns: 48% 48%;
+        margin-right:15px ;
+        grid-template-areas:
+            "taarich-protokol taarich-bizua"
+            "notice notice"
+            "type-arvuyot shiur-amla";
+}
+

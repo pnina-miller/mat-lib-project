@@ -4,6 +4,7 @@ import {MatbeaButtonModule, MatbeaIconButtonModule, MatbeaSliceDataContainerModu
 import {ProjectBasicDetailsModule} from "../../project-basic-details-components/project-basic-details/project-basic-details.module";
 import { ShlavimContainerComponent } from './shlavim-container.component';
 import { ShlavimModule } from '../shlavim/shlavim.module';
+import { TipulBearvuyotModule } from '../../../shlavim-details/tipul-bearvuyot/tipul-bearvuyot.module';
 
 @NgModule({
   declarations: [ ShlavimContainerComponent ],
@@ -15,7 +16,8 @@ import { ShlavimModule } from '../shlavim/shlavim.module';
     MatbeaButtonModule,
     MatbeaIconButtonModule,
     ProjectBasicDetailsModule,
-    ShlavimModule
+    ShlavimModule,
+    TipulBearvuyotModule
   ],
   exports: [ ShlavimContainerComponent ]
 })
