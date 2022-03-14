@@ -45,6 +45,7 @@ import { RadioButtonTabModule } from '../radio-button-tab/radio-button-tab.modul
 import { MatbeaComboModule } from '../matbea-combo/matbea-combo.module';
 import {RouterModule} from "@angular/router";
 import {MatbeaMenuModule} from "../matbea-menu/matbea-menu.module";
+import { MatbeaDinamicTableModule } from './matbea-dinamic-table/matbea-dinamic-table.module';
 
 
 
@@ -100,9 +101,11 @@ import {MatbeaMenuModule} from "../matbea-menu/matbea-menu.module";
         RadioButtonTabModule,
         MatbeaComboModule,
         RouterModule,
-        MatbeaMenuModule
+        MatbeaMenuModule,
+        MatbeaDinamicTableModule
     ],
   exports: [
+    MatbeaDinamicTableModule,
     MatbeaTableComponent,
     MatbeaTableCellComponent,
     FilterPopupComponent,

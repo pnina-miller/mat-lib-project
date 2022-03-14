@@ -51,6 +51,7 @@
     "@storybook/core": "^6.2.9",
     "config": "^3.3.6",
     "date-format": "^3.0.0",
+    "dynamic-mat-table": "^1.4.31",
     "express": "4.17.1",
     "helmet": "^4.4.1",
     "jsdom": "^11.1.0",

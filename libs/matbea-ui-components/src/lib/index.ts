@@ -18,3 +18,4 @@ export * from './matbea-radio-button/matbea-radio-button.module';
 export * from './matbea-icon/matbea-icon.module';
 export * from './matbea-details-steper/matbea-details-steper.module';
 export * from './matbea-slide-toggle/matbea-slide-toggle.module';
+export * from './matbea-table/matbea-dinamic-table/matbea-dinamic-table.module'

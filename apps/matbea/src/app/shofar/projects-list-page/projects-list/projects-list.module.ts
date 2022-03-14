@@ -12,6 +12,7 @@ import {
   MatbeaSlideToggleModule
 } from '@pdesks/matbea-ui-components';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatbeaDinamicTableModule } from 'libs/matbea-ui-components/src/lib/matbea-table/matbea-dinamic-table/matbea-dinamic-table.module';
 
 
 
@@ -28,6 +29,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     //  MatDialogModule,
     //  MatbeaDividerModule,
     //  MatbeaIconButtonModule,
+    MatbeaDinamicTableModule
 
 
   ],

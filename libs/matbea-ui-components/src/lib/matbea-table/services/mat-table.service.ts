@@ -10,8 +10,7 @@ import { FilterColumn, MultiSelectFilterColumn, SelectFilterColumn } from '../mo
 export class MatTableService {
 
   public dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
-  public displayDataSource: BehaviorSubject<MatTableDataSource<any>> =
-    new BehaviorSubject(new MatTableDataSource<any>());
+  public displayDataSource: BehaviorSubject<MatTableDataSource<any>> = new BehaviorSubject(new MatTableDataSource<any>());
 
   public displayedColumns: BehaviorSubject<Array<string>> = new BehaviorSubject(
     new Array<string>()

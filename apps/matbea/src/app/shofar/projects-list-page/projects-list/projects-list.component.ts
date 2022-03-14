@@ -9,7 +9,13 @@ import {Project} from "../../store/models/project.model";
 import {StateProjectDetails} from "../../store/state/project-details.state";
 import * as ProjectDetailsAction from "../../store/actions/project-details.actions";
 import * as ShofarActions from "../../store/actions/shofar.actions";
-
+import {
+  AbstractField,
+  TableField,
+  TablePagination,
+  TableSetting,
+  VisibleActionMenu,
+} from 'dynamic-mat-table';
 
 @Component({
   selector: 'projects-list',
@@ -21,7 +27,9 @@ export class ProjectsListComponent implements OnInit {
 
   displayedColumns$ = this.store$.select(ShofarSelectors.getColumnDefinitions);
   dataSource$ = this.store$.select(ShofarSelectors.getProjectsWithFilter);
+  dataSource
   displayedColumns: ColumnDefinition[];
+  dinamicDisplayedColumns: TableField<any>[]
   sub: Subscription = new Subscription();
   loadingTable$ = this.store$.select(ShofarSelectors.getLoadingTable);
   loadingTable = true;
@@ -33,12 +41,16 @@ export class ProjectsListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private store$: Store<State>, private storeProjectDetails$: Store<StateProjectDetails>) {
   }
 
-  ngOnInit(): void {
-
-    this.sub.add(this.displayedColumns$.subscribe(
+  ngOnInit(): void { 
+    this.dataSource$.subscribe((r:any[])=>{debugger;
+      let newarr = r.map(el=> Object.entries(el).reduce((obj, entry)=>(entry[0]=='id' ? obj : { [entry[0]]:entry[1], ...obj } ),{}) );
+      debugger;
+       this.dataSource=newarr})
+        this.sub.add(this.displayedColumns$.subscribe(
         (val) => {
           console.log('Display columns in project list component', val)
           this.displayedColumns = val;
+          this.dinamicDisplayedColumns=val.map(column => ({name: column.columnnameenglish=='shmKablanimMeshurshar'?'nothing':column.columnnameenglish} as any));
         },
         (err) => console.log('Error for columns in project list component', err),
         () => console.log('Comlite for colums in project list component')

@@ -1,5 +1,8 @@
 <!--
 <div> -->
-  <matbea-table (dataSourceChangeLength)="changeProjectListLenght($event)"  [displayedColumns]="displayedColumns" [messages]="messages"
-    [dataSource$]="dataSource$" navTo='/table/details/' [loading]='loadingTable' (row)="toDeteils($event)" (clickInRow)="console($event)"  ></matbea-table>
+<!-- <matbea-dinamic-table></matbea-dinamic-table> -->
+<matbea-dinamic-table  [displayedColumns]="dinamicDisplayedColumns" [idataSource]="dataSource" ></matbea-dinamic-table>
+
+  <!-- <matbea-table (dataSourceChangeLength)="changeProjectListLenght($event)"  [displayedColumns]="displayedColumns" [messages]="messages"
+    [dataSource$]="dataSource$" navTo='/table/details/' [loading]='loadingTable' (row)="toDeteils($event)" (clickInRow)="console($event)"  ></matbea-table> -->
 <!-- </div> -->
