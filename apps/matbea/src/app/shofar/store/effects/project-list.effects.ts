@@ -15,7 +15,7 @@ export class ProjectsListEffects {
       ofType(ShofarActions.initProjectList, ShofarActions.init),
       mergeMap(() =>
         this.service.getProjectList().pipe(
-          map((res) => {debugger
+          map((res) => {
             let projecs = [];
             let statusBitzua: string[] = [];
             if (res.data != null && res.data.projectsList && res.data.projectsList.length > 0) {

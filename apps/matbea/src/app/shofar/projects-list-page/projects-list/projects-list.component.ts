@@ -42,9 +42,8 @@ export class ProjectsListComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    this.dataSource$.subscribe((r:any[])=>{debugger;
+    this.dataSource$.subscribe((r:any[])=>{;
       let newarr = r.map(el=> Object.entries(el).reduce((obj, entry)=>(entry[0]=='id' ? obj : { [entry[0]]:entry[1], ...obj } ),{}) );
-      debugger;
        this.dataSource=newarr})
         this.sub.add(this.displayedColumns$.subscribe(
         (val) => {

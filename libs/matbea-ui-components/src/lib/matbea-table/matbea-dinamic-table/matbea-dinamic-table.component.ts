@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {
   TableRow,
   TableField,
@@ -6,7 +6,6 @@ import {
   TableSetting,
   TablePagination,
   TablePaginationMode,
-  TableVirtualScrollDataSource,
 } from 'dynamic-mat-table';
 import { BehaviorSubject } from 'rxjs';
 import {
@@ -38,7 +37,7 @@ export class MatbeaDinamicTableComponent implements OnInit, OnChanges {
 
   showNoData: boolean = true;
 
-  dataSource//: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  dataSource: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   pagination: TablePagination = {};
 
@@ -53,11 +52,11 @@ export class MatbeaDinamicTableComponent implements OnInit, OnChanges {
   noDataBtn:boolean = false;
 
 @Input() displayedColumns=tableColumnsConfig
-@Input() idataSource=DATA;
-  constructor() {}
+@Input() idataSource:any[]=DATA;
+  constructor(private cdref: ChangeDetectorRef) {}
   ngOnChanges(changes: SimpleChanges): void {; 
-    this.dataSource=new TableVirtualScrollDataSource(this.idataSource || [])
-    // this.dataSource.next(this.idataSource || []);
+    this.dataSource.next(this.idataSource || []);
+    this.cdref.detectChanges();
   }
 
   ngOnInit(): void {
@@ -69,7 +68,7 @@ export class MatbeaDinamicTableComponent implements OnInit, OnChanges {
     columnsConfig: TableField<any>[],
     settingConfig: TableSetting,
     paginationConfig: TablePagination
-  ): void {debugger
+  ): void {
     this.columns = columnsConfig;
     this.setting = settingConfig;
     this.pagination = paginationConfig;

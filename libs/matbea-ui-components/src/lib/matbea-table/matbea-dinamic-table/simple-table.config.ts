@@ -36,6 +36,7 @@ import {
       'background-color': 'afafaf',
       color: '55fab3',
     },
+    scrollStrategy:'fixed-size',
     autoHeight: true,
   };
   
