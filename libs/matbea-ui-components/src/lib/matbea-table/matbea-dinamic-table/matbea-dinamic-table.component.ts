@@ -1,92 +1,162 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import {
-  TableRow,
-  TableField,
-  PrintConfig,
-  TableSetting,
-  TablePagination,
-  TablePaginationMode,
-} from 'dynamic-mat-table';
-import { BehaviorSubject } from 'rxjs';
-import {
-  tableColumnsConfig,
-  tableSettingsConfig,
-  paginationConfig,
-} from './simple-table.config';
-import { DATA } from './simple-table.model';
+// import { Output, EventEmitter, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges,
+//   ViewChild, } from '@angular/core';
+// import { Router } from '@angular/router';
+// import {
+//   TableRow,
+//   TableField,
+//   PrintConfig,
+//   TableSetting,
+//   TablePagination,
+//   TablePaginationMode,
+// } from 'dynamic-mat-table';
+// import { BehaviorSubject } from 'rxjs';
+// import {
+//   tableSettingsConfig,
+//   paginationConfig,
+// } from '../../matbea-table-dynamic/simple-table.config';
+// import { Subscription } from 'rxjs';
+// import { MatDialog } from '@angular/material/dialog';
+// import { MatTableService } from './mat-table.service';
+// import { FilterColumn } from '../models/filterColumns';
+// import { FormControl } from '@angular/forms';
 
-@Component({
-  selector: 'matbea-dinamic-table',
-  templateUrl: './matbea-dinamic-table.component.html',
-  styleUrls: ['./matbea-dinamic-table.component.scss']
-})
-export class MatbeaDinamicTableComponent implements OnInit, OnChanges {
-  columns!: TableField<any>[];
+// @Component({
+//   selector: 'matbea-dinamic-table',
+//   templateUrl: './matbea-dinamic-table.component.html',
+//   styleUrls: ['./matbea-dinamic-table.component.scss'],
+// })
+// export class MatbeaTableComponent implements OnInit, OnChanges {
+  
+//   direction: 'ltr' | 'rtl' = 'ltr';
+//   showReloadData: boolean = true;
+//   rowHeight: number = 30;
+//   pending: boolean = false;
+//   setting: TableSetting = {};
+//   paginationMode: TablePaginationMode = 'client-side';
+//   showNoData: boolean = true;
+//   pagination: TablePagination = {};
+//   stickyHeader: boolean = false;
+//   printConfig: PrintConfig = {};
+//   showProgress: boolean = true;
+  
+//   dataSource$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+//   _dataSource: any;
 
-  direction: 'ltr' | 'rtl' = 'ltr';
+//   // mainColumnDisplay: any[] = [];
+//   // mainColumn: any[] = [];
+//   // isMainColumn: boolean = false;
+//   displayedColumns = [];
+//   // sub: Subscription;
 
-  showReloadData: boolean = true;
+//   @ViewChild('dinamicTable') dinamicTable
+//   @Input('displayedColumns') displayedColumnsTemp: TableField<any>[];
+//   // @Input() paginatorOn: boolean = false;
+//   // @Input() loading = true;
+//   // @Input() messages: [];
+//   @Input() selectedRows: number[] = [];
+//   @Output() selectedRowsChange = new EventEmitter<number[]>();
+//   @Output() dataSourceChangeLength = new EventEmitter<number>();
+//   updateFilters: any;
+//   @Output() clickInRow = new EventEmitter();
+//   selectControl: FormControl = new FormControl();
+//   @Input() dataSource: any[] = [];
+//   @Input() navTo: string = null;
+//   @Output() row = new EventEmitter();
+//   @Input() name;
 
-  rowHeight: number = 40;
+//   constructor(
+//     private cdref: ChangeDetectorRef,
+//     private router: Router,
+//     public dialog: MatDialog,
+//     private matTableService: MatTableService,
+//     private changeDetector: ChangeDetectorRef
+//   ) {}
 
-  pending: boolean = false;
+//   ngOnChanges(changes: SimpleChanges): void {
+//     this.dataSource$.next(this.dataSource || []);
+//     this.cdref.detectChanges();
+//     this.tableOnChanges(changes);
+//   }
 
-  setting: TableSetting = {};
+//   ngOnInit(): void {
+//     this.initTable( this.displayedColumns, tableSettingsConfig, paginationConfig);
+//     this.selectControl.valueChanges.subscribe((value: boolean) => {
+//       Array.from({ length: this.dataSource?.length }).forEach((el, i) => {
+//         this.onRowSelected({ target: i, value });
+//       });
+//     });
+//   }
 
-  paginationMode: TablePaginationMode = 'client-side';
+//   initTable(columnsConfig: TableField<any>[], settingConfig: TableSetting, paginationConfig: TablePagination): void {
+//     // this.columns = columnsConfig;
+//     this.setting = settingConfig;
+//     this.pagination = paginationConfig;
+//   }
 
-  showNoData: boolean = true;
+//   changeHeaderMode() {
+//     this.stickyHeader = !this.stickyHeader;
+//   }
 
-  dataSource: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+//   table_onRowClick(e) {    
+//     if (e.event === 'DoubleClick') {
+//       const row = e.sender.row;
+//       console.clear();
+//       if (this.navTo) {
+//         this.router.navigate([this.navTo + row.rowId]);
+//       }
+//       this.row.emit(row);
+//     }
+//   }
 
-  pagination: TablePagination = {};
+//   tableOnChanges(changes: SimpleChanges): void {
+//     console.log('SimpleChanges in matbea-table', this);
+//     !this.dataSource[0] &&
+//       this.dataSource$.subscribe((list) => {
+//         if (this.dataSource) this.dataSource = list || [];
+//         this._dataSource = list;
+//         // this.loading = false;
+//         this.selectedRows.forEach((i) => (this.dataSource[i].selectRow = true));
+//       });
+//     // this.isMainColumn = !!this.displayedColumnsTemp.find(col => !!col.subColumns);
+//     // this.mainColumn = this.displayedColumnsTemp.map(column => column.subColumns ? column : { name: column.name + column.index });
+//     // this.mainColumnDisplay = this.mainColumn.map((c) => c.columnnameenglish);
+//     let filtereCols = this.displayedColumnsTemp
+//     // .reduce((arr, col) => {
+//     //   let cols = col.subColumns || [col];
+//     //   return [...arr, ...cols];
+//     // }, []);
 
-  stickyHeader: boolean = false;
+//     this.displayedColumns = filtereCols;
+//     this.matTableService.init(this._dataSource, this.displayedColumns.map((col) => new FilterColumn(col))
+//     );
+//     this.matTableService.displayDataSource.subscribe((data: any[]) => {
+//       this.dataSource = data;
+//       this.changeDetector.detectChanges();
+//       this.dataSourceChangeLength.emit(this.dataSource?.length);
+//     });
+//   }
 
-  printConfig: PrintConfig = {};
+//   onRowSelected(event: any): void {
+//     if (this.dataSource[event.target]) {
+//       this.dataSource[event.target].selectRow = event.value;
+//     }
+//     if (event.value && !this.selectedRows.includes(event.target)) {
+//       this.selectedRows.push(event.target);
+//     } else {
+//       this.selectedRows.forEach((row, i) => {
+//         if (row === event.target) this.selectedRows.splice(i, 1);
+//       });
+//     }
+//     this.selectedRowsChange.emit(this.selectedRows);
+//   }
 
-  showProgress: boolean = true;
-
-  dataPlayName: 'clear data' | 'fetch data' = 'clear data';
-
-  noDataBtn:boolean = false;
-
-@Input() displayedColumns=tableColumnsConfig
-@Input() idataSource:any[]=DATA;
-  constructor(private cdref: ChangeDetectorRef) {}
-  ngOnChanges(changes: SimpleChanges): void {; 
-    this.dataSource.next(this.idataSource || []);
-    this.cdref.detectChanges();
-  }
-
-  ngOnInit(): void {
-    this.initTable(this.displayedColumns, tableSettingsConfig, paginationConfig);
-   
-  }
-
-  initTable(
-    columnsConfig: TableField<any>[],
-    settingConfig: TableSetting,
-    paginationConfig: TablePagination
-  ): void {
-    this.columns = columnsConfig;
-    this.setting = settingConfig;
-    this.pagination = paginationConfig;
-  }
-
-  dataPlay(): void {
-    if (this.dataSource.value !== this.idataSource) {
-      this.dataSource.next(this.idataSource);
-      this.dataPlayName = 'clear data';
-    } else if (this.dataSource.value === this.idataSource) {
-      this.dataSource.next([]);
-      this.dataPlayName = 'fetch data';
-    }
-
-    this.noDataBtn = !this.noDataBtn;
-  }
-
-  changeHeaderMode(){
-    this.stickyHeader = !this.stickyHeader;
-  }
-}
+//   selectMethod(event: any) {
+//     if (event.id === 1) {
+//       this.onRowSelected({ target: -1, value: true });
+//     } else {
+//       Array.from({ length: this.dataSource.length }).forEach((el, i) =>
+//         this.onRowSelected({ target: i, value: true })
+//       );
+//     }
+//   }
+// }

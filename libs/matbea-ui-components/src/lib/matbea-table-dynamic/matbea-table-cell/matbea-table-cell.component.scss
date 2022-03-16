@@ -1,0 +1,31 @@
+@import "libs/matbea-ui-components/assets/variables.scss";
+matbea-table-cell{
+  white-space: nowrap;
+  direction: ltr;
+
+}
+
+.matbea-table-cell-status{
+  .matbea-table-cell-status-point{
+    display: inline-block;
+    border-radius: 50%;
+    height: 0.4em;
+    width: 0.4em;
+    margin-left: 0.5em;
+    vertical-align: middle;
+  }
+
+&.matbea-table-cell-status-pail{
+  color: $matbea-table-cell-status-pail;
+  .matbea-table-cell-status-point{
+    background-color: $matbea-table-cell-status-pail;
+  }}
+
+  &.matbea-table-cell-status-histaem{
+    color: $matbea-table-cell-status-histaem;
+    .matbea-table-cell-status-point{
+      background-color: $matbea-table-cell-status-histaem;
+
+    }}
+}
+

@@ -29,11 +29,11 @@ import {
     direction: 'ltr',
     visibaleActionMenu: actionMenu,
     rowStyle: {
-      'background-color': '#70e181',
+      'background-color': '#F9FBFD',
       color: 'ffffff',
     },
     alternativeRowStyle: {
-      'background-color': 'afafaf',
+      'background-color': '#FFFFFF',
       color: '55fab3',
     },
     scrollStrategy:'fixed-size',

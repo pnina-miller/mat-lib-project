@@ -5,15 +5,13 @@ import {MatTableModule} from '@angular/material/table';
 import {CdkTableModule} from '@angular/cdk/table';
 import { MatButtonModule } from '@angular/material/button';
 import {
-  MatbeaTableModule,
   MatbeaColumnsPickerModule,
   MatbeaDividerModule,
   MatbeaIconButtonModule,
   MatbeaSlideToggleModule
 } from '@pdesks/matbea-ui-components';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatbeaDinamicTableModule } from 'libs/matbea-ui-components/src/lib/matbea-table/matbea-dinamic-table/matbea-dinamic-table.module';
-
+import { MatbeaTableModule} from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table.module'
 
 
 
@@ -29,8 +27,6 @@ import { MatbeaDinamicTableModule } from 'libs/matbea-ui-components/src/lib/matb
     //  MatDialogModule,
     //  MatbeaDividerModule,
     //  MatbeaIconButtonModule,
-    MatbeaDinamicTableModule
-
 
   ],
    bootstrap: [ProjectsListComponent],

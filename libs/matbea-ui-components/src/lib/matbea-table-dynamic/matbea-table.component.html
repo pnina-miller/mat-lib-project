@@ -1,0 +1,19 @@
+<mat-card style="height:100%;">
+  <dynamic-mat-table #dinamicTable
+    [tableName]="name"
+    [showReload]="showReloadData"
+    [dir]="direction"
+    [rowHeight]="rowHeight"
+    [columns]="displayedColumns"
+    [pending]="pending"
+    [setting]="setting"
+    [sticky]="true"
+    [dataSource]="_dataSource$"
+    [showNoData]="showNoData"
+    [printConfig]="printConfig"
+    [showProgress]="showProgress"
+    (onRowEvent)="table_onRowClick($event)"
+
+  >
+  </dynamic-mat-table>
+</mat-card>
