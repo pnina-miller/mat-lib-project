@@ -96,7 +96,7 @@ export class MatTableService {
   }
 
 
-  filterArrChanged() {debugger
+  filterArrChanged() {
     if (this.updateFilters) {
       this.updateFilters(this.filterArrSource.getValue());
     }

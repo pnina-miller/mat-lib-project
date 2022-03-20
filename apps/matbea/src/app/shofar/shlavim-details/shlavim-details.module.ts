@@ -12,8 +12,7 @@ import {
   MatbeaIconModule,
   MatbeaInputModule,
   MatbeaMenuModule,
-  MatbeaTableModule,
-  PipesModule,
+  PipesModule, MatbeaTableModule
 } from '@pdesks/matbea-ui-components';
 
 import { YechidotComponent } from './yechidot/yechidot.component';
@@ -22,6 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HosafatYechidaModule } from './hosafat-yechida/hosafat-yechida.module';
 import { ActionBarComponent } from './action-bar/action-bar.component';
 import { HazmanatPinkasimModule } from './hazmanat-pinkasim/hazmanat-pinkasim.module';
+// import { MatbeaTableModule } from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table.module';
 
 @NgModule({
   declarations: [

@@ -1,8 +1,6 @@
 <!--
 <div> -->
-<matbea-dinamic-table [originalColumns]="displayedColumns"  (dataSourceChangeLength)="changeProjectListLenght($event)"  [displayedColumns]="dinamicDisplayedColumns"
-[dataSource]="dataSource" navTo='/table/details/' (row)="toDeteils($event)" (clickInRow)="console($event)"></matbea-dinamic-table>
+<!-- <matbea-dinamic-table [originalColumns]="displayedColumns"  (dataSourceChangeLength)="changeProjectListLenght($event)"  [displayedColumns]="dinamicDisplayedColumns" [dataSource]="dataSource" navTo='/table/details/' (row)="toDeteils($event)" (clickInRow)="console($event)"></matbea-dinamic-table> -->
 
-   <!-- <matbea-table (dataSourceChangeLength)="changeProjectListLenght($event)"  [displayedColumns]="displayedColumns" [messages]="messages"
-    [dataSource$]="dataSource$" navTo='/table/details/' [loading]='loadingTable' (row)="toDeteils($event)" (clickInRow)="console($event)"  ></matbea-table>  -->
+   <matbea-table (dataSourceChangeLength)="changeProjectListLenght($event)"  [displayedColumns]="displayedColumns" [messages]="messages" [dataSource$]="dataSource$" navTo='/table/details/' [loading]='loadingTable' (row)="toDeteils($event)" (clickInRow)="console($event)"  ></matbea-table> 
 <!-- </div> -->

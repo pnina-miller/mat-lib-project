@@ -1,10 +1,15 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { TableField } from 'dynamic-mat-table';
+// import { MatbeaTableCellComponent } from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table-cell/matbea-table-cell.component';
 import { Observable } from 'rxjs';
 import { ShofarServices } from '../../services/shofar-services';
 import { ColumnDefinition } from '../../store/models/column-definition.model';
 import { HazmanatPinkasimComponent } from '../hazmanat-pinkasim/hazmanat-pinkasim.component';
+
+// const HEADER_FIELD_SETTING={headerTooltipEnable:false, dynamicCellComponent:MatbeaTableCellComponent, clickable:true, clickType: 'cell', draggable: false, filterable: false}
+
 
 const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:'selectRow',ordernumber:'0',columnformatter:'checkbox', removable: 'false', notSortable:true, style:{'padding-right':'7px'}},
 {ordernumber:'1', columnnamehebrew:"מס' יחידה", columnformatter:' ', display:'1', columnnameenglish:'misparShura', removable: 'false'} ,
@@ -45,7 +50,7 @@ export class YechidotComponent implements OnInit {
 @Input() misparProyectSagur:number;
 @Input() misparShalav:number;
 
-  displayedColumns: ColumnDefinition[] = [];
+  displayedColumns: any[] = [];
   loadingTab
   loadingTable = true;
   selectedRows:number[]=[];
@@ -60,6 +65,7 @@ export class YechidotComponent implements OnInit {
   ngOnInit() {
     this.showActionBar=false;
     this.displayedColumns =COLUMNS as ColumnDefinition[];
+    // this.displayedColumns =COLUMNS.map((column,index) => ({...HEADER_FIELD_SETTING, index, header:column.columnnamehebrew, name: column.columnnameenglish=='shmKablanimMeshurshar'?'nothing':column.columnnameenglish} as TableField<any>))
     this.refreshData();
     this.dataSource$.subscribe(data =>{this.dataSource=data});
   }
@@ -67,7 +73,6 @@ export class YechidotComponent implements OnInit {
    console.log('new selectedRows',e)
     this.selectedRows=e
     this.showActionBar = e.length>0;
-    
   }
 
   openHazmanatPinkasim() {

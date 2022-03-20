@@ -6,7 +6,7 @@ import { ProjectsListPageComponent } from './projects-list-page.component';
 import {
   MatbeaButtonModule,
   MatbeaColumnsPickerModule,
-  MatbeaDividerModule, MatbeaIconButtonModule, MatbeaInputModule
+  MatbeaDividerModule, MatbeaIconButtonModule, MatbeaTableModule
 } from '@pdesks/matbea-ui-components';
 import { ProjectsListModule } from './projects-list/projects-list.module';
 import {CreateProjectWizardButtonModule} from "../create-project-wizard/create-project-wizard-button/create-project-wizard-button.module";
@@ -17,7 +17,7 @@ import {OpenColumnPickerButtonComponent} from "./buttons-for-table/open-column-p
 import {MatDialogModule} from "@angular/material/dialog";
 import { HipusLefiPerteyProjectComponent } from './hipus-lefi-pertey-project/hipus-lefi-pertey-project.component';
 import { ComboStatusProjectModule } from './combo-status-project/combo-status-project.module';
-import { MatbeaTableModule } from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table.module';
+// import { MatbeaTableModule } from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table.module';
 
 
 @NgModule({

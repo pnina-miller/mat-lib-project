@@ -8,10 +8,10 @@ import {
   MatbeaColumnsPickerModule,
   MatbeaDividerModule,
   MatbeaIconButtonModule,
-  MatbeaSlideToggleModule
+  MatbeaSlideToggleModule, MatbeaTableModule
 } from '@pdesks/matbea-ui-components';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatbeaTableModule} from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table.module'
+// import { MatbeaTableModule} from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table.module'
 
 
 

@@ -64,6 +64,7 @@ export class MatbeaTableComponent implements OnInit, OnChanges {
   @Input() navTo: string = null;
   @Output() row = new EventEmitter();
   @Input() name;
+  @Input() rowSelectionMode='none'
   _dataSource$ = new BehaviorSubject<any[]>([]);
 
   constructor(

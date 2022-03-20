@@ -73,7 +73,7 @@ export class ShofarServices{
 
     getyechidot(misparProyectSagur:number, misparShalv:number) {
       return this.httpClient.request("get", this.urlPrefix + '/matbea/shofar/V1/projects/steps/appartments/'+misparProyectSagur+'/'+misparShalv+'/1', { headers: this.getHeader() }).pipe(map((res:{data:any})=>{
-        return res.data.avctl071List.fullList;
+      return res.data.avctl071List.fullList;
       }))
     }
     savePinkasShovarim(misparProyectSagur:string, misparShalv:string, sendTo){

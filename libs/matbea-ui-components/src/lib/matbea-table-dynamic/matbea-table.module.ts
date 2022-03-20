@@ -63,7 +63,9 @@ import { DynamicMatTableModule } from 'dynamic-mat-table';
     BooleanFilterComponent,
     MultiSelectFilterComponent,
     NumericFilterComponent,
-    MatFilterComponent],
+    MatFilterComponent,
+    MatbeaTableCellComponent
+  ],
     imports: [
         CommonModule,
         MatTableModule,
@@ -118,7 +120,7 @@ import { DynamicMatTableModule } from 'dynamic-mat-table';
     BooleanFilterComponent,
     MultiSelectFilterComponent,
     NumericFilterComponent,
-    MatFilterComponent
+    MatFilterComponent,
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: new MatbeaPaginatorIntl() },

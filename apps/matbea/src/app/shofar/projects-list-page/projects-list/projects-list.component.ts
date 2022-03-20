@@ -16,7 +16,7 @@ import {
   TableSetting,
   VisibleActionMenu,
 } from 'dynamic-mat-table';
-import { MatbeaTableCellComponent } from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table-cell/matbea-table-cell.component';
+// import { MatbeaTableCellComponent } from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table-cell/matbea-table-cell.component';
 
 @Component({
   selector: 'projects-list',
@@ -41,7 +41,7 @@ export class ProjectsListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private store$: Store<State>, private storeProjectDetails$: Store<StateProjectDetails>) {
   }
-headerFieldSetting={headerTooltipEnable:false, dynamicCellComponent:MatbeaTableCellComponent, clickable:true, clickType: 'cell', draggable: false, filterable: false, }
+// headerFieldSetting={headerTooltipEnable:false, dynamicCellComponent:MatbeaTableCellComponent, clickable:true, clickType: 'cell', draggable: false, filterable: false}
   ngOnInit(): void { 
     this.dataSource$.subscribe((r:any[])=>{;
       let newarr = r.map(el=> Object.entries(el).reduce((obj, entry)=>( { [entry[0]=='id'?'rowId':entry[0]]:entry[1], ...obj } ),{}) );
@@ -51,8 +51,7 @@ headerFieldSetting={headerTooltipEnable:false, dynamicCellComponent:MatbeaTableC
         (val) => {
           console.log('Display columns in project list component', val)
           this.displayedColumns = val;
-          this.dinamicDisplayedColumns=val.map((column,index) => (
-            {...this.headerFieldSetting, index, header:column.columnnamehebrew, name: column.columnnameenglish=='shmKablanimMeshurshar'?'nothing':column.columnnameenglish} as TableField<any>));
+          // this.dinamicDisplayedColumns=val.map((column,index) => ({...this.headerFieldSetting, index, header:column.columnnamehebrew, name: column.columnnameenglish=='shmKablanimMeshurshar'?'nothing':column.columnnameenglish} as TableField<any>));
         },
         (err) => console.log('Error for columns in project list component', err),
         () => console.log('Comlite for colums in project list component')
