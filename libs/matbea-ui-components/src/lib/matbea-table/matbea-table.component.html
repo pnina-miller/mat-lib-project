@@ -2,6 +2,7 @@
 <ng-container >
   <div class="matbea-table-cotainer">
     <div class="matbea-table">
+      <cdk-virtual-scroll-viewport tvsItemSize class="wrapper mat-elevation-z2">
       <table mat-table matSort [dataSource]="dataSource" style="width: 100%; height: 100%;" >
         <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of displayedColumns">
           <th mat-header-cell mat-sort-header [disabled]="column.notSortable" style=" min-width: 40px;" *matHeaderCellDef sortActionDescription="Sort by {{column.columnnameenglish}}">
@@ -33,6 +34,7 @@
         <tr mat-row class="matbea-on-hover-row" (dblclick)="onClick(row)" *matRowDef="let row; columns: columsToDisplay">
         </tr>
       </table>
+</cdk-virtual-scroll-viewport>
     </div>
     <div *ngIf="!dataSource?.data||dataSource?.data.length==0"class='matbea-table-not-information' >
       <div>

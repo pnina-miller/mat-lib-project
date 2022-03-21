@@ -45,7 +45,10 @@ import { RadioButtonTabModule } from '../radio-button-tab/radio-button-tab.modul
 import { MatbeaComboModule } from '../matbea-combo/matbea-combo.module';
 import {RouterModule} from "@angular/router";
 import {MatbeaMenuModule} from "../matbea-menu/matbea-menu.module";
-
+import { TableVirtualScrollModule } from 'ng-table-virtual-scroll'
+import { ScrollingModule } from '@angular/cdk/scrolling';
+// import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -63,6 +66,8 @@ import {MatbeaMenuModule} from "../matbea-menu/matbea-menu.module";
     NumericFilterComponent,
     MatFilterComponent],
     imports: [
+      MatTableModule,
+      TableVirtualScrollModule,
         CommonModule,
         MatTableModule,
         MatButtonModule,
@@ -74,7 +79,7 @@ import {MatbeaMenuModule} from "../matbea-menu/matbea-menu.module";
         PipesModule,
         MatCheckboxModule,
         MatIconModule,
-
+        TableVirtualScrollModule,
         FormsModule,
         ReactiveFormsModule,
         MatButtonModule,
@@ -91,7 +96,7 @@ import {MatbeaMenuModule} from "../matbea-menu/matbea-menu.module";
         MatChipsModule,
         MatDatepickerModule,
         MatNativeDateModule,
-
+        ScrollingModule,
         MatbeaIconButtonModule,
         MatbeaIconModule,
         MatbeaInputModule,

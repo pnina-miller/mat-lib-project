@@ -18,6 +18,7 @@ import { MatTableService } from "./services/mat-table.service";
 import { FilterColumn } from "./models/filterColumns";
 import { MatTableDataSource } from "@angular/material/table";
 import { FormControl } from '@angular/forms';
+import {TableVirtualScrollDataSource} from 'ng-table-virtual-scroll';
 
 @Component({
   selector: 'matbea-table',
@@ -68,11 +69,10 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log("SimpleChanges in matbea-table", this);
       this.dataSource$.subscribe((list) => {
-        if (this.dataSource) this.dataSource.data = list || [];
-        this._dataSource = list
+        // if (this.dataSource) this.dataSource.data = list || [];
+        this._dataSource = list;
         this.loading=false;
         this.selectedRows.forEach(i => this.dataSource.filteredData[i].selectRow = true)
-      });
     this.isMainColumn = !!this.displayedColumnsTemp.find(col => !!col.subColumns)
     this.mainColumn = this.displayedColumnsTemp.map(column => column.subColumns ? column : { columnnameenglish: column.columnnameenglish + column.ordernumber })
     this.mainColumnDisplay = this.mainColumn.map(c => c.columnnameenglish)
@@ -85,8 +85,11 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       .sort((a, b) => Number(a.ordernumber) - Number(b.ordernumber)).map((e) => e.columnnameenglish);
     this.displayedColumns = filtereCols//this.displayedColumnsTemp;
    this.matTableService.init('', '', this._dataSource, this.displayedColumns.map((col) => new FilterColumn(col)));
-    this.matTableService.displayDataSource.subscribe(data => {
-      this.dataSource = data;
+      });
+       this.matTableService.displayDataSource.subscribe(data => {
+      // this.dataSource = data;
+      this.dataSource = new TableVirtualScrollDataSource(data.data);debugger
+
       this.changeDetector.detectChanges();
       this.dataSourceChangeLength.emit(this.dataSource?.data?.length);
 
