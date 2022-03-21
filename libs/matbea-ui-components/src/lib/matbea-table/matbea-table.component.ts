@@ -88,7 +88,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       });
        this.matTableService.displayDataSource.subscribe(data => {
       // this.dataSource = data;
-      this.dataSource = new TableVirtualScrollDataSource(data.data);debugger
+      this.dataSource = new TableVirtualScrollDataSource(data.data);
 
       this.changeDetector.detectChanges();
       this.dataSourceChangeLength.emit(this.dataSource?.data?.length);

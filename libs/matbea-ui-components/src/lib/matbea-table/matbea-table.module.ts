@@ -47,8 +47,6 @@ import {RouterModule} from "@angular/router";
 import {MatbeaMenuModule} from "../matbea-menu/matbea-menu.module";
 import { TableVirtualScrollModule } from 'ng-table-virtual-scroll'
 import { ScrollingModule } from '@angular/cdk/scrolling';
-// import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -67,9 +65,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatFilterComponent],
     imports: [
       MatTableModule,
-      TableVirtualScrollModule,
         CommonModule,
-        MatTableModule,
         MatButtonModule,
         CdkTableModule,
         MatPaginatorModule,
@@ -85,7 +81,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatButtonModule,
         HttpClientModule,
         MatInputModule,
-        MatTableModule,
         MatSelectModule,
         MatCheckboxModule,
         MatButtonToggleModule,

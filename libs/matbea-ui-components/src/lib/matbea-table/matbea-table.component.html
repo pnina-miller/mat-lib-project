@@ -2,7 +2,7 @@
 <ng-container >
   <div class="matbea-table-cotainer">
     <div class="matbea-table">
-      <cdk-virtual-scroll-viewport tvsItemSize class="wrapper mat-elevation-z2">
+      <cdk-virtual-scroll-viewport tvsItemSize="30" headerHeight="55" class="wrapper mat-elevation-z2">
       <table mat-table matSort [dataSource]="dataSource" style="width: 100%; height: 100%;" >
         <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of displayedColumns">
           <th mat-header-cell mat-sort-header [disabled]="column.notSortable" style=" min-width: 40px;" *matHeaderCellDef sortActionDescription="Sort by {{column.columnnameenglish}}">
