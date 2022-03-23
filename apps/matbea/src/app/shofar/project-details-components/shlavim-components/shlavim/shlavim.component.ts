@@ -3,6 +3,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { TableCellTryComponent } from '../table-cell-try/table-cell-try.component';
 import { HosafatShalavComponent } from '../hosafat-shalav/hosafat-shalav.component';
 import { ShlavimService } from './shlavim.service';
 
@@ -16,7 +17,7 @@ export class ShlavimComponent implements OnInit, OnChanges {
   @Input('shlavim') shlavim;
   @Input('misparProyectSagur') misparProyectSagur: string;
   @Output() loadData: EventEmitter<any> = new EventEmitter();
-  displayedColumns = [{ columnnameenglish: 'teurHaShlav', columnnamehebrew: 'זיהוי שלב', columnformatter: 'link', display: '1' },
+  displayedColumns = [{ columnnameenglish: 'teurHaShlav', columnnamehebrew: 'זיהוי שלב', columnformatter: 'link', display: '1', dynamicComponent:TableCellTryComponent },
   { columnnameenglish: 'teurYeudShlav', columnnamehebrew: 'ייעוד', columnformatter: '', display: '1' },
   { columnnameenglish: 'misparYechidotBeSlv', columnnamehebrew: "מס' יחידות", columnformatter: '', display: '1' },
   { columnnameenglish: 'taarich8SiyumTzafui', columnnamehebrew: 'מועד סיום צפוי', columnformatter: 'Int2DateFormatter', display: '1' },

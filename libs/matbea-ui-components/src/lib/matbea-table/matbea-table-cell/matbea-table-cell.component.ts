@@ -4,7 +4,7 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
-  EventEmitter, Output
+  EventEmitter, Output, ViewContainerRef
 } from '@angular/core';
 import { ColumnDefinition } from '../../models/column-definition.model';
 import { FormControl } from '@angular/forms';
@@ -18,7 +18,7 @@ import { FormControl } from '@angular/forms';
 })
 export class MatbeaTableCellComponent implements OnInit, OnChanges{
   @Input() column: ColumnDefinition;
-  @Input() item: any;
+ @Input() item: any;
   @Input() index: number;
   @Input() style;
 
@@ -31,7 +31,8 @@ export class MatbeaTableCellComponent implements OnInit, OnChanges{
   selectControl:FormControl = new FormControl(true);
   inputControl:FormControl = new FormControl();
   value=true;
-  constructor() {
+
+  constructor(public viewContainerRef:ViewContainerRef) {
 
   }
 

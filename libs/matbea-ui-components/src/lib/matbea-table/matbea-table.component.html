@@ -15,7 +15,7 @@
             </div>
           </th>
           <td mat-cell [style]="column.style" *matCellDef="let project; let i=index">
-            <matbea-table-cell (onRowSelected)="onRowSelected($event)" [index]="i" [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell>
+            <matbea-table-cell-container (onRowSelected)="onRowSelected($event)" [index]="i" [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell-container>
           </td>
         </ng-container>
                 <!-- try -->
