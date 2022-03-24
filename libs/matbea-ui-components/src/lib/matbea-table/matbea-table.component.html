@@ -6,13 +6,7 @@
       <table mat-table matSort [dataSource]="dataSource" style="width: 100%; height: 100%;" >
         <ng-container [matColumnDef]="column.columnnameenglish" *ngFor="let column of displayedColumns">
           <th mat-header-cell mat-sort-header [disabled]="column.notSortable" style=" min-width: 40px;" *matHeaderCellDef sortActionDescription="Sort by {{column.columnnameenglish}}">
-            {{column.columnnamehebrew?column.columnnamehebrew:column.columnnameenglish}}
-            <div *ngIf="column.columnformatter==='checkbox'" style="display: contents;">
-              <mat-checkbox [formControl]="selectControl" checked="" ></mat-checkbox>
-              <matbea-menu (clickedItem)="selectMethod($event)" [items]="[{ id: 0, name: 'הכל', disabled: false, role: 'menuitem'},{ id: 1, name: 'בטווח', disabled: false, role: 'menuitem'}]">
-                <matbea-icon icon="keyboard_arrow_down"></matbea-icon>
-              </matbea-menu>          
-            </div>
+            <matbea-table-header-cell [column]="column" ></matbea-table-header-cell>
           </th>
           <td mat-cell [style]="column.style" *matCellDef="let project; let i=index">
             <matbea-table-cell-container (onRowSelected)="onRowSelected($event)" [index]="i" [item]="project" [column]="column" (clickInMenu)="clickInRow.emit($event)" ></matbea-table-cell-container>

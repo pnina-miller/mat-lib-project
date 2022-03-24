@@ -48,6 +48,7 @@ import {MatbeaMenuModule} from "../matbea-menu/matbea-menu.module";
 import { TableVirtualScrollModule } from 'ng-table-virtual-scroll'
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatbeaTableCellContainerComponent } from './matbea-table-cell-container/matbea-table-cell-container.component';
+import { MatbeaTableHeaderCellComponent } from './matbea-table-header-cell/matbea-table-header-cell.component';
 
 
 
@@ -64,7 +65,8 @@ import { MatbeaTableCellContainerComponent } from './matbea-table-cell-container
     MultiSelectFilterComponent,
     NumericFilterComponent,
     MatFilterComponent,
-    MatbeaTableCellContainerComponent],
+    MatbeaTableCellContainerComponent,
+    MatbeaTableHeaderCellComponent],
     imports: [
       MatTableModule,
         CommonModule,

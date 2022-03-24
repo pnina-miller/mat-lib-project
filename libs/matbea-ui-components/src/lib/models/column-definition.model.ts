@@ -1,4 +1,5 @@
 export interface ColumnDefinition {
+  dynamicHeaderCellComponent: any;
   columnnameenglish: string,
   columnnamehebrew: string,
   display: string,

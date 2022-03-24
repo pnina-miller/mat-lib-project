@@ -17,7 +17,7 @@ export class ShlavimComponent implements OnInit, OnChanges {
   @Input('shlavim') shlavim;
   @Input('misparProyectSagur') misparProyectSagur: string;
   @Output() loadData: EventEmitter<any> = new EventEmitter();
-  displayedColumns = [{ columnnameenglish: 'teurHaShlav', columnnamehebrew: 'זיהוי שלב', columnformatter: 'link', display: '1', dynamicComponent:TableCellTryComponent },
+  displayedColumns = [{ columnnameenglish: 'teurHaShlav', columnnamehebrew: 'זיהוי שלב', columnformatter: 'link', display: '1', dynamicCellComponent:TableCellTryComponent },
   { columnnameenglish: 'teurYeudShlav', columnnamehebrew: 'ייעוד', columnformatter: '', display: '1' },
   { columnnameenglish: 'misparYechidotBeSlv', columnnamehebrew: "מס' יחידות", columnformatter: '', display: '1' },
   { columnnameenglish: 'taarich8SiyumTzafui', columnnamehebrew: 'מועד סיום צפוי', columnformatter: 'Int2DateFormatter', display: '1' },

@@ -5,7 +5,7 @@ import {
   OnInit,
   SimpleChanges,
   ViewChild,
-  OnChanges, Output, EventEmitter, ChangeDetectorRef
+  OnChanges, Output, EventEmitter, ChangeDetectorRef, ViewContainerRef, ComponentFactoryResolver, ViewChildren, QueryList
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -19,6 +19,7 @@ import { FilterColumn } from "./models/filterColumns";
 import { MatTableDataSource } from "@angular/material/table";
 import { FormControl } from '@angular/forms';
 import {TableVirtualScrollDataSource} from 'ng-table-virtual-scroll';
+import { MatbeaTableHeaderCellComponent } from './matbea-table-header-cell/matbea-table-header-cell.component';
 
 @Component({
   selector: 'matbea-table',
@@ -35,12 +36,26 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   sub: Subscription;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+ @ViewChildren(MatbeaTableHeaderCellComponent) tableHeaderCellComponent: QueryList<MatbeaTableHeaderCellComponent>;
+
   mainColumnDisplay: any[] = [];
   mainColumn: any[] = [];
   isMainColumn: boolean = false;
 
   ngAfterViewInit() {
     if (this.dataSource.data) {
+    if(this.dataSource.data[0]){
+      this.displayedColumns.forEach((col,index)=>{
+        if(col.dynamicHeaderCellComponent){debugger
+           const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.displayedColumns[index].dynamicHeaderCellComponent);
+      this.tableHeaderCellComponent.get(index).viewContainerRef.clear()
+      const componentRef = this.tableHeaderCellComponent.get(index).viewContainerRef.createComponent(componentFactory);
+      (componentRef.instance as any).tableData=this;
+        }
+      })
+     
+
+    }
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.dataSource.filter
@@ -62,8 +77,8 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() clickInRow = new EventEmitter();
   selectControl: FormControl = new FormControl();
 
-  constructor(private router: Router, private _liveAnnouncer: LiveAnnouncer, public dialog: MatDialog,
-    private matTableService: MatTableService, private changeDetector: ChangeDetectorRef) { }
+  constructor(private router: Router, private _liveAnnouncer: LiveAnnouncer, public dialog: MatDialog, private componentFactoryResolver: ComponentFactoryResolver,
+    private matTableService: MatTableService, private changeDetector: ChangeDetectorRef,  public viewContainerRef:ViewContainerRef) { }
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -72,7 +87,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
         // if (this.dataSource) this.dataSource.data = list || [];
         this._dataSource = list;
         this.loading=false;
-        this.selectedRows.forEach(i => this.dataSource.filteredData[i].selectRow = true)
+        this.selectedRows.forEach(i => this._dataSource.filteredData[i].selectRow = true)
     this.isMainColumn = !!this.displayedColumnsTemp.find(col => !!col.subColumns)
     this.mainColumn = this.displayedColumnsTemp.map(column => column.subColumns ? column : { columnnameenglish: column.columnnameenglish + column.ordernumber })
     this.mainColumnDisplay = this.mainColumn.map(c => c.columnnameenglish)
@@ -93,8 +108,8 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.changeDetector.detectChanges();
       this.dataSourceChangeLength.emit(this.dataSource?.data?.length);
 
-    })
     this.ngAfterViewInit();
+    })
 
   }
 
@@ -123,14 +138,6 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.selectedRows.forEach((row, i) => { if (row === event.target) this.selectedRows.splice(i, 1); });
     }
     this.selectedRowsChange.emit(this.selectedRows)
-  }
-
-  selectMethod(event: any) {
-    if(event.id===1){
-      this.onRowSelected({target:-1,value:true})
-    } else{
-    Array.from({ length: this.dataSource.filteredData.length }).forEach((el, i) => this.onRowSelected({ target: i, value: true }))
-    }
   }
 
   announceSortChange(sortState: Sort) {

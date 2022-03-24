@@ -21,14 +21,17 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HosafatYechidaModule } from './hosafat-yechida/hosafat-yechida.module';
 import { ActionBarComponent } from './action-bar/action-bar.component';
 import { HazmanatPinkasimModule } from './hazmanat-pinkasim/hazmanat-pinkasim.module';
-// import { MatbeaTableModule } from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table.module';
+import { YechidotSelectHeaderMenuComponent } from './yechidot-select-header-menu/yechidot-select-header-menu.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
     ShlavimDetailsComponent,
     YechidotComponent,
     YechidotHeaderComponent,
-    ActionBarComponent
+    ActionBarComponent,
+    YechidotSelectHeaderMenuComponent    
   ],
   imports: [
     CommonModule,
@@ -46,8 +49,10 @@ import { HazmanatPinkasimModule } from './hazmanat-pinkasim/hazmanat-pinkasim.mo
     MatbeaDividerModule,
     MatbeaComboModule,
     MatbeaMenuModule,
-    MatbeaIconModule
+    MatbeaIconModule,
+    MatCheckboxModule, FormsModule, ReactiveFormsModule
   ],
+  exports: [YechidotSelectHeaderMenuComponent]
 })
 export class ShlavimDetailsModule {}
 

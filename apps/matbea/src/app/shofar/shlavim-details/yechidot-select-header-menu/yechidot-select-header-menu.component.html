@@ -1,0 +1,10 @@
+<mat-checkbox [formControl]="selectControl" checked=""></mat-checkbox>
+<matbea-menu
+  (clickedItem)="selectMethod($event)"
+  [items]="[
+    { id: 0, name: 'הכל', disabled: false, role: 'menuitem' },
+    { id: 1, name: 'בטווח', disabled: false, role: 'menuitem' }
+  ]"
+>
+  <matbea-icon icon="keyboard_arrow_down"></matbea-icon>
+</matbea-menu>

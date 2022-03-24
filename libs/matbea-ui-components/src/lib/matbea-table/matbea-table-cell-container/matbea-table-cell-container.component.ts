@@ -21,8 +21,8 @@ export class MatbeaTableCellContainerComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if(this.tableCellComponent){
-      if(this.column.dynamicComponent){
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.column.dynamicComponent);
+      if(this.column.dynamicCellComponent){
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.column.dynamicCellComponent);
         const viewContainerRef = this.tableCellComponent.viewContainerRef;
         const componentRef = viewContainerRef.createComponent(componentFactory);
         try{

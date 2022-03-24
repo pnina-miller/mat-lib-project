@@ -7,11 +7,12 @@ import { Observable } from 'rxjs';
 import { ShofarServices } from '../../services/shofar-services';
 import { ColumnDefinition } from '../../store/models/column-definition.model';
 import { HazmanatPinkasimComponent } from '../hazmanat-pinkasim/hazmanat-pinkasim.component';
+import { YechidotSelectHeaderMenuComponent } from '../yechidot-select-header-menu/yechidot-select-header-menu.component';
 
 // const HEADER_FIELD_SETTING={headerTooltipEnable:false, dynamicCellComponent:MatbeaTableCellComponent, clickable:true, clickType: 'cell', draggable: false, filterable: false}
 
 
-const COLUMNS=[{columnnamehebrew:' ',display:'1', columnnameenglish:'selectRow',ordernumber:'0',columnformatter:'checkbox', removable: 'false', notSortable:true, style:{'padding-right':'7px'}},
+const COLUMNS=[{columnnamehebrew:' ', dynamicHeaderCellComponent:YechidotSelectHeaderMenuComponent, display:'1', columnnameenglish:'selectRow',ordernumber:'0',columnformatter:'checkbox', removable: 'false', notSortable:true, style:{'padding-right':'7px'}},
 {ordernumber:'1', columnnamehebrew:"מס' יחידה", columnformatter:' ', display:'1', columnnameenglish:'misparShura', removable: 'false'} ,
 {ordernumber:'2', columnnamehebrew:"שמות הרוכשים", columnformatter:' ', display:'1', columnnameenglish:'shemLakoachKolel', removable: 'false'} ,
 {ordernumber:'3', columnnamehebrew:"זיהוי יחידה", columnformatter:' ', display:'1', columnnameenglish:'teurYechidaMeforat', removable: 'false'} ,
