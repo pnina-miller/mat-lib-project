@@ -27,6 +27,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import * as fromProjectDetails from './shofar/store/reducers/project-details.reducer';
 import { ProjectDetailsEffects } from './shofar/store/effects/project-details.effects';
+import { CustomRouteReuseStrategy } from './router-strategy';
+import { RouteReuseStrategy } from '@angular/router';
 
 const effectsShofar = [
   ProjectsListEffects,
@@ -64,8 +66,10 @@ const effectsProjectDetails =[
     StoreModule.forFeature(fromProjectDetails.PROJECTDETAILS_FEATURE_KEY, fromProjectDetails.reducerProjectDetails),
     EffectsModule.forFeature(effectsProjectDetails),
   ],
-providers:
-  [],
+providers:[{
+  provide: RouteReuseStrategy,
+  useClass: CustomRouteReuseStrategy
+}],
   // providers: [AuthGuardService, {provide : LocationStrategy , useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
 })
