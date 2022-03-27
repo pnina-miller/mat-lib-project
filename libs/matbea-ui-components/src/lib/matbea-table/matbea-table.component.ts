@@ -20,6 +20,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { FormControl } from '@angular/forms';
 import {TableVirtualScrollDataSource} from 'ng-table-virtual-scroll';
 import { MatbeaTableHeaderCellComponent } from './matbea-table-header-cell/matbea-table-header-cell.component';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'matbea-table',
@@ -37,11 +38,19 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
  @ViewChildren(MatbeaTableHeaderCellComponent) tableHeaderCellComponent: QueryList<MatbeaTableHeaderCellComponent>;
+ @ViewChild(CdkVirtualScrollViewport) virtualScroll: CdkVirtualScrollViewport;
 
   mainColumnDisplay: any[] = [];
   mainColumn: any[] = [];
   isMainColumn: boolean = false;
-
+  position=0;
+save(){
+  this.position=this.virtualScroll.getRenderedRange().start;
+}
+scroll(){
+  this.ngOnChanges({})
+  this.virtualScroll.scrollToIndex(this.position);
+}
   ngAfterViewInit() {
     if (this.dataSource.data) {
     if(this.dataSource.data[0]){
@@ -122,6 +131,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
     console.log(row);
     let id = row.id;
     if (this.navTo) {
+      this.save();
       this.router.navigate([this.navTo + id]);
     }
     this.row.emit(row);

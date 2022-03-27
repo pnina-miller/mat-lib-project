@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
 import * as ShofarSelectors from '../../store/selectors/shofar.selectors';
@@ -16,6 +16,7 @@ import {
   TableSetting,
   VisibleActionMenu,
 } from 'dynamic-mat-table';
+import { MatbeaTableComponent } from 'libs/matbea-ui-components/src/lib/matbea-table/matbea-table.component';
 // import { MatbeaTableCellComponent } from 'libs/matbea-ui-components/src/lib/matbea-table-dynamic/matbea-table-cell/matbea-table-cell.component';
 
 @Component({
@@ -37,7 +38,12 @@ export class ProjectsListComponent implements OnInit {
   messages: any[];
   messages$ = this.store$.select(ShofarSelectors.getMessagesToTable);
   projectListLenght: number;
+  
+  @ViewChild(MatbeaTableComponent) tablecomponent: MatbeaTableComponent;
 
+  scroll(){
+    this.tablecomponent.scroll();
+  }
 
   constructor(private route: ActivatedRoute, private store$: Store<State>, private storeProjectDetails$: Store<StateProjectDetails>) {
   }

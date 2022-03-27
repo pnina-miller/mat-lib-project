@@ -7,6 +7,7 @@ import {Subscription} from "rxjs";
 
 import { HipusLefiPerteyProjectComponent } from './hipus-lefi-pertey-project/hipus-lefi-pertey-project.component';
 import { ComboStatusProjectComponent } from './combo-status-project/combo-status-project.component';
+import { ProjectsListComponent } from './projects-list/projects-list.component';
 
 
 @Component({
@@ -27,10 +28,14 @@ export class ProjectsListPageComponent implements OnInit {
   defaultStatus: boolean;
   @ViewChild(ComboStatusProjectComponent) statusCombo: ComboStatusProjectComponent;
   @ViewChild(HipusLefiPerteyProjectComponent) perteyProect: HipusLefiPerteyProjectComponent;
+  @ViewChild(ProjectsListComponent) ProjectsListComponent: ProjectsListComponent;
 
   constructor(private store$: Store<State>) {
   }
-
+  scroll(){
+    setTimeout(() => this.ProjectsListComponent.scroll(),1);
+  }
+  
   ngOnInit(): void {
     this.sub.add(
       this.valueToSelectStatus$.subscribe(
@@ -95,3 +100,4 @@ export class ProjectsListPageComponent implements OnInit {
     console.log(data);
   }
 }
+

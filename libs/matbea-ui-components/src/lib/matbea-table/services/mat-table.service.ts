@@ -52,7 +52,7 @@ export class MatTableService {
   ): void {
     this.resetFilters()
     // if (this.dataSource.filteredData.length === 0) {//?
-      if (tableDataSource) this.initDataSource(tableDataSource);
+      if (tableDataSource) this.initDataSource(tableDataSource.map((l,i)=>({...l, shemProyectSagur:i})));
       else if (dataSourceUrl)
         this.loadDataSource(dataSourceUrl).subscribe((res) =>
           this.initDataSource(res)

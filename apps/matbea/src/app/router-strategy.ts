@@ -128,6 +128,8 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy  {
     public retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
      console.log(route,'retrieve',this.handlers[route.routeConfig?.data?.key || route.routeConfig.path]);
      if (!route.routeConfig) return null;
+    try{ (this.handlers[route.routeConfig?.data?.key || route.routeConfig.path] as any)?.componentRef.instance?.scroll();
+    }catch(err){}
     return this.handlers[route.routeConfig?.data?.key || route.routeConfig.path];
     }
 
