@@ -21,7 +21,9 @@
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
 
-
+    ::-webkit-scrollbar-thumb{
+      min-height:30px;
+    }
     .mat-cell {
       // min-width: 3em;
       // text-align: center;
