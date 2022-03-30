@@ -18,8 +18,8 @@ import { MatTableService } from "./services/mat-table.service";
 import { FilterColumn } from "./models/filterColumns";
 import { MatTableDataSource } from "@angular/material/table";
 import { FormControl } from '@angular/forms';
-import {TableVirtualScrollDataSource} from 'ng-table-virtual-scroll';
 import { MatbeaTableHeaderCellComponent } from './matbea-table-header-cell/matbea-table-header-cell.component';
+import { GridTableDataSource } from './virtual-scroll/data-source';
 
 @Component({
   selector: 'matbea-table',
@@ -29,7 +29,8 @@ import { MatbeaTableHeaderCellComponent } from './matbea-table-header-cell/matbe
 })
 
 export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
-  dataSource: any = new MatTableDataSource([]);
+  // dataSource: any = new MatTableDataSource([]);
+  dataSource: GridTableDataSource<any>;
   _dataSource: any;
   columsToDisplay: string[] = [];
   displayedColumns: ColumnDefinition[];
@@ -56,9 +57,9 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
      
 
     }
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.dataSource.filter
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
+      // this.dataSource.filter
     }
   }
 
@@ -103,7 +104,8 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
       });
        this.matTableService.displayDataSource.subscribe(data => {
       // this.dataSource = data;
-      this.dataSource = new TableVirtualScrollDataSource(data.data);
+      this.dataSource.allData = data.data;
+      // this.dataSource = new TableVirtualScrollDataSource(data.data);
 
       this.changeDetector.detectChanges();
       this.dataSourceChangeLength.emit(this.dataSource?.data?.length);
@@ -115,7 +117,7 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     console.log("OnInit in matbea-table", this);
-    this.selectControl.valueChanges.subscribe((value: boolean) => { Array.from({ length: this.dataSource?.filteredData.length }).forEach((el, i) => { this.onRowSelected({ target: i, value }) }) })
+    // this.selectControl.valueChanges.subscribe((value: boolean) => { Array.from({ length: this.dataSource?.filteredData.length }).forEach((el, i) => { this.onRowSelected({ target: i, value }) }) })
   }
   onClick(row: any): void {
     console.clear();
@@ -129,9 +131,9 @@ export class MatbeaTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onRowSelected(event: any): void {
-    if(this.dataSource.filteredData[event.target]){
-      this.dataSource.filteredData[event.target].selectRow = event.value
-    }
+    // if(this.dataSource.filteredData[event.target]){
+    //   this.dataSource.filteredData[event.target].selectRow = event.value
+    // }
     if (event.value && !this.selectedRows.includes(event.target)) {
       this.selectedRows.push(event.target);
     } else {

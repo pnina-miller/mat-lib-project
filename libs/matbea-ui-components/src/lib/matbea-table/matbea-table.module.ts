@@ -45,10 +45,10 @@ import { RadioButtonTabModule } from '../radio-button-tab/radio-button-tab.modul
 import { MatbeaComboModule } from '../matbea-combo/matbea-combo.module';
 import {RouterModule} from "@angular/router";
 import {MatbeaMenuModule} from "../matbea-menu/matbea-menu.module";
-import { TableVirtualScrollModule } from 'ng-table-virtual-scroll'
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatbeaTableCellContainerComponent } from './matbea-table-cell-container/matbea-table-cell-container.component';
 import { MatbeaTableHeaderCellComponent } from './matbea-table-header-cell/matbea-table-header-cell.component';
+import { VirtualScrollModule } from './virtual-scroll/virtual-scroll.module';
 
 
 
@@ -78,7 +78,6 @@ import { MatbeaTableHeaderCellComponent } from './matbea-table-header-cell/matbe
         MatTooltipModule,
         PipesModule,
         MatIconModule,
-        TableVirtualScrollModule,
         FormsModule,
         ReactiveFormsModule,
         MatButtonModule,
@@ -103,7 +102,9 @@ import { MatbeaTableHeaderCellComponent } from './matbea-table-header-cell/matbe
         RadioButtonTabModule,
         MatbeaComboModule,
         RouterModule,
-        MatbeaMenuModule
+        MatbeaMenuModule,  
+        VirtualScrollModule,
+        ScrollingModule
           ],
   exports: [
     MatbeaTableComponent,
